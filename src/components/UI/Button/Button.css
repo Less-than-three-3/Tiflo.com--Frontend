@@ -1,0 +1,11 @@
+.btn {
+  @apply font-bold py-0 px-4 rounded-md;
+}
+
+.btn-blue {
+  background-color: #7A79FF;
+}
+
+.btn-blue:hover {
+  background-color: #6463e3;
+}

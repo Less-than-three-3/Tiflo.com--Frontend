@@ -1,0 +1,19 @@
+@import "../components/UI/Button/Button.css";
+@import "../components/sections/Toolbar/Toolbar.css";
+@import "components/section.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  height: 100vh;
+  background-color: #111315;
+  color: white;
+}
+
+

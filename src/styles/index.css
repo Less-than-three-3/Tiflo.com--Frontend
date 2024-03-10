@@ -1,9 +1,16 @@
 @import "../components/UI/Button/Button.css";
 @import "../components/sections/Toolbar/Toolbar.css";
-@import "components/section.css";
+@import "./components/section.css";
+@import "./components/image.css";
+@import "./components/text.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  overflow-y: hidden;
+}
 
 body {
   margin: 0;

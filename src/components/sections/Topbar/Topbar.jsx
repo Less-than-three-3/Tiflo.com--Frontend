@@ -5,13 +5,11 @@ export const Topbar = () => {
     <>
       <div id="topbar" className="section flex items-center justify-between px-10 py-6 font-bold">
         <div className="text-2xl">Tiflo.com</div>
-        <div className="text-xl">Проект: белка акробат</div>
+        {/*<div className="text-xl">Проект: {projectName}</div>*/}
         <div className="flex gap-6">
           <img src="/src/assets/icons/user.svg" alt="user"
                className="w-10"/>
-          <img src="/src/assets/icons/share.svg" alt="share"
-               className="w-9"/>
-          <Button/>
+          <Button value={"Экспорт"}/>
         </div>
       </div>
     </>

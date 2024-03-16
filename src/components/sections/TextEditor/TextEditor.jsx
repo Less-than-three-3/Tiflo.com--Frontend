@@ -1,23 +1,72 @@
-export const TextEditor = () => {
+import {useEffect, useState} from "react";
+import {Button} from "../../UI/Button/Button.jsx";
+import axios from "axios";
+
+export const TextEditor = ({text, projectId}) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editText, setEditText] = useState(text);
+
+  useEffect(() => {
+    setEditText(text)
+  }, [text]);
+
+  const toVoice = async () => {
+    setTimeout(() => {
+      axios({
+        url: 'http://89.208.231.158:80/src/assets/cat.wav', //your url
+        method: 'GET',
+        responseType: 'blob', // important
+      }).then((response) => {
+        // create file link in browser's memory
+        const href = URL.createObjectURL(response.data);
+
+        // create "a" HTML element with href to file & click
+        const link = document.createElement('a');
+        link.href = href;
+        link.setAttribute('download', 'description.wav'); //or any other extension
+        document.body.appendChild(link);
+        link.click();
+
+        // clean up "a" element & remove ObjectURL
+        document.body.removeChild(link);
+        URL.revokeObjectURL(href);
+      });
+    }, 0)
+  }
+
   return (
     <>
       <div className="section w-1/4">
-        <div className="grid grid-cols-2 pb-6">
-          <div className="font-bold">Текст</div>
-          <div className="text-inactive font-bold">Редактирование</div>
+        <div className="grid grid-cols-2 pb-6 w-9/12">
+          <div className={`${!projectId ? "text-inactive" : isEditing && "text-inactive"} font-bold`}
+               onClick={() => setIsEditing(false)}>
+            Текст
+          </div>
+          <div className={`${!projectId ? "text-inactive" : !isEditing && "text-inactive"} font-bold`}
+               onClick={() => setIsEditing(true)}>
+            Редактирование
+          </div>
         </div>
-        <div className="overflow-scroll h-5/6">
-          Цветная горизонтально ориентированная фотография, сделанная в городском парке. Стоит ясный зимний день. На
-          заднем плане — темные стволы деревьев без листьев, за ними виднеются здания. Между белыми облаками — голубое
-          небо. Землю покрывает сплошной слой снега. На переднем плане справа — прямой ствол дерева, покрытый
-          серо-коричневой корой с трещинами. В центре фотографии — белка. Задними широко расставленными лапами она
-          упирается в ствол дерева, передними — крепко держится за раскрытую ладонь человека, на которой лежит горсть
-          орехов: лесные и кедровые. Несколько орехов белка уже расколола, на ладони лежат пустые скорлупки. Черный
-          блестящий глаз белки широко открыт. На ушах — пышные серые кисточки. Тело покрыто ровным густым
-          серо-коричневым мехом. На лапах острые темные когти, которым белка цепляется за ствол дерева и протянутую руку
-          с угощеньем. Расстояние между ладонью и стволом дерева такое, что зверек почти висит в воздухе, но при этом
-          крепко держится за ладонь с орехами. Фигура белки и ладонь человека занимают бОльшую часть кадра. Фото сделано
-          с близкого расстояния.
+        <div className="overflow-scroll h-5/6 border-rat">
+          {projectId &&
+            <>
+              {!isEditing ?
+                <div>{editText}</div>
+                :
+                <textarea className="bg-inherit border-2 border-rat rounded-md p-2 outline-none h-5/6 w-full"
+                          value={editText}
+                          onChange={(event) => {
+                            setEditText(event.target.value)
+                          }}/>
+              }
+
+              {editText &&
+                <div className="mt-4">
+                  <Button value={"В голос"} onClick={toVoice}/>
+                </div>
+              }
+            </>
+          }
         </div>
       </div>
     </>

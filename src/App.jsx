@@ -6,23 +6,30 @@ import {TextEditor} from "./components/sections/TextEditor/TextEditor.jsx";
 import {useState} from "react";
 
 export const App = () => {
-  const [topbarH, setTopbarH] = useState(0)
-  setTimeout(() => {
-    setTopbarH(document.getElementById("topbar").clientHeight);
-    console.log(topbarH);
-  }, 0)
+
+  const [isProjectListOpened, setIsProjectListOpened] = useState(true);
+  const [project, setProject] = useState({
+    id: "1",
+    name: "sheep",
+    photo: "/src/assets/photo/sheep.png",
+    text: "На фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.png",
+  });
 
   return (
     <>
       <div className="flex flex-col gap-5 ">
-        <Topbar/>
+        <Topbar project={project} setProject={setProject}/>
 
         {/* TODO нормально посчиать высоту */}
-        <div className="flex gap-5" style={{height: `calc(100vh - ${topbarH}px)`}}>
-          <Toolbar/>
-          <ProjectList/>
-          <PhotoEditor/>
-          <TextEditor/>
+        <div className="flex gap-5" style={{height: `calc(100vh - 100px)`}}>
+          <Toolbar states={{isProjectListOpened}} handlers={{setIsProjectListOpened}}/>
+
+          {isProjectListOpened &&
+            <ProjectList project={project} setProject={setProject}/>
+          }
+
+          <PhotoEditor project={project} setProject={setProject}/>
+          <TextEditor project={project} setProject={setProject}/>
         </div>
       </div>
     </>

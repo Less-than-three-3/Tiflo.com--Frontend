@@ -3,36 +3,33 @@ import {Toolbar} from "./components/sections/Toolbar/Toolbar.jsx";
 import {ProjectList} from "./components/sections/ProjectList/ProjectList.jsx";
 import {PhotoEditor} from "./components/sections/PhotoEditor/PhotoEditor.jsx";
 import {TextEditor} from "./components/sections/TextEditor/TextEditor.jsx";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 
 export const App = () => {
 
   const [isProjectListOpened, setIsProjectListOpened] = useState(true);
-  const [projectId, setProjectId] = useState("");
-  // const project = projects.find((prj) => prj.id === projectId);
-  const project = {
+  const [project, setProject] = useState({
     id: "1",
     name: "sheep",
     photo: "/src/assets/photo/sheep.png",
-    text: "На фото овца",
-  };
-  const [text, setText] = useState("")
+    text: "На фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.png",
+  });
 
   return (
     <>
       <div className="flex flex-col gap-5 ">
-        <Topbar/>
+        <Topbar project={project} setProject={setProject}/>
 
         {/* TODO нормально посчиать высоту */}
         <div className="flex gap-5" style={{height: `calc(100vh - 100px)`}}>
           <Toolbar states={{isProjectListOpened}} handlers={{setIsProjectListOpened}}/>
 
           {isProjectListOpened &&
-            <ProjectList setProjectId={setProjectId}/>
+            <ProjectList project={project} setProject={setProject}/>
           }
 
-          <PhotoEditor projectId={projectId} setProjectId={setProjectId} setText={setText}/>
-          <TextEditor text={text} projectId={projectId}/>
+          <PhotoEditor project={project} setProject={setProject}/>
+          <TextEditor project={project} setProject={setProject}/>
         </div>
       </div>
     </>

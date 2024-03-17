@@ -1,13 +1,15 @@
-export const ProjectList = ({setProjectId}) => {
+export const ProjectList = ({project, setProject}) => {
   const openNewProject = () => {
-    setProjectId("");
+    setProject({
+      id: "",
+      name: "New Project",
+    });
   }
 
-  const openExistingProject = (event) => {
-    const id = event.target.id;
-    // console.log(id) // TODO Запрос на проект (фото + текст)
-    setProjectId(id);
-  }
+  // const openExistingProject = (event) => {
+  //   const id = event.target.id;
+  //   // console.log(id) // TODO Запрос на проект (фото + текст)
+  // }
 
   return (
     <>

@@ -1,17 +1,18 @@
 import {Topbar} from "./components/sections/Topbar/Topbar.jsx";
 import {Toolbar} from "./components/sections/Toolbar/Toolbar.jsx";
 import {ProjectList} from "./components/sections/ProjectList/ProjectList.jsx";
-import {PhotoEditor} from "./components/sections/PhotoEditor/PhotoEditor.jsx";
-import {TextEditor} from "./components/sections/TextEditor/TextEditor.jsx";
 import {useState} from "react";
+import {Route, Routes} from "react-router-dom";
+import {PhotoCommentPage} from "./components/pages/PhotoCommentPage/PhotoCommentPage.jsx";
+import {useProject} from "./hooks/useProject.js";
 
 export const App = () => {
-
   const [isProjectListOpened, setIsProjectListOpened] = useState(true);
-  const [project, setProject] = useState({
+  const {project, setProject} = useProject()
+  setProject({
     id: "1",
     name: "sheep",
-    photo: "/src/assets/photo/sheep.png",
+    media: "/src/assets/photo/sheep.png",
     text: "На фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.png",
   });
 
@@ -28,8 +29,9 @@ export const App = () => {
             <ProjectList project={project} setProject={setProject}/>
           }
 
-          <PhotoEditor project={project} setProject={setProject}/>
-          <TextEditor project={project} setProject={setProject}/>
+          <Routes>
+            <Route path="/" element={<PhotoCommentPage project={project} setProject={setProject}/>}/>
+          </Routes>
         </div>
       </div>
     </>

@@ -26,4 +26,4 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ubuntu
           key: ${{ secrets.PRIVATE_KEY }}
-          script: cd /home/ubuntu/frontend/Tiflo.com--frontend && sudo docker build . -t frontend && sudo docker run frontend
+          script: cd /home/ubuntu/frontend/Tiflo.com--frontend && sudo docker build . -t frontend && sudo docker run -v /home/ubuntu/frontend/public/dist:/app/dist -t frontend

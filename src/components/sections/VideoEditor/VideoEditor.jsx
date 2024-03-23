@@ -1,7 +1,9 @@
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {Button} from "../../UI/Button/Button.jsx";
+import {useProject} from "../../../hooks/useProject.js";
 
-export const VideoEditor = ({project, setProject}) => {
+export const VideoEditor = () => {
+  const {project, setProjectMedia, setProjectText} = useProject();
   const hiddenFileInput = useRef(null);
   const [file, setFile] = useState();
 
@@ -11,30 +13,21 @@ export const VideoEditor = ({project, setProject}) => {
 
   const uploadFile = (event) => {
     const uploadedFIle = event.target.files[0];
-    console.log(uploadedFIle)
     setFile(uploadedFIle);
 
-    setProject({
-      id: "1",
-      name: project.name,
-      photo: URL.createObjectURL(uploadedFIle),
-      text: ""
-    })
+    setProjectMedia(URL.createObjectURL(uploadedFIle));
+    setTimeout(() => {
+      console.log(project)
+
+    }, 100)
   };
 
   const toText = () => {
     //   TODO перевод в текст
-    setTimeout(() => {
-      setProject({
-        id: project.id,
-        name: project.name,
-        photo: project.photo,
-        text: "На изображении показана группа из шести астронавтов, стоящих на скалистой снежной поверхности, возможно, " +
-          "на горе или скале. Все они носят белые костюмы, что говорит о том, что они являются частью космической миссии" +
-          " или исследовательской команды. Астронавты расположены в различных местах, а некоторые стоят ближе к переднему " +
-          "плану, а другие - дальше, создавая ощущение глубины и масштабирования в сцене."
-      })
-    }, 0)
+    setProjectText("На изображении показана группа из шести астронавтов, стоящих на скалистой снежной поверхности, возможно, " +
+      "на горе или скале. Все они носят белые костюмы, что говорит о том, что они являются частью космической миссии" +
+      " или исследовательской команды. Астронавты расположены в различных местах, а некоторые стоят ближе к переднему " +
+      "плану, а другие - дальше, создавая ощущение глубины и масштабирования в сцене.")
   }
 
   return (
@@ -62,7 +55,7 @@ export const VideoEditor = ({project, setProject}) => {
           :
           <>
             <div className="font-bold pb-8">Фото: {file && file.name}</div>
-            <img src={project.photo} alt=""/>
+            <img src={project.media} alt=""/>
             <div className="mt-4">
               <Button value={"В текст"} onClick={toText}/>
             </div>

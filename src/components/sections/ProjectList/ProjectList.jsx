@@ -1,14 +1,17 @@
 import {useProject} from "../../../hooks/useProject.js";
+import {useState} from "react";
+import {getProjects} from "../../../mocks/projects.js";
 
 export const ProjectList = () => {
-  const {newProject} = useProject();
+  const {newProject, setProject} = useProject();
+  const projects = getProjects();
 
   return (
     <>
       <div className="section basis-1/5">
-        <div className="grid grid-cols-2 font-bold">
+        <div className="grid grid-cols-2 font-bold mb-8">
           <div>Все проекты</div>
-          {/*<div className="text-inactive mb-8">Недавние</div>*/}
+          <div className="text-inactive">Недавние</div>
         </div>
 
         <div className="grid grid-cols-2 gap-5">
@@ -17,6 +20,13 @@ export const ProjectList = () => {
                onClick={() => {
                  newProject();
                }}/>
+
+          {projects.map((project) => (
+            <div key={project.id}
+                 style={{backgroundImage: `url(${project.media})`}}
+                 className="background-image w-full h-24"
+                  onClick={() => setProject(project)}/>
+          ))}
         </div>
       </div>
     </>

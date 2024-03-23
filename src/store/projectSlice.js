@@ -18,13 +18,6 @@ const projectSlice = createSlice({
     },
 
     setProjectAction(state, {payload}) {
-      // console.log("setProjectAction", payload)
-      // state = {
-      //   id: payload.id,
-      //   name: payload.name,
-      //   media: payload.media,
-      //   text: payload.text,
-      // }
       state.id = payload.id;
       state.name = payload.name;
       state.media = payload.media;
@@ -32,15 +25,16 @@ const projectSlice = createSlice({
     },
 
     setProjectNameAction(state, {payload}) {
-      state.name = payload
+      state.name = payload;
     },
 
     setProjectMediaAction(state, {payload}) {
-      state.media = payload
+      state.id = "0";
+      state.media = payload;
     },
 
     setProjectTextAction(state, {payload}) {
-      state.text = payload
+      state.text = payload;
     }
   }
 })

@@ -1,6 +1,10 @@
-export const Toolbar = ({states, handlers}) => {
-  const openHome = () => {
+import {useNavigate} from "react-router-dom";
 
+export const Toolbar = ({states, handlers}) => {
+  const navigate = useNavigate();
+
+  const openHome = () => {
+    navigate("/")
   }
 
   const openProjectList = () => {
@@ -8,11 +12,11 @@ export const Toolbar = ({states, handlers}) => {
   }
 
   const openPhotoEditor = () => {
-    console.log("open photo editor")
+    navigate("/")
   }
 
   const openVideoEditor = () => {
-    console.log("open video editor")
+    navigate("/video")
   }
 
   return (

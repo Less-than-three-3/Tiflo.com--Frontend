@@ -1,14 +1,11 @@
 import {useEffect, useState} from "react";
 import {Button} from "../../UI/Button/Button.jsx";
 import axios from "axios";
+import {useProject} from "../../../hooks/useProject.js";
 
-export const TextEditor = ({project, setProject}) => {
+export const TextEditor = () => {
   const [isEditing, setIsEditing] = useState(false);
-  const [editText, setEditText] = useState(project.text);
-
-  useEffect(() => {
-    setEditText(project.text)
-  }, [project.text]);
+  const {project, setProjectText} = useProject();
 
   const toVoice = async () => {
     setTimeout(() => {
@@ -47,27 +44,29 @@ export const TextEditor = ({project, setProject}) => {
             Редактирование
           </div>
         </div>
-        {project.id &&
-          <>
-            {!isEditing ?
-              <div className="overflow-x-hidden h-5/6">
-                {editText}
-              </div>
-              :
-              <textarea className="bg-inherit border-2 border-rat rounded-md p-2 outline-none h-5/6 w-full"
-                        value={editText}
-                        onChange={(event) => {
-                          setEditText(event.target.value)
-                        }}/>
-            }
-          </>
-        }
+        <div className="h-5/6">
+          {project.id &&
+            <>
+              {!isEditing ?
+                <div className="overflow-x-hidden min-h-10 max-h-full">
+                  {project.text}
+                </div>
+                :
+                <textarea className="bg-inherit border-2 border-rat rounded-md p-2 outline-none w-full h-full"
+                          value={project.text}
+                          onChange={(event) => {
+                            setProjectText(event.target.value)
+                          }}/>
+              }
+            </>
+          }
 
-        {editText &&
-          <div className="mt-4">
-            <Button value={"В голос"} onClick={toVoice}/>
-          </div>
-        }
+          {project.text &&
+            <div className="mt-4">
+              <Button value={"В голос"} onClick={toVoice}/>
+            </div>
+          }
+        </div>
       </div>
     </>
   );

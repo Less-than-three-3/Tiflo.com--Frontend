@@ -13,17 +13,13 @@ export const PhotoEditor = () => {
 
   const uploadFile = (event) => {
     const uploadedFIle = event.target.files[0];
-    console.log(uploadedFIle)
     setFile(uploadedFIle);
 
-    // axios.postForm('http://89.208.231.158/api/save-image', {
-    //   file: uploadedFIle,
-    // })
-    //   .then((response) => {
-    //     console.log(response)
-    //   })
-
     setProjectMedia(URL.createObjectURL(uploadedFIle));
+    setTimeout(() => {
+      console.log(project)
+
+    }, 100)
   };
 
   const toText = () => {

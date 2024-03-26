@@ -1,7 +1,18 @@
+import {Input} from "../../UI/Input/Input.jsx";
+import {Button} from "../../UI/Button/Button.jsx";
+
 export const RegPage = () => {
   return (
     <>
-      <h1>Reg</h1>
+      <div className="w-full flex justify-center">
+        <div className="w-5/12 bg-raccoon p-12 rounded-2xl">
+          <Input placeholder="Username"/>
+          <Input placeholder="Password"/>
+          <Input placeholder="Repeat password"/>
+          <Button value="SignUp" onClick={() => {
+          }} mode="primary"/>
+        </div>
+      </div>
     </>
   );
 }

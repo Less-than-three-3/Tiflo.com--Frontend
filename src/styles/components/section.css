@@ -1,5 +1,3 @@
 .section {
-  @apply px-6 py-8;
-
-  background-color: #1A1D1F;
+  @apply px-6 py-8 bg-raccoon;
 }

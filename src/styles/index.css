@@ -18,8 +18,8 @@ body {
 }
 
 #root {
+  @apply bg-seal;
   height: 100vh;
-  background-color: #111315;
   color: white;
 }
 

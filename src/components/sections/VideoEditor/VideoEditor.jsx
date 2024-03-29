@@ -47,17 +47,18 @@ export const VideoEditor = () => {
                 style={{display: 'none'}}
               />
               <div>
-                <div>Загрузите изображение</div>
-                <div>Или перетащите изображение сюда</div>
+                <div>Загрузите видео</div>
+                <div>Или перетащите видео сюда</div>
               </div>
             </div>
           </>
           :
           <>
-            <div className="font-bold pb-8">Фото: {file && file.name}</div>
-            <img src={project.media} alt=""/>
-            <div className="mt-4">
-              <Button value={"В текст"} onClick={toText}/>
+            <div className="font-bold pb-8">Видео: {file && file.name}</div>
+            <div style={{backgroundImage: `url(${project.media})`}}
+                 className="background-image w-full h-4/6"/>
+            <div className="mt-4 w-28">
+              <Button mode="primary" value={"В текст"} onClick={toText}/>
             </div>
           </>
         }

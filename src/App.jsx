@@ -10,8 +10,7 @@ import {Topbar} from "./components/sections/Topbar/Topbar.jsx";
 export const App = () => {
   return (
     <>
-      <div className="flex flex-col"
-           style={{gap: "20px"}}>
+      <div className="flex flex-col gap-5">
         <Topbar/>
 
         <Routes>

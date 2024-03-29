@@ -8,7 +8,7 @@ export const ProjectList = () => {
 
   return (
     <>
-      <div className="section basis-1/5">
+      <div className="section w-96">
         <div className="grid grid-cols-2 font-bold mb-8">
           <div>Все проекты</div>
           <div className="text-inactive">Недавние</div>

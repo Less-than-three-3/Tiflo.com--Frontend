@@ -4,12 +4,10 @@ export const getProjects = () => {
       id: "1",
       name: "sheep",
       media: "/src/assets/photo/sheep.png",
-      text: "На фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/phot" +
-        "o/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/asse" +
-        "ts/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/" +
-        "src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фо" +
-        "то овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep.pngНа фото овца/src/assets/photo/sheep." +
-        "pngНа фото овца/src/asseng",
+      text: "На изображении показана группа из шести астронавтов, стоящих на скалистой снежной поверхности, возможно, " +
+        "на горе или скале. Все они носят белые костюмы, что говорит о том, что они являются частью космической мисси" +
+        "и или исследовательской команды. Астронавты расположены в различных местах, а некоторые стоят ближе к переднему" +
+        " плану, а другие - дальше, создавая ощущение глубины и масштабирования в сцене",
     },
     {
       id: "2",

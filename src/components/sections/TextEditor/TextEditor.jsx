@@ -33,7 +33,7 @@ export const TextEditor = () => {
 
   return (
     <>
-      <div className="section w-1/4">
+      <div className="section" style={{width: "30em"}}>
         <div className="grid grid-cols-2 pb-6 w-9/12">
           <div className={`${!project.id ? "text-inactive" : isEditing && "text-inactive"} font-bold`}
                onClick={() => setIsEditing(false)}>
@@ -44,11 +44,11 @@ export const TextEditor = () => {
             Редактирование
           </div>
         </div>
-        <div className="h-5/6">
+        <div className="h-5/6 w-full">
           {project.id &&
             <>
               {!isEditing ?
-                <div className="overflow-x-hidden min-h-10 max-h-full">
+                <div className="overflow-x-hidden min-h-10 max-h-full text-pretty break-words">
                   {project.text}
                 </div>
                 :
@@ -62,8 +62,8 @@ export const TextEditor = () => {
           }
 
           {project.text &&
-            <div className="mt-4">
-              <Button value={"В голос"} onClick={toVoice}/>
+            <div className="mt-4 w-28">
+              <Button mode="primary" value={"В голос"} onClick={toVoice}/>
             </div>
           }
         </div>

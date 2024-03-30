@@ -7,6 +7,7 @@ const projectSlice = createSlice({
     name: "New Project",
     media: "",
     text: "",
+    comments: [],
   },
 
   reducers: {
@@ -15,6 +16,7 @@ const projectSlice = createSlice({
       state.name = "New Project";
       state.media = "";
       state.text = "";
+      state.comments = [];
     },
 
     setProjectAction(state, {payload}) {
@@ -22,6 +24,7 @@ const projectSlice = createSlice({
       state.name = payload.name;
       state.media = payload.media;
       state.text = payload.text;
+      state.comments = payload.comments;
     },
 
     setProjectNameAction(state, {payload}) {

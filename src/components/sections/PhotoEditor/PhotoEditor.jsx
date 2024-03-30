@@ -16,10 +16,6 @@ export const PhotoEditor = () => {
     setFile(uploadedFIle);
 
     setProjectMedia(URL.createObjectURL(uploadedFIle));
-    setTimeout(() => {
-      console.log(project)
-
-    }, 100)
   };
 
   const toText = () => {

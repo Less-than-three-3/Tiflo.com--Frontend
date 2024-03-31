@@ -2,6 +2,7 @@ import {useCallback, useEffect, useMemo, useRef} from "react";
 import {useWavesurfer} from '@wavesurfer/react'
 import Timeline from 'wavesurfer.js/dist/plugins/timeline.esm.js'
 import RegionsPlugin from 'wavesurfer.js/dist/plugins/regions.esm.js'
+import MultiTrack from "wavesurfer-multitrack";
 
 export const AudioEditor = () => {
   const contaienrRef = useRef(null);
@@ -61,6 +62,7 @@ export const AudioEditor = () => {
         <button onClick={onPlayPause} style={{minWidth: '5em'}}>
           {isPlaying ? 'Pause' : 'Play'}
         </button>
+
       </div>
     </>
   );

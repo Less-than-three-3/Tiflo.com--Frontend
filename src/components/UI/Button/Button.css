@@ -3,7 +3,7 @@
 }
 
 .btn-blue {
-  background-color: #7A79FF;
+  @apply bg-purple
 }
 
 .btn-blue:hover {

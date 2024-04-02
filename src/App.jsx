@@ -6,11 +6,12 @@ import {AuthPage} from "./components/pages/AuthPage/AuthPage.jsx";
 import {PhotoCommentPage} from "./components/pages/ProjectPage/PhotoCommentPage/PhotoCommentPage.jsx";
 import {VideoCommentPage} from "./components/pages/ProjectPage/VideoCommentPage/VideoCommentPage.jsx";
 import {Topbar} from "./components/sections/Topbar/Topbar.jsx";
+import {NotFoundPage} from "./components/pages/NotFoundPage/NotFoundPage.jsx";
 
 export const App = () => {
   return (
     <>
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-5 h-full">
         <Topbar/>
 
         <Routes>
@@ -21,6 +22,7 @@ export const App = () => {
             <Route path="photo" element={<PhotoCommentPage/>}/>
             <Route path="video" element={<VideoCommentPage/>}/>
           </Route>
+          <Route path="*" element={<NotFoundPage/>}/>
         </Routes>
       </div>
     </>

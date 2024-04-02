@@ -6,10 +6,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        'mouse': '#656565',
-        'rat': '#787878',
-        'raccoon': '#1A1D1F',
-        'seal': '#111315',
+        "mouse": "#656565",
+        "rat": "#787878",
+        "raccoon": "#1A1D1F",
+        "seal": "#111315",
+        "purple": "#7A79FF"
       },
     },
   },

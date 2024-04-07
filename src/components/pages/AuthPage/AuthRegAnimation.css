@@ -1,0 +1,11 @@
+.pictureContainer, .inputContainer {
+  transition: transform 1s;
+}
+
+.pictureContainer.active {
+  transform: translateX(100%);
+}
+
+.inputContainer.active {
+  transform: translateX(-100%);
+}

@@ -3,9 +3,8 @@ import {Button} from "../../UI/Button/Button.jsx";
 import {useState} from "react";
 import axios from "axios";
 import {host} from "../../../models/consts.js";
-import {Link} from "react-router-dom";
 
-export const RegPage = ({setIsRegistration, container, btnRef, switchHandler}) => {
+export const RegPage = ({setIsRegistration, btnRef, switchHandler}) => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");
@@ -19,8 +18,8 @@ export const RegPage = ({setIsRegistration, container, btnRef, switchHandler}) =
   }
 
   const handleClick = () => {
-    setIsRegistration(false);
     switchHandler();
+    setIsRegistration(false);
   }
 
   return (
@@ -43,12 +42,12 @@ export const RegPage = ({setIsRegistration, container, btnRef, switchHandler}) =
       </div>
 
       <Button value="Создать аккаунт" onClick={reg} mode="primary"/>
-      <div className="w-full flex justify-center mt-8" ref={btnRef} onClick={handleClick}>
+      <div className="w-full flex justify-center mt-8" >
         Уже есть аккаунт?
-        <Link className="underline underline-offset-4 text-purple ml-1"
-              to="/auth">
+        <div className="underline underline-offset-4 text-purple ml-1"
+              ref={btnRef} onClick={handleClick}>
           Вход в аккаунт
-        </Link>
+        </div>
       </div>
     </>
   );

@@ -3,6 +3,7 @@
 @import "./components/section.css";
 @import "./components/image.css";
 @import "./components/text.css";
+@import "../components/pages/AuthPage/AuthRegAnimation.css";
 
 @tailwind base;
 @tailwind components;
@@ -22,16 +23,3 @@ body {
   height: 100vh;
   color: white;
 }
-
-.pictureContainer, .inputContainer {
-  transition: transform 1s;
-}
-
-.pictureContainer.active {
-  transform: translateX(100%);
-}
-
-.inputContainer.active {
-  transform: translateX(-100%);
-}
-

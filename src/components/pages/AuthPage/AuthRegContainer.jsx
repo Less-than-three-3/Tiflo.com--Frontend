@@ -1,17 +1,18 @@
-import {AuthPage} from "./AuthPage.jsx";
-import {useRef, useState} from "react";
-import {RegPage} from "./RegPage.jsx";
+import {Outlet, useLocation} from "react-router-dom";
+import {useEffect} from "react";
 
-export const AuthRegContainer = ({isRegistration, setIsRegistration}) => {
-  const btnRef = useRef(null);
-  const pictureContainerRef = useRef(null);
-  const inputContainerRef = useRef(null);
-
-  const handleClick = () => {
-    console.log("click")
-    pictureContainerRef.current.classList.toggle('active');
-    inputContainerRef.current.classList.toggle('active');
-  };
+export const AuthRegContainer = ({pictureContainerRef, inputContainerRef}) => {
+  const location = useLocation();
+  useEffect(() => {
+    if (location.pathname === "/auth/signIn") {
+      pictureContainerRef.current.classList.remove('active');
+      inputContainerRef.current.classList.remove('active');
+    }
+    if (location.pathname === "/auth/signUp") {
+      pictureContainerRef.current.classList.add('active');
+      inputContainerRef.current.classList.add('active');
+    }
+  }, [inputContainerRef, location.pathname, pictureContainerRef])
 
   return (
     <>
@@ -27,11 +28,7 @@ export const AuthRegContainer = ({isRegistration, setIsRegistration}) => {
             <div className="w-1/2 h-full bg-raccoon p-20 rounded-md flex flex-col justify-between inputContainer"
                  ref={inputContainerRef}>
 
-              {isRegistration ?
-                <RegPage setIsRegistration={setIsRegistration} btnRef={btnRef} switchHandler={handleClick}/>
-                :
-                <AuthPage setIsRegistration={setIsRegistration} btnRef={btnRef} switchHandler={handleClick}/>
-              }
+              <Outlet />
             </div>
           </div>
         </div>

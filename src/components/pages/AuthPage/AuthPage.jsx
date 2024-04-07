@@ -3,8 +3,9 @@ import {Button} from "../../UI/Button/Button.jsx";
 import axios from "axios";
 import {host} from "../../../models/consts.js";
 import {useState} from "react";
+import {Link, useNavigate} from "react-router-dom";
 
-export const AuthPage = ({setIsRegistration, btnRef, switchHandler}) => {
+export const AuthPage = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
@@ -14,11 +15,6 @@ export const AuthPage = ({setIsRegistration, btnRef, switchHandler}) => {
       password: password,
     })
       .then((res) => console.log(res))
-  }
-
-  const handleClick = () => {
-    switchHandler();
-    setIsRegistration(true);
   }
 
   return (
@@ -39,10 +35,9 @@ export const AuthPage = ({setIsRegistration, btnRef, switchHandler}) => {
         <Button value="Войти в аккаунт" onClick={auth} mode="primary"/>
         <div className="w-full flex justify-center">
           Нет аккаунта?
-          <div className="underline underline-offset-4 text-purple ml-1"
-               ref={btnRef} onClick={handleClick}>
+          <Link className="underline underline-offset-4 text-purple ml-1" to="/auth/signUp">
             Регистрация
-          </div>
+          </Link>
         </div>
       </div>
     </>

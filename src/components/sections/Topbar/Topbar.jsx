@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import {useProject} from "../../../hooks/useProject.js";
 import {Link, useNavigate, useNavigation} from "react-router-dom";
 
-export const Topbar = ({setIsRegistration}) => {
+export const Topbar = () => {
   const [isSignedIn, setIsSignedIn] = useState(false);
   const {project, setProjectName} = useProject();
   const [isEditing, setIsEditing] = useState(false);
@@ -26,13 +26,11 @@ export const Topbar = ({setIsRegistration}) => {
   const navigate = useNavigate();
 
   const toSignIn = () => {
-    navigate("/auth");
-    setIsRegistration(false);
+    navigate("/auth/signIn");
   }
 
   const toSignUp = () => {
-    navigate("/auth");
-    setIsRegistration(true);
+    navigate("/auth/signUp");
   }
 
   return (

@@ -1,9 +1,9 @@
 import {Button} from "../../UI/Button/Button.jsx";
 import {useEffect, useState} from "react";
 import {useProject} from "../../../hooks/useProject.js";
-import {Link} from "react-router-dom";
+import {Link, useNavigate, useNavigation} from "react-router-dom";
 
-export const Topbar = () => {
+export const Topbar = ({setIsRegistration}) => {
   const [isSignedIn, setIsSignedIn] = useState(false);
   const {project, setProjectName} = useProject();
   const [isEditing, setIsEditing] = useState(false);
@@ -21,6 +21,18 @@ export const Topbar = () => {
       setName(project.name)
       setIsEditing(false);
     }
+  }
+
+  const navigate = useNavigate();
+
+  const toSignIn = () => {
+    navigate("/auth");
+    setIsRegistration(false);
+  }
+
+  const toSignUp = () => {
+    navigate("/auth");
+    setIsRegistration(true);
   }
 
   return (
@@ -58,12 +70,8 @@ export const Topbar = () => {
 
           <>
             <div className="flex gap-10">
-              <Link to="auth">
-                <Button value="SignIn" mode="primary"/>
-              </Link>
-              <Link to="reg">
-                <Button value="SignUp" mode="secondary"/>
-              </Link>
+              <Button value="SignIn" mode="primary" onClick={toSignIn}/>
+              <Button value="SignUp" mode="secondary" onClick={toSignUp}/>
             </div>
           </>
         }

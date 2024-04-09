@@ -17,7 +17,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: vavasto
-#          key: ${{ secrets.PRIVATE_KEY }}
+          key: ${{ secrets.PRIVATE_KEY }}
           script: cd /home/vavasto/frontend/Tiflo.com--Frontend && git pull
       - name: Build containers
         uses: appleboy/ssh-action@master
@@ -25,5 +25,5 @@ jobs:
           timeout: 10m
           host: ${{ secrets.HOST }}
           username: vavasto
-#          key: ${{ secrets.PRIVATE_KEY }}
+          key: ${{ secrets.PRIVATE_KEY }}
           script: cd /home/vavasto/frontend/Tiflo.com--Frontend && npm install && sudo docker build . -t frontend && sudo docker run -v /home/vavasto/frontend/public/dist:/app/dist -t frontend

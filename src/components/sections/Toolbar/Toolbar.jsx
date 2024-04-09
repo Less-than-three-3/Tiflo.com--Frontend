@@ -1,4 +1,4 @@
-import {Link, useLocation, useNavigate} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 
 export const Toolbar = ({states, handlers}) => {
   const path = useLocation().pathname;

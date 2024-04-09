@@ -5,7 +5,7 @@ import axios from "axios";
 import {host} from "../../../models/consts.js";
 import {Link, useNavigate} from "react-router-dom";
 
-export const RegPage = () => {
+export const RegForm = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");

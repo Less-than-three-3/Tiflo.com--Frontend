@@ -5,7 +5,7 @@ import {host} from "../../../models/consts.js";
 import {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 
-export const AuthPage = () => {
+export const AuthForm = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 

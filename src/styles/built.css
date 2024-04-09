@@ -631,6 +631,10 @@ video {
   }
 }
 
+.relative {
+  position: relative;
+}
+
 .m-14 {
   margin: 3.5rem;
 }
@@ -733,10 +737,6 @@ video {
 
 .grow {
   flex-grow: 1;
-}
-
-.resize {
-  resize: both;
 }
 
 .grid-cols-2 {
@@ -938,6 +938,7 @@ video {
 
 html {
   overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 body {

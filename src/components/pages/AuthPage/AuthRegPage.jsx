@@ -1,7 +1,10 @@
 import {Outlet, useLocation} from "react-router-dom";
-import {useEffect} from "react";
+import {useEffect, useRef} from "react";
 
-export const AuthRegContainer = ({pictureContainerRef, inputContainerRef}) => {
+export const AuthRegPage = () => {
+  const pictureContainerRef = useRef(null);
+  const inputContainerRef = useRef(null);
+
   const location = useLocation();
   useEffect(() => {
     if (location.pathname === "/auth/signIn") {

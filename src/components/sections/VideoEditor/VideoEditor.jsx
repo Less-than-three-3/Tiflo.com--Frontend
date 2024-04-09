@@ -57,8 +57,9 @@ export const VideoEditor = () => {
             <div className="font-bold pb-8">Видео: {file && file.name}</div>
             <div style={{backgroundImage: `url(${project.media})`}}
                  className="background-image w-full h-4/6"/>
-            <div className="mt-4 w-28">
-              <Button mode="primary" value={"В текст"} onClick={toText}/>
+
+            <div className="flex">
+              <img src="/src/assets/icons/add_text.svg" alt=""/>
             </div>
           </>
         }

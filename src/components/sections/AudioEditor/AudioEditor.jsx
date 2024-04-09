@@ -1,68 +1,65 @@
 import {useCallback, useEffect, useMemo, useRef} from "react";
-import {useWavesurfer} from '@wavesurfer/react'
-import Timeline from 'wavesurfer.js/dist/plugins/timeline.esm.js'
-import RegionsPlugin from 'wavesurfer.js/dist/plugins/regions.esm.js'
-import MultiTrack from "wavesurfer-multitrack";
+import TimelinePlugin from 'wavesurfer.js/dist/plugins/timeline.esm.js'
+import WaveSurfer from "wavesurfer.js";
 
 export const AudioEditor = () => {
-  const contaienrRef = useRef(null);
+  const waveform = useRef(null);
+  const waveform2 = useRef(null);
 
-  const {wavesurfer, isPlaying} = useWavesurfer({
-    container: contaienrRef,
-    waveColor: '#4F4A85',
-    progressColor: '#383351',
-    url: '/src/assets/audio.mp3',
-    cursorColor: "#fff",
-    cursorWidth: 2,
-    plugins: useMemo(() => [Timeline.create()], []),
-  });
+  useEffect(() => {
+    const multitrack = Multitrack.create(
+      [
+        {
+          id: 0,
+          draggable: true,
+          startPosition: 1, // start time relative to the entire multitrack
+          url: '/src/assets/audio.mp3',
+          volume: 0.3,
 
-  wavesurfer?.on('interaction', () => {
-    wavesurfer.play()
-  })
+        },
+        {
+          id: 1,
+          draggable: true,
+          startPosition: 1, // start time relative to the entire multitrack
+          url: '/src/assets/audio.mp3',
+          volume: 0.3,
+        },
+        {
+          id: 2,
+          draggable: true,
+          startPosition: 100, // start time relative to the entire multitrack
+          url: '/src/assets/audio.mp3',
+          volume: 0.3,
+        },
+      ],
+      {
+        container: waveform.current, // required!
+        rightButtonDrag: false, // set to true to drag with right mouse button
+        cursorWidth: 2,
+        cursorColor: '#9421d7',
+        trackBackground: '#2D2D2D',
+        trackBorderColor: '#466193',
+        dragBounds: true,
+      },
+    )
 
-  const onPlayPause = useCallback(() => {
-    wavesurfer && wavesurfer.playPause()
-  }, [wavesurfer])
-
-  const wsRegions = wavesurfer?.registerPlugin(RegionsPlugin.create())
-
-  wavesurfer?.on('decode', () => {
-    // Regions
-    wsRegions.addRegion({
-      start: 9,
-      end: 30,
-      content: 'Tap & Resize & Drag',
-      color: "rgba(117,6,255,0.49)",
-      drag: true,
-      resize: true,
+    // Play/pause button
+    const button = document.querySelector('#play')
+    multitrack.once('canplay', () => {
+      button.disabled = false
+      button.onclick = () => {
+        multitrack.isPlaying() ? multitrack.pause() : multitrack.play()
+        button.textContent = multitrack.isPlaying() ? 'Pause' : 'Play'
+      }
     })
 
-    wsRegions.addRegion({
-      start: 46.5,
-      content: 'Marker',
-      color: "rgb(6,160,255)",
-      drag: true,
-      resize: true,
-    })
-  })
-
-  let activeRegion = null
-  wsRegions?.on('region-clicked', (region, e) => {
-    e.stopPropagation() // prevent triggering a click on the waveform
-    activeRegion = region
-    region.play()
-    region.setOptions({ color: "rgba(80,89,255,0.49)" })
-  })
+  }, []);
 
   return (
     <>
       <div className="section grow w-full">
-        <div id="waveform" ref={contaienrRef}></div>
-        <button onClick={onPlayPause} style={{minWidth: '5em'}}>
-          {isPlaying ? 'Pause' : 'Play'}
-        </button>
-
+        <div id="waveform" ref={waveform}></div>
+        <button id="play">play</button>
       </div>
     </>
   );

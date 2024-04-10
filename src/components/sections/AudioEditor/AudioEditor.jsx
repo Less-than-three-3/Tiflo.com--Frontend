@@ -1,65 +1,46 @@
-import {useCallback, useEffect, useMemo, useRef} from "react";
-import TimelinePlugin from 'wavesurfer.js/dist/plugins/timeline.esm.js'
-import WaveSurfer from "wavesurfer.js";
+import {useEffect, useRef} from "react";
+import {audioParts, getWfElements, moveWfElements, splitWfElements} from "../../../models/waveform.js";
 
 export const AudioEditor = () => {
   const waveform = useRef(null);
-  const waveform2 = useRef(null);
 
+  let multitrack;
   useEffect(() => {
-    const multitrack = Multitrack.create(
-      [
-        {
-          id: 0,
-          draggable: true,
-          startPosition: 1, // start time relative to the entire multitrack
-          url: '/src/assets/audio.mp3',
-          volume: 0.3,
-
-        },
-        {
-          id: 1,
-          draggable: true,
-          startPosition: 1, // start time relative to the entire multitrack
-          url: '/src/assets/audio.mp3',
-          volume: 0.3,
-        },
-        {
-          id: 2,
-          draggable: true,
-          startPosition: 100, // start time relative to the entire multitrack
-          url: '/src/assets/audio.mp3',
-          volume: 0.3,
-        },
-      ],
+    multitrack = Multitrack.create(
+      audioParts.reverse(),
       {
         container: waveform.current, // required!
         rightButtonDrag: false, // set to true to drag with right mouse button
         cursorWidth: 2,
         cursorColor: '#9421d7',
-        trackBackground: '#2D2D2D',
         trackBorderColor: '#466193',
         dragBounds: true,
       },
     )
 
-    // Play/pause button
-    const button = document.querySelector('#play')
-    multitrack.once('canplay', () => {
-      button.disabled = false
-      button.onclick = () => {
-        multitrack.isPlaying() ? multitrack.pause() : multitrack.play()
-        button.textContent = multitrack.isPlaying() ? 'Pause' : 'Play'
-      }
-    })
-
   }, []);
+
+  const playPause = () => {
+    multitrack.isPlaying() ? multitrack.pause() : multitrack.play()
+  }
+
+  useEffect(() => {
+    const wfElements = getWfElements(waveform);
+    const {wfVideos, wfVoices} = splitWfElements(wfElements);
+
+    moveWfElements(wfVideos, true, 0);
+    moveWfElements(wfVoices, false, 1);
+  }, [])
 
   return (
     <>
-      <div className="section grow w-full">
-        <div id="waveform" ref={waveform}></div>
-        <button id="play">play</button>
+      <div className="section grow w-full flex">
+        <div className="w-16">
+          <button onClick={playPause}>play</button>
+          <img src="/src/assets/icons/video_inactive.svg" alt="" className="w-10 mt-10"/>
+          <img src="/src/assets/icons/text.svg" alt="" className="w-10 mt-24"/>
+        </div>
+        <div className="w-full h-full" id="waveform" ref={waveform}></div>
       </div>
     </>
   );

@@ -4,17 +4,33 @@ import axios from "axios";
 import {host} from "../../../models/consts.js";
 import {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
+import {useUser} from "../../../hooks/useUser.js";
 
 export const AuthForm = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
-  const auth = () => {
-    axios.post(`${host}/api/auth/signIn`, {
+  const {setUser} = useUser();
+
+  const navigate = useNavigate();
+  const auth = async () => {
+    const response = await axios.post(`${host}/api/auth/signIn`, {
       login: login,
       password: password,
     })
-      .then((res) => console.log(res))
+
+    if (response.status === 200) {
+      setUser({
+        id: response.data.userId,
+        login: response.data.login,
+        isLoggedIn: true,
+      })
+
+      navigate("/project/photo")
+
+      axios.get(`${host}/api/projects`)
+        .then((response) => {console.log(response.data)})
+    }
   }
 
   return (

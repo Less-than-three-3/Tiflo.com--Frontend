@@ -3,7 +3,7 @@ import {Button} from "../../UI/Button/Button.jsx";
 import {useState} from "react";
 import axios from "axios";
 import {host} from "../../../models/consts.js";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 export const RegForm = () => {
   const [login, setLogin] = useState("");
@@ -38,7 +38,7 @@ export const RegForm = () => {
       </div>
 
       <Button value="Создать аккаунт" onClick={reg} mode="primary"/>
-      <div className="w-full flex justify-center mt-8">
+      <div className="w-full flex justify-center">
         Уже есть аккаунт?
         <Link className="underline underline-offset-4 text-purple ml-1" to="/auth/signIn">
           Вход в аккаунт

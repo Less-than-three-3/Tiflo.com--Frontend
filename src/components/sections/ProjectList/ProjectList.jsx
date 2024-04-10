@@ -1,10 +1,18 @@
 import {useProject} from "../../../hooks/useProject.js";
 import {useState} from "react";
 import {getProjects} from "../../../mocks/projects.js";
+import axios from "axios";
+import {host} from "../../../models/consts.js";
 
 export const ProjectList = () => {
   const {newProject, setProject} = useProject();
   const projects = getProjects();
+
+  const newPrjct = () => {
+    newProject();
+    axios.post(`${host}/api/projects`)
+      .then((response) => {console.log(response)})
+  }
 
   return (
     <>
@@ -17,9 +25,7 @@ export const ProjectList = () => {
         <div className="grid grid-cols-2 gap-5">
           <div style={{backgroundImage: "url(/src/assets/icons/new_project.svg)"}}
                className="background-image w-full h-24"
-               onClick={() => {
-                 newProject();
-               }}/>
+               onClick={newPrjct}/>
 
           {projects.map((project) => (
             <div key={project.id}

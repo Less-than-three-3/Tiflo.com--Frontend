@@ -19,7 +19,7 @@ export const AuthRegPage = () => {
 
   return (
     <>
-      <div className="w-full h-full flex justify-center mt-20">
+      <div className="w-full h-full flex justify-center mt-10">
         <div className="w-1/2 h-5/6 rounded-2xl bg-center bg-no-repeat bg-cover flex flex-row"
              style={{backgroundImage: "url(/src/assets/photo/purple.jpg)"}}>
 

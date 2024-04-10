@@ -1,13 +1,17 @@
 import {Button} from "../../UI/Button/Button.jsx";
 import {useEffect, useState} from "react";
 import {useProject} from "../../../hooks/useProject.js";
-import {Link, useNavigate, useNavigation} from "react-router-dom";
+import {Link} from "react-router-dom";
+import {useUser} from "../../../hooks/useUser.js";
+import axios from "axios";
+import {host} from "../../../models/consts.js";
 
 export const Topbar = () => {
-  const [isSignedIn, setIsSignedIn] = useState(false);
   const {project, setProjectName} = useProject();
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState(project.name);
+
+  const {user, dropUser} = useUser();
 
   useEffect(() => {
     setName(project.name)
@@ -23,14 +27,11 @@ export const Topbar = () => {
     }
   }
 
-  const navigate = useNavigate();
-
-  const toSignIn = () => {
-    navigate("/auth/signIn");
-  }
-
-  const toSignUp = () => {
-    navigate("/auth/signUp");
+  const logout = async () => {
+    const response = await axios.post(`${host}/api/auth/logout`)
+    if (response.status === 200) {
+      dropUser();
+    }
   }
 
   return (
@@ -40,7 +41,7 @@ export const Topbar = () => {
           <div className="text-2xl">Tiflo.com</div>
         </Link>
 
-        {isSignedIn ?
+        {user.isLoggedIn ?
           <>
             <div className="text-xl flex items-center">
               <div>
@@ -61,6 +62,7 @@ export const Topbar = () => {
             <div className="flex gap-6">
               <img src="/src/assets/icons/user.svg" alt="user"
                    className="w-10"/>
+              <Button value="Logout" mode="secondary" onClick={logout}/>
             </div>
           </>
 
@@ -68,8 +70,12 @@ export const Topbar = () => {
 
           <>
             <div className="flex gap-10">
-              <Button value="SignIn" mode="primary" onClick={toSignIn}/>
-              <Button value="SignUp" mode="secondary" onClick={toSignUp}/>
+              <Link to="/auth/signIn">
+                <Button value="SignIn" mode="primary"/>
+              </Link>
+              <Link to="/auth/signUp">
+                <Button value="SignUp" mode="secondary"/>
+              </Link>
             </div>
           </>
         }

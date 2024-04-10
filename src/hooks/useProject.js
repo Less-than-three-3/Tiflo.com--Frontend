@@ -6,7 +6,7 @@ import {
 
 export function useProject() {
   const project = useSelector((state) => {
-    return state.projectReducer.projectSlice
+    return state.projectSlice;
   })
 
   const dispatch = useDispatch();

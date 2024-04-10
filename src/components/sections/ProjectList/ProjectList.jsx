@@ -13,7 +13,7 @@ export const ProjectList = () => {
     axios.post(`${host}/api/projects`)
       .then((response) => {console.log(response)})
   }
-
+//
   return (
     <>
       <div className="section w-96">

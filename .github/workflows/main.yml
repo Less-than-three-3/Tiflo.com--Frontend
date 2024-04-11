@@ -19,6 +19,10 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.PRIVATE_KEY }}
           script: cd /home/vavasto/frontend/Tiflo.com--Frontend && git pull
+      - name: Try NPM
+        uses: appleboy/ssh-action@master
+        with:
+          script: npm -v
       - name: Build containers
         uses: appleboy/ssh-action@master
         with:

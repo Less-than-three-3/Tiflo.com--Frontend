@@ -16,12 +16,14 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
           key: ${{ secrets.PRIVATE_KEY }}
           script: cd /home/vavasto/frontend/Tiflo.com--Frontend && git pull
       - name: Try NPM
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
           key: ${{ secrets.PRIVATE_KEY }}
           script: /home/vavasto/.nvm/versions/node/v18.20.1/bin/npm -v
       - name: Build containers
@@ -29,5 +31,6 @@ jobs:
         with:
           timeout: 10m
           host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
           key: ${{ secrets.PRIVATE_KEY }}
           script: cd /home/vavasto/frontend/Tiflo.com--Frontend && npm install && sudo docker build . -t frontend && sudo docker run -v /home/vavasto/frontend/public/dist:/app/dist -t frontend

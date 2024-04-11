@@ -25,7 +25,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.PRIVATE_KEY }}
-          script: npm -v
+          script: /home/vavasto/.nvm/versions/node/v18.20.1/bin/npm -v
       - name: Build containers
         uses: appleboy/ssh-action@master
         with:

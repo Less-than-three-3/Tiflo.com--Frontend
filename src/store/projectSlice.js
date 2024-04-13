@@ -52,8 +52,11 @@ const projectSlice = createSlice({
       });
     },
 
-    setProjectAudioArrAction(state, {payload}) {
+    clearProjectAudioAction(state) {
       state.comments = [];
+    },
+
+    setProjectAudioArrAction(state, {payload}) {
       state.comments.push({
         path: payload.path,
         text: payload.text,
@@ -72,5 +75,6 @@ export const {
   setProjectTextAction,
   setProjectAudioAction,
   setProjectAudioArrAction,
+  clearProjectAudioAction,
 } = projectSlice.actions
 export default projectSlice.reducer

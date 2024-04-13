@@ -4,7 +4,7 @@ import axios from "axios";
 import {host} from "../../../models/consts.js";
 
 export const VideoEditor = ({setUpdateProject, play}) => {
-  const {project, setProjectMedia, setProjectText, setProjectAudio, clearProjectAudio} = useProject();
+  const {project, setProjectMedia, setProjectText, setProjectAudio, clearProjectAudio, setProjectAudioArrAction} = useProject();
   const hiddenFileInput = useRef(null);
   const [file, setFile] = useState();
 
@@ -30,7 +30,7 @@ export const VideoEditor = ({setUpdateProject, play}) => {
 
     if (mediaResponse.status === 200) {
       const getProjectResponse = await axios.get(`${host}/api/projects/${project.id}`);
-      setProjectAudio(getProjectResponse.data.audioParts[0].path);
+      setProjectAudioArrAction(getProjectResponse.data.audioParts[0].path);
       setTimeout(() => {
         setUpdateProject((v) => v + 1)
       }, 100)

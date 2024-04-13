@@ -1,6 +1,7 @@
 import {useEffect, useRef, useState} from "react";
 import {Button} from "../../UI/Button/Button.jsx";
 import {useProject} from "../../../hooks/useProject.js";
+import axios from "axios";
 
 export const VideoEditor = () => {
   const {project, setProjectMedia, setProjectText} = useProject();
@@ -18,8 +19,9 @@ export const VideoEditor = () => {
     setProjectMedia(URL.createObjectURL(uploadedFIle));
     setTimeout(() => {
       console.log(project)
-
     }, 100)
+
+    axios.post()
   };
 
   const toText = () => {

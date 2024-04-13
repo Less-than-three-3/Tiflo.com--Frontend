@@ -8,12 +8,12 @@ export const ProjectList = () => {
   const {newProject, setProject} = useProject();
   const projects = getProjects();
 
-  const newPrjct = () => {
+  const clockNewProject = async () => {
     newProject();
-    axios.post(`${host}/api/projects`)
-      .then((response) => {console.log(response)})
+    const response = await axios.post(`${host}/api/projects`)
+    console.log(response.data);
   }
-//tfhhgg
+
   return (
     <>
       <div className="section w-96">
@@ -25,7 +25,7 @@ export const ProjectList = () => {
         <div className="grid grid-cols-2 gap-5">
           <div style={{backgroundImage: "url(/src/assets/icons/new_project.svg)"}}
                className="background-image w-full h-24"
-               onClick={newPrjct}/>
+               onClick={clockNewProject}/>
 
           {projects.map((project) => (
             <div key={project.id}

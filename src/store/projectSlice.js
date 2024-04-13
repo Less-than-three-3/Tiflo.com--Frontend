@@ -20,6 +20,7 @@ const projectSlice = createSlice({
     },
 
     setProjectAction(state, {payload}) {
+      console.log(payload)
       state.id = payload.projectId;
       state.name = payload.name;
       state.media = payload.path;

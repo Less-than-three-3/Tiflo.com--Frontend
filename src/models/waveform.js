@@ -86,6 +86,8 @@ export const splitWfElements = (wfElements, audioParts) => {
 export const moveWfElements = (wfElements, isVideo, row, audioParts) => {
   for (const id in wfElements) {
     const partId = audioParts.filter((i) => i.isVideo === isVideo)[id].id;
+    console.log(partId)
     wfElements[id].style.top = `${-((3 - partId - row) * trackHeight)}px`;
+    console.log(`${-((3 - partId - row) * trackHeight)}px`)
   }
 }

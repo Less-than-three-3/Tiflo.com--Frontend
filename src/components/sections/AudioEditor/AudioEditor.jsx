@@ -14,7 +14,7 @@ export const AudioEditor = () => {
         id: 0,
         draggable: true,
         startPosition: 0,
-        url: project.comments.length > 0 ? project.comments[0].path : "",
+        url: project.comments ? project.comments.length > 0 ? project.comments[0].path : "" : "",
         volume: 0.3,
         options: {
           waveColor: '#7A79FF',

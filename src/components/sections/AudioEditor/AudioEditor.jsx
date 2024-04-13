@@ -10,6 +10,7 @@ export const AudioEditor = ({updateProject, play, setPlay}) => {
 
   let multitrack;
   useEffect(() => {
+    console.log(waveform.current.querySelector("div"))
     if (waveform.current && waveform.current.querySelector("div")) {
       const domNode = waveform.current.querySelector("div");
       unmountComponentAtNode(domNode);
@@ -46,7 +47,7 @@ export const AudioEditor = ({updateProject, play, setPlay}) => {
 
       console.log(audioParts);
       multitrack = Multitrack.create(
-        audioParts.reverse(),
+        audioParts,
         {
           container: waveform.current, // required!
           rightButtonDrag: false, // set to true to drag with right mouse button

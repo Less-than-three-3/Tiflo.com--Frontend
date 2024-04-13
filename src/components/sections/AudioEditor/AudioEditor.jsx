@@ -15,19 +15,6 @@ export const AudioEditor = ({updateProject, play, setPlay}) => {
     }
 
     if (project && project.comments && project.comments.length > 0) {
-      // const audioParts = [
-      //   {
-      //     id: 0,
-      //     draggable: true,
-      //     startPosition: 0,
-      //     url: project.comments[0].path,
-      //     volume: 0.3,
-      //     options: {
-      //       waveColor: '#7A79FF',
-      //     },
-      //     isVideo: true,
-      //   },
-      // ]
       let audioParts = [];
       for (const id in project.comments) {
         audioParts.push({
@@ -68,6 +55,8 @@ export const AudioEditor = ({updateProject, play, setPlay}) => {
   }, [updateProject]);
 
   const playPause = () => {
+    console.log(multitrack)
+    console.log(play)
     multitrack.isPlaying() ? multitrack.pause() : multitrack.play()
     setPlay((v) => !v)
   }

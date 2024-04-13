@@ -19,6 +19,10 @@ export function useProject() {
     dispatch(setProjectAction(value));
   }
 
+  const setProjectId = (value) => {
+    dispatch(setProjectIdAction(value))
+  }
+
   const setProjectName = (value) => {
     dispatch(setProjectNameAction(value))
   }

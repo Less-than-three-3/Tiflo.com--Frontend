@@ -28,6 +28,11 @@ const projectSlice = createSlice({
       state.comments = payload.comments;
     },
 
+    setProjectIdAction(state, {payload}) {
+      console.log("payload id", payload)
+      state.id = payload;
+    },
+
     setProjectNameAction(state, {payload}) {
       state.name = payload;
     },
@@ -46,6 +51,7 @@ const projectSlice = createSlice({
 export const {
   newProjectAction,
   setProjectAction,
+  setProjectIdAction,
   setProjectNameAction,
   setProjectMediaAction,
   setProjectTextAction

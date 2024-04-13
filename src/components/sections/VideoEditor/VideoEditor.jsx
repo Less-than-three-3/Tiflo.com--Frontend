@@ -54,7 +54,7 @@ export const VideoEditor = ({setUpdateProject, play}) => {
       "плану, а другие - дальше, создавая ощущение глубины и масштабирования в сцене.")
   }
 
-  const generateComment = () => {
+  const generateComment = async () => {
     const genComResponse = await axios.post(`${host}/api/projects/${project.id}/video/comment`, {
       start: "00:03",
     })

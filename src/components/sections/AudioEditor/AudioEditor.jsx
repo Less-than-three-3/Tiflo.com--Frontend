@@ -1,6 +1,8 @@
 import {useEffect, useRef} from "react";
 import {getWfElements, moveWfElements, splitWfElements} from "../../../models/waveform.js";
 import {useProject} from "../../../hooks/useProject.js";
+// eslint-disable-next-line react/no-deprecated
+import {unmountComponentAtNode} from "react-dom";
 
 export const AudioEditor = ({updateProject, play, setPlay}) => {
   const waveform = useRef(null);
@@ -8,6 +10,8 @@ export const AudioEditor = ({updateProject, play, setPlay}) => {
 
   let multitrack;
   useEffect(() => {
+    const domNode = waveform.current.querySelector("div");
+    unmountComponentAtNode(domNode);
 
     if (project && project.comments && project.comments.length > 0) {
       // const audioParts = [

@@ -39,6 +39,7 @@ export const AudioEditor = ({updateProject, play, setPlay}) => {
         })
       }
 
+      console.log(audioParts);
       multitrack = Multitrack.create(
         audioParts.reverse(),
         {

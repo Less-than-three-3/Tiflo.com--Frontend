@@ -10,6 +10,7 @@ export const AudioEditor = ({updateProject}) => {
   useEffect(() => {
 
     if (project.comments && project.comments.length > 0) {
+      console.log("project comments length", project.comments.length)
       const audioParts = [
         {
           id: 0,

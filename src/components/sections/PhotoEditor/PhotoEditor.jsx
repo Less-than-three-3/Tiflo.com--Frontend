@@ -29,7 +29,7 @@ export const PhotoEditor = () => {
   return (
     <>
       <div className="section grow">
-        {!project.id ?
+        {!project.media ?
           <>
             <div className="border-4 border-dashed border-mouse rounded-3xl
                             flex justify-center items-center flex-col

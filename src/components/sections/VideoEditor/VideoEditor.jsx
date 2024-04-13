@@ -41,10 +41,10 @@ export const VideoEditor = () => {
   return (
     <>
       <div className="section grow">
-        {!project.id ?
+        {!project.media ?
           <>
             <div className="border-4 border-dashed border-mouse rounded-3xl
-                            flex justify-center items-center flex-col
+                         video   flex justify-center items-center flex-col
                             m-14 p-20"
                  onClick={handleClick}>
               <img src="/src/assets/icons/upload.svg" alt=""/>

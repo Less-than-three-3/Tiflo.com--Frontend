@@ -35,7 +35,7 @@ export const AudioEditor = () => {
       },
     )
 
-  }, [project.comments]);
+  }, [project.comments[0].path]);
 
   const playPause = () => {
     multitrack.isPlaying() ? multitrack.pause() : multitrack.play()

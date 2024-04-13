@@ -1,11 +1,27 @@
 import {useEffect, useRef} from "react";
-import {audioParts, getWfElements, moveWfElements, splitWfElements} from "../../../models/waveform.js";
+import {getWfElements, moveWfElements, splitWfElements} from "../../../models/waveform.js";
+import {useProject} from "../../../hooks/useProject.js";
 
 export const AudioEditor = () => {
   const waveform = useRef(null);
+  const {project} = useProject();
 
   let multitrack;
   useEffect(() => {
+    const audioParts = [
+      {
+        id: 0,
+        draggable: true,
+        startPosition: 0,
+        url: project.comments[0].path,
+        volume: 0.3,
+        options: {
+          waveColor: '#7A79FF',
+        },
+        isVideo: true,
+      },
+    ]
+
     multitrack = Multitrack.create(
       audioParts.reverse(),
       {
@@ -18,7 +34,7 @@ export const AudioEditor = () => {
       },
     )
 
-  }, []);
+  }, [project.comments]);
 
   const playPause = () => {
     multitrack.isPlaying() ? multitrack.pause() : multitrack.play()

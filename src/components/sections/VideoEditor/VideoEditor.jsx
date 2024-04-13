@@ -3,7 +3,7 @@ import {useProject} from "../../../hooks/useProject.js";
 import axios from "axios";
 import {host} from "../../../models/consts.js";
 
-export const VideoEditor = () => {
+export const VideoEditor = ({setUpdateProject}) => {
   const {project, setProjectMedia, setProjectText, setProjectAudio} = useProject();
   const hiddenFileInput = useRef(null);
   const [file, setFile] = useState();
@@ -20,7 +20,7 @@ export const VideoEditor = () => {
     const formData = new FormData();
     formData.append('file', uploadedFIle);
 
-    console.log("video editor", project.id)
+    console.log("video editor project id", project.id)
     const mediaResponse = await axios.post(`${host}/api/projects/${project.id}/media`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -31,6 +31,9 @@ export const VideoEditor = () => {
     if (mediaResponse.status === 200) {
       const getProjectResponse = await axios.get(`${host}/api/projects/${project.id}`);
       setProjectAudio(getProjectResponse.data.audioParts[0].path);
+      setTimeout(() => {
+        setUpdateProject((v) => v + 1)
+      }, 100)
     }
   };
 

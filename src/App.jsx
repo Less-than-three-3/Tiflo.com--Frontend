@@ -8,8 +8,11 @@ import {Topbar} from "./components/sections/Topbar/Topbar.jsx";
 import {NotFoundPage} from "./components/pages/NotFoundPage/NotFoundPage.jsx";
 import {AuthRegPage} from "./components/pages/AuthPage/AuthRegPage.jsx";
 import {AuthForm} from "./components/pages/AuthPage/AuthForm.jsx";
+import {useState} from "react";
 
 export const App = () => {
+  const [updateProject, setUpdateProject] = useState(0);
+
   return (
     <>
       <div className="flex flex-col gap-5 h-full">
@@ -23,7 +26,7 @@ export const App = () => {
           </Route>
           <Route path="project" element={<ProjectPage/>}>
             <Route path="photo" element={<PhotoCommentPage/>}/>
-            <Route path="video" element={<VideoCommentPage/>}/>
+            <Route path="video" element={<VideoCommentPage setUpdateProject={setUpdateProject}/>}/>
           </Route>
           <Route path="*" element={<NotFoundPage/>}/>
         </Routes>

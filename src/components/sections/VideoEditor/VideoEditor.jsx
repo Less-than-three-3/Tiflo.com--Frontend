@@ -59,8 +59,9 @@ export const VideoEditor = ({setUpdateProject, play}) => {
       start: "00:03",
     })
 
-    console.log(genComResponse.data)
+    console.log("genComResponse", genComResponse.data)
     for (const audioPart of genComResponse.data.audioParts) {
+      console.log("audioPart", audioPart)
       setProjectAudio(audioPart)
     }
     setTimeout(() => {

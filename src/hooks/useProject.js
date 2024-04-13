@@ -6,7 +6,7 @@ import {
   setProjectTextAction,
   setProjectIdAction,
   setProjectAudioAction,
-  setProjectAudioArrAction, clearProjectAudioAction
+  clearProjectAudioAction
 } from "../store/projectSlice.js";
 
 export function useProject() {
@@ -19,10 +19,6 @@ export function useProject() {
   const newProject = () => {
     dispatch(newProjectAction());
   }
-
-  // const setProject = (value) => {
-  //   dispatch(setProjectAction(value));
-  // }
 
   const setProjectId = (value) => {
     dispatch(setProjectIdAction(value))
@@ -44,10 +40,6 @@ export function useProject() {
     dispatch(setProjectAudioAction(value))
   }
 
-  const setProjectAudioArr = (value) => {
-    dispatch(setProjectAudioArrAction(value))
-  }
-
   const clearProjectAudio = () => {
     dispatch(clearProjectAudioAction())
   }
@@ -55,13 +47,11 @@ export function useProject() {
   return {
     project,
     newProject,
-    // setProject,
     setProjectId,
     setProjectName,
     setProjectMedia,
     setProjectText,
     setProjectAudio,
-    setProjectAudioArr,
     clearProjectAudio,
   }
 }

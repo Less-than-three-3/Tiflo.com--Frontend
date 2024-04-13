@@ -19,16 +19,7 @@ const projectSlice = createSlice({
       state.comments = [];
     },
 
-    // setProjectAction(state, {payload}) {
-    //   console.log("payload", payload)
-    //   state.id = payload.projectId;
-    //   state.name = payload.name;
-    //   state.media = payload.path;
-    //   state.text = payload.text;
-    // },
-
     setProjectIdAction(state, {payload}) {
-      console.log("payload id", payload)
       state.id = payload;
     },
 
@@ -46,35 +37,25 @@ const projectSlice = createSlice({
 
     setProjectAudioAction(state, {payload}) {
       state.comments.push({
-        path: payload,
-        text: "",
-        start: 0,
+        path: payload.path,
+        text: payload.text,
+        start: payload.start,
       });
     },
 
     clearProjectAudioAction(state) {
       state.comments = [];
     },
-
-    setProjectAudioArrAction(state, {payload}) {
-      state.comments.push({
-        path: payload.path,
-        text: payload.text,
-        start: payload.start,
-      });
-    }
   }
 })
 
 export const {
   newProjectAction,
-  // setProjectAction,
   setProjectIdAction,
   setProjectNameAction,
   setProjectMediaAction,
   setProjectTextAction,
   setProjectAudioAction,
-  setProjectAudioArrAction,
   clearProjectAudioAction,
 } = projectSlice.actions
 export default projectSlice.reducer

@@ -55,8 +55,8 @@ export const AudioEditor = ({updateProject, play, setPlay}) => {
   }, [updateProject]);
 
   const playPause = () => {
-    console.log(multitrack)
-    console.log(play)
+    console.log("multitrack", multitrack)
+    console.log("play", play)
     multitrack.isPlaying() ? multitrack.pause() : multitrack.play()
     setPlay((v) => !v)
   }

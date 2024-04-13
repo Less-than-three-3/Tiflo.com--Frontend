@@ -4,7 +4,7 @@ import axios from "axios";
 import {host} from "../../../models/consts.js";
 
 export const VideoEditor = ({setUpdateProject, play}) => {
-  const {project, setProjectMedia, setProjectText, clearProjectAudio, setProjectAudio, setProjectAudioArr} = useProject();
+  const {project, setProjectMedia, setProjectText, clearProjectAudio, setProjectAudio} = useProject();
   const hiddenFileInput = useRef(null);
   const [file, setFile] = useState();
 
@@ -59,11 +59,9 @@ export const VideoEditor = ({setUpdateProject, play}) => {
       start: "00:03",
     })
 
-    console.log("genComResponse", genComResponse.data)
     clearProjectAudio();
     for (const audioPart of genComResponse.data.audioParts) {
-      console.log("audioPart", audioPart)
-      setProjectAudioArr(audioPart)
+      setProjectAudio(audioPart)
     }
     setTimeout(() => {
       setUpdateProject((v) => v + 1)

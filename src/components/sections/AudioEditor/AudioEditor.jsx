@@ -23,7 +23,6 @@ export const AudioEditor = ({updateProject, play, setPlay}) => {
       //     isVideo: true,
       //   },
       // ]
-
       let audioParts = [];
       for (const id in project.comments) {
         audioParts.push({

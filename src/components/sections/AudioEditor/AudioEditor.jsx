@@ -29,7 +29,7 @@ export const AudioEditor = ({updateProject, play, setPlay}) => {
         audioParts.push({
           id: id,
           draggable: true,
-          startPosition: 0,
+          startPosition: project.comments[id].start && 0,
           url: project.comments[id].path,
           volume: 0.3,
           options: {

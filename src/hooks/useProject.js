@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from 'react-redux';
 import {
   newProjectAction, setProjectAction,
-  setProjectNameAction, setProjectMediaAction, setProjectTextAction
+  setProjectNameAction, setProjectMediaAction, setProjectTextAction, setProjectIdAction
 } from "../store/projectSlice.js";
 
 export function useProject() {
@@ -39,6 +39,7 @@ export function useProject() {
     project,
     newProject,
     setProject,
+    setProjectId,
     setProjectName,
     setProjectMedia,
     setProjectText,

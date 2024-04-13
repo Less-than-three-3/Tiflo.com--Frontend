@@ -2,15 +2,14 @@ import {useEffect, useRef} from "react";
 import {getWfElements, moveWfElements, splitWfElements} from "../../../models/waveform.js";
 import {useProject} from "../../../hooks/useProject.js";
 
-export const AudioEditor = ({updateProject, setPlay}) => {
+export const AudioEditor = ({updateProject, play, setPlay}) => {
   const waveform = useRef(null);
   const {project} = useProject();
 
   let multitrack;
   useEffect(() => {
 
-    if (project.comments && project.comments.length > 0) {
-      console.log("project comments length", project.comments.length)
+    if (project && project.comments && project.comments.length > 0) {
       const audioParts = [
         {
           id: 0,
@@ -24,7 +23,6 @@ export const AudioEditor = ({updateProject, setPlay}) => {
           isVideo: true,
         },
       ]
-
       multitrack = Multitrack.create(
         audioParts.reverse(),
         {
@@ -43,19 +41,22 @@ export const AudioEditor = ({updateProject, setPlay}) => {
       moveWfElements(wfVideos, true, 0);
       moveWfElements(wfVoices, false, 1);
     }
-
   }, [updateProject]);
 
   const playPause = () => {
-    multitrack?.isPlaying() ? multitrack?.pause() : multitrack?.play()
-    setPlay((v) => !v);
+    multitrack.isPlaying() ? multitrack.pause() : multitrack.play()
+    setPlay((v) => !v)
   }
 
   return (
     <>
       <div className="section grow w-full flex">
         <div className="w-16">
-          <button onClick={playPause}>play</button>
+          <button onClick={
+            playPause
+          }
+          >play
+          </button>
           <img src="/src/assets/icons/video_inactive.svg" alt="" className="w-10 mt-10"/>
           <img src="/src/assets/icons/text.svg" alt="" className="w-10 mt-24"/>
         </div>

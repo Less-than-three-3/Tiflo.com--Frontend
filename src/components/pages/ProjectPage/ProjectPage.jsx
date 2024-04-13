@@ -10,11 +10,11 @@ import {getProjectById} from "../../../mocks/projects.js";
 
 export const ProjectPage = () => {
   const [isProjectListOpened, setIsProjectListOpened] = useState(true);
-  const {project, setProject} = useProject()
+  const {project} = useProject()
 
-  useEffect(() => {
-    setProject(getProjectById(1));
-  }, []);
+  // useEffect(() => {
+  //   setProject(getProjectById(1));
+  // }, []);
 
   return (
     <>

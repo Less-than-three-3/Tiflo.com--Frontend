@@ -19,13 +19,13 @@ const projectSlice = createSlice({
       state.comments = [];
     },
 
-    setProjectAction(state, {payload}) {
-      console.log("payload", payload)
-      state.id = payload.projectId;
-      state.name = payload.name;
-      state.media = payload.path;
-      state.text = payload.text;
-    },
+    // setProjectAction(state, {payload}) {
+    //   console.log("payload", payload)
+    //   state.id = payload.projectId;
+    //   state.name = payload.name;
+    //   state.media = payload.path;
+    //   state.text = payload.text;
+    // },
 
     setProjectIdAction(state, {payload}) {
       console.log("payload id", payload)
@@ -57,7 +57,7 @@ const projectSlice = createSlice({
 
 export const {
   newProjectAction,
-  setProjectAction,
+  // setProjectAction,
   setProjectIdAction,
   setProjectNameAction,
   setProjectMediaAction,

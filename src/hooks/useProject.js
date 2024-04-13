@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from 'react-redux';
 import {
-  newProjectAction, setProjectAction,
+  newProjectAction,
   setProjectNameAction, setProjectMediaAction, setProjectTextAction, setProjectIdAction, setProjectAudioAction
 } from "../store/projectSlice.js";
 
@@ -15,9 +15,9 @@ export function useProject() {
     dispatch(newProjectAction());
   }
 
-  const setProject = (value) => {
-    dispatch(setProjectAction(value));
-  }
+  // const setProject = (value) => {
+  //   dispatch(setProjectAction(value));
+  // }
 
   const setProjectId = (value) => {
     dispatch(setProjectIdAction(value))
@@ -42,7 +42,7 @@ export function useProject() {
   return {
     project,
     newProject,
-    setProject,
+    // setProject,
     setProjectId,
     setProjectName,
     setProjectMedia,

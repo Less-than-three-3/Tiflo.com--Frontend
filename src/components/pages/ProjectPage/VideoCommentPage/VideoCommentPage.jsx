@@ -13,7 +13,7 @@ export const VideoCommentPage = () => {
           <VideoEditor setUpdateProject={setUpdateProject} play={play}/>
           <TextEditor/>
         </div>
-        <AudioEditor updateProject={updateProject} setPlay={setPlay}/>
+        <AudioEditor updateProject={updateProject} play={play} setPlay={setPlay}/>
       </div>
     </>
   );

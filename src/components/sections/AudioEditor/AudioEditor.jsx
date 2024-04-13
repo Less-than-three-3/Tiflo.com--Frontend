@@ -9,31 +9,33 @@ export const AudioEditor = ({updateProject}) => {
   let multitrack;
   useEffect(() => {
 
-    const audioParts = [
-      {
-        id: 0,
-        draggable: true,
-        startPosition: 0,
-        url: project.comments ? project.comments.length > 0 ? project.comments[0].path : "" : "",
-        volume: 0.3,
-        options: {
-          waveColor: '#7A79FF',
+    if (project.comments && project.comments.length > 0) {
+      const audioParts = [
+        {
+          id: 0,
+          draggable: true,
+          startPosition: 0,
+          url: project.comments[0].path,
+          volume: 0.3,
+          options: {
+            waveColor: '#7A79FF',
+          },
+          isVideo: true,
         },
-        isVideo: true,
-      },
-    ]
+      ]
 
-    multitrack = Multitrack.create(
-      audioParts.reverse(),
-      {
-        container: waveform.current, // required!
-        rightButtonDrag: false, // set to true to drag with right mouse button
-        cursorWidth: 2,
-        cursorColor: '#9421d7',
-        trackBorderColor: '#466193',
-        dragBounds: true,
-      },
-    )
+      multitrack = Multitrack.create(
+        audioParts.reverse(),
+        {
+          container: waveform.current, // required!
+          rightButtonDrag: false, // set to true to drag with right mouse button
+          cursorWidth: 2,
+          cursorColor: '#9421d7',
+          trackBorderColor: '#466193',
+          dragBounds: true,
+        },
+      )
+    }
 
   }, [updateProject]);
 

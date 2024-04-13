@@ -35,11 +35,11 @@ export const AudioEditor = ({updateProject, play, setPlay}) => {
           draggable: true,
           startPosition: project.comments[id].start || 0,
           url: project.comments[id].path,
-          volume: 0.3,
+          volume: 1,
           options: {
             waveColor: project.comments[id].text ? '#79ff8f' : '#7A79FF',
           },
-          isVideo: project.comments[id].text.length > 0,
+          isVideo: project.comments[id].text.length === 0,
         })
       }
 

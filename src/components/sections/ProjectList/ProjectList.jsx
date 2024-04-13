@@ -18,7 +18,7 @@ export const ProjectList = () => {
       console.log("store project", project)
       const getProject = await axios.get(`${host}/api/projects/${project.id}`)
       console.log("request project", getProject.data)
-    }, 100)
+    }, 1000)
 
   }
 

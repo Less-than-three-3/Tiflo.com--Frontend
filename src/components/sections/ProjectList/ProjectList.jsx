@@ -14,10 +14,11 @@ export const ProjectList = () => {
     console.log(response.data);
     setProject(response.data);
 
-    setTimeout(async () => {
+    setTimeout(() => {
       console.log("store project", project)
-      const getProject = await axios.get(`${host}/api/projects/${project.id}`)
-      console.log("request project", getProject.data)
+      axios.get(`${host}/api/projects/${project.id}`)
+        .then((response) => {console.log(response.data)})
+      // console.log("request project", getProject.data)
     }, 1000)
 
   }

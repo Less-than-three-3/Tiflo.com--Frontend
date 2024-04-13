@@ -8,19 +8,14 @@ export const ProjectList = () => {
   const {project, newProject, setProject, setProjectId} = useProject();
   const projects = getProjects();
 
-  const clockNewProject = async () => {
+  const clickNewProject = async () => {
     newProject();
     const newProjectResponse = await axios.post(`${host}/api/projects`)
     console.log(newProjectResponse.data);
     setProjectId(newProjectResponse.data.projectId);
 
-    setTimeout(() => {
-      console.log("store project", project)
-      axios.get(`${host}/api/projects/${newProjectResponse.data.projectId}`)
-        .then((response) => {console.log(response.data)})
-      // console.log("request project", getProject.data)
-    }, 1000)
-
+    const getProjectResponse = await axios.get(`${host}/api/projects/${newProjectResponse.data.projectId}`)
+    console.log(getProjectResponse.data)
   }
 
   return (
@@ -34,13 +29,13 @@ export const ProjectList = () => {
         <div className="grid grid-cols-2 gap-5">
           <div style={{backgroundImage: "url(/src/assets/icons/new_project.svg)"}}
                className="background-image w-full h-24"
-               onClick={clockNewProject}/>
+               onClick={clickNewProject}/>
 
           {projects.map((project) => (
             <div key={project.id}
                  style={{backgroundImage: `url(${project.media})`}}
                  className="background-image w-full h-24"
-                  onClick={() => setProject(project)}/>
+                 onClick={() => setProject(project)}/>
           ))}
         </div>
       </div>

@@ -38,12 +38,20 @@ const projectSlice = createSlice({
     },
 
     setProjectMediaAction(state, {payload}) {
-      state.id = "0";
       state.media = payload;
     },
 
     setProjectTextAction(state, {payload}) {
       state.text = payload;
+    },
+
+    setProjectAudioAction(state, {payload}) {
+      console.log("payload audio", payload)
+      state.comments.push({
+        path: payload,
+        text: "",
+        start: 0,
+      });
     }
   }
 })
@@ -54,6 +62,7 @@ export const {
   setProjectIdAction,
   setProjectNameAction,
   setProjectMediaAction,
-  setProjectTextAction
+  setProjectTextAction,
+  setProjectAudioAction,
 } = projectSlice.actions
 export default projectSlice.reducer

@@ -1,11 +1,10 @@
-import {useEffect, useRef, useState} from "react";
-import {Button} from "../../UI/Button/Button.jsx";
+import {useRef, useState} from "react";
 import {useProject} from "../../../hooks/useProject.js";
 import axios from "axios";
 import {host} from "../../../models/consts.js";
 
 export const VideoEditor = () => {
-  const {project, setProjectMedia, setProjectText} = useProject();
+  const {project, setProjectMedia, setProjectText, setProjectAudio} = useProject();
   const hiddenFileInput = useRef(null);
   const [file, setFile] = useState();
 
@@ -18,14 +17,17 @@ export const VideoEditor = () => {
     setFile(uploadedFIle);
 
     setProjectMedia(URL.createObjectURL(uploadedFIle));
-    setTimeout(() => {
-      console.log(project)
-    }, 100)
 
-    const response = await axios.post(`${host}/api/projects/${project.id}/media`, {
+    console.log("video editor", project.id)
+    const mediaResponse = await axios.post(`${host}/api/projects/${project.id}/media`, {
       file: uploadedFIle
     })
-    console.log(response)
+    console.log(mediaResponse.data)
+
+    if (mediaResponse.status === 200) {
+      const getProjectResponse = await axios.get(`${host}/api/projects/${project.id}`);
+      setProjectAudio(getProjectResponse.data.audioParts[0].path);
+    }
   };
 
   const toText = () => {

@@ -54,6 +54,14 @@ export const VideoEditor = ({setUpdateProject, play}) => {
       "плану, а другие - дальше, создавая ощущение глубины и масштабирования в сцене.")
   }
 
+  const generateComment = () => {
+    const genComResponse = await axios.post(`${host}/api/projects/${project.id}/video/comment`, {
+      start: "00:03",
+    })
+
+    console.log(genComResponse.data)
+  }
+
   return (
     <>
       <div className="section grow">
@@ -84,6 +92,7 @@ export const VideoEditor = ({setUpdateProject, play}) => {
               Ваш браузер не поддерживает элемент video.
             </video>
 
+            {/* timing: 00:03 */}
             {/*<div className="flex justify-between items-center">*/}
             {/*  <div>00:00</div>*/}
             {/*  <div className="flex justify-center items-center gap-4">*/}
@@ -91,7 +100,7 @@ export const VideoEditor = ({setUpdateProject, play}) => {
             {/*    <img src="/src/assets/icons/play.svg" alt="" className="h-8"/>*/}
             {/*    <img src="/src/assets/icons/forward.svg" alt="" className="h-5"/>*/}
             {/*  </div>*/}
-              <img src="/src/assets/icons/add_text.svg" alt=""/>
+              <img src="/src/assets/icons/add_text.svg" alt="" onClick={generateComment}/>
             {/*</div>*/}
           </>
         }

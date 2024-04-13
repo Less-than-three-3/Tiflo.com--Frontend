@@ -70,20 +70,20 @@ export const VideoEditor = ({setUpdateProject}) => {
           :
           <>
             <div className="font-bold pb-8">Видео: {file && file.name}</div>
-            <video className="h-1/2" width="320" height="240" controls>
+            <video className="" width="200" controls>
               <source src={project.media} type="video/webm"/>
               Ваш браузер не поддерживает элемент video.
             </video>
 
-            <div className="flex justify-between items-center">
-              <div>00:00</div>
-              <div className="flex justify-center items-center gap-4">
-                <img src="/src/assets/icons/past.svg" alt="" className="h-5"/>
-                <img src="/src/assets/icons/play.svg" alt="" className="h-8"/>
-                <img src="/src/assets/icons/forward.svg" alt="" className="h-5"/>
-              </div>
-              <img src="/src/assets/icons/add_text.svg" alt=""/>
-            </div>
+            {/*<div className="flex justify-between items-center">*/}
+            {/*  <div>00:00</div>*/}
+            {/*  <div className="flex justify-center items-center gap-4">*/}
+            {/*    <img src="/src/assets/icons/past.svg" alt="" className="h-5"/>*/}
+            {/*    <img src="/src/assets/icons/play.svg" alt="" className="h-8"/>*/}
+            {/*    <img src="/src/assets/icons/forward.svg" alt="" className="h-5"/>*/}
+            {/*  </div>*/}
+            {/*  <img src="/src/assets/icons/add_text.svg" alt=""/>*/}
+            {/*</div>*/}
           </>
         }
       </div>

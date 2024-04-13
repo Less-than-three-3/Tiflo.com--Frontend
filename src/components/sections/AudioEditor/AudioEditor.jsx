@@ -8,6 +8,7 @@ export const AudioEditor = () => {
 
   let multitrack;
   useEffect(() => {
+
     const audioParts = [
       {
         id: 0,

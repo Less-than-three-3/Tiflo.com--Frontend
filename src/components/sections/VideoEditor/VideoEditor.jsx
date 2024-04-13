@@ -61,6 +61,7 @@ export const VideoEditor = ({setUpdateProject, play}) => {
 
     clearProjectAudio();
     for (const audioPart of genComResponse.data.audioParts) {
+      console.log(audioPart)
       setProjectAudio(audioPart)
     }
     setTimeout(() => {

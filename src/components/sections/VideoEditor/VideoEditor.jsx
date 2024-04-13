@@ -20,13 +20,11 @@ export const VideoEditor = ({setUpdateProject, play}) => {
     const formData = new FormData();
     formData.append('file', uploadedFIle);
 
-    console.log("video editor project id", project.id)
     const mediaResponse = await axios.post(`${host}/api/projects/${project.id}/media`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     })
-    console.log(mediaResponse.data)
 
     if (mediaResponse.status === 200) {
       const getProjectResponse = await axios.get(`${host}/api/projects/${project.id}`);

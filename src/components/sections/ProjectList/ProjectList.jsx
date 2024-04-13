@@ -11,11 +11,9 @@ export const ProjectList = () => {
   const clickNewProject = async () => {
     newProject();
     const newProjectResponse = await axios.post(`${host}/api/projects`)
-    console.log(newProjectResponse.data);
     setProjectId(newProjectResponse.data.projectId);
 
     const getProjectResponse = await axios.get(`${host}/api/projects/${newProjectResponse.data.projectId}`)
-    console.log(getProjectResponse.data)
   }
 
   return (

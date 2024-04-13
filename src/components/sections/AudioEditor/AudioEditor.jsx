@@ -43,7 +43,6 @@ export const AudioEditor = ({updateProject, play, setPlay}) => {
         })
       }
 
-      console.log(audioParts);
       multitrack = Multitrack.create(
         audioParts,
         {
@@ -57,6 +56,7 @@ export const AudioEditor = ({updateProject, play, setPlay}) => {
       )
 
       const wfElements = getWfElements(waveform);
+      console.log("audioParts", audioParts);
       console.log("wfElements", wfElements)
       const {wfVideos, wfVoices} = splitWfElements(wfElements);
 

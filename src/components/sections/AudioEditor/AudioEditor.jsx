@@ -33,9 +33,9 @@ export const AudioEditor = ({updateProject, play, setPlay}) => {
           url: project.comments[id].path,
           volume: 0.3,
           options: {
-            waveColor: '#7A79FF',
+            waveColor: project.comments[id].text ? '#79ff8f' : '#7A79FF',
           },
-          isVideo: true,
+          isVideo: !project.comments[id].text ? '#79ff8f' : '#7A79FF',
         })
       }
 

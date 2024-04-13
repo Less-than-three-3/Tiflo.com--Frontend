@@ -10,13 +10,13 @@ export const ProjectList = () => {
 
   const clockNewProject = async () => {
     newProject();
-    const response = await axios.post(`${host}/api/projects`)
+    const newProjectResponse = await axios.post(`${host}/api/projects`)
     console.log(response.data);
     setProjectId(response.data.projectId);
 
     setTimeout(() => {
       console.log("store project", project)
-      axios.get(`${host}/api/projects/${project.id}`)
+      axios.get(`${host}/api/projects/${response.data.projectId}`)
         .then((response) => {console.log(response.data)})
       // console.log("request project", getProject.data)
     }, 1000)

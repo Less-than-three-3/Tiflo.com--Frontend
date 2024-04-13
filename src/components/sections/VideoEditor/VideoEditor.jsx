@@ -17,10 +17,14 @@ export const VideoEditor = () => {
     setFile(uploadedFIle);
 
     setProjectMedia(URL.createObjectURL(uploadedFIle));
+    const formData = new FormData();
+    formData.append('file', uploadedFIle);
 
     console.log("video editor", project.id)
-    const mediaResponse = await axios.post(`${host}/api/projects/${project.id}/media`, {
-      file: uploadedFIle
+    const mediaResponse = await axios.post(`${host}/api/projects/${project.id}/media`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
     })
     console.log(mediaResponse.data)
 

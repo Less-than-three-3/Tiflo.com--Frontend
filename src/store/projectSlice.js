@@ -25,7 +25,6 @@ const projectSlice = createSlice({
       state.name = payload.name;
       state.media = payload.path;
       state.text = payload.text;
-      state.comments = payload.comments;
     },
 
     setProjectIdAction(state, {payload}) {

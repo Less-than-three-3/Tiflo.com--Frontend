@@ -1,9 +1,9 @@
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {useProject} from "../../../hooks/useProject.js";
 import axios from "axios";
 import {host} from "../../../models/consts.js";
 
-export const VideoEditor = ({setUpdateProject}) => {
+export const VideoEditor = ({setUpdateProject, play}) => {
   const {project, setProjectMedia, setProjectText, setProjectAudio} = useProject();
   const hiddenFileInput = useRef(null);
   const [file, setFile] = useState();
@@ -36,6 +36,15 @@ export const VideoEditor = ({setUpdateProject}) => {
       }, 100)
     }
   };
+
+  const videoRef = useRef(null);
+  useEffect(() => {
+    if (play && videoRef && videoRef.current) {
+      videoRef.current?.pause();
+    } else {
+      videoRef.current?.play();
+    }
+  }, [play, videoRef])
 
   const toText = () => {
     //   TODO перевод в текст
@@ -70,7 +79,7 @@ export const VideoEditor = ({setUpdateProject}) => {
           :
           <>
             <div className="font-bold pb-8">Видео: {file && file.name}</div>
-            <video className="" width="200" controls>
+            <video className="h-80" controls ref={videoRef}>
               <source src={project.media} type="video/webm"/>
               Ваш браузер не поддерживает элемент video.
             </video>
@@ -82,7 +91,7 @@ export const VideoEditor = ({setUpdateProject}) => {
             {/*    <img src="/src/assets/icons/play.svg" alt="" className="h-8"/>*/}
             {/*    <img src="/src/assets/icons/forward.svg" alt="" className="h-5"/>*/}
             {/*  </div>*/}
-            {/*  <img src="/src/assets/icons/add_text.svg" alt=""/>*/}
+              <img src="/src/assets/icons/add_text.svg" alt=""/>
             {/*</div>*/}
           </>
         }

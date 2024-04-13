@@ -2,7 +2,7 @@ import {useEffect, useRef} from "react";
 import {getWfElements, moveWfElements, splitWfElements} from "../../../models/waveform.js";
 import {useProject} from "../../../hooks/useProject.js";
 
-export const AudioEditor = ({updateProject}) => {
+export const AudioEditor = ({updateProject, setPlay}) => {
   const waveform = useRef(null);
   const {project} = useProject();
 
@@ -47,7 +47,8 @@ export const AudioEditor = ({updateProject}) => {
   }, [updateProject]);
 
   const playPause = () => {
-    multitrack.isPlaying() ? multitrack.pause() : multitrack.play()
+    multitrack?.isPlaying() ? multitrack.pause() : multitrack.play()
+    setPlay((v) => !v);
   }
 
   return (

@@ -10,8 +10,10 @@ export const AudioEditor = ({updateProject, play, setPlay}) => {
 
   let multitrack;
   useEffect(() => {
-    const domNode = waveform.current.querySelector("div");
-    unmountComponentAtNode(domNode);
+    if (waveform.current && waveform.current.querySelector("div")) {
+      const domNode = waveform.current.querySelector("div");
+      unmountComponentAtNode(domNode);
+    }
 
     if (project && project.comments && project.comments.length > 0) {
       // const audioParts = [

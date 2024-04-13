@@ -1,8 +1,11 @@
 import {TextEditor} from "../../../sections/TextEditor/TextEditor.jsx";
 import {AudioEditor} from "../../../sections/AudioEditor/AudioEditor.jsx";
 import {VideoEditor} from "../../../sections/VideoEditor/VideoEditor.jsx";
+import {useState} from "react";
 
-export const VideoCommentPage = ({setUpdateProject}) => {
+export const VideoCommentPage = () => {
+  const [updateProject, setUpdateProject] = useState(0);
+
   return (
     <>
       <div className="flex flex-col grow gap-5">

@@ -11,8 +11,6 @@ import {AuthForm} from "./components/pages/AuthPage/AuthForm.jsx";
 import {useState} from "react";
 
 export const App = () => {
-  const [updateProject, setUpdateProject] = useState(0);
-
   return (
     <>
       <div className="flex flex-col gap-5 h-full">
@@ -26,7 +24,7 @@ export const App = () => {
           </Route>
           <Route path="project" element={<ProjectPage/>}>
             <Route path="photo" element={<PhotoCommentPage/>}/>
-            <Route path="video" element={<VideoCommentPage setUpdateProject={setUpdateProject}/>}/>
+            <Route path="video" element={<VideoCommentPage/>}/>
           </Route>
           <Route path="*" element={<NotFoundPage/>}/>
         </Routes>

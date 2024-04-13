@@ -60,6 +60,10 @@ export const VideoEditor = ({setUpdateProject, play}) => {
     })
 
     console.log(genComResponse.data)
+    for (const audioPart of genComResponse.data) {
+      setProjectAudio(audioPart)
+    }
+    setUpdateProject((v) => v + 1)
   }
 
   return (

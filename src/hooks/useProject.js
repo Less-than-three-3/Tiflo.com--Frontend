@@ -1,7 +1,12 @@
 import {useDispatch, useSelector} from 'react-redux';
 import {
   newProjectAction,
-  setProjectNameAction, setProjectMediaAction, setProjectTextAction, setProjectIdAction, setProjectAudioAction
+  setProjectNameAction,
+  setProjectMediaAction,
+  setProjectTextAction,
+  setProjectIdAction,
+  setProjectAudioAction,
+  setProjectAudioArrAction
 } from "../store/projectSlice.js";
 
 export function useProject() {
@@ -39,6 +44,10 @@ export function useProject() {
     dispatch(setProjectAudioAction(value))
   }
 
+  const setProjectAudioArr = (value) => {
+    dispatch(setProjectAudioArrAction(value))
+  }
+
   return {
     project,
     newProject,
@@ -48,5 +57,6 @@ export function useProject() {
     setProjectMedia,
     setProjectText,
     setProjectAudio,
+    setProjectAudioArr,
   }
 }

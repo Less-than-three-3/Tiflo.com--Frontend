@@ -45,11 +45,19 @@ const projectSlice = createSlice({
     },
 
     setProjectAudioAction(state, {payload}) {
-      console.log("payload audio", payload)
       state.comments.push({
         path: payload,
         text: "",
         start: 0,
+      });
+    },
+
+    setProjectAudioArrAction(state, {payload}) {
+      state.comments = [];
+      state.comments.push({
+        path: payload.path,
+        text: payload.text,
+        start: payload.start,
       });
     }
   }
@@ -63,5 +71,6 @@ export const {
   setProjectMediaAction,
   setProjectTextAction,
   setProjectAudioAction,
+  setProjectAudioArrAction,
 } = projectSlice.actions
 export default projectSlice.reducer

@@ -57,8 +57,11 @@ export const AudioEditor = ({updateProject, play, setPlay}) => {
       )
 
       const wfElements = getWfElements(waveform);
+      console.log("wfElements", wfElements)
       const {wfVideos, wfVoices} = splitWfElements(wfElements);
 
+      console.log("wfVideos", wfVideos)
+      console.log("wfVoices", wfVoices)
       moveWfElements(wfVideos, true, 0);
       moveWfElements(wfVoices, false, 1);
     }

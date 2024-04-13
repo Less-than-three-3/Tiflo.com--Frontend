@@ -1,8 +1,6 @@
 import {useEffect, useRef} from "react";
 import {getWfElements, moveWfElements, splitWfElements} from "../../../models/waveform.js";
 import {useProject} from "../../../hooks/useProject.js";
-// eslint-disable-next-line react/no-deprecated
-import {unmountComponentAtNode} from "react-dom";
 
 export const AudioEditor = ({updateProject, play, setPlay}) => {
   const waveform = useRef(null);
@@ -13,7 +11,7 @@ export const AudioEditor = ({updateProject, play, setPlay}) => {
     console.log(waveform.current.querySelector("div"))
     if (waveform.current && waveform.current.querySelector("div")) {
       const domNode = waveform.current.querySelector("div");
-      unmountComponentAtNode(domNode);
+      domNode.remove();
     }
 
     if (project && project.comments && project.comments.length > 0) {
@@ -41,7 +39,7 @@ export const AudioEditor = ({updateProject, play, setPlay}) => {
           options: {
             waveColor: project.comments[id].text ? '#79ff8f' : '#7A79FF',
           },
-          isVideo: !project.comments[id].text ? true : false,
+          isVideo: project.comments[id].text.length > 0,
         })
       }
 

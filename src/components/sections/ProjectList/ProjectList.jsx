@@ -5,13 +5,21 @@ import axios from "axios";
 import {host} from "../../../models/consts.js";
 
 export const ProjectList = () => {
-  const {newProject, setProject} = useProject();
+  const {project, newProject, setProject} = useProject();
   const projects = getProjects();
 
   const clockNewProject = async () => {
     newProject();
     const response = await axios.post(`${host}/api/projects`)
     console.log(response.data);
+    setProject(response.data);
+
+    setTimeout(async () => {
+      console.log("store project", project)
+      const getProject = await axios.get(`${host}/api/projects/${project.id}`)
+      console.log("request project", getProject.data)
+    }, 100)
+
   }
 
   return (

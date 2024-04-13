@@ -2,6 +2,7 @@ import {useEffect, useRef, useState} from "react";
 import {Button} from "../../UI/Button/Button.jsx";
 import {useProject} from "../../../hooks/useProject.js";
 import axios from "axios";
+import {host} from "../../../models/consts.js";
 
 export const VideoEditor = () => {
   const {project, setProjectMedia, setProjectText} = useProject();
@@ -12,7 +13,7 @@ export const VideoEditor = () => {
     hiddenFileInput.current.click();
   };
 
-  const uploadFile = (event) => {
+  const uploadFile = async (event) => {
     const uploadedFIle = event.target.files[0];
     setFile(uploadedFIle);
 
@@ -21,7 +22,10 @@ export const VideoEditor = () => {
       console.log(project)
     }, 100)
 
-    axios.post()
+    const response = await axios.post(`${host}/api/projects/${project.id}/media`, {
+      file: uploadedFIle
+    })
+    console.log(response)
   };
 
   const toText = () => {

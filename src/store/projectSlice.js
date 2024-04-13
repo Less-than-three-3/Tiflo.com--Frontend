@@ -20,9 +20,9 @@ const projectSlice = createSlice({
     },
 
     setProjectAction(state, {payload}) {
-      state.id = payload.id;
+      state.id = payload.projectId;
       state.name = payload.name;
-      state.media = payload.media;
+      state.media = payload.path;
       state.text = payload.text;
       state.comments = payload.comments;
     },

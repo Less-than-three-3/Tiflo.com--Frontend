@@ -36,6 +36,12 @@ export const AudioEditor = ({updateProject}) => {
           dragBounds: true,
         },
       )
+
+      const wfElements = getWfElements(waveform);
+      const {wfVideos, wfVoices} = splitWfElements(wfElements);
+
+      moveWfElements(wfVideos, true, 0);
+      moveWfElements(wfVoices, false, 1);
     }
 
   }, [updateProject]);
@@ -43,14 +49,6 @@ export const AudioEditor = ({updateProject}) => {
   const playPause = () => {
     multitrack.isPlaying() ? multitrack.pause() : multitrack.play()
   }
-
-  useEffect(() => {
-    const wfElements = getWfElements(waveform);
-    const {wfVideos, wfVoices} = splitWfElements(wfElements);
-
-    moveWfElements(wfVideos, true, 0);
-    moveWfElements(wfVoices, false, 1);
-  }, [])
 
   return (
     <>

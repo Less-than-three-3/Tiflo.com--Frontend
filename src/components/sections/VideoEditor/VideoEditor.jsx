@@ -70,7 +70,7 @@ export const VideoEditor = ({setUpdateProject}) => {
           :
           <>
             <div className="font-bold pb-8">Видео: {file && file.name}</div>
-            <video width="320" height="240" controls>
+            <video className="h-1/2" width="320" height="240" controls>
               <source src={project.media} type="video/webm"/>
               Ваш браузер не поддерживает элемент video.
             </video>

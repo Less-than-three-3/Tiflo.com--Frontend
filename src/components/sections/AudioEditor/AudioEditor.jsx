@@ -35,7 +35,7 @@ export const AudioEditor = ({updateProject, play, setPlay}) => {
           options: {
             waveColor: project.comments[id].text ? '#79ff8f' : '#7A79FF',
           },
-          isVideo: !project.comments[id].text ? '#79ff8f' : '#7A79FF',
+          isVideo: !project.comments[id].text ? true : false,
         })
       }
 

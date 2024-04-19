@@ -2,31 +2,30 @@ import {useEffect, useRef} from "react";
 import {getWfElements, moveWfElements, splitWfElements} from "../../../models/waveform.js";
 import {useProject} from "../../../hooks/useProject.js";
 
-export const AudioEditor = ({updateProject, play, setPlay}) => {
+export const AudioEditor = ({updateProject, setPlay}) => {
   const waveform = useRef(null);
   const {project} = useProject();
 
   let multitrack;
   useEffect(() => {
-    console.log(waveform.current.querySelector("div"))
     if (waveform.current && waveform.current.querySelector("div")) {
       const domNode = waveform.current.querySelector("div");
       domNode.remove();
     }
 
-    if (project && project.comments && project.comments.length > 0) {
+    if (project && project.audioParts && project.audioParts.length > 0) {
       let audioParts = [];
-      for (const id in project.comments) {
+      for (const id in project.audioParts) {
         audioParts.push({
           id: id,
           draggable: true,
-          startPosition: project.comments[id].start || 0,
-          url: project.comments[id].path,
+          startPosition: project.audioParts[id].start || 0,
+          url: project.audioParts[id].path,
           volume: 1,
           options: {
-            waveColor: project.comments[id].text ? '#79ff8f' : '#7A79FF',
+            waveColor: project.audioParts[id].text ? '#79ff8f' : '#7A79FF',
           },
-          isVideo: project.comments[id].text.length === 0,
+          isVideo: project.audioParts[id].text.length === 0,
         })
       }
 
@@ -43,20 +42,14 @@ export const AudioEditor = ({updateProject, play, setPlay}) => {
       )
 
       const wfElements = getWfElements(waveform, audioParts);
-      console.log("audioParts", audioParts);
-      console.log("wfElements", wfElements)
       const {wfVideos, wfVoices} = splitWfElements(wfElements, audioParts);
 
-      console.log("wfVideos", wfVideos)
-      console.log("wfVoices", wfVoices)
       moveWfElements(wfVideos, true, 0, audioParts);
       moveWfElements(wfVoices, false, 1, audioParts);
     }
   }, [updateProject]);
 
   const playPause = () => {
-    console.log("multitrack", multitrack)
-    console.log("play", play)
     multitrack.isPlaying() ? multitrack.pause() : multitrack.play()
     setPlay((v) => !v)
   }
@@ -65,11 +58,7 @@ export const AudioEditor = ({updateProject, play, setPlay}) => {
     <>
       <div className="section grow w-full flex">
         <div className="w-16">
-          <button onClick={
-            playPause
-          }
-          >play
-          </button>
+          <button onClick={playPause}>play</button>
           <img src="/src/assets/icons/video_inactive.svg" alt="" className="w-10 mt-10"/>
           <img src="/src/assets/icons/text.svg" alt="" className="w-10 mt-24"/>
         </div>

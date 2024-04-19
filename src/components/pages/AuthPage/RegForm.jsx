@@ -5,6 +5,7 @@ import axios from "axios";
 import {host} from "../../../models/consts.js";
 import {Link, useNavigate} from "react-router-dom";
 import {useUser} from "../../../hooks/useUser.js";
+import {api} from "../../../api/api.js";
 
 export const RegForm = () => {
   const [login, setLogin] = useState("");
@@ -16,17 +17,10 @@ export const RegForm = () => {
   const navigate = useNavigate();
 
   const reg = async () => {
-    const regResponce = await axios.post(`${host}/api/auth/signUp`, {
-      login: login,
-      password: password,
-    })
-    console.log(regResponce);
+    const regResponce = await api.signUp(login, password);
 
     if (regResponce.status === 200) {
-      const authResponse = await axios.post(`${host}/api/auth/signIn`, {
-        login: login,
-        password: password,
-      })
+      const authResponse = await api.signIn(login, password);
 
       if (authResponse.status === 200) {
         setUser({
@@ -37,10 +31,7 @@ export const RegForm = () => {
 
         navigate("/project/photo")
 
-        axios.get(`${host}/api/projects`)
-          .then((response) => {
-            console.log(response.data)
-          })
+
       }
     }
   }

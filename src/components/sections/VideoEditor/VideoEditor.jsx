@@ -2,6 +2,7 @@ import {useEffect, useRef, useState} from "react";
 import {useProject} from "../../../hooks/useProject.js";
 import axios from "axios";
 import {host} from "../../../models/consts.js";
+import {audioParts} from "../../../mocks/audioParts.js";
 
 export const VideoEditor = ({setUpdateProject, play}) => {
   const {project, setProjectMedia, setProjectText, clearProjectAudio, setProjectAudio} = useProject();
@@ -39,29 +40,20 @@ export const VideoEditor = ({setUpdateProject, play}) => {
   useEffect(() => {
     console.log(play)
     if (play && videoRef && videoRef.current) {
-
       videoRef.current?.pause();
     } else {
       videoRef.current?.play();
     }
   }, [play, videoRef])
 
-  const toText = () => {
-    //   TODO перевод в текст
-    setProjectText("На изображении показана группа из шести астронавтов, стоящих на скалистой снежной поверхности, возможно, " +
-      "на горе или скале. Все они носят белые костюмы, что говорит о том, что они являются частью космической миссии" +
-      " или исследовательской команды. Астронавты расположены в различных местах, а некоторые стоят ближе к переднему " +
-      "плану, а другие - дальше, создавая ощущение глубины и масштабирования в сцене.")
-  }
-
   const generateComment = async () => {
-    const genComResponse = await axios.post(`${host}/api/projects/${project.id}/video/comment`, {
-      start: "00:03",
-    })
+    // const genComResponse = await axios.post(`${host}/api/projects/${project.id}/video/comment`, {
+    //   start: "00:03",
+    // })
 
     clearProjectAudio();
-    for (const audioPart of genComResponse.data.audioParts) {
-      console.log(audioPart)
+    for (const audioPart of audioParts) {
+      console.log("audioPart", audioPart)
       setProjectAudio(audioPart)
     }
     setTimeout(() => {

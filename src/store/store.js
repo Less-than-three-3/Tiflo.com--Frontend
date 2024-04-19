@@ -1,8 +1,9 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit'
-import { persistReducer } from 'redux-persist';
+import {persistReducer, persistStore} from 'redux-persist';
 import projectSlice from "./projectSlice.js";
 import userSlice from "./userSlice.js";
 import storage from "redux-persist/lib/storage";
+import projectListSlice from "./projectListSlice.js";
 
 const persistConfig = {
   key: 'root',
@@ -10,6 +11,7 @@ const persistConfig = {
 }
 
 const rootReducer = combineReducers({
+  projectListSlice,
   projectSlice,
   userSlice,
 })
@@ -23,3 +25,5 @@ export const store = configureStore({
       serializableCheck: false,
     }),
 })
+
+export const persistor = persistStore(store)

@@ -5,7 +5,7 @@ import {useProject} from "../../../hooks/useProject.js";
 
 export const TextEditor = () => {
   const [isEditing, setIsEditing] = useState(false);
-  const {project, setProjectText} = useProject();
+  const {project} = useProject();
 
   const toVoice = async () => {
     setTimeout(() => {
@@ -54,9 +54,7 @@ export const TextEditor = () => {
                 :
                 <textarea className="bg-inherit border-2 border-rat rounded-md p-2 outline-none w-full h-full"
                           value={project.text}
-                          onChange={(event) => {
-                            setProjectText(event.target.value)
-                          }}/>
+                />
               }
             </>
           }

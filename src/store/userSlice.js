@@ -3,7 +3,7 @@ import {createSlice} from '@reduxjs/toolkit'
 const userSlice = createSlice({
   name: 'user',
   initialState: {
-    id: "",
+    userId: "",
     login: "",
     isLoggedIn: false,
   },
@@ -12,7 +12,7 @@ const userSlice = createSlice({
     dropUserAction(state) {
       state.id = "";
       state.login = "";
-      state.isLoggedIn = true;
+      state.isLoggedIn = false;
     },
 
     setUserAction(state, {payload}) {

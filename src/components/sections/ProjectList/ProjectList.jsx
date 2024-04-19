@@ -1,19 +1,27 @@
 import {useProject} from "../../../hooks/useProject.js";
-import {useState} from "react";
-import {getProjects} from "../../../mocks/projects.js";
-import axios from "axios";
-import {host} from "../../../models/consts.js";
+import {useEffect} from "react";
+import {useProjectList} from "../../../hooks/useProjectList.js";
+import {api} from "../../../api/api.js";
 
 export const ProjectList = () => {
   const {project, newProject, setProject, setProjectId} = useProject();
-  const projects = getProjects();
+  const {projectList, setProjectList, pushProject} = useProjectList();
+
+  useEffect(() => {
+    (async () => {
+      const projectListRes = await api.getProjectList()
+      setProjectList(projectListRes.data);
+    })()
+
+  }, [])
 
   const clickNewProject = async () => {
     newProject();
-    const newProjectResponse = await axios.post(`${host}/api/projects`)
-    setProjectId(newProjectResponse.data.projectId);
 
-    const getProjectResponse = await axios.get(`${host}/api/projects/${newProjectResponse.data.projectId}`)
+    const newProjectRes = await api.createProject();
+    setProjectId(newProjectRes.data.projectId);
+
+    const getProjectRes = await api.getProjectById(newProjectRes.data.projectId);
   }
 
   return (
@@ -29,9 +37,9 @@ export const ProjectList = () => {
                className="background-image w-full h-24"
                onClick={clickNewProject}/>
 
-          {projects.map((project) => (
-            <div key={project.id}
-                 style={{backgroundImage: `url(${project.media})`}}
+          {projectList.map((project) => (
+            <div key={project.projectId}
+                 style={{backgroundImage: `url(${project.path || "/src/assets/icons/image_inactive.svg"})`}}
                  className="background-image w-full h-24"
                  onClick={() => setProject(project)}/>
           ))}

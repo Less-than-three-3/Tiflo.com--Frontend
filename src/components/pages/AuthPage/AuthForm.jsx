@@ -5,31 +5,26 @@ import {host} from "../../../models/consts.js";
 import {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import {useUser} from "../../../hooks/useUser.js";
+import {signInMock} from "../../../mocks/user.js";
+import {api} from "../../../api/api.js";
 
 export const AuthForm = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
-
   const {setUser} = useUser();
 
   const navigate = useNavigate();
   const auth = async () => {
-    const response = await axios.post(`${host}/api/auth/signIn`, {
-      login: login,
-      password: password,
-    })
+    const signInRes = await api.signIn(login, password)
 
-    if (response.status === 200) {
+    if (signInRes.status === 200) {
       setUser({
-        id: response.data.userId,
-        login: response.data.login,
+        id: signInRes.data.userId,
+        login: signInRes.data.login,
         isLoggedIn: true,
       })
 
       navigate("/project/photo")
-
-      axios.get(`${host}/api/projects`)
-        .then((response) => {console.log(response.data)})
     }
   }
 

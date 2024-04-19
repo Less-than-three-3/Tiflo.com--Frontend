@@ -3,36 +3,30 @@ import {createSlice} from '@reduxjs/toolkit'
 const projectSlice = createSlice({
   name: 'project',
   initialState: {
-    id: "",
+    projectId: "",
     name: "New Project",
-    media: "",
-    text: "",
-    comments: [],
+    path: "",
+    audioParts: [],
   },
 
   reducers: {
     newProjectAction(state) {
-      state.id = "";
+      state.projectId = "";
       state.name = "New Project";
-      state.media = "";
-      state.text = "";
-      state.comments = [];
+      state.path = "";
+      state.audioParts = [];
     },
 
     setProjectIdAction(state, {payload}) {
-      state.id = payload;
+      state.projectId = payload;
     },
 
     setProjectNameAction(state, {payload}) {
       state.name = payload;
     },
 
-    setProjectMediaAction(state, {payload}) {
-      state.media = payload;
-    },
-
-    setProjectTextAction(state, {payload}) {
-      state.text = payload;
+    setProjectPathAction(state, {payload}) {
+      state.path = payload;
     },
 
     setProjectAudioAction(state, {payload}) {
@@ -44,7 +38,7 @@ const projectSlice = createSlice({
     },
 
     clearProjectAudioAction(state) {
-      state.comments = [];
+      state.audioParts = [];
     },
   }
 })

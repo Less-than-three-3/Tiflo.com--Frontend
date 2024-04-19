@@ -5,6 +5,8 @@ import {Link} from "react-router-dom";
 import {useUser} from "../../../hooks/useUser.js";
 import axios from "axios";
 import {host} from "../../../models/consts.js";
+import {logoutMock} from "../../../mocks/user.js";
+import {api} from "../../../api/api.js";
 
 export const Topbar = () => {
   const {project, setProjectName} = useProject();
@@ -28,8 +30,9 @@ export const Topbar = () => {
   }
 
   const logout = async () => {
-    const response = await axios.post(`${host}/api/auth/logout`)
-    if (response.status === 200) {
+    const logoutRes = await api.logout();
+
+    if (logoutRes.status === 200) {
       dropUser();
     }
   }

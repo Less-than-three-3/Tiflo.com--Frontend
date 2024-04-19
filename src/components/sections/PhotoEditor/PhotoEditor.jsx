@@ -1,9 +1,9 @@
-import {useEffect, useRef, useState} from "react";
+import {useRef, useState} from "react";
 import {Button} from "../../UI/Button/Button.jsx";
 import {useProject} from "../../../hooks/useProject.js";
 
 export const PhotoEditor = () => {
-  const {project, setProjectMedia, setProjectText} = useProject();
+  const {project, setProjectMedia} = useProject();
   const hiddenFileInput = useRef(null);
   const [file, setFile] = useState();
 
@@ -14,17 +14,8 @@ export const PhotoEditor = () => {
   const uploadFile = (event) => {
     const uploadedFIle = event.target.files[0];
     setFile(uploadedFIle);
-
     setProjectMedia(URL.createObjectURL(uploadedFIle));
   };
-
-  const toText = () => {
-    //   TODO перевод в текст
-    setProjectText("На изображении показана группа из шести астронавтов, стоящих на скалистой снежной поверхности, возможно, " +
-      "на горе или скале. Все они носят белые костюмы, что говорит о том, что они являются частью космической миссии" +
-      " или исследовательской команды. Астронавты расположены в различных местах, а некоторые стоят ближе к переднему " +
-      "плану, а другие - дальше, создавая ощущение глубины и масштабирования в сцене.")
-  }
 
   return (
     <>
@@ -54,7 +45,7 @@ export const PhotoEditor = () => {
             <div style={{backgroundImage: `url(${project.media})`}}
                   className="background-image w-full h-4/6"/>
             <div className="mt-4 w-28">
-              <Button mode="primary" value={"В текст"} onClick={toText}/>
+              <Button mode="primary" value={"В текст"}/>
             </div>
           </>
         }

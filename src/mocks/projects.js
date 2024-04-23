@@ -1,4 +1,4 @@
-const projectList = [
+let projectList = [
   {
     projectId: "00000000-0000-0000-0000-000000000001",
     name: "Sheep project",
@@ -60,22 +60,26 @@ export const getProjectListMock = () => {
 }
 
 export const createProjectMock = () => {
+  const newProject = {
+    audioParts: null,
+    name: "NewProject",
+    path: "",
+    projectId: "00000000-0000-0000-0000-000000000000",
+    userId: "00000000-0000-0000-0000-000000000000"
+  }
+
+  projectList.unshift(newProject);
+
   return {
     status: 200,
-    data: {
-      audioParts: null,
-      name: "NewProject",
-      path: "",
-      projectId: "00000000-0000-0000-0000-000000000000",
-      userId: "00000000-0000-0000-0000-000000000000"
-    }
+    data: newProject,
   }
 }
 
 export const getProjectByIdMock = (projectId) => {
   return {
     status: 200,
-    data: projectList.find((project) => project.id.toString() === projectId.toString())
+    data: projectList.find((project) => project.projectId === projectId)
   }
 }
 
@@ -84,7 +88,18 @@ export const deleteProjectMock = (projectId) => {
 }
 
 export const updateProjectNameMock = (projectId, name) => {
-  console.log(`Update project name, \nid: ${projectId}\nname:${name}`)
+  const id = projectList.findIndex((project) => project.projectId === projectId);
+  projectList[id] = {
+    ...projectList[id],
+    name,
+  };
+
+  return {
+    status: 200,
+    data: {
+      message: "Name successfully updated",
+    },
+  }
 }
 
 export const createCommentMock = (projectId, name) => {
@@ -92,7 +107,19 @@ export const createCommentMock = (projectId, name) => {
 }
 
 export const uploadMediaMock = (projectId, file) => {
-  console.log(`Upload media ${file}\nfor project ${projectId}`)
+  const id = projectList.findIndex((project) => project.projectId === projectId);
+  console.log(id)
+  projectList[id] = {
+    ...projectList[id],
+    path: URL.createObjectURL(file),
+  };
+
+  return {
+    status: 200,
+    data: {
+      message: "File uploaded successfully",
+    }
+  }
 }
 
 export const voiceCommentMock = (projectId, text) => {

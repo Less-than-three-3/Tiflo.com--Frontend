@@ -3,13 +3,10 @@ import {useEffect, useState} from "react";
 import {useProject} from "../../../hooks/useProject.js";
 import {Link} from "react-router-dom";
 import {useUser} from "../../../hooks/useUser.js";
-import axios from "axios";
-import {host} from "../../../models/consts.js";
-import {logoutMock} from "../../../mocks/user.js";
 import {api} from "../../../api/api.js";
 
 export const Topbar = () => {
-  const {project, setProjectName} = useProject();
+  const {project, setProject} = useProject();
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState(project.name);
 
@@ -19,9 +16,13 @@ export const Topbar = () => {
     setName(project.name)
   }, [project.name]);
 
-  const saveProjectName = (event) => {
+  const saveProjectName = async (event) => {
     if (event.key === "Enter") {
-      setProjectName(name)
+      const updateNameRes = await api.updateProjectName(project.projectId, name)
+      setProject({
+        ...project,
+        name
+      });
       setIsEditing(false);
     } else if (event.key === "Escape") {
       setName(project.name)
@@ -62,9 +63,10 @@ export const Topbar = () => {
               }
             </div>
 
-            <div className="flex gap-6">
+            <div className="flex gap-6 items-center">
               <img src="/src/assets/icons/user.svg" alt="user"
                    className="w-10"/>
+              <div>{user.login}</div>
               <Button value="Logout" mode="secondary" onClick={logout}/>
             </div>
           </>

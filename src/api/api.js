@@ -1,7 +1,13 @@
 import {logoutMock, signInMock, signUpMock} from "../mocks/user.js";
 import axios from "axios";
 import {host} from "../models/consts.js";
-import {createProjectMock, getProjectByIdMock, getProjectListMock} from "../mocks/projects.js";
+import {
+  createProjectMock,
+  getProjectByIdMock,
+  getProjectListMock,
+  updateProjectNameMock,
+  uploadMediaMock
+} from "../mocks/projects.js";
 
 class Api {
   #isDeploy;
@@ -66,7 +72,32 @@ class Api {
     if (this.#isDeploy) {
       return await axios.get(`${host}/api/projects/${projectId}`);
     } else {
-      return getProjectByIdMock();
+      return getProjectByIdMock(projectId);
+    }
+  }
+
+  async updateProjectName(projectId, name) {
+    if (this.#isDeploy) {
+      return await axios.patch(`${host}/api/projects/${projectId}`, {
+        name
+      });
+    } else {
+      return updateProjectNameMock(projectId, name);
+    }
+  }
+
+  async uploadMedia(projectId, file) {
+    if (this.#isDeploy) {
+      const formData = new FormData();
+      formData.append('file', file);
+
+      return await axios.post(`${host}/api/projects/${projectId}/media`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+    } else {
+      return uploadMediaMock(projectId, file);
     }
   }
 }

@@ -4,24 +4,21 @@ import {useProjectList} from "../../../hooks/useProjectList.js";
 import {api} from "../../../api/api.js";
 
 export const ProjectList = () => {
-  const {project, newProject, setProject, setProjectId} = useProject();
-  const {projectList, setProjectList, pushProject} = useProjectList();
+  const {project, newProject, setProject} = useProject();
+  const {projectList, setProjectList} = useProjectList();
 
   useEffect(() => {
     (async () => {
       const projectListRes = await api.getProjectList()
       setProjectList(projectListRes.data);
     })()
-
-  }, [])
+  }, [project])
 
   const clickNewProject = async () => {
-    newProject();
-
     const newProjectRes = await api.createProject();
-    setProjectId(newProjectRes.data.projectId);
-
-    const getProjectRes = await api.getProjectById(newProjectRes.data.projectId);
+    if (newProjectRes.status === 200) {
+      setProject(newProjectRes.data);
+    }
   }
 
   return (

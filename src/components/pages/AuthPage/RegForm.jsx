@@ -1,8 +1,6 @@
 import {Input} from "../../UI/Input/Input.jsx";
 import {Button} from "../../UI/Button/Button.jsx";
 import {useState} from "react";
-import axios from "axios";
-import {host} from "../../../models/consts.js";
 import {Link, useNavigate} from "react-router-dom";
 import {useUser} from "../../../hooks/useUser.js";
 import {api} from "../../../api/api.js";
@@ -30,8 +28,6 @@ export const RegForm = () => {
         })
 
         navigate("/project/photo")
-
-
       }
     }
   }

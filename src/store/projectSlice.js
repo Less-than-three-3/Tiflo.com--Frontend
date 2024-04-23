@@ -17,16 +17,11 @@ const projectSlice = createSlice({
       state.audioParts = [];
     },
 
-    setProjectIdAction(state, {payload}) {
-      state.projectId = payload;
-    },
-
-    setProjectNameAction(state, {payload}) {
-      state.name = payload;
-    },
-
-    setProjectPathAction(state, {payload}) {
-      state.path = payload;
+    setProjectAction(state, {payload}) {
+      state.projectId = payload.projectId;
+      state.name = payload.name;
+      state.path = payload.path;
+      state.audioParts = payload.audioParts;
     },
 
     setProjectAudioAction(state, {payload}) {
@@ -45,9 +40,7 @@ const projectSlice = createSlice({
 
 export const {
   newProjectAction,
-  setProjectIdAction,
-  setProjectNameAction,
-  setProjectMediaAction,
+  setProjectAction,
   setProjectTextAction,
   setProjectAudioAction,
   clearProjectAudioAction,

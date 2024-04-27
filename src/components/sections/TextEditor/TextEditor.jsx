@@ -4,10 +4,14 @@ import axios from "axios";
 import {useProject} from "../../../hooks/useProject.js";
 import {api} from "../../../api/api.js";
 import {host} from "../../../models/consts.js";
+import {useLocation} from "react-router-dom";
 
 export const TextEditor = () => {
   const [isEditing, setIsEditing] = useState(false);
   const {project, updateProjectAudio} = useProject();
+
+  const location = useLocation();
+  const pathname = location.pathname;
 
   const changeText = (event) => {
     const part = project.audioParts.find((part) => part.partId === event.currentTarget.id);
@@ -86,7 +90,7 @@ export const TextEditor = () => {
             </>
           }
 
-          {project.audioParts?.some((part) => part !== "") &&
+          {project.audioParts?.some((part) => part !== "") && pathname === "/project/photo" &&
             <div className="mt-4 w-28">
               <Button mode="primary" value={"В голос"} onClick={toVoice}/>
             </div>

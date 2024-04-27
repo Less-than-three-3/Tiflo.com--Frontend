@@ -133,6 +133,14 @@ class Api {
       return mock.createCommentToVideo(projectId, splitPoint);
     }
   }
+
+  async voiceTheText(projectId, text) {
+    if (this.#isDeploy) {
+      return await axios.post(`${host}/api/projects/${projectId}/voice`, {
+        "text": text,
+      })
+    }
+  }
 }
 
 export const api = new Api();

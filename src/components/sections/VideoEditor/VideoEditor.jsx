@@ -45,6 +45,18 @@ export const VideoEditor = ({setUpdateProject, play}) => {
   }, [play, videoRef])
 
   const generateComment = async () => {
+    // function convertSecondsToTime(seconds) {
+    //   console.log("sec, ", seconds)
+    //   const hours = Math.floor(seconds / 3600);
+    //   const minutes = Math.floor((seconds - (hours * 3600)) / 60);
+    //   const milliseconds = (seconds - (hours * 3600) - (minutes * 60)) * 1000;
+    //   const timeString = hours.toString().padStart(2, '0') + ':' +
+    //     minutes.toString().padStart(2, '0') + ':' +
+    //     milliseconds.toString().padStart(3, '0');
+    //   return timeString;
+    // }
+
+    // console.log(convertSecondsToTime(videoRef.current.currentTime));
     const videoCommentRes = await api.createCommentToVideo(project.projectId, "00:00:03.000");
 
     if (videoCommentRes.status === 200) {

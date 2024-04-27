@@ -14,7 +14,9 @@ class Api {
 
   async logout() {
     if (this.#isDeploy) {
-      return await axios.post(`${host}/api/auth/logout`);
+      const response = await axios.post(`${host}/api/auth/logout`);
+      console.log(response.data);
+      return response;
     } else {
       return mock.logout();
     }
@@ -22,10 +24,12 @@ class Api {
 
   async signIn(login, password) {
     if (this.#isDeploy) {
-      return await axios.post(`${host}/api/auth/signIn`, {
+      const response = await axios.post(`${host}/api/auth/signIn`, {
         login: login,
         password: password,
       });
+      console.log(response.data);
+      return response;
     } else {
       return mock.signIn(login, password);
     }
@@ -33,10 +37,12 @@ class Api {
 
   async signUp(login, password) {
     if (this.#isDeploy) {
-      return await axios.post(`${host}/api/auth/signUp`, {
+      const response = await axios.post(`${host}/api/auth/signUp`, {
         login: login,
         password: password,
       });
+      console.log(response.data);
+      return response;
     } else {
       return mock.signUp(login, password);
     }
@@ -47,7 +53,9 @@ class Api {
 
   async getProjectList() {
     if (this.#isDeploy) {
-      return await axios.get(`${host}/api/projects`);
+      const response = await axios.get(`${host}/api/projects`);
+      console.log(response.data);
+      return response;
     } else {
       return mock.getProjectList();
     }
@@ -55,7 +63,9 @@ class Api {
 
   async createProject() {
     if (this.#isDeploy) {
-      return axios.post(`${host}/api/projects`);
+      const response = axios.post(`${host}/api/projects`);
+      console.log(response.data);
+      return response;
     } else {
       return mock.createProject();
     }
@@ -63,7 +73,9 @@ class Api {
 
   async getProjectById(projectId) {
     if (this.#isDeploy) {
-      return await axios.get(`${host}/api/projects/${projectId}`);
+      const response = await axios.get(`${host}/api/projects/${projectId}`);
+      console.log(response.data);
+      return response;
     } else {
       return mock.getProjectById(projectId);
     }
@@ -71,9 +83,11 @@ class Api {
 
   async updateProjectName(projectId, name) {
     if (this.#isDeploy) {
-      return await axios.patch(`${host}/api/projects/${projectId}`, {
+      const response = await axios.patch(`${host}/api/projects/${projectId}`, {
         name
       });
+      console.log(response.data);
+      return response;
     } else {
       return mock.updateProjectName(projectId, name);
     }
@@ -84,11 +98,13 @@ class Api {
       const formData = new FormData();
       formData.append('file', file);
 
-      return await axios.post(`${host}/api/projects/${projectId}/media`, formData, {
+      const response = await axios.post(`${host}/api/projects/${projectId}/media`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
+      console.log(response.data);
+      return response;
     } else {
       return mock.uploadMedia(projectId, file);
     }
@@ -100,15 +116,19 @@ class Api {
     //     "name": imageId,
     //   })
     // } else {
-      return mock.createCommentToPhoto(projectId, imageId);
+    const response = mock.createCommentToPhoto(projectId, imageId);
+    console.log(response.data);
+    return response;
     // }
   }
 
   async createCommentToVideo(projectId, splitPoint) {
     if (this.#isDeploy) {
-      return await axios.post(`${host}/api/projects/${projectId}/video/comment`, {
+      const response = await axios.post(`${host}/api/projects/${projectId}/video/comment`, {
         "splitPoint": splitPoint,
       })
+      console.log(response.data);
+      return response;
     } else {
       return mock.createCommentToVideo(projectId, splitPoint);
     }

@@ -25,21 +25,16 @@ const projectSlice = createSlice({
     },
 
     setProjectAudioAction(state, {payload}) {
-      console.log("payload", payload)
-
       state.audioParts = [];
       state.audioParts.push(...payload);
-      console.log("state.audioParts", state.audioParts)
     },
 
     updateProjectAudioAction(state, {payload}) {
-      console.log(payload)
       if (state.audioParts) {
         const index = state.audioParts.findIndex(part => part.partId === payload.partId);
         if (index !== -1) {
           state.audioParts[index] = payload;
         }
-        console.log(state.audioParts)
       }
     }
   }

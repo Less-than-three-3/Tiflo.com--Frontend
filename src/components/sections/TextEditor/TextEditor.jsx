@@ -7,7 +7,6 @@ export const TextEditor = () => {
   const [isEditing, setIsEditing] = useState(false);
   const {project, updateProjectAudio} = useProject();
 
-  console.log(project)
   const changeText = (event) => {
     const part = project.audioParts.find((part) => part.partId === event.currentTarget.id);
     updateProjectAudio({

@@ -37,7 +37,6 @@ export const VideoEditor = ({setUpdateProject, play}) => {
 
   const videoRef = useRef(null);
   useEffect(() => {
-    // console.log("play", play)
     // if (play && videoRef && videoRef.current) {
     //   videoRef.current?.pause();
     // } else {

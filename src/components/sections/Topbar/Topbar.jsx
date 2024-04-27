@@ -67,7 +67,7 @@ export const Topbar = () => {
               <img src="/src/assets/icons/user.svg" alt="user"
                    className="w-10"/>
               <div>{user.login}</div>
-              <Button value="Logout" mode="secondary" onClick={logout}/>
+              <Button value="Выйти" mode="secondary" onClick={logout}/>
             </div>
           </>
 
@@ -76,10 +76,10 @@ export const Topbar = () => {
           <>
             <div className="flex gap-10">
               <Link to="/">
-                <Button value="SignIn" mode="primary"/>
+                <Button value="Войти" mode="primary"/>
               </Link>
               <Link to="/signUp">
-                <Button value="SignUp" mode="secondary"/>
+                <Button value="Регистрация" mode="secondary"/>
               </Link>
             </div>
           </>

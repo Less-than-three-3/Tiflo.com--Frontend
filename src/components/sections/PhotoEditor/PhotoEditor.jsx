@@ -43,6 +43,24 @@ export const PhotoEditor = () => {
     }
   };
 
+  const toText = async () => {
+    const createTextRes = await api.createCommentToPhoto(project.projectId, project.path);
+    if (createTextRes.status === 200) {
+      setProject({
+        ...project,
+        audioParts: [
+          {
+            partId: "d6f2d2da-e076-4a72-a5d3-52874b80d694",
+            start: 0,
+            duration: 0,
+            text: createTextRes.data,
+            path: project.path,
+          },
+        ]
+      })
+    }
+  }
+
   return (
     <>
       <div className="section grow">
@@ -52,7 +70,7 @@ export const PhotoEditor = () => {
             <div style={{backgroundImage: `url(${project.path})`}}
                  className="background-image w-full h-4/6"/>
             <div className="mt-4 w-28">
-              <Button mode="primary" value={"В текст"}/>
+              <Button mode="primary" value={"В текст"} onClick={toText}/>
             </div>
           </>
           :

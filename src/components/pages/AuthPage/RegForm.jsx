@@ -15,9 +15,9 @@ export const RegForm = () => {
   const navigate = useNavigate();
 
   const reg = async () => {
-    const regResponce = await api.signUp(login, password);
+    const regResponse = await api.signUp(login, password);
 
-    if (regResponce.status === 200) {
+    if (regResponse.status === 200) {
       const authResponse = await api.signIn(login, password);
 
       if (authResponse.status === 200) {

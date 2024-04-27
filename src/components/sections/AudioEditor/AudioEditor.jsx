@@ -19,7 +19,7 @@ export const AudioEditor = ({updateProject, setPlay}) => {
         audioParts.push({
           id: id,
           draggable: true,
-          startPosition: project.audioParts[id].start || 0,
+          startPosition: project.audioParts[id].start,
           url: project.audioParts[id].path,
           volume: 1,
           options: {
@@ -42,16 +42,18 @@ export const AudioEditor = ({updateProject, setPlay}) => {
       )
 
       const wfElements = getWfElements(waveform, audioParts);
-      const {wfVideos, wfVoices} = splitWfElements(wfElements, audioParts);
 
-      moveWfElements(wfVideos, true, 0, audioParts);
-      moveWfElements(wfVoices, false, 1, audioParts);
+      if (wfElements.length > 1) {
+        const {wfVideos, wfVoices} = splitWfElements(wfElements, audioParts);
+
+        moveWfElements(wfVideos, true, 0, audioParts);
+        moveWfElements(wfVoices, false, 1, audioParts);
+      }
     }
   }, [updateProject]);
 
   const playPause = () => {
     multitrack.isPlaying() ? multitrack.pause() : multitrack.play()
-    setPlay((v) => !v)
   }
 
   return (

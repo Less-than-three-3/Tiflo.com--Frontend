@@ -1,13 +1,6 @@
-import {logoutMock, signInMock, signUpMock} from "../mocks/user.js";
 import axios from "axios";
 import {host} from "../models/consts.js";
-import {
-  createProjectMock,
-  getProjectByIdMock,
-  getProjectListMock,
-  updateProjectNameMock,
-  uploadMediaMock
-} from "../mocks/projects.js";
+import {mock} from "../mocks/mock.js";
 
 class Api {
   #isDeploy;
@@ -23,7 +16,7 @@ class Api {
     if (this.#isDeploy) {
       return await axios.post(`${host}/api/auth/logout`);
     } else {
-      return logoutMock();
+      return mock.logout();
     }
   }
 
@@ -34,7 +27,7 @@ class Api {
         password: password,
       });
     } else {
-      return signInMock(login, password);
+      return mock.signIn(login, password);
     }
   }
 
@@ -45,7 +38,7 @@ class Api {
         password: password,
       });
     } else {
-      return signUpMock(login, password);
+      return mock.signUp(login, password);
     }
   }
 
@@ -56,7 +49,7 @@ class Api {
     if (this.#isDeploy) {
       return await axios.get(`${host}/api/projects`);
     } else {
-      return getProjectListMock();
+      return mock.getProjectList();
     }
   }
 
@@ -64,7 +57,7 @@ class Api {
     if (this.#isDeploy) {
       return axios.post(`${host}/api/projects`);
     } else {
-      return createProjectMock();
+      return mock.createProject();
     }
   }
 
@@ -72,7 +65,7 @@ class Api {
     if (this.#isDeploy) {
       return await axios.get(`${host}/api/projects/${projectId}`);
     } else {
-      return getProjectByIdMock(projectId);
+      return mock.getProjectById(projectId);
     }
   }
 
@@ -82,7 +75,7 @@ class Api {
         name
       });
     } else {
-      return updateProjectNameMock(projectId, name);
+      return mock.updateProjectName(projectId, name);
     }
   }
 
@@ -97,7 +90,27 @@ class Api {
         },
       });
     } else {
-      return uploadMediaMock(projectId, file);
+      return mock.uploadMedia(projectId, file);
+    }
+  }
+
+  async createCommentToPhoto(projectId, imageId) {
+    // if (this.#isDeploy) {
+    //   return await axios.post(`${host}/api/projects/${projectId}/image/text`, {
+    //     "name": imageId,
+    //   })
+    // } else {
+      return mock.createCommentToPhoto(projectId, imageId);
+    // }
+  }
+
+  async createCommentToVideo(projectId, splitPoint) {
+    if (this.#isDeploy) {
+      return await axios.post(`${host}/api/projects/${projectId}/video/comment`, {
+        "splitPoint": splitPoint,
+      })
+    } else {
+      return mock.createCommentToVideo(projectId, splitPoint);
     }
   }
 }

@@ -25,24 +25,30 @@ const projectSlice = createSlice({
     },
 
     setProjectAudioAction(state, {payload}) {
-      state.comments.push({
-        path: payload.path,
-        text: payload.text,
-        start: payload.start,
-      });
+      console.log("payload", payload)
+
+      state.audioParts = [];
+      state.audioParts.push(...payload);
+      console.log("state.audioParts", state.audioParts)
     },
 
-    clearProjectAudioAction(state) {
-      state.audioParts = [];
-    },
+    updateProjectAudioAction(state, {payload}) {
+      console.log(payload)
+      if (state.audioParts) {
+        const index = state.audioParts.findIndex(part => part.partId === payload.partId);
+        if (index !== -1) {
+          state.audioParts[index] = payload;
+        }
+        console.log(state.audioParts)
+      }
+    }
   }
 })
 
 export const {
   newProjectAction,
   setProjectAction,
-  setProjectTextAction,
   setProjectAudioAction,
-  clearProjectAudioAction,
+  updateProjectAudioAction,
 } = projectSlice.actions
 export default projectSlice.reducer

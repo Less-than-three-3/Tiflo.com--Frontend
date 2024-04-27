@@ -1,4 +1,4 @@
-let projectList = [
+export let projectList = [
   {
     projectId: "00000000-0000-0000-0000-000000000001",
     name: "Sheep project",
@@ -51,77 +51,3 @@ let projectList = [
     ]
   },
 ]
-
-export const getProjectListMock = () => {
-  return {
-    status: 200,
-    data: projectList,
-  }
-}
-
-export const createProjectMock = () => {
-  const newProject = {
-    audioParts: null,
-    name: "NewProject",
-    path: "",
-    projectId: "00000000-0000-0000-0000-000000000000",
-    userId: "00000000-0000-0000-0000-000000000000"
-  }
-
-  projectList.unshift(newProject);
-
-  return {
-    status: 200,
-    data: newProject,
-  }
-}
-
-export const getProjectByIdMock = (projectId) => {
-  return {
-    status: 200,
-    data: projectList.find((project) => project.projectId === projectId)
-  }
-}
-
-export const deleteProjectMock = (projectId) => {
-  console.log(`Delete project, \nid:${projectId}`)
-}
-
-export const updateProjectNameMock = (projectId, name) => {
-  const id = projectList.findIndex((project) => project.projectId === projectId);
-  projectList[id] = {
-    ...projectList[id],
-    name,
-  };
-
-  return {
-    status: 200,
-    data: {
-      message: "Name successfully updated",
-    },
-  }
-}
-
-export const createCommentMock = (projectId, name) => {
-  console.log(`Create comment\nproject: ${projectId}\nfor media ${name}`)
-}
-
-export const uploadMediaMock = (projectId, file) => {
-  const id = projectList.findIndex((project) => project.projectId === projectId);
-  console.log(id)
-  projectList[id] = {
-    ...projectList[id],
-    path: URL.createObjectURL(file),
-  };
-
-  return {
-    status: 200,
-    data: {
-      message: "File uploaded successfully",
-    }
-  }
-}
-
-export const voiceCommentMock = (projectId, text) => {
-  console.log(`Voice comment ${text}\nfor project ${text}`)
-}

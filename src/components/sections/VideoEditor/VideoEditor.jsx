@@ -1,11 +1,9 @@
 import {useEffect, useRef, useState} from "react";
 import {useProject} from "../../../hooks/useProject.js";
-import axios from "axios";
-import {host} from "../../../models/consts.js";
-import {audioParts} from "../../../mocks/audioParts.js";
+import {api} from "../../../api/api.js";
 
 export const VideoEditor = ({setUpdateProject, play}) => {
-  const {project, setProjectMedia, setProjectText, clearProjectAudio, setProjectAudio} = useProject();
+  const {project, setProject, setProjectAudio} = useProject();
   const hiddenFileInput = useRef(null);
   const [file, setFile] = useState();
 
@@ -17,54 +15,49 @@ export const VideoEditor = ({setUpdateProject, play}) => {
     const uploadedFIle = event.target.files[0];
     setFile(uploadedFIle);
 
-    setProjectMedia(URL.createObjectURL(uploadedFIle));
-    const formData = new FormData();
-    formData.append('file', uploadedFIle);
+    setProject({
+      ...project,
+      path: URL.createObjectURL(uploadedFIle),
+    });
 
-    const mediaResponse = await axios.post(`${host}/api/projects/${project.id}/media`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    })
+    const mediaResponse = await api.uploadMedia(project.projectId, uploadedFIle);
 
     if (mediaResponse.status === 200) {
-      const getProjectResponse = await axios.get(`${host}/api/projects/${project.id}`);
-      setProjectAudio(getProjectResponse.data.audioParts[0].path);
-      setTimeout(() => {
-        setUpdateProject((v) => v + 1)
-      }, 100)
+      const getProjectResponse = await api.getProjectById(project.projectId);
+      if (getProjectResponse.status === 200) {
+        if (!getProjectResponse.data.audioParts) {
+          console.error("Cannot find audio parts\nproject.audioParts = ", getProjectResponse.data.audioParts);
+        } else {
+          setProjectAudio(getProjectResponse.data.audioParts);
+          setUpdateProject((v) => v + 1)
+        }
+      }
     }
   };
 
   const videoRef = useRef(null);
   useEffect(() => {
-    console.log(play)
-    if (play && videoRef && videoRef.current) {
-      videoRef.current?.pause();
-    } else {
-      videoRef.current?.play();
-    }
+    // console.log("play", play)
+    // if (play && videoRef && videoRef.current) {
+    //   videoRef.current?.pause();
+    // } else {
+    //   videoRef.current?.play();
+    // }
   }, [play, videoRef])
 
   const generateComment = async () => {
-    // const genComResponse = await axios.post(`${host}/api/projects/${project.id}/video/comment`, {
-    //   start: "00:03",
-    // })
+    const videoCommentRes = await api.createCommentToVideo(project.projectId, "00:00:03.000");
 
-    clearProjectAudio();
-    for (const audioPart of audioParts) {
-      console.log("audioPart", audioPart)
-      setProjectAudio(audioPart)
+    if (videoCommentRes.status === 200) {
+      setProjectAudio(videoCommentRes.data.audioParts);
+      setUpdateProject((v) => v + 1);
     }
-    setTimeout(() => {
-      setUpdateProject((v) => v + 1)
-    }, 100)
   }
 
   return (
     <>
       <div className="section grow">
-        {!project.media ?
+        {!project.path ?
           <>
             <div className="border-4 border-dashed border-mouse rounded-3xl
                          video   flex justify-center items-center flex-col
@@ -87,7 +80,7 @@ export const VideoEditor = ({setUpdateProject, play}) => {
           <>
             <div className="font-bold pb-8">Видео: {file && file.name}</div>
             <video className="h-80" controls ref={videoRef}>
-              <source src={project.media} type="video/webm"/>
+              <source src={project.path} type="video/webm"/>
               Ваш браузер не поддерживает элемент video.
             </video>
 

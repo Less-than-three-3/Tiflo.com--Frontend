@@ -41,7 +41,7 @@ export const Topbar = () => {
   return (
     <>
       <div id="topbar" className="section flex items-center justify-between px-10 py-6 font-bold">
-        <Link to="/">
+        <Link to="/signIn">
           <div className="text-2xl">Tiflo.com</div>
         </Link>
 
@@ -75,10 +75,10 @@ export const Topbar = () => {
 
           <>
             <div className="flex gap-10">
-              <Link to="/auth/signIn">
+              <Link to="/signIn">
                 <Button value="SignIn" mode="primary"/>
               </Link>
-              <Link to="/auth/signUp">
+              <Link to="/signUp">
                 <Button value="SignUp" mode="secondary"/>
               </Link>
             </div>

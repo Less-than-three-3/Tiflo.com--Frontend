@@ -14,8 +14,6 @@ export const AudioEditor = ({updateProject, setPlay}) => {
     }
 
     if (project && project.audioParts && project.audioParts.length > 0) {
-      console.log("project.audioParts", project.audioParts);
-
       let audioParts = [];
       for (const id in project.audioParts) {
         audioParts.push({
@@ -31,6 +29,8 @@ export const AudioEditor = ({updateProject, setPlay}) => {
         })
       }
 
+      console.log("audioParts", audioParts);
+
       multitrack = Multitrack.create(
         audioParts,
         {
@@ -43,8 +43,9 @@ export const AudioEditor = ({updateProject, setPlay}) => {
         },
       )
 
+      console.log("multitrack", multitrack)
       const wfElements = getWfElements(waveform, audioParts);
-
+      console.log("wfElements", wfElements)
       if (wfElements.length > 1) {
         const {wfVideos, wfVoices} = splitWfElements(wfElements, audioParts);
 

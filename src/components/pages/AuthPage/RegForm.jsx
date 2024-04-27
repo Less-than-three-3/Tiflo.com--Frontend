@@ -17,7 +17,7 @@ export const RegForm = () => {
   const reg = async () => {
     const regResponse = await api.signUp(login, password);
 
-    if (regResponse.status === 200) {
+    if (regResponse.status === 201) {
       const authResponse = await api.signIn(login, password);
 
       if (authResponse.status === 200) {

@@ -20,7 +20,7 @@ export const AudioEditor = ({updateProject, setPlay}) => {
         const path = project.audioParts[id].path;
         const uuid = path.match(uuidRegex);
 
-        let format = "wav";
+        let format = "mp3";
         let fileFormat = project.audioParts[id].path.split(".")[1];
         if (fileFormat) {
           format = fileFormat

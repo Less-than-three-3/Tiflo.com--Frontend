@@ -16,11 +16,21 @@ export const AudioEditor = ({updateProject, setPlay}) => {
     if (project && project.audioParts && project.audioParts.length > 0) {
       let audioParts = [];
       for (const id in project.audioParts) {
+        const uuidRegex = /[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}/i;
+        const path = project.audioParts[id].path;
+        const uuid = path.match(uuidRegex);
+
+        let format = "wav";
+        let fileFormat = project.audioParts[id].path.split(".")[1];
+        if (fileFormat) {
+          format = fileFormat
+        }
+
         audioParts.push({
           id: id,
           draggable: true,
           startPosition: project.audioParts[id].start,
-          url: project.audioParts[id].path,
+          url: `/media/${uuid}.${format}`,
           volume: 1,
           options: {
             waveColor: project.audioParts[id].text ? '#79ff8f' : '#7A79FF',

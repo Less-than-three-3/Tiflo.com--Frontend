@@ -14,6 +14,8 @@ export const AudioEditor = ({updateProject, setPlay}) => {
     }
 
     if (project && project.audioParts && project.audioParts.length > 0) {
+      console.log("project.audioParts", project.audioParts);
+
       let audioParts = [];
       for (const id in project.audioParts) {
         audioParts.push({

@@ -1,7 +1,7 @@
 import {Button} from "../../UI/Button/Button.jsx";
 import {useEffect, useState} from "react";
 import {useProject} from "../../../hooks/useProject.js";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useUser} from "../../../hooks/useUser.js";
 import {api} from "../../../api/api.js";
 
@@ -30,12 +30,16 @@ export const Topbar = () => {
     }
   }
 
+  const navigate = useNavigate();
+
   const logout = async () => {
     const logoutRes = await api.logout();
 
     if (logoutRes.status === 200) {
       dropUser();
+      navigate("/")
     }
+
   }
 
   return (

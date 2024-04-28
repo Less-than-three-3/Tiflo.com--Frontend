@@ -79,10 +79,10 @@ export const Topbar = () => {
 
           <>
             <div className="flex gap-10">
-              <Link to="/">
+              <Link to="/auth/signIn">
                 <Button value="Войти" mode="primary"/>
               </Link>
-              <Link to="/signUp">
+              <Link to="/auth/signUp">
                 <Button value="Регистрация" mode="secondary"/>
               </Link>
             </div>

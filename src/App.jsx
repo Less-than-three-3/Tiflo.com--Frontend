@@ -1,5 +1,6 @@
-import {ProjectPage} from "./components/pages/ProjectPage/ProjectPage.jsx";
 import {Route, Routes} from "react-router-dom";
+
+import {ProjectPage} from "./components/pages/ProjectPage/ProjectPage.jsx";
 import {HomePage} from "./components/pages/HomePage/HomePage.jsx";
 import {RegForm} from "./components/pages/AuthPage/RegForm.jsx";
 import {PhotoCommentPage} from "./components/pages/ProjectPage/PhotoCommentPage/PhotoCommentPage.jsx";
@@ -16,9 +17,9 @@ export const App = () => {
         <Topbar/>
 
         <Routes>
-          {/*<Route path="/" element={<HomePage/>}/>*/}
-          <Route path="/" element={<AuthRegPage/>}>
-            <Route path="" element={<AuthForm/>}/>
+          <Route path="/" element={<HomePage/>}/>
+          <Route path="auth" element={<AuthRegPage/>}>
+            <Route path="signIn" element={<AuthForm/>}/>
             <Route path="signUp" element={<RegForm/>}/>
           </Route>
           <Route path="project" element={<ProjectPage/>}>

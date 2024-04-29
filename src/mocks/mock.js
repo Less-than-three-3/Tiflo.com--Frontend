@@ -126,6 +126,10 @@ class Mock {
 
   voiceComment(projectId, text) {
     console.log(`Voice comment ${text}\nfor project ${text}`)
+    return {
+      status: 200,
+      data: "/src/assets/audio-part-4.mp3",
+    }
   }
 }
 

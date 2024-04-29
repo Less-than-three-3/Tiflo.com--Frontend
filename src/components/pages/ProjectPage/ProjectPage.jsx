@@ -1,12 +1,10 @@
 import {Toolbar} from "../../sections/Toolbar/Toolbar.jsx";
 import {ProjectList} from "../../sections/ProjectList/ProjectList.jsx";
-import {Outlet, Route, Routes} from "react-router-dom";
-import {useEffect, useState} from "react";
-import {useProject} from "../../../hooks/useProject.js";
+import {Outlet} from "react-router-dom";
+import {useState} from "react";
 
 export const ProjectPage = () => {
   const [isProjectListOpened, setIsProjectListOpened] = useState(true);
-  const {project} = useProject()
 
   return (
     <>

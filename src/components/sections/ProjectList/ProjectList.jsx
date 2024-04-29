@@ -2,10 +2,14 @@ import {useProject} from "../../../hooks/useProject.js";
 import {useEffect} from "react";
 import {useProjectList} from "../../../hooks/useProjectList.js";
 import {api} from "../../../api/api.js";
+import {useLocation, useNavigate} from "react-router-dom";
+import {determineFileType} from "../../../utils/media.js";
 
 export const ProjectList = () => {
-  const {project, newProject, setProject} = useProject();
+  const {project, setProject} = useProject();
   const {projectList, setProjectList} = useProjectList();
+
+  const location = useLocation();
 
   useEffect(() => {
     (async () => {
@@ -18,6 +22,24 @@ export const ProjectList = () => {
     const newProjectRes = await api.createProject();
     if (newProjectRes.status === 200) {
       setProject(newProjectRes.data);
+    }
+  }
+
+  const navigate = useNavigate();
+  const clickExistingProject = (project) => {
+    const fileType = determineFileType(project.path);
+    switch (fileType) {
+      case "image":
+        navigate("/project/photo");
+        setProject(project)
+        break;
+      case "video":
+        navigate("/project/video");
+        setProject(project)
+        break;
+      case "none":
+        console.error("Forbidden file format:", project.path);
+        break;
     }
   }
 
@@ -34,12 +56,23 @@ export const ProjectList = () => {
                className="background-image w-full h-24"
                onClick={clickNewProject}/>
 
-          {projectList.map((project) => (
-            <div key={project.projectId}
-                 style={{backgroundImage: `url(${project.path || "/src/assets/icons/image_inactive.svg"})`}}
-                 className="background-image w-full h-24"
-                 onClick={() => setProject(project)}/>
-          ))}
+          {location.pathname === "/project/photo" &&
+            projectList.filter((project) => determineFileType(project.path) === "image" ||
+              determineFileType(project.path) === "none").map((project) => (
+              <div key={project.projectId}
+                   style={{backgroundImage: `url(${project.path || "/src/assets/icons/image_inactive.svg"})`}}
+                   className="background-image w-full h-24"
+                   onClick={() => clickExistingProject(project)}/>
+            ))}
+
+          {location.pathname === "/project/video" &&
+            projectList.filter((project) => determineFileType(project.path) === "video" ||
+              determineFileType(project.path) === "none").map((project) => (
+              <div key={project.projectId}
+                   style={{backgroundImage: `url("/src/assets/icons/image_inactive.svg")`}}
+                   className="background-image w-full h-24"
+                   onClick={() => clickExistingProject(project)}/>
+            ))}
         </div>
       </div>
     </>

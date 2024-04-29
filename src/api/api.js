@@ -111,15 +111,15 @@ class Api {
   }
 
   async createCommentToPhoto(projectId, imageId) {
-    // if (this.#isDeploy) {
-    //   return await axios.post(`${host}/api/projects/${projectId}/image/text`, {
-    //     "name": imageId,
-    //   })
-    // } else {
-    const response = mock.createCommentToPhoto(projectId, imageId);
-    console.log(response.data);
-    return response;
-    // }
+    if (this.#isDeploy) {
+      const response = await axios.post(`${host}/api/projects/${projectId}/image/text`, {
+        "name": imageId,
+      });
+      console.log(response.data);
+      return response;
+    } else {
+    return mock.createCommentToPhoto(projectId, imageId);
+    }
   }
 
   async createCommentToVideo(projectId, splitPoint) {
@@ -136,9 +136,43 @@ class Api {
 
   async voiceTheText(projectId, text) {
     if (this.#isDeploy) {
-      return await axios.post(`${host}/api/projects/${projectId}/voice`, {
+      const response = await axios.post(`${host}/api/projects/${projectId}/voice`, {
         "text": text,
+      });
+      console.log(response.data);
+      return response;
+    } else {
+      return mock.voiceComment(projectId, text)
+    }
+  }
+
+
+  //  --- Get audio file
+  async getAudio(fileName) {
+    if (this.#isDeploy) {
+      const response = await axios({
+        url: `${host}/media/${fileName}`, //your url
+        method: 'GET',
+        responseType: 'blob', // important
       })
+
+      if (response.status) {
+        console.log(response.data)
+        // create file link in browser's memory
+        const href = URL.createObjectURL(response.data);
+        console.log("href", href)
+
+        // create "a" HTML element with href to file & click
+        const link = document.createElement('a');
+        link.href = href;
+        link.setAttribute('download', 'description.wav'); //or any other extension
+        document.body.appendChild(link);
+        link.click();
+
+        // clean up "a" element & remove ObjectURL
+        document.body.removeChild(link);
+        URL.revokeObjectURL(href);
+      }
     }
   }
 }

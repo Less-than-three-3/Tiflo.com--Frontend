@@ -1,7 +1,7 @@
 import {useEffect, useRef, useState} from "react";
 import {useProject} from "../../../hooks/useProject.js";
 import {api} from "../../../api/api.js";
-import {convertNumberToTimestamp} from "../../../utils/media.js";
+import {convertNumberToTimestamp, convertNumberToTimestampWithMS} from "../../../utils/media.js";
 import {media} from "../../../models/media.js";
 import {host} from "../../../models/consts.js";
 
@@ -78,8 +78,8 @@ export const VideoEditor = ({setUpdateProject}) => {
   }, [])
 
   const generateComment = async () => {
-    console.log("generating comment", convertNumberToTimestamp(media.getTime()));
-    const videoCommentRes = await api.createCommentToVideo(project.projectId, convertNumberToTimestamp(media.getTime()));
+    console.log("generating comment", convertNumberToTimestampWithMS(media.getTime()));
+    const videoCommentRes = await api.createCommentToVideo(project.projectId, convertNumberToTimestampWithMS(media.getTime()));
     if (videoCommentRes.status === 200) {
       setProjectAudio(videoCommentRes.data.audioParts);
       setUpdateProject((v) => v + 1);

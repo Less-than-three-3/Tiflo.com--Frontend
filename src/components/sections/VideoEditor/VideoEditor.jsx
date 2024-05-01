@@ -64,6 +64,7 @@ export const VideoEditor = ({setUpdateProject}) => {
   }
 
   useEffect(() => {
+    console.log("media", media)
     if (media.video.current) {
       media.video.current.addEventListener('loadedmetadata', () => {
         media.onMultitrackChange(() => {

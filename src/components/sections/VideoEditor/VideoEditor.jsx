@@ -3,6 +3,7 @@ import {useProject} from "../../../hooks/useProject.js";
 import {api} from "../../../api/api.js";
 import {convertNumberToTimestamp} from "../../../utils/media.js";
 import {media} from "../../../models/media.js";
+import {host} from "../../../models/consts.js";
 
 export const VideoEditor = ({setUpdateProject}) => {
   const {project, setProject, setProjectAudio} = useProject();
@@ -91,7 +92,7 @@ export const VideoEditor = ({setUpdateProject}) => {
           <>
             <div className="font-bold pb-8">Видео: {file && file.name}</div>
             <video className="h-80 m-auto mb-4" ref={media.video} muted>
-              <source src={project.path} type="video/mp4"/>
+              <source src={`${host}/media/${project.path}`} type="video/mp4"/>
               Ваш браузер не поддерживает элемент video.
             </video>
 

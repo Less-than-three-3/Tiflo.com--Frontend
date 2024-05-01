@@ -25,15 +25,17 @@ export const VideoEditor = ({setUpdateProject}) => {
     });
 
     const mediaResponse = await api.uploadMedia(project.projectId, uploadedFIle);
-    if (mediaResponse.status === 200) {
-      const getProjectResponse = await api.getProjectById(project.projectId);
-      if (getProjectResponse.status === 200) {
-        if (!getProjectResponse.data.audioParts) {
-          console.error("Cannot find audio parts\nproject.audioParts = ", getProjectResponse.data.audioParts);
-        } else {
-          setProjectAudio(getProjectResponse.data.audioParts);
-          setUpdateProject((v) => v + 1)
-        }
+
+    const getProjectResponse = await api.getProjectById(project.projectId);
+    if (getProjectResponse.status === 200) {
+      setProject(getProjectResponse.data);
+      console.log(project)
+
+      if (!getProjectResponse.data.audioParts) {
+        console.error("Cannot find audio parts\nproject.audioParts = ", getProjectResponse.data.audioParts);
+      } else {
+        setProjectAudio(getProjectResponse.data.audioParts);
+        setUpdateProject((v) => v + 1)
       }
     }
   };

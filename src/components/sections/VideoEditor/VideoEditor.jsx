@@ -2,8 +2,9 @@ import {useEffect, useRef, useState} from "react";
 import {useProject} from "../../../hooks/useProject.js";
 import {api} from "../../../api/api.js";
 import {convertNumberToTimestamp} from "../../../utils/media.js";
+import {media} from "../../../models/media.js";
 
-export const VideoEditor = ({multitrackRef, setUpdateProject, play, setPlay}) => {
+export const VideoEditor = ({setUpdateProject}) => {
   const {project, setProject, setProjectAudio} = useProject();
   const hiddenFileInput = useRef(null);
   const [file, setFile] = useState();
@@ -37,25 +38,37 @@ export const VideoEditor = ({multitrackRef, setUpdateProject, play, setPlay}) =>
     }
   };
 
-  const videoRef = useRef(null);
-  useEffect(() => {
-    if (!play && videoRef && videoRef.current) {
-      videoRef.current?.pause();
-    } else {
-      videoRef.current?.play();
-    }
-  }, [play, videoRef])
+  const [play, setPlay] = useState(false);
+  media.setVideo(useRef(null));
+
+  const clickPlay = () => {
+    setPlay(true);
+    media.play();
+  }
+
+  const clickPause = () => {
+    setPlay(false);
+    media.pause();
+  }
+
+  const forward = () => {
+    const newTime = media.multitrack.getCurrentTime() + 10;
+    media.setTime(newTime);
+  }
+
+  const back = () => {
+    const newTime = media.multitrack.getCurrentTime() - 10;
+    media.setTime(newTime);
+  }
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.addEventListener('loadedmetadata', () => {
-        setDuration(convertNumberToTimestamp(videoRef.current.duration));
-      });
+    media.video.current.addEventListener('loadedmetadata', () => {
+      setDuration(convertNumberToTimestamp(media.video.current.duration));
+    });
 
-      videoRef.current.addEventListener("timeupdate", () => {
-        setTime(convertNumberToTimestamp(videoRef.current.currentTime));
-      });
-    }
+    media.video.current.addEventListener("timeupdate", () => {
+      setTime(convertNumberToTimestamp(media.video.current.currentTime));
+    });
   }, [])
 
   const generateComment = async () => {
@@ -66,21 +79,13 @@ export const VideoEditor = ({multitrackRef, setUpdateProject, play, setPlay}) =>
     }
   }
 
-  const forward = () => {
-    multitrackRef.current.setTime(multitrackRef.current.getCurrentTime() + 10)
-  }
-
-  const back = () => {
-    multitrackRef.current.setTime(multitrackRef.current.getCurrentTime() - 10)
-  }
-
   return (
     <>
       <div className="section grow">
         {project.path ?
           <>
             <div className="font-bold pb-8">Видео: {file && file.name}</div>
-            <video className="h-80 m-auto mb-4" ref={videoRef}>
+            <video className="h-80 m-auto mb-4" ref={media.video}>
               <source src={project.path} type="video/mp4"/>
               Ваш браузер не поддерживает элемент video.
             </video>
@@ -99,11 +104,11 @@ export const VideoEditor = ({multitrackRef, setUpdateProject, play, setPlay}) =>
                 {play ?
                   <img src="/src/assets/icons/pause.svg" alt=""
                        className="h-6"
-                       onClick={() => setPlay(false)}/>
+                       onClick={clickPause}/>
                   :
                   <img src="/src/assets/icons/play.svg" alt=""
                        className="h-6"
-                       onClick={() => setPlay(true)}/>
+                       onClick={clickPlay}/>
                 }
                 <img src="/src/assets/icons/forward.svg" alt=""
                      className="h-5"

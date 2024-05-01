@@ -1,3 +1,5 @@
+import {media} from "../models/media.js";
+
 export const timelineHeight = 40;
 export const trackHeight = 130;
 
@@ -8,6 +10,7 @@ export const setAudioParts = (project) => {
       id: id,
       draggable: true,
       startPosition: project.audioParts[id].start / 10,
+      duration: project.audioParts[id].duration,
       url: import.meta.env.VITE_IS_DEPLOY === "true" ? `/media/${project.audioParts[id].path}` : project.audioParts[id].path,
       volume: 1,
       options: {
@@ -20,11 +23,11 @@ export const setAudioParts = (project) => {
   return audioParts;
 }
 
-export const createMultitrack = (waveform, audioParts) => {
+export const createMultitrack = (audioParts) => {
   return Multitrack.create(
     audioParts,
     {
-      container: waveform.current, // required!
+      container: media.waveform.current, // required!
       rightButtonDrag: false, // set to true to drag with right mouse button
       cursorWidth: 2,
       cursorColor: '#9421d7',
@@ -34,9 +37,8 @@ export const createMultitrack = (waveform, audioParts) => {
   )
 }
 
-export const getWfElements = (waveform, audioParts) => {
-  const wf = waveform.current;
-  const wfOuterContainer = wf.querySelector("div")
+export const getWfElements = (audioParts) => {
+  const wfOuterContainer = media.waveform.current.querySelector("div")
   wfOuterContainer.style.height = `${timelineHeight + 2 * trackHeight}px`;
   wfOuterContainer.style.overflow = "hidden";
 

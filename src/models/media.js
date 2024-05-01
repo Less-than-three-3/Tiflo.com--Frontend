@@ -80,6 +80,7 @@ class Media {
     let lastTimestamp = this.getTime() * 10;
     setInterval(() => {
       const time = this.getTime() * 10;
+      console.log("time", time)
       if (time > lastTimestamp) {
         const tracks = this.getVideoTracks();
         const isVideo = tracks.some((track) => (track.startPosition * 10 < time) && (time < (track.startPosition * 10 + track.duration * 10)));

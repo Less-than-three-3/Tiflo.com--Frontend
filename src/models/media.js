@@ -2,6 +2,7 @@ class Media {
   multitrack;
   waveform;
   video;
+  isPlaying = false;
 
   setMultitrack(mt) {
     this.multitrack = mt;
@@ -32,22 +33,54 @@ class Media {
   }
 
   play() {
+    const time = this.getTime() * 10;
+    const tracks = this.getVideoTracks();
+    const isVideo = tracks.some((track) => (track.startPosition * 10 <= time) && (time <= (track.startPosition * 10 + track.duration)));
+
+    if (isVideo) {
+      this.video.current?.play();
+    }
+    this.isPlaying = true;
     this.multitrack?.play();
-    this.video.current?.play();
   }
 
   pause() {
+    this.isPlaying = false;
     this.multitrack?.pause();
     this.video.current?.pause();
   }
 
-  isPlaying() {
-    return this.multitrack?.isPlaying();
+  getDuration() {
+    return this.multitrack.maxDuration;
+  }
+
+  getTime() {
+    return this.multitrack.getCurrentTime();
   }
 
   setTime(time) {
     this.multitrack?.setTime(time);
     this.video.current.currentTime = time;
+  }
+
+  onMultitrackChange(callback) {
+    let lastTimestamp = this.getTime() * 10;
+    setInterval(() => {
+      const time = this.getTime() * 10;
+      if (time > lastTimestamp) {
+        const tracks = this.getVideoTracks();
+        const isVideo = tracks.some((track) => (track.startPosition * 10 < time) && (time < (track.startPosition * 10 + track.duration)));
+
+        if (isVideo && this.isPlaying) {
+          this.video.current?.play();
+        } else {
+          this.video.current?.pause();
+        }
+      }
+      lastTimestamp = time;
+
+      callback();
+    }, 100)
   }
 }
 

@@ -52,23 +52,23 @@ export const VideoEditor = ({setUpdateProject}) => {
   }
 
   const forward = () => {
-    const newTime = media.multitrack.getCurrentTime() + 10;
+    const newTime = media.getTime() + 10;
     media.setTime(newTime);
   }
 
   const back = () => {
-    const newTime = media.multitrack.getCurrentTime() - 10;
+    const newTime = media.getTime() - 10;
     media.setTime(newTime);
   }
 
   useEffect(() => {
     if (media.video.current) {
       media.video.current.addEventListener('loadedmetadata', () => {
-        setDuration(convertNumberToTimestamp(media.video.current.duration));
-      });
+        media.onMultitrackChange(() => {
+          setTime(convertNumberToTimestamp(media.getTime()));
+        });
 
-      media.video.current.addEventListener("timeupdate", () => {
-        setTime(convertNumberToTimestamp(media.video.current.currentTime));
+        setDuration(convertNumberToTimestamp(media.getDuration()));
       });
     }
   }, [])
@@ -87,7 +87,7 @@ export const VideoEditor = ({setUpdateProject}) => {
         {project.path ?
           <>
             <div className="font-bold pb-8">Видео: {file && file.name}</div>
-            <video className="h-80 m-auto mb-4" ref={media.video}>
+            <video className="h-80 m-auto mb-4" ref={media.video} muted>
               <source src={project.path} type="video/mp4"/>
               Ваш браузер не поддерживает элемент video.
             </video>

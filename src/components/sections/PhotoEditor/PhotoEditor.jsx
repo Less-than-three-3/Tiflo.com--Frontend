@@ -15,7 +15,9 @@ export const PhotoEditor = () => {
       const projectListRes = await api.getProjectList();
       if (projectListRes.status === 200) {
         setProjectList(projectListRes.data);
-        setProject(projectListRes.data[0]);
+        if (projectListRes.data && projectListRes.data.length > 0) {
+          setProject(projectListRes.data[0]);
+        }
       }
     })()
   }, [])

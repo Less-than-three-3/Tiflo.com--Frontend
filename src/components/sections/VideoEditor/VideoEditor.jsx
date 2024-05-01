@@ -78,8 +78,8 @@ export const VideoEditor = ({setUpdateProject}) => {
   }, [])
 
   const generateComment = async () => {
-    console.log("generating comment", media.getTime());
-    const videoCommentRes = await api.createCommentToVideo(project.projectId, media.getTime());
+    console.log("generating comment", convertNumberToTimestamp(media.getTime()));
+    const videoCommentRes = await api.createCommentToVideo(project.projectId, convertNumberToTimestamp(media.getTime()));
     if (videoCommentRes.status === 200) {
       setProjectAudio(videoCommentRes.data.audioParts);
       setUpdateProject((v) => v + 1);

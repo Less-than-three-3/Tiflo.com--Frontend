@@ -62,13 +62,15 @@ export const VideoEditor = ({setUpdateProject}) => {
   }
 
   useEffect(() => {
-    media.video.current.addEventListener('loadedmetadata', () => {
-      setDuration(convertNumberToTimestamp(media.video.current.duration));
-    });
+    if (media.video.current) {
+      media.video.current.addEventListener('loadedmetadata', () => {
+        setDuration(convertNumberToTimestamp(media.video.current.duration));
+      });
 
-    media.video.current.addEventListener("timeupdate", () => {
-      setTime(convertNumberToTimestamp(media.video.current.currentTime));
-    });
+      media.video.current.addEventListener("timeupdate", () => {
+        setTime(convertNumberToTimestamp(media.video.current.currentTime));
+      });
+    }
   }, [])
 
   const generateComment = async () => {

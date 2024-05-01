@@ -42,7 +42,6 @@ class Media {
   }
 
   isPlaying() {
-    console.log(this.multitrack?.isPlaying())
     return this.multitrack?.isPlaying();
   }
 

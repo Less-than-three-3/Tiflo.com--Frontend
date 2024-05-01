@@ -11,7 +11,9 @@ const projectListSlice = createSlice({
 
     setProjectListAction(state, {payload}) {
       state.length = 0;
-      state.push(...payload);
+      if (payload) {
+        state.push(...payload);
+      }
     },
 
     pushProjectAction(state, {payload}) {

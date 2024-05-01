@@ -59,7 +59,6 @@ class Media {
   }
 
   setTime(time) {
-    console.log(time)
     this.multitrack?.setTime(time);
 
     const tracks = this.getVideoTracks();
@@ -73,7 +72,6 @@ class Media {
         videoTime += track.duration;
       }
     }
-    console.log(videoTime)
 
     this.video.current.currentTime = videoTime;
   }

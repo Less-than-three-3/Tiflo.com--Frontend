@@ -37,9 +37,9 @@ export const AudioEditor = ({multitrackRef, updateProject, play, setPlay}) => {
 
   useEffect(() => {
     if (play) {
-      multitrackRef.current.play();
+      multitrackRef.current?.play();
     } else {
-      multitrackRef.current.pause();
+      multitrackRef.current?.pause();
     }
   }, [play, multitrackRef]);
 

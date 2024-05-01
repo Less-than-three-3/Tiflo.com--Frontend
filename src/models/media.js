@@ -37,6 +37,7 @@ class Media {
     const tracks = this.getVideoTracks();
     const isVideo = tracks.some((track) => (track.startPosition * 10 <= time) && (time <= (track.startPosition * 10 + track.duration)));
 
+    console.log("isVideo", isVideo)
     if (isVideo) {
       this.video.current?.play();
     }

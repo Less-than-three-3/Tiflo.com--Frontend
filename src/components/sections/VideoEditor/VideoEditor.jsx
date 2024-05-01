@@ -29,7 +29,7 @@ export const VideoEditor = ({setUpdateProject}) => {
     const getProjectResponse = await api.getProjectById(project.projectId);
     if (getProjectResponse.status === 200) {
       setProject(getProjectResponse.data);
-      console.log(project)
+      console.log("project", project)
 
       if (!getProjectResponse.data.audioParts) {
         console.error("Cannot find audio parts\nproject.audioParts = ", getProjectResponse.data.audioParts);

@@ -78,7 +78,8 @@ export const VideoEditor = ({setUpdateProject}) => {
   }, [])
 
   const generateComment = async () => {
-    const videoCommentRes = await api.createCommentToVideo(project.projectId, "00:00:03.000");
+    console.log("generating comment", media.getTime());
+    const videoCommentRes = await api.createCommentToVideo(project.projectId, media.getTime());
     if (videoCommentRes.status === 200) {
       setProjectAudio(videoCommentRes.data.audioParts);
       setUpdateProject((v) => v + 1);
@@ -92,9 +93,8 @@ export const VideoEditor = ({setUpdateProject}) => {
           <>
             <div className="font-bold pb-8">Видео: {file && file.name}</div>
             <video className="h-80 m-auto mb-4" ref={media.video} muted>
-              <source src={`${host}/media/${project.path}`} type="video/mp4"/>
-              Ваш браузер не поддерживает элемент video.
-            </video>
+                <source src={`${host}/media/${project.path}`} type="video/mp4"/>
+              </video>
 
             <div className="flex justify-between items-center">
               <div className="flex gap-1">

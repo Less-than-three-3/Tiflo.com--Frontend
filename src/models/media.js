@@ -59,8 +59,23 @@ class Media {
   }
 
   setTime(time) {
+    console.log(time)
     this.multitrack?.setTime(time);
-    this.video.current.currentTime = time;
+
+    const tracks = this.getVideoTracks();
+    const previousTracks = tracks.filter((track) => track.startPosition < time);
+
+    let videoTime = 0;
+    for (const track of previousTracks) {
+      if (track.startPosition < time && time < (track.startPosition + track.duration)) {
+        videoTime += time - track.startPosition;
+      } else {
+        videoTime += track.duration;
+      }
+    }
+    console.log(videoTime)
+
+    this.video.current.currentTime = videoTime;
   }
 
   onMultitrackChange(callback) {
@@ -69,7 +84,7 @@ class Media {
       const time = this.getTime() * 10;
       if (time > lastTimestamp) {
         const tracks = this.getVideoTracks();
-        const isVideo = tracks.some((track) => (track.startPosition * 10 < time) && (time < (track.startPosition * 10 + track.duration)));
+        const isVideo = tracks.some((track) => (track.startPosition * 10 < time) && (time < (track.startPosition * 10 + track.duration * 10)));
 
         if (isVideo && this.isPlaying) {
           this.video.current?.play();

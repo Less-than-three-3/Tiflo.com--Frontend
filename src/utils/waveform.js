@@ -10,7 +10,7 @@ export const setAudioParts = (project) => {
       id: id,
       draggable: true,
       startPosition: project.audioParts[id].start / 10,
-      duration: project.audioParts[id].duration,
+      duration: project.audioParts[id].duration / 10,
       url: import.meta.env.VITE_IS_DEPLOY === "true" ? `/media/${project.audioParts[id].path}` : project.audioParts[id].path,
       volume: 1,
       options: {

@@ -23,7 +23,9 @@ export const AudioEditor = ({updateProject}) => {
 
     if (project && project.audioParts && project.audioParts.length > 0) {
       const audioParts = setAudioParts(project);
+      console.log("audioParts", audioParts);
       media.setMultitrack(createMultitrack(audioParts));
+      console.log("multitrack", media.multitrack)
 
       const wfElements = getWfElements(audioParts);
       if (wfElements.length > 1) {

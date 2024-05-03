@@ -73,6 +73,7 @@ export const splitWfElements = (wfElements, audioParts) => {
 
 export const moveWfElements = (wfElements, row, audioParts) => {
   for (const id in wfElements) {
+    console.log(id, audioParts[id])
     wfElements[id].style.top = `${-((audioParts.length - 1 - id - row) * trackHeight)}px`;
   }
 }

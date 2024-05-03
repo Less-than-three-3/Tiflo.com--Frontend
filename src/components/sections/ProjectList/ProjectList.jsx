@@ -3,7 +3,7 @@ import {useEffect} from "react";
 import {useProjectList} from "../../../hooks/useProjectList.js";
 import {api} from "../../../api/api.js";
 import {useLocation, useNavigate} from "react-router-dom";
-import {determineFileType} from "../../../utils/media.js";
+import {determineFileType} from "../../../utils/format.js";
 
 export const ProjectList = () => {
   const {project, setProject} = useProject();

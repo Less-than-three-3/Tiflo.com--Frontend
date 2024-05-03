@@ -1,7 +1,7 @@
 import {useEffect, useRef, useState} from "react";
 import {useProject} from "../../../hooks/useProject.js";
 import {api} from "../../../api/api.js";
-import {convertNumberToTimestamp, convertNumberToTimestampWithMS} from "../../../utils/media.js";
+import {convertNumberToTimestamp, convertNumberToTimestampWithMS} from "../../../utils/format.js";
 import {media} from "../../../models/media.js";
 import {host} from "../../../models/consts.js";
 
@@ -93,8 +93,12 @@ export const VideoEditor = ({setUpdateProject}) => {
           <>
             <div className="font-bold pb-8">Видео: {file && file.name}</div>
             <video className="h-80 m-auto mb-4" ref={media.video} muted>
+              {api.isDeploy ?
                 <source src={`${host}/media/${project.path}`} type="video/mp4"/>
-              </video>
+                :
+                <source src={project.path} type="video/mp4"/>
+              }
+            </video>
 
             <div className="flex justify-between items-center">
               <div className="flex gap-1">

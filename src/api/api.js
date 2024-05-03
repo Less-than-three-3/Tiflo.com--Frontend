@@ -3,17 +3,17 @@ import {host} from "../models/consts.js";
 import {mock} from "../mocks/mock.js";
 
 class Api {
-  #isDeploy;
+  isDeploy;
 
   constructor() {
-    this.#isDeploy = import.meta.env.VITE_IS_DEPLOY === "true";
+    this.isDeploy = import.meta.env.VITE_IS_DEPLOY === "true";
   }
 
 
   // ---  USER  ---
 
   async logout() {
-    if (this.#isDeploy) {
+    if (this.isDeploy) {
       const response = await axios.post(`${host}/api/auth/logout`);
       console.log(response.data);
       return response;
@@ -23,7 +23,7 @@ class Api {
   }
 
   async signIn(login, password) {
-    if (this.#isDeploy) {
+    if (this.isDeploy) {
       const response = await axios.post(`${host}/api/auth/signIn`, {
         login: login,
         password: password,
@@ -36,7 +36,7 @@ class Api {
   }
 
   async signUp(login, password) {
-    if (this.#isDeploy) {
+    if (this.isDeploy) {
       const response = await axios.post(`${host}/api/auth/signUp`, {
         login: login,
         password: password,
@@ -52,7 +52,7 @@ class Api {
   //  --- PROJECTS  ---
 
   async getProjectList() {
-    if (this.#isDeploy) {
+    if (this.isDeploy) {
       const response = await axios.get(`${host}/api/projects`);
       console.log(response.data);
       return response;
@@ -62,7 +62,7 @@ class Api {
   }
 
   async createProject() {
-    if (this.#isDeploy) {
+    if (this.isDeploy) {
       const response = axios.post(`${host}/api/projects`);
       console.log(response.data);
       return response;
@@ -72,7 +72,7 @@ class Api {
   }
 
   async getProjectById(projectId) {
-    if (this.#isDeploy) {
+    if (this.isDeploy) {
       const response = await axios.get(`${host}/api/projects/${projectId}`);
       console.log(response.data);
       return response;
@@ -82,7 +82,7 @@ class Api {
   }
 
   async updateProjectName(projectId, name) {
-    if (this.#isDeploy) {
+    if (this.isDeploy) {
       const response = await axios.patch(`${host}/api/projects/${projectId}`, {
         name
       });
@@ -94,7 +94,7 @@ class Api {
   }
 
   async uploadMedia(projectId, file) {
-    if (this.#isDeploy) {
+    if (this.isDeploy) {
       const formData = new FormData();
       formData.append('file', file);
 
@@ -111,7 +111,7 @@ class Api {
   }
 
   async createCommentToPhoto(projectId, imageId) {
-    if (this.#isDeploy) {
+    if (this.isDeploy) {
       const response = await axios.post(`${host}/api/projects/${projectId}/image/text`, {
         "name": imageId,
       });
@@ -123,7 +123,7 @@ class Api {
   }
 
   async createCommentToVideo(projectId, splitPoint) {
-    if (this.#isDeploy) {
+    if (this.isDeploy) {
       const response = await axios.post(`${host}/api/projects/${projectId}/video/comment`, {
         "splitPoint": splitPoint,
       })
@@ -135,7 +135,7 @@ class Api {
   }
 
   async voiceTheText(projectId, text) {
-    if (this.#isDeploy) {
+    if (this.isDeploy) {
       const response = await axios.post(`${host}/api/projects/${projectId}/voice`, {
         "text": text,
       });
@@ -149,7 +149,7 @@ class Api {
 
   //  --- Get audio file
   async getAudio(fileName) {
-    if (this.#isDeploy) {
+    if (this.isDeploy) {
       const response = await axios({
         url: `${host}/media/${fileName}`, //your url
         method: 'GET',

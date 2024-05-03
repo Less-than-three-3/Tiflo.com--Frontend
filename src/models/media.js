@@ -2,10 +2,41 @@ class Media {
   multitrack;
   waveform;
   video;
+
   isPlaying = false;
+  onChangeHandlers = [];
 
   setMultitrack(mt) {
     this.multitrack = mt;
+    const onChangeHandlers = this.onChangeHandlers;
+
+    const handlePlayPause = () => {
+      const time = this.getTime() * 10;
+      const tracks = this.getVideoTracks();
+      const isVideo = tracks.some((track) => (track.startPosition * 10 < time) && (time < (track.startPosition * 10 + track.duration * 10)));
+
+      if (isVideo && this.isPlaying) {
+        this.video.current?.play();
+      } else {
+        this.video.current?.pause();
+      }
+    }
+
+    onChangeHandlers.push(handlePlayPause);
+
+    this.multitrack = new Proxy(this.multitrack, {
+      get(target, prop) {
+        return target[prop];
+      },
+
+      set(target, prop, val) {
+        target[prop] = val;
+        for (const handler of onChangeHandlers) {
+          handler();
+        }
+        return true;
+      }
+    })
   }
 
   setWaveform(wf) {
@@ -33,21 +64,13 @@ class Media {
   }
 
   play() {
-    const time = this.getTime() * 10;
-    const tracks = this.getVideoTracks();
-    const isVideo = tracks.some((track) => (track.startPosition * 10 <= time) && (time <= (track.startPosition * 10 + track.duration)));
-
-    if (isVideo) {
-      this.video.current?.play();
-    }
-    this.isPlaying = true;
     this.multitrack?.play();
+    this.isPlaying = true;
   }
 
   pause() {
-    this.isPlaying = false;
     this.multitrack?.pause();
-    this.video.current?.pause();
+    this.isPlaying = false;
   }
 
   getDuration() {
@@ -77,23 +100,7 @@ class Media {
   }
 
   onMultitrackChange(callback) {
-    let lastTimestamp = this.getTime() * 10;
-    setInterval(() => {
-      const time = this.getTime() * 10;
-      if (time > lastTimestamp) {
-        const tracks = this.getVideoTracks();
-        const isVideo = tracks.some((track) => (track.startPosition * 10 < time) && (time < (track.startPosition * 10 + track.duration * 10)));
-
-        if (isVideo && this.isPlaying) {
-          this.video.current?.play();
-        } else {
-          this.video.current?.pause();
-        }
-      }
-      lastTimestamp = time;
-
-      callback();
-    }, 100)
+    this.onChangeHandlers.push(callback);
   }
 }
 

@@ -14,26 +14,22 @@ export const AudioEditor = ({updateProject}) => {
   media.setWaveform(useRef(null));
 
   useEffect(() => {
-    console.log("updating audio", updateProject);
     if (media.waveform.current && media.waveform.current.querySelector("div")) {
       const domNode = media.waveform.current.querySelector("div");
       domNode.remove();
-      console.log("node removed")
     }
 
     if (project && project.audioParts && project.audioParts.length > 0) {
       const audioParts = setAudioParts(project);
       audioParts.sort((a, b) => a.startPosition - b.startPosition);
-      console.log("audioParts", audioParts);
       media.setMultitrack(createMultitrack(audioParts));
-      console.log("multitrack", media.multitrack)
 
       const wfElements = getWfElements(audioParts);
       if (wfElements.length > 1) {
         const {wfVideos, wfVoices} = splitWfElements(wfElements, audioParts);
 
-        moveWfElements(wfVideos, true, 0, audioParts);
-        moveWfElements(wfVoices, false, 1, audioParts);
+        moveWfElements(wfVideos, 0, audioParts);
+        moveWfElements(wfVoices, 1, audioParts);
       }
 
       media.waveform.current.addEventListener("click", () => {

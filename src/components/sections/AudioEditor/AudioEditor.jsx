@@ -14,9 +14,11 @@ export const AudioEditor = ({updateProject}) => {
   media.setWaveform(useRef(null));
 
   useEffect(() => {
+    console.log("updating audio", updateProject);
     if (media.waveform.current && media.waveform.current.querySelector("div")) {
       const domNode = media.waveform.current.querySelector("div");
       domNode.remove();
+      console.log("node removed")
     }
 
     if (project && project.audioParts && project.audioParts.length > 0) {

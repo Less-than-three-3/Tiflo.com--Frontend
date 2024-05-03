@@ -22,8 +22,8 @@ export const AudioEditor = ({updateProject}) => {
     }
 
     if (project && project.audioParts && project.audioParts.length > 0) {
-      project.audioParts.sort((a, b) => a.startPosition - b.startPosition);
       const audioParts = setAudioParts(project);
+      audioParts.sort((a, b) => a.startPosition - b.startPosition);
       console.log("audioParts", audioParts);
       media.setMultitrack(createMultitrack(audioParts));
       console.log("multitrack", media.multitrack)

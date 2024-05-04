@@ -19,18 +19,18 @@ export const VideoEditor = ({setUpdateProject}) => {
   const uploadFile = async (event) => {
     const uploadedFIle = event.target.files[0];
     setFile(uploadedFIle);
+    console.log("media.video", media.video)
 
-    setProject({
-      ...project,
-      path: URL.createObjectURL(uploadedFIle),
-    });
+    // setProject({
+    //   ...project,
+    //   path: URL.createObjectURL(uploadedFIle),
+    // });
 
     const mediaResponse = await api.uploadMedia(project.projectId, uploadedFIle);
 
     const getProjectResponse = await api.getProjectById(project.projectId);
     if (getProjectResponse.status === 200) {
       setProject(getProjectResponse.data);
-      console.log("project", project)
 
       if (!getProjectResponse.data.audioParts) {
         console.error("Cannot find audio parts\nproject.audioParts = ", getProjectResponse.data.audioParts);

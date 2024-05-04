@@ -78,25 +78,28 @@ export const VideoEditor = ({setUpdateProject}) => {
     }
   }
 
+  console.log("project.path", project.path)
+
   return (
     <>
       <div className="section grow">
         {project.path ?
           <>
             <div className="font-bold pb-8">Видео: {project.path}</div>
-            <video className="h-80 m-auto mb-4"
-                   ref={media.video}
-                   muted
-                   key={params.projectId}>
 
-              {api.isDeploy ?
-                <source src={`${host}/media/${project.path}`}
-                        type="video/mp4"
-                        key={params.projectId}/>
-                :
-                <source src={project.path} type="video/mp4"/>
-              }
-            </video>
+              <video className="h-80 m-auto mb-4"
+                      ref={media.video}
+                      muted
+                      key={params.projectId}>
+
+                {api.isDeploy && media.video.current !== null ?
+                  <source src={`${host}/media/${project.path}`}
+                          type="video/mp4"
+                          key={params.projectId}/>
+                  :
+                  <source src={project.path} type="video/mp4"/>
+                }
+              </video>
 
             <div className="flex justify-between items-center">
               <div className="flex gap-1">

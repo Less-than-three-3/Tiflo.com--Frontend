@@ -90,7 +90,9 @@ export const VideoEditor = ({setUpdateProject}) => {
                    key={params.projectId}>
 
               {api.isDeploy ?
-                <source src={`${host}/media/${project.path}`} type="video/mp4"/>
+                <source src={`${host}/media/${project.path}`}
+                        type="video/mp4"
+                        key={params.projectId}/>
                 :
                 <source src={project.path} type="video/mp4"/>
               }

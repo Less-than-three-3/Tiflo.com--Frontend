@@ -70,6 +70,13 @@ export const VideoEditor = ({setUpdateProject}) => {
         setDuration(convertNumberToTimestamp(media.getDuration()));
       });
     }
+
+    (async () => {
+      const getProjectRes = await api.getProjectById(params.projectId);
+      if (getProjectRes.status === 200) {
+        setProject(getProjectRes.data);
+      }
+    })()
   }, [])
 
   const generateComment = async () => {

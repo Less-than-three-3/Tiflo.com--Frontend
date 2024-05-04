@@ -20,7 +20,7 @@ export const PhotoEditor = () => {
         setProject(getProjectRes.data);
       }
     })()
-  }, [])
+  }, [params])
 
   const handleClick = () => {
     hiddenFileInput.current.click();

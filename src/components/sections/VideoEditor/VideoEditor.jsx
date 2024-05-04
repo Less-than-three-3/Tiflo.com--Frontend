@@ -81,6 +81,23 @@ export const VideoEditor = ({setUpdateProject}) => {
   }
 
   useEffect(() => {
+    const handleHashChange = () => {
+      console.log("hash change")
+      if (media.video.current) {
+        media.video.current.load();
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+
+    // Очистка обработчика при размонтировании компонента
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, []); // Пустой массив зависимостей означает, что эффект будет вызван только при монтировании и размонтировании
+
+
+  useEffect(() => {
     if (media.video.current) {
       console.log(media.video)
       media.video.current.load();

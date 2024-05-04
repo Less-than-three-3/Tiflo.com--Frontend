@@ -33,9 +33,9 @@ export const Topbar = () => {
   const navigate = useNavigate();
 
   const logout = async () => {
-    await api.logout();
     dropUser();
-    navigate("/")
+    navigate("/");
+    await api.logout();
   }
 
   return (

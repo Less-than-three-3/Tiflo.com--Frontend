@@ -1,7 +1,7 @@
 import {TextEditor} from "../../../sections/TextEditor/TextEditor.jsx";
 import {AudioEditor} from "../../../sections/AudioEditor/AudioEditor.jsx";
 import {VideoEditor} from "../../../sections/VideoEditor/VideoEditor.jsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useProject} from "../../../../hooks/useProject.js";
 import {useParams} from "react-router-dom";
 import {api} from "../../../../api/api.js";
@@ -11,12 +11,15 @@ export const VideoCommentPage = () => {
   const {setProject} = useProject();
 
   const params = useParams();
-  (async () => {
-    const getProjectRes = await api.getProjectById(params.projectId);
-    if (getProjectRes.status === 200) {
-      setProject(getProjectRes.data);
-    }
-  })()
+  useEffect(() => {
+    (async () => {
+      console.log("v")
+      const getProjectRes = await api.getProjectById(params.projectId);
+      if (getProjectRes.status === 200) {
+        setProject(getProjectRes.data);
+      }
+    })()
+  }, [])
 
   return (
     <>

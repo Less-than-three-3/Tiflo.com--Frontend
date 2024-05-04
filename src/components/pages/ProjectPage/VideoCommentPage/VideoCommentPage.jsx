@@ -9,8 +9,8 @@ import {api} from "../../../../api/api.js";
 export const VideoCommentPage = () => {
   const [updateProject, setUpdateProject] = useState(0);
   const {setProject} = useProject();
-
   const params = useParams();
+
   useEffect(() => {
     (async () => {
       const getProjectRes = await api.getProjectById(params.projectId);
@@ -18,7 +18,7 @@ export const VideoCommentPage = () => {
         setProject(getProjectRes.data);
       }
     })()
-  }, [])
+  }, [params])
 
   return (
     <>

@@ -13,15 +13,6 @@ export const PhotoEditor = () => {
   const {setProjectList} = useProjectList();
   const params = useParams();
 
-  useEffect(() => {
-    (async () => {
-      const getProjectRes = await api.getProjectById(params.projectId);
-      if (getProjectRes.status === 200) {
-        setProject(getProjectRes.data);
-      }
-    })()
-  }, [params])
-
   const handleClick = () => {
     hiddenFileInput.current.click();
   };

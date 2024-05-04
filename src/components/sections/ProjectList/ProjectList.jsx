@@ -4,6 +4,7 @@ import {useProjectList} from "../../../hooks/useProjectList.js";
 import {api} from "../../../api/api.js";
 import {useLocation, useNavigate} from "react-router-dom";
 import {determineFileType} from "../../../utils/format.js";
+import {host} from "../../../models/consts.js";
 
 export const ProjectList = () => {
   const {project, setProject} = useProject();
@@ -60,7 +61,7 @@ export const ProjectList = () => {
             projectList.filter((project) => determineFileType(project.path) === "image" ||
               determineFileType(project.path) === "none").map((project) => (
               <div key={project.projectId}
-                   style={{backgroundImage: `url(${project.path || "/src/assets/icons/image_inactive.svg"})`}}
+                   style={{backgroundImage: `url(${(api.isDeploy ? `${host}/media/${project.path}` : project.path) || "/src/assets/icons/image_inactive.svg"})`}}
                    className="background-image w-full h-24"
                    onClick={() => clickExistingProject(project)}/>
             ))}

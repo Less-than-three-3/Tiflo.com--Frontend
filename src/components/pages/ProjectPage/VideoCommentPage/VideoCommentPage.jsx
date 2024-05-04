@@ -13,7 +13,6 @@ export const VideoCommentPage = () => {
   const params = useParams();
   useEffect(() => {
     (async () => {
-      console.log("v")
       const getProjectRes = await api.getProjectById(params.projectId);
       if (getProjectRes.status === 200) {
         setProject(getProjectRes.data);

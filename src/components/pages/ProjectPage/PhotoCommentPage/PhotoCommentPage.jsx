@@ -11,7 +11,6 @@ export const PhotoCommentPage = () => {
 
   useEffect(() => {
     (async () => {
-      console.log("p")
       const getProjectRes = await api.getProjectById(params.projectId);
       if (getProjectRes.status === 200) {
         setProject(getProjectRes.data);

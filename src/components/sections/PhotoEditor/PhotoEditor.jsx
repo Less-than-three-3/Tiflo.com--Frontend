@@ -4,6 +4,7 @@ import {useProject} from "../../../hooks/useProject.js";
 import {api} from "../../../api/api.js";
 import {useProjectList} from "../../../hooks/useProjectList.js";
 import {useParams} from "react-router-dom";
+import {host} from "../../../models/consts.js";
 
 export const PhotoEditor = () => {
   const {project, setProject} = useProject();
@@ -72,7 +73,7 @@ export const PhotoEditor = () => {
         {project.path ?
           <>
             <div className="font-bold pb-8">Фото: {project.path || (file && file.name)}</div>
-            <div style={{backgroundImage: `url(${project.path})`}}
+            <div style={{backgroundImage: api.isDeploy ? `url(${host}/media/${project.path})` : `url(${project.path})`}}
                  className="background-image w-full h-4/6"/>
             <div className="mt-4 w-28">
               <Button mode="primary" value={"В текст"} onClick={toText}/>

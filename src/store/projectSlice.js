@@ -18,7 +18,6 @@ const projectSlice = createSlice({
     },
 
     setProjectAction(state, {payload}) {
-      console.log(payload)
       state.projectId = payload.projectId;
       state.name = payload.name;
       state.path = payload.path;

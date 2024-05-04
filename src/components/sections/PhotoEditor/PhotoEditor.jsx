@@ -15,7 +15,7 @@ export const PhotoEditor = () => {
 
   useEffect(() => {
     (async () => {
-      const getProjectRes = await api.getProjectById(params);
+      const getProjectRes = await api.getProjectById(params.projectId);
       if (getProjectRes.status === 200) {
         setProject(getProjectRes.data);
       }
@@ -32,8 +32,7 @@ export const PhotoEditor = () => {
 
     const uploadMediaRes = await api.uploadMedia(project.projectId, uploadedFIle);
     if (uploadMediaRes.status === 200) {
-      console.log("params", params)
-      const getProjectRes = await api.getProjectById(params);
+      const getProjectRes = await api.getProjectById(params.projectId);
       if (getProjectRes.status === 200) {
         setProject(getProjectRes.data);
       }

@@ -16,7 +16,7 @@ export const PhotoCommentPage = () => {
         setProject(getProjectRes.data);
       }
     })()
-  }, [])
+  }, [params])
 
   return (
     <>

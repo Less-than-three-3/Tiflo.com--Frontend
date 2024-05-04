@@ -9,7 +9,6 @@ import {useParams} from "react-router-dom";
 export const VideoEditor = ({setUpdateProject}) => {
   const {project, setProject, setProjectAudio} = useProject();
   const hiddenFileInput = useRef(null);
-  const [file, setFile] = useState();
   const [time, setTime] = useState("00:00:00");
   const [duration, setDuration] = useState("00:00:00");
   const params = useParams();
@@ -20,7 +19,6 @@ export const VideoEditor = ({setUpdateProject}) => {
 
   const uploadFile = async (event) => {
     const uploadedFIle = event.target.files[0];
-    setFile(uploadedFIle);
 
     const mediaResponse = await api.uploadMedia(params.projectId, uploadedFIle);
 
@@ -80,40 +78,17 @@ export const VideoEditor = ({setUpdateProject}) => {
     }
   }
 
-  useEffect(() => {
-    const handleHashChange = () => {
-      console.log("hash change")
-      if (media.video.current) {
-        media.video.current.load();
-      }
-    };
-
-    window.addEventListener('hashchange', handleHashChange);
-
-    // Очистка обработчика при размонтировании компонента
-    return () => {
-      window.removeEventListener('hashchange', handleHashChange);
-    };
-  }, []); // Пустой массив зависимостей означает, что эффект будет вызван только при монтировании и размонтировании
-
-
-  useEffect(() => {
-    if (media.video.current) {
-      console.log(media.video)
-      media.video.current.load();
-    }
-  }, [params])
-
   return (
     <>
       <div className="section grow">
         {project.path ?
           <>
-            <div className="font-bold pb-8">Видео: {file && file.name}</div>
+            <div className="font-bold pb-8">Видео: {project.path}</div>
             <video className="h-80 m-auto mb-4"
                    ref={media.video}
                    muted
                    key={params.projectId}>
+
               {api.isDeploy ?
                 <source src={`${host}/media/${project.path}`} type="video/mp4"/>
                 :

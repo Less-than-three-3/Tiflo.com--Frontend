@@ -67,5 +67,19 @@ export const audioParts = [
     duration: 5,
     text: "",
     path: "/src/assets/audio-part-3.mp3",
+  },
+  {
+    partId: "b656afe1-8b64-4ce6-8311-1551d65853be",
+    start: 15,
+    duration: 11,
+    text: "группа мужчин, стоящих рядом с черной машиной.",
+    path: "/src/assets/audio-part-3.mp3",
+  },
+  {
+    partId: "50e01171-0864-4dba-8e2f-488b57765a63",
+    start: 25,
+    duration: 5,
+    text: "",
+    path: "/src/assets/audio-part-4.mp3",
   }
 ]

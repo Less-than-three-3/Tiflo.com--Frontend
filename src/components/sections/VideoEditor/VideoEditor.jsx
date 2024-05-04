@@ -19,12 +19,6 @@ export const VideoEditor = ({setUpdateProject}) => {
   const uploadFile = async (event) => {
     const uploadedFIle = event.target.files[0];
     setFile(uploadedFIle);
-    console.log("media.video", media.video)
-
-    // setProject({
-    //   ...project,
-    //   path: URL.createObjectURL(uploadedFIle),
-    // });
 
     const mediaResponse = await api.uploadMedia(project.projectId, uploadedFIle);
 
@@ -77,7 +71,6 @@ export const VideoEditor = ({setUpdateProject}) => {
   }, [])
 
   const generateComment = async () => {
-    console.log("generating comment", convertNumberToTimestampWithMS(media.getTime()));
     const videoCommentRes = await api.createCommentToVideo(project.projectId, convertNumberToTimestampWithMS(media.getTime()));
     if (videoCommentRes.status === 200) {
       setProjectAudio(videoCommentRes.data.audioParts);

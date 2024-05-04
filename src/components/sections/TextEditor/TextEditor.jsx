@@ -1,13 +1,25 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Button} from "../../UI/Button/Button.jsx";
 import {useProject} from "../../../hooks/useProject.js";
 import {api} from "../../../api/api.js";
 import {useLocation} from "react-router-dom";
 import {Timestamp} from "../../UI/Timestamp/Timestamp.jsx";
+import {convertNumberToTimestamp} from "../../../utils/format.js";
 
 export const TextEditor = () => {
   const [isEditing, setIsEditing] = useState(false);
   const {project, updateProjectAudio} = useProject();
+  const [boxSizes, setBoxSizes] = useState([]);
+
+  useEffect(() => {
+    const boxes = document.getElementsByClassName("non-editable");
+    if (boxes.length > 0) {
+      setBoxSizes([]);
+      for (const box of boxes) {
+        setBoxSizes([...boxSizes, box.scrollHeight + 30])
+      }
+    }
+  }, [])
 
   const location = useLocation();
   const pathname = location.pathname;
@@ -23,6 +35,7 @@ export const TextEditor = () => {
   const toVoice = async () => {
     const text = project.audioParts.find((part) => part.text !== "").text;
     const voiceTextRes = await api.voiceTheText(project.projectId, text);
+
     if (voiceTextRes.status === 200) {
       const fileName = voiceTextRes.data;
       await api.getAudio(fileName);
@@ -42,39 +55,53 @@ export const TextEditor = () => {
             Редактирование
           </div>
         </div>
-        <div className="h-5/6 w-full">
-          {project.projectId && project.audioParts?.filter((part) => part.text !== "").map((part) => (
-            <div key={part.partId}>
-              {isEditing ?
-                <>
-                  {pathname === "/project/video" &&
-                    <Timestamp time="00:00:03"/>
-                  }
-                  <textarea className="bg-inherit border-2 border-rat rounded-md p-2 outline-none w-full h-full"
-                            value={part.text}
-                            onChange={changeText}
-                            id={part.partId}
-                  />
-                  {pathname === "/project/video" &&
-                    <Timestamp time="00:00:11"/>
-                  }
-                </>
-                :
-                <>
-                  {pathname === "/project/video" &&
-                    <Timestamp time="00:00:03"/>
-                  }
-                  <div className="overflow-x-hidden min-h-10 max-h-full text-pretty break-words"
-                       id={part.partId}>
-                    {part.text}
-                  </div>
-                  {pathname === "/project/video" &&
-                    <Timestamp time="00:00:11"/>
-                  }
-                </>
-              }
-            </div>
-          ))}
+        <div className="h-5/6 w-full overflow-y-scroll">
+          {project.projectId && project.audioParts?.filter((part) => part.text !== "")
+            .map((part, i) => ({
+              ...part,
+              height: boxSizes[i],
+            }))
+            .map((part) => (
+              <div className="flex flex-col items-center"
+                   key={part.partId}
+                   onDoubleClick={() => setIsEditing(true)}>
+                {isEditing ?
+                  <>
+                    {pathname === "/project/video" &&
+                      <Timestamp time={convertNumberToTimestamp(part.start / 10)}
+                                 isEditing={isEditing}/>
+                    }
+                    <textarea
+                      className="editable resize-none bg-inherit border-2 border-rat rounded-md
+                        p-2 outline-none w-11/12 h-full box-content overflow-y-hidden"
+                      style={{height: `${part.height}px`}}
+                      value={part.text}
+                      onChange={changeText}
+                      id={part.partId}
+                    />
+                    {pathname === "/project/video" &&
+                      <Timestamp time={convertNumberToTimestamp((part.start + part.duration) / 10)}
+                                 isEditing={isEditing}/>
+                    }
+                  </>
+                  :
+                  <>
+                    {pathname === "/project/video" &&
+                      <Timestamp time={convertNumberToTimestamp(part.start / 10)}
+                                 isEditing={isEditing}/>
+                    }
+                    <div className="non-editable overflow-x-hidden min-h-10 max-h-full text-pretty break-words"
+                         id={part.partId}>
+                      {part.text}
+                    </div>
+                    {pathname === "/project/video" &&
+                      <Timestamp time={convertNumberToTimestamp((part.start + part.duration) / 10)}
+                                 isEditing={isEditing}/>
+                    }
+                  </>
+                }
+              </div>
+            ))}
 
           {project.audioParts?.some((part) => part !== "") && pathname === "/project/photo" &&
             <div className="mt-4 w-28">

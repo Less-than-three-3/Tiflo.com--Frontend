@@ -683,6 +683,14 @@ video {
   margin-top: 1rem;
 }
 
+.box-border {
+  box-sizing: border-box;
+}
+
+.box-content {
+  box-sizing: content-box;
+}
+
 .flex {
   display: flex;
 }
@@ -779,8 +787,16 @@ video {
   width: 100%;
 }
 
+.w-11\/12 {
+  width: 91.666667%;
+}
+
 .grow {
   flex-grow: 1;
+}
+
+.resize-none {
+  resize: none;
 }
 
 .grid-cols-2 {
@@ -837,6 +853,14 @@ video {
 
 .overflow-x-hidden {
   overflow-x: hidden;
+}
+
+.overflow-y-hidden {
+  overflow-y: hidden;
+}
+
+.overflow-y-scroll {
+  overflow-y: scroll;
 }
 
 .text-pretty {

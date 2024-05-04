@@ -82,6 +82,23 @@ export let projectList = [
         duration: 130,
         text: "",
         path: "/src/assets/statham-part-2.wav",
+      },
+      {
+        partId: uuidv4(),
+        projectId: "",
+        start: 230,
+        duration: 110,
+        text: "группа мужчин, стоящих рядом с черной машиной. Они одеты в синюю форму, и автомобиль кажется BMW. " +
+          "Мужчины расположены перед машиной, а сцена происходит на грунтовой дороге.",
+        path: "/src/assets/statham-description.wav",
+      },
+      {
+        partId: uuidv4(),
+        projectId: "",
+        start: 300,
+        duration: 130,
+        text: "",
+        path: "/src/assets/statham-part-2.wav",
       }
     ]
   },

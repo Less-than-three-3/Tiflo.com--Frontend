@@ -32,6 +32,7 @@ export const PhotoEditor = () => {
 
     const uploadMediaRes = await api.uploadMedia(project.projectId, uploadedFIle);
     if (uploadMediaRes.status === 200) {
+      console.log("params", params)
       const getProjectRes = await api.getProjectById(params);
       if (getProjectRes.status === 200) {
         setProject(getProjectRes.data);

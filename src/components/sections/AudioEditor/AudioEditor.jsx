@@ -8,9 +8,12 @@ import {
 } from "../../../utils/waveform.js";
 import {useProject} from "../../../hooks/useProject.js";
 import {media} from "../../../models/media.js";
+import {useParams} from "react-router-dom";
 
 export const AudioEditor = ({updateProject}) => {
   const {project} = useProject();
+  const params = useParams();
+
   media.setWaveform(useRef(null));
 
   useEffect(() => {
@@ -31,7 +34,7 @@ export const AudioEditor = ({updateProject}) => {
         media.setTime(media.getTime());
       })
     }
-  }, [updateProject]);
+  }, [updateProject, params]);
 
   return (
     <>

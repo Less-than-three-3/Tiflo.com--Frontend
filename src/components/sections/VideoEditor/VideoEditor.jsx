@@ -89,7 +89,6 @@ export const VideoEditor = ({setUpdateProject}) => {
             <video className="h-80 m-auto mb-4"
                    ref={media.video}
                    muted
-                   onLoadedData={() => console.log('Video loaded')}
                    key={params.projectId}>
               {api.isDeploy ?
                 <source src={`${host}/media/${project.path}`} type="video/mp4"/>

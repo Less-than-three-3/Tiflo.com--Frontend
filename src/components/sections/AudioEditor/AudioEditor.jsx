@@ -26,13 +26,6 @@ export const AudioEditor = ({updateProject}) => {
 
       const wfElements = getWfElements(audioParts);
       moveWfElements(wfElements, audioParts);
-      // if (wfElements.length > 1) {
-      //
-      //   const {wfVideos, wfVoices} = splitWfElements(wfElements, audioParts);
-      //
-      //   moveWfElements(wfVideos, 0, audioParts);
-      //   moveWfElements(wfVoices, 1, audioParts);
-      // }
 
       media.waveform.current.addEventListener("click", () => {
         media.setTime(media.getTime());

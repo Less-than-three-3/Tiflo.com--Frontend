@@ -8,15 +8,12 @@ export const PhotoCommentPage = () => {
   const {setProject} = useProject();
 
   const params = useParams();
-  // useEffect(() => {
-    (async () => {
-      const getProjectRes = await api.getProjectById(params.projectId);
-      if (getProjectRes.status === 200) {
-        setProject(getProjectRes.data);
-        console.log(getProjectRes.data)
-      }
-    })()
-  // }, [])
+  (async () => {
+    const getProjectRes = await api.getProjectById(params.projectId);
+    if (getProjectRes.status === 200) {
+      setProject(getProjectRes.data);
+    }
+  })()
 
   return (
     <>

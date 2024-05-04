@@ -3,21 +3,20 @@ import {Button} from "../../UI/Button/Button.jsx";
 import {useProject} from "../../../hooks/useProject.js";
 import {api} from "../../../api/api.js";
 import {useProjectList} from "../../../hooks/useProjectList.js";
+import {useParams} from "react-router-dom";
 
 export const PhotoEditor = () => {
   const {project, setProject} = useProject();
   const hiddenFileInput = useRef(null);
   const [file, setFile] = useState();
   const {setProjectList} = useProjectList();
+  const params = useParams();
 
   useEffect(() => {
     (async () => {
-      const projectListRes = await api.getProjectList();
-      if (projectListRes.status === 200) {
-        setProjectList(projectListRes.data);
-        if (projectListRes.data && projectListRes.data.length > 0) {
-          setProject(projectListRes.data[0]);
-        }
+      const getProjectRes = await api.getProjectById(params);
+      if (getProjectRes.status === 200) {
+        setProject(getProjectRes.data);
       }
     })()
   }, [])
@@ -36,6 +35,11 @@ export const PhotoEditor = () => {
         ...project,
         path: URL.createObjectURL(uploadedFIle)
       });
+
+      const getProjectRes = await api.getProjectById(params);
+      if (getProjectRes.status === 200) {
+        setProject(getProjectRes.data);
+      }
 
       const projectListRes = await api.getProjectList();
       if (projectListRes.status === 200) {

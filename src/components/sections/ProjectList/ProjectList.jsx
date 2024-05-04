@@ -9,7 +9,7 @@ import {host} from "../../../models/consts.js";
 export const ProjectList = () => {
   const {project, setProject} = useProject();
   const {projectList, setProjectList} = useProjectList();
-
+  const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
@@ -23,24 +23,19 @@ export const ProjectList = () => {
     const newProjectRes = await api.createProject();
     if (newProjectRes.status === 200) {
       setProject(newProjectRes.data);
+      if (location.pathname.includes("photo")) {
+        navigate(`/project/photo/${newProjectRes.data.projectId}`);
+      } else {
+        navigate(`/project/video/${newProjectRes.data.projectId}`);
+      }
     }
   }
 
-  const navigate = useNavigate();
   const clickExistingProject = (project) => {
-    const fileType = determineFileType(project.path);
-    switch (fileType) {
-      case "image":
-        navigate("/project/photo");
-        setProject(project)
-        break;
-      case "video":
-        navigate("/project/video");
-        setProject(project)
-        break;
-      case "none":
-        console.error("Forbidden file format:", project.path);
-        break;
+    if (location.pathname.includes("photo")) {
+      navigate(`/project/photo/${project.projectId}`);
+    } else {
+      navigate(`/project/video/${project.projectId}`);
     }
   }
 
@@ -57,7 +52,7 @@ export const ProjectList = () => {
                className="background-image w-full h-24"
                onClick={clickNewProject}/>
 
-          {location.pathname === "/project/photo" &&
+          {location.pathname.includes("/project/photo") &&
             projectList.filter((project) => determineFileType(project.path) === "image" ||
               determineFileType(project.path) === "none").map((project) => (
               <div key={project.projectId}
@@ -66,7 +61,7 @@ export const ProjectList = () => {
                    onClick={() => clickExistingProject(project)}/>
             ))}
 
-          {location.pathname === "/project/video" &&
+          {location.pathname.includes("/project/video") &&
             projectList.filter((project) => determineFileType(project.path) === "video" ||
               determineFileType(project.path) === "none").map((project) => (
               <div key={project.projectId}

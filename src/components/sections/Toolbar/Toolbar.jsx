@@ -1,7 +1,7 @@
 import {Link, useLocation} from "react-router-dom";
 
 export const Toolbar = ({states, handlers}) => {
-  const path = useLocation().pathname;
+  const {pathname} = useLocation();
 
   const openProjectList = () => {
     handlers.setIsProjectListOpened((v) => !v)
@@ -11,7 +11,7 @@ export const Toolbar = ({states, handlers}) => {
     <>
       <div className="section pt-12 w-24 flex flex-col gap-12">
         <Link to="/">
-          <img src={path === "/" ?
+          <img src={pathname === "/" ?
             "/src/assets/icons/home_active.svg" :
             "/src/assets/icons/home_inactive.svg"}
                alt="home"
@@ -23,15 +23,15 @@ export const Toolbar = ({states, handlers}) => {
              alt="list"
              className="toolbar-icon"
              onClick={openProjectList}/>
-        <Link to="/project/photo">
-          <img src={path === "/project/photo" ?
+        <Link to="/project/photo/new">
+          <img src={pathname.includes("/project/photo") ?
             "/src/assets/icons/image_active.svg" :
             "/src/assets/icons/image_inactive.svg"}
                alt="image"
                className="toolbar-icon"/>
         </Link>
-        <Link to="/project/video">
-          <img src={path === "/project/video" ?
+        <Link to="/project/video/new">
+          <img src={pathname.includes("/project/video") ?
             "/src/assets/icons/video_active.svg" :
             "/src/assets/icons/video_inactive.svg"}
                alt="video"

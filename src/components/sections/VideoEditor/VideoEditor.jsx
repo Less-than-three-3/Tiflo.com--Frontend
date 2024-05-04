@@ -4,6 +4,7 @@ import {api} from "../../../api/api.js";
 import {convertNumberToTimestamp, convertNumberToTimestampWithMS} from "../../../utils/format.js";
 import {media} from "../../../models/media.js";
 import {host} from "../../../models/consts.js";
+import {useParams} from "react-router-dom";
 
 export const VideoEditor = ({setUpdateProject}) => {
   const {project, setProject, setProjectAudio} = useProject();
@@ -11,6 +12,7 @@ export const VideoEditor = ({setUpdateProject}) => {
   const [file, setFile] = useState();
   const [time, setTime] = useState("00:00:00");
   const [duration, setDuration] = useState("00:00:00");
+  const params = useParams();
 
   const handleClick = () => {
     hiddenFileInput.current.click();
@@ -20,9 +22,9 @@ export const VideoEditor = ({setUpdateProject}) => {
     const uploadedFIle = event.target.files[0];
     setFile(uploadedFIle);
 
-    const mediaResponse = await api.uploadMedia(project.projectId, uploadedFIle);
+    const mediaResponse = await api.uploadMedia(params.projectId, uploadedFIle);
 
-    const getProjectResponse = await api.getProjectById(project.projectId);
+    const getProjectResponse = await api.getProjectById(params.projectId);
     if (getProjectResponse.status === 200) {
       setProject(getProjectResponse.data);
 

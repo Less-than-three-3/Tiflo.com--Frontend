@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {Button} from "../../UI/Button/Button.jsx";
 import {useProject} from "../../../hooks/useProject.js";
 import {api} from "../../../api/api.js";
-import {useLocation} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 import {Timestamp} from "../../UI/Timestamp/Timestamp.jsx";
 import {convertNumberToTimestamp} from "../../../utils/format.js";
 
@@ -10,6 +10,9 @@ export const TextEditor = () => {
   const [isEditing, setIsEditing] = useState(false);
   const {project, updateProjectAudio, setProjectAudio} = useProject();
   const [boxSizes, setBoxSizes] = useState([]);
+  const location = useLocation();
+  const pathname = location.pathname;
+  const params = useParams();
 
   useEffect(() => {
     const boxes = document.getElementsByClassName("non-editable");
@@ -20,9 +23,6 @@ export const TextEditor = () => {
       }
     }
   }, [])
-
-  const location = useLocation();
-  const pathname = location.pathname;
 
   const changeText = (event) => {
     const part = project.audioParts.find((part) => part.partId === event.currentTarget.id);
@@ -75,7 +75,7 @@ export const TextEditor = () => {
                    onDoubleClick={() => setIsEditing(true)}>
                 {isEditing ?
                   <>
-                    {pathname === "/project/video" &&
+                    {pathname.includes("/project/video") &&
                       <Timestamp time={convertNumberToTimestamp(part.start / 10)}
                                  setTime={setStart}
                                  isEditing={isEditing}/>
@@ -88,7 +88,7 @@ export const TextEditor = () => {
                       onChange={changeText}
                       id={part.partId}
                     />
-                    {pathname === "/project/video" &&
+                    {pathname.includes("/project/video") &&
                       <Timestamp time={convertNumberToTimestamp((part.start + part.duration) / 10)}
                                  setTime={setEnd}
                                  isEditing={isEditing}/>
@@ -96,7 +96,7 @@ export const TextEditor = () => {
                   </>
                   :
                   <>
-                    {pathname === "/project/video" &&
+                    {pathname.includes("/project/video") &&
                       <Timestamp time={convertNumberToTimestamp(part.start / 10)}
                                  setTime={setStart}
                                  isEditing={isEditing}/>
@@ -105,7 +105,7 @@ export const TextEditor = () => {
                          id={part.partId}>
                       {part.text}
                     </div>
-                    {pathname === "/project/video" &&
+                    {pathname.includes("/project/video") &&
                       <Timestamp time={convertNumberToTimestamp((part.start + part.duration) / 10)}
                                  setTime={setEnd}
                                  isEditing={isEditing}/>
@@ -115,7 +115,7 @@ export const TextEditor = () => {
               </div>
             ))}
 
-          {project.audioParts?.some((part) => part !== "") && pathname === "/project/photo" &&
+          {project.audioParts?.some((part) => part !== "") && pathname.includes("/project/photo") &&
             <div className="mt-4 w-28">
               <Button mode="primary" value={"В голос"} onClick={toVoice}/>
             </div>

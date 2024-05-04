@@ -80,6 +80,13 @@ export const VideoEditor = ({setUpdateProject}) => {
     }
   }
 
+  useEffect(() => {
+    if (media.video.current) {
+      console.log(media.video)
+      media.video.current.load();
+    }
+  }, [params])
+
   return (
     <>
       <div className="section grow">

@@ -33,13 +33,9 @@ export const Topbar = () => {
   const navigate = useNavigate();
 
   const logout = async () => {
-    const logoutRes = await api.logout();
-
-    if (logoutRes.status === 200) {
-      dropUser();
-      navigate("/")
-    }
-
+    await api.logout();
+    dropUser();
+    navigate("/")
   }
 
   return (

@@ -8,7 +8,7 @@ import {convertNumberToTimestamp} from "../../../utils/format.js";
 
 export const TextEditor = () => {
   const [isEditing, setIsEditing] = useState(false);
-  const {project, updateProjectAudio} = useProject();
+  const {project, updateProjectAudio, setProjectAudio} = useProject();
   const [boxSizes, setBoxSizes] = useState([]);
 
   useEffect(() => {
@@ -42,6 +42,14 @@ export const TextEditor = () => {
     }
   }
 
+  const setStart = (time) => {
+
+  }
+
+  const setEnd = (time) => {
+
+  }
+
   return (
     <>
       <div className="section" style={{width: "30em"}}>
@@ -69,6 +77,7 @@ export const TextEditor = () => {
                   <>
                     {pathname === "/project/video" &&
                       <Timestamp time={convertNumberToTimestamp(part.start / 10)}
+                                 setTime={setStart}
                                  isEditing={isEditing}/>
                     }
                     <textarea
@@ -81,6 +90,7 @@ export const TextEditor = () => {
                     />
                     {pathname === "/project/video" &&
                       <Timestamp time={convertNumberToTimestamp((part.start + part.duration) / 10)}
+                                 setTime={setEnd}
                                  isEditing={isEditing}/>
                     }
                   </>
@@ -88,6 +98,7 @@ export const TextEditor = () => {
                   <>
                     {pathname === "/project/video" &&
                       <Timestamp time={convertNumberToTimestamp(part.start / 10)}
+                                 setTime={setStart}
                                  isEditing={isEditing}/>
                     }
                     <div className="non-editable overflow-x-hidden min-h-10 max-h-full text-pretty break-words"
@@ -96,6 +107,7 @@ export const TextEditor = () => {
                     </div>
                     {pathname === "/project/video" &&
                       <Timestamp time={convertNumberToTimestamp((part.start + part.duration) / 10)}
+                                 setTime={setEnd}
                                  isEditing={isEditing}/>
                     }
                   </>

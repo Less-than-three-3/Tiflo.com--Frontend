@@ -6,7 +6,7 @@ import {media} from "../../../models/media.js";
 import {host} from "../../../models/consts.js";
 import {useParams} from "react-router-dom";
 
-export const VideoEditor = ({setUpdateProject}) => {
+export const VideoEditor = () => {
   const {project, setProject, setProjectAudio} = useProject();
   const hiddenFileInput = useRef(null);
   const [time, setTime] = useState("00:00:00");
@@ -30,7 +30,6 @@ export const VideoEditor = ({setUpdateProject}) => {
         console.error("Cannot find audio parts\nproject.audioParts = ", getProjectResponse.data.audioParts);
       } else {
         setProjectAudio(getProjectResponse.data.audioParts);
-        setUpdateProject((v) => v + 1)
       }
     }
   };
@@ -61,24 +60,23 @@ export const VideoEditor = ({setUpdateProject}) => {
   useEffect(() => {
     if (media.video.current) {
       media.video.current.addEventListener('loadedmetadata', () => {
-        media.onMultitrackChange(() => {
-          setTime(convertNumberToTimestamp(media.getTime()));
-        });
+        setTimeout(() => {
+          media.onMultitrackChange(() => {
+            setTime(convertNumberToTimestamp(media.getTime()));
+          });
 
-        setDuration(convertNumberToTimestamp(media.getDuration()));
+          setDuration(convertNumberToTimestamp(media.getDuration()));
+        }, 100)
       });
     }
-  }, [])
+  }, [project])
 
   const generateComment = async () => {
     const videoCommentRes = await api.createCommentToVideo(project.projectId, convertNumberToTimestampWithMS(media.getTime()));
     if (videoCommentRes.status === 200) {
       setProjectAudio(videoCommentRes.data.audioParts);
-      setUpdateProject((v) => v + 1);
     }
   }
-
-  console.log("project.path", project.path)
 
   return (
     <>
@@ -92,7 +90,7 @@ export const VideoEditor = ({setUpdateProject}) => {
                       muted
                       key={params.projectId}>
 
-                {api.isDeploy && media.video.current !== null ?
+                {api.isDeploy ?
                   <source src={`${host}/media/${project.path}`}
                           type="video/mp4"
                           key={params.projectId}/>

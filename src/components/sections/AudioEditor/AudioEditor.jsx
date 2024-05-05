@@ -10,7 +10,7 @@ import {useProject} from "../../../hooks/useProject.js";
 import {media} from "../../../models/media.js";
 import {useParams} from "react-router-dom";
 
-export const AudioEditor = ({updateProject}) => {
+export const AudioEditor = () => {
   const {project} = useProject();
   const params = useParams();
 
@@ -33,8 +33,10 @@ export const AudioEditor = ({updateProject}) => {
       media.waveform.current.addEventListener("click", () => {
         media.setTime(media.getTime());
       })
+
+      console.log(media.multitrack)
     }
-  }, [updateProject, params]);
+  }, [project, params]);
 
   return (
     <>

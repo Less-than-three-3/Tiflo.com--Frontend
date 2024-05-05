@@ -33,8 +33,6 @@ export const AudioEditor = () => {
       media.waveform.current.addEventListener("click", () => {
         media.setTime(media.getTime());
       })
-
-      console.log(media.multitrack)
     }
   }, [project, params]);
 

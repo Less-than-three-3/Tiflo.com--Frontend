@@ -27,7 +27,7 @@ export const RegForm = () => {
           isLoggedIn: true,
         })
 
-        navigate("/project/photo")
+        navigate("/project/photo/new")
       }
     }
   }

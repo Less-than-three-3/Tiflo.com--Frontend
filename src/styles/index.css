@@ -1,4 +1,5 @@
 @import "../components/UI/Button/Button.css";
+@import "../components/sections/ProjectList/ProjectList.css";
 @import "../components/sections/Toolbar/Toolbar.css";
 @import "./components/section.css";
 @import "./components/image.css";

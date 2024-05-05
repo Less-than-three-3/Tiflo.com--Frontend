@@ -40,7 +40,7 @@ export const Timestamp = ({time, setTime, isEditing = false}) => {
         {/*         value={value}*/}
         {/*         onChange={onChangeHandler}/>*/}
         {/*  :*/}
-          <div className="m-2 text-xl">
+          <div className="m-2">
             {value}
           </div>
         {/*}*/}

@@ -80,24 +80,25 @@ export const VideoEditor = () => {
 
   return (
     <>
-      <div className="section grow">
+      <div className="section grow text-sm">
         {project.path ?
           <>
             <div className="font-bold pb-8">Видео: {project.path}</div>
 
-              <video className="h-80 m-auto mb-4"
-                      ref={media.video}
-                      muted
-                      key={params.projectId}>
+            <video className="m-auto mb-4 h-4/6"
+                   // style={{height: "inherit"}}
+                   ref={media.video}
+                   muted
+                   key={params.projectId}>
 
-                {api.isDeploy ?
-                  <source src={`${host}/media/${project.path}`}
-                          type="video/mp4"
-                          key={params.projectId}/>
-                  :
-                  <source src={project.path} type="video/mp4"/>
-                }
-              </video>
+              {api.isDeploy ?
+                <source src={`${host}/media/${project.path}`}
+                        type="video/mp4"
+                        key={params.projectId}/>
+                :
+                <source src={project.path} type="video/mp4"/>
+              }
+            </video>
 
             <div className="flex justify-between items-center">
               <div className="flex gap-1">

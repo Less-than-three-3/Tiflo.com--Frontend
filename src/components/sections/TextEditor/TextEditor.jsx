@@ -52,7 +52,7 @@ export const TextEditor = () => {
 
   return (
     <>
-      <div className="section" style={{width: "30em"}}>
+      <div className="section text-sm" style={{width: "30em"}}>
         <div className="grid grid-cols-2 pb-6 w-9/12">
           <div className={`${!project.projectId ? "text-inactive" : isEditing && "text-inactive"} font-bold`}
                onClick={() => setIsEditing(false)}>

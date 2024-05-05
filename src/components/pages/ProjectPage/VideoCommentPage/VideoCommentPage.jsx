@@ -22,7 +22,7 @@ export const VideoCommentPage = () => {
   return (
     <>
       <div className="flex flex-col grow gap-5">
-        <div className="flex grow gap-5">
+        <div className="flex grow gap-5 h-3/6">
           <VideoEditor/>
           <TextEditor/>
         </div>

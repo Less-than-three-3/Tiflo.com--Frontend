@@ -40,10 +40,8 @@ export const Topbar = () => {
 
   return (
     <>
-      <div id="topbar" className="section flex items-center justify-between px-10 py-6 font-bold">
-        <Link to="/">
-          <div className="text-2xl">Tiflo.com</div>
-        </Link>
+      <div id="topbar" className="section flex items-center justify-between px-10 py-4 font-bold">
+        <div className="text-xl">Tiflo.com</div>
 
         {user.isLoggedIn ?
           <>

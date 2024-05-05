@@ -55,7 +55,7 @@ export const PhotoEditor = () => {
 
   return (
     <>
-      <div className="section grow">
+      <div className="section grow text-sm">
         {project.path ?
           <>
             <div className="font-bold pb-8">Фото: {project.path || (file && file.name)}</div>

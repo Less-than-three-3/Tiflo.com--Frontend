@@ -41,15 +41,15 @@ export const ProjectList = () => {
 
   return (
     <>
-      <div className="section w-96">
-        <div className="grid grid-cols-2 font-bold mb-8">
+      <div className="section w-60">
+        <div className="flex justify-between font-bold mb-8 text-sm">
           <div>Все проекты</div>
           <div className="text-inactive">Недавние</div>
         </div>
 
-        <div className="grid grid-cols-2 gap-5">
+        <div className="grid grid-cols-2 gap-3">
           <div style={{backgroundImage: "url(/src/assets/icons/new_project.svg)"}}
-               className="background-image w-full h-24"
+               className="project-image"
                onClick={clickNewProject}/>
 
           {location.pathname.includes("/project/photo") &&
@@ -57,7 +57,7 @@ export const ProjectList = () => {
               determineFileType(project.path) === "none").map((project) => (
               <div key={project.projectId}
                    style={{backgroundImage: `url(${(api.isDeploy ? `${host}/media/${project.path}` : project.path) || "/src/assets/icons/image_inactive.svg"})`}}
-                   className="background-image w-full h-24"
+                   className="project-image"
                    onClick={() => clickExistingProject(project)}/>
             ))}
 
@@ -66,7 +66,7 @@ export const ProjectList = () => {
               determineFileType(project.path) === "none").map((project) => (
               <div key={project.projectId}
                    style={{backgroundImage: `url("/src/assets/icons/image_inactive.svg")`}}
-                   className="background-image w-full h-24"
+                   className="project-image"
                    onClick={() => clickExistingProject(project)}/>
             ))}
         </div>

@@ -88,20 +88,22 @@ export const VideoEditor = () => {
             <video className="m-auto mb-4 h-4/6"
                    ref={media.video}
                    muted
-                   key={params.projectId}>
+                   key={params.projectId}
+                   src={api.isDeploy ? `${host}/media/${project.path}` : project.path}
+            />
+            {/*</video>*/}
 
-              {api.isDeploy ?
-                <>
-                  {console.log(project.path) ||
-                    <source src={`${host}/media/${project.path}`}
-                            type="video/mp4"
-                            key={params.projectId}/>
-                  }
-                </>
-                :
-                <source src={project.path} type="video/mp4"/>
-              }
-            </video>
+            {/*{api.isDeploy ?*/}
+            {/*  <>*/}
+            {/*    {console.log(project.path) ||*/}
+            {/*      <source src={`${host}/media/${project.path}`}*/}
+            {/*              type="video/mp4"*/}
+            {/*              key={params.projectId}/>*/}
+            {/*    }*/}
+            {/*  </>*/}
+            {/*  :*/}
+            {/*  <source src={project.path} type="video/mp4"/>*/}
+            {/*}*/}
 
             <div className="flex justify-between items-center">
               <div className="flex gap-1">

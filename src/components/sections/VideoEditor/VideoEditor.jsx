@@ -86,15 +86,18 @@ export const VideoEditor = () => {
             <div className="font-bold pb-8">Видео: {project.path}</div>
 
             <video className="m-auto mb-4 h-4/6"
-                   // style={{height: "inherit"}}
                    ref={media.video}
                    muted
                    key={params.projectId}>
 
               {api.isDeploy ?
-                <source src={`${host}/media/${project.path}`}
-                        type="video/mp4"
-                        key={params.projectId}/>
+                <>
+                  {console.log(project.path) ||
+                    <source src={`${host}/media/${project.path}`}
+                            type="video/mp4"
+                            key={params.projectId}/>
+                  }
+                </>
                 :
                 <source src={project.path} type="video/mp4"/>
               }

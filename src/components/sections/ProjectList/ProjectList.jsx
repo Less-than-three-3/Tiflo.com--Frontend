@@ -10,7 +10,7 @@ export const ProjectList = () => {
   const {project, setProject} = useProject();
   const {projectList, setProjectList} = useProjectList();
   const navigate = useNavigate();
-  const location = useLocation();
+  const {pathname} = useLocation();
 
   useEffect(() => {
     (async () => {
@@ -23,7 +23,7 @@ export const ProjectList = () => {
     const newProjectRes = await api.createProject();
     if (newProjectRes.status === 200) {
       setProject(newProjectRes.data);
-      if (location.pathname.includes("photo")) {
+      if (pathname.includes("photo")) {
         navigate(`/project/photo/${newProjectRes.data.projectId}`);
       } else {
         navigate(`/project/video/${newProjectRes.data.projectId}`);
@@ -32,7 +32,7 @@ export const ProjectList = () => {
   }
 
   const clickExistingProject = (project) => {
-    if (location.pathname.includes("photo")) {
+    if (pathname.includes("photo")) {
       navigate(`/project/photo/${project.projectId}`);
     } else {
       navigate(`/project/video/${project.projectId}`);
@@ -43,8 +43,13 @@ export const ProjectList = () => {
     <>
       <div className="section w-60">
         <div className="flex justify-between font-bold mb-8 text-sm">
-          <div>Все проекты</div>
-          <div className="text-inactive">Недавние</div>
+          {pathname.includes("/project/photo") &&
+            <div>Описание фото</div>
+          }
+          {pathname.includes("/project/video") &&
+            <div>Комментарии к видео</div>
+          }
+          {/*<div className="text-inactive">Недавние</div>*/}
         </div>
 
         <div className="grid grid-cols-2 gap-3">
@@ -52,7 +57,7 @@ export const ProjectList = () => {
                className="project-image"
                onClick={clickNewProject}/>
 
-          {location.pathname.includes("/project/photo") &&
+          {pathname.includes("/project/photo") &&
             projectList.filter((project) => determineFileType(project.path) === "image" ||
               determineFileType(project.path) === "none").map((project) => (
               <div key={project.projectId}
@@ -61,7 +66,7 @@ export const ProjectList = () => {
                    onClick={() => clickExistingProject(project)}/>
             ))}
 
-          {location.pathname.includes("/project/video") &&
+          {pathname.includes("/project/video") &&
             projectList.filter((project) => determineFileType(project.path) === "video" ||
               determineFileType(project.path) === "none").map((project) => (
               <div key={project.projectId}

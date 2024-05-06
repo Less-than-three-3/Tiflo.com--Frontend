@@ -4,7 +4,6 @@ import {
   getWfElements,
   moveWfElements,
   setAudioParts,
-  splitWfElements
 } from "../../../utils/waveform.js";
 import {useProject} from "../../../hooks/useProject.js";
 import {media} from "../../../models/media.js";

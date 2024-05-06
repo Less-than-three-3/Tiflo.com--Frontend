@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {Button} from "../../UI/Button/Button.jsx";
 import {useProject} from "../../../hooks/useProject.js";
 import {api} from "../../../api/api.js";
@@ -13,6 +13,7 @@ export const TextEditor = () => {
   const location = useLocation();
   const pathname = location.pathname;
   const params = useParams();
+  const deleteBtn = useRef(null);
 
   useEffect(() => {
     const boxes = document.getElementsByClassName("non-editable");
@@ -42,6 +43,12 @@ export const TextEditor = () => {
     }
   }
 
+  const showDeleteBtn = (isShown, id) => {
+    const img = document.getElementById(`delete_${id}`);
+    // console.log(`delete_${id}`, img)
+    img.style.display = isShown ? "block" : "none";
+  }
+
   const setStart = (time) => {
 
   }
@@ -49,6 +56,8 @@ export const TextEditor = () => {
   const setEnd = (time) => {
 
   }
+
+  const [show, setShow] = useState(false);
 
   return (
     <>
@@ -70,48 +79,59 @@ export const TextEditor = () => {
               height: boxSizes[i],
             }))
             .map((part) => (
-              <div className="flex flex-col items-center"
-                   key={part.partId}
-                   onDoubleClick={() => setIsEditing(true)}>
-                {isEditing ?
-                  <>
-                    {pathname.includes("/project/video") &&
-                      <Timestamp time={convertNumberToTimestamp(part.start / 10)}
-                                 setTime={setStart}
-                                 isEditing={isEditing}/>
-                    }
-                    <textarea
-                      className="editable resize-none bg-inherit border-2 border-rat rounded-md
+              <div className="relative"
+                key={part.partId}
+                   onMouseOver={() => showDeleteBtn(true, part.partId)}
+                   onMouseOut={() => showDeleteBtn(false, part.partId)}>
+
+                <img src="/src/assets/icons/delete.svg" alt=""
+                     className="h-5 hidden absolute right-0 top-5"
+                     id={`delete_${part.partId}`}
+                />
+
+                <div className="flex flex-col items-center"
+                     onDoubleClick={() => setIsEditing(true)}>
+                  {isEditing ?
+                    <>
+                      {pathname.includes("/project/video") &&
+                        <Timestamp time={convertNumberToTimestamp(part.start / 10)}
+                                   setTime={setStart}
+                                   isEditing={isEditing}/>
+                      }
+                      <textarea
+                        className="editable resize-none bg-inherit border-2 border-rat rounded-md
                         p-2 outline-none w-11/12 h-full box-content overflow-y-hidden"
-                      style={{height: `${part.height}px`}}
-                      value={part.text}
-                      onChange={changeText}
-                      id={part.partId}
-                    />
-                    {pathname.includes("/project/video") &&
-                      <Timestamp time={convertNumberToTimestamp((part.start + part.duration) / 10)}
-                                 setTime={setEnd}
-                                 isEditing={isEditing}/>
-                    }
-                  </>
-                  :
-                  <>
-                    {pathname.includes("/project/video") &&
-                      <Timestamp time={convertNumberToTimestamp(part.start / 10)}
-                                 setTime={setStart}
-                                 isEditing={isEditing}/>
-                    }
-                    <div className="non-editable overflow-x-hidden min-h-10 max-h-full text-pretty break-words"
-                         id={part.partId}>
-                      {part.text}
-                    </div>
-                    {pathname.includes("/project/video") &&
-                      <Timestamp time={convertNumberToTimestamp((part.start + part.duration) / 10)}
-                                 setTime={setEnd}
-                                 isEditing={isEditing}/>
-                    }
-                  </>
-                }
+                        style={{height: `${part.height}px`}}
+                        value={part.text}
+                        onChange={changeText}
+                        id={part.partId}
+                      />
+                      {pathname.includes("/project/video") &&
+                        <Timestamp time={convertNumberToTimestamp((part.start + part.duration) / 10)}
+                                   setTime={setEnd}
+                                   isEditing={isEditing}/>
+                      }
+                    </>
+                    :
+                    <>
+
+                      {pathname.includes("/project/video") &&
+                        <Timestamp time={convertNumberToTimestamp(part.start / 10)}
+                                   setTime={setStart}
+                                   isEditing={isEditing}/>
+                      }
+                      <div className="non-editable overflow-x-hidden min-h-10 max-h-full text-pretty break-words"
+                           id={part.partId}>
+                        {part.text}
+                      </div>
+                      {pathname.includes("/project/video") &&
+                        <Timestamp time={convertNumberToTimestamp((part.start + part.duration) / 10)}
+                                   setTime={setEnd}
+                                   isEditing={isEditing}/>
+                      }
+                    </>
+                  }
+                </div>
               </div>
             ))}
 

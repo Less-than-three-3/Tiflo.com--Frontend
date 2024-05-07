@@ -1,6 +1,7 @@
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useProjectList} from "../../../hooks/useProjectList.js";
 import {determineFileType} from "../../../utils/format.js";
+import {api} from "../../../api/api.js";
 
 export const Toolbar = ({states, handlers}) => {
   const {pathname} = useLocation();
@@ -11,13 +12,25 @@ export const Toolbar = ({states, handlers}) => {
   }
 
   const navigate = useNavigate();
-  const openPhotoProject = () => {
-    const projectId = projectList.filter((project) => determineFileType(project.path) === "image")[0].projectId;
+  const openPhotoProject = async () => {
+    let projectId = projectList.filter((project) => determineFileType(project.path) === "image")[0].projectId;
+    if (!projectId) {
+      const createProjectRes = await api.createProject();
+      if (createProjectRes.status === 200) {
+        projectId = createProjectRes.data.projectId;
+      }
+    }
     navigate(`/project/photo/${projectId}`);
   }
 
-  const openVideoProject = () => {
-    const projectId = projectList.filter((project) => determineFileType(project.path) === "video")[0].projectId;
+  const openVideoProject = async () => {
+    let projectId = projectList.filter((project) => determineFileType(project.path) === "video")[0].projectId;
+    if (!projectId) {
+      const createProjectRes = await api.createProject();
+      if (createProjectRes.status === 200) {
+        projectId = createProjectRes.data.projectId;
+      }
+    }
     navigate(`/project/video/${projectId}`);
   }
 

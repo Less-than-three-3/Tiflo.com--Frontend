@@ -175,6 +175,16 @@ class Api {
       }
     }
   }
+
+  async createFinalAudio(projectId) {
+    if (this.isDeploy) {
+      const response = await axios.post(`${host}/api/projects/${projectId}/audio`);
+      console.log(response.data);
+      return response;
+    } else {
+      return mock.createFinalAudio(projectId);
+    }
+  }
 }
 
 export const api = new Api();

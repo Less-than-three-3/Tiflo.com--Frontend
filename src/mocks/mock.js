@@ -131,6 +131,13 @@ class Mock {
       data: "/src/assets/audio-part-4.mp3",
     }
   }
+
+  createFinalAudio(projectId) {
+    return {
+      status: 200,
+      data: `Create final audio for project ${projectId}`,
+    }
+  }
 }
 
 export const mock = new Mock();

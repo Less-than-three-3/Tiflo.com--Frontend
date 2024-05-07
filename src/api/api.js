@@ -112,7 +112,7 @@ class Api {
 
   async createCommentToPhoto(projectId, imageId) {
     if (this.isDeploy) {
-      const response = await axios.post(`${host}/api/projects/${projectId}/image/text`, {
+      const response = await axios.post(`${host}/api/projects/${projectId}/image/comment`, {
         "name": imageId,
       });
       console.log(response.data);

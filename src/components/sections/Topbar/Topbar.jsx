@@ -41,7 +41,7 @@ export const Topbar = () => {
   return (
     <>
       <div id="topbar" className="section flex items-center justify-between px-10 py-4 font-bold">
-        <div className="text-xl">Tiflo.com</div>
+        <div className="text-xl">Tiflo.tech</div>
 
         {user.isLoggedIn ?
           <>

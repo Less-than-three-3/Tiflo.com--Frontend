@@ -13,8 +13,11 @@ export const Toolbar = ({states, handlers}) => {
 
   const navigate = useNavigate();
   const openPhotoProject = async () => {
-    let projectId = projectList.filter((project) => determineFileType(project.path) === "image")[0].projectId;
-    if (!projectId) {
+    let projectId;
+    const photoProjects = projectList.filter((project) => determineFileType(project.path) === "image");
+    if (photoProjects.length !== 0) {
+      projectId = photoProjects[0].projectId;
+    } else {
       const createProjectRes = await api.createProject();
       if (createProjectRes.status === 200) {
         projectId = createProjectRes.data.projectId;
@@ -24,8 +27,11 @@ export const Toolbar = ({states, handlers}) => {
   }
 
   const openVideoProject = async () => {
-    let projectId = projectList.filter((project) => determineFileType(project.path) === "video")[0].projectId;
-    if (!projectId) {
+    let projectId;
+    const videoProjects = projectList.filter((project) => determineFileType(project.path) === "video");
+    if (videoProjects.length !== 0) {
+      projectId = videoProjects[0].projectId;
+    } else {
       const createProjectRes = await api.createProject();
       if (createProjectRes.status === 200) {
         projectId = createProjectRes.data.projectId;

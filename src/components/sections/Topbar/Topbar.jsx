@@ -10,7 +10,8 @@ import {determineFileType} from "../../../utils/format.js";
 
 export const Topbar = () => {
   const {project, setProject} = useProject();
-  const {pojectList, setProjectList} = useProjectList();
+  const {setProjectList} = useProjectList();
+  const {clearProject} = useProject();
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState(project.name);
   const [showDelete, setShowDelete] = useState(false);
@@ -22,15 +23,18 @@ export const Topbar = () => {
 
   const saveProjectName = async (event) => {
     if (event.key === "Enter") {
-      const updateNameRes = await api.updateProjectName(project.projectId, name)
-      setProject({
-        ...project,
-        name
-      });
       setIsEditing(false);
+
+      const updateNameRes = await api.updateProjectName(project.projectId, name);
+      if (updateNameRes.status === 200) {
+        setProject({
+          ...project,
+          name
+        });
+      }
     } else if (event.key === "Escape") {
-      setName(project.name)
       setIsEditing(false);
+      setName(project.name)
     }
   }
 
@@ -38,6 +42,7 @@ export const Topbar = () => {
 
   const logout = async () => {
     dropUser();
+
     navigate("/auth/signIn");
     await api.logout();
   }
@@ -46,10 +51,11 @@ export const Topbar = () => {
 
   const deleteProject = async () => {
     const deleteProjectRes = await api.deleteProject(project.projectId);
+    console.log(deleteProjectRes);
     if (deleteProjectRes.status === 200) {
-      const getProjectsList = await api.getProjectList();
-      if (getProjectsList.status === 200) {
-        setProjectList(getProjectsList.data);
+      const getProjectsListRes = await api.getProjectList();
+      if (getProjectsListRes.status === 200) {
+        setProjectList(getProjectsListRes.data);
 
         if (pathname.includes("/project/photo")) {
           const photoProjects = projectList.filter((project) => determineFileType(project.path) === "image");

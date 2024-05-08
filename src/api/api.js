@@ -77,7 +77,8 @@ class Api {
 
   async deleteProject(projectId) {
     if (this.isDeploy) {
-const response = await axios.delete(`${host}/api/projects/${projectId}`)
+      const response = await axios.delete(`${host}/api/projects/${projectId}`)
+      return response;
     } else {
       return mock.deleteProject(projectId);
     }

@@ -10,13 +10,13 @@ const userSlice = createSlice({
 
   reducers: {
     dropUserAction(state) {
-      state.id = "";
+      state.userId = "";
       state.login = "";
       state.isLoggedIn = false;
     },
 
     setUserAction(state, {payload}) {
-      state.id = payload.id;
+      state.userId = payload.id;
       state.login = payload.login;
       state.isLoggedIn = true;
     },

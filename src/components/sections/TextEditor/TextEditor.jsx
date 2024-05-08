@@ -49,7 +49,6 @@ export const TextEditor = () => {
 
   const updateComment = async (event) => {
     if (event.ctrlKey && event.key === 'Enter') {
-      const part = project.audioParts.find((part) => part.partId === event.currentTarget.id);
       const changeTextRes = await api.changeTextComment(project.projectId, event.currentTarget.id, currentText);
       if (changeTextRes.status === 200) {
         const getProjectRes = await api.getProjectById(project.projectId);
@@ -74,10 +73,8 @@ export const TextEditor = () => {
     if (pathname.includes("/project/video/")) {
       const finalAudioRes = await api.createFinalAudio(project.projectId);
       if (finalAudioRes.status === 200) {
-        const getProjectRes = await api.getProjectById(project.projectId);
-        if (getProjectRes.status === 200) {
-          setProject(getProjectRes.data);
-        }
+        const fileName = finalAudioRes.data + ".wav"
+        await api.getAudio(fileName);
       }
     }
   }

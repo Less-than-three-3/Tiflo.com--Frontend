@@ -15,7 +15,6 @@ class Api {
   async logout() {
     if (this.isDeploy) {
       const response = await axios.post(`${host}/api/auth/logout`);
-      console.log(response.data);
       return response;
     } else {
       return mock.logout();
@@ -28,7 +27,6 @@ class Api {
         login: login,
         password: password,
       });
-      console.log(response.data);
       return response;
     } else {
       return mock.signIn(login, password);
@@ -41,7 +39,6 @@ class Api {
         login: login,
         password: password,
       });
-      console.log(response.data);
       return response;
     } else {
       return mock.signUp(login, password);
@@ -54,7 +51,6 @@ class Api {
   async getProjectList() {
     if (this.isDeploy) {
       const response = await axios.get(`${host}/api/projects`);
-      console.log(response.data);
       return response;
     } else {
       return mock.getProjectList();
@@ -64,7 +60,6 @@ class Api {
   async createProject() {
     if (this.isDeploy) {
       const response = axios.post(`${host}/api/projects`);
-      console.log(response.data);
       return response;
     } else {
       return mock.createProject();
@@ -74,7 +69,6 @@ class Api {
   async getProjectById(projectId) {
     if (this.isDeploy) {
       const response = await axios.get(`${host}/api/projects/${projectId}`);
-      console.log(response.data);
       return response;
     } else {
       return mock.getProjectById(projectId);
@@ -86,7 +80,6 @@ class Api {
       const response = await axios.patch(`${host}/api/projects/${projectId}`, {
         name
       });
-      console.log(response.data);
       return response;
     } else {
       return mock.updateProjectName(projectId, name);
@@ -103,7 +96,6 @@ class Api {
           'Content-Type': 'multipart/form-data',
         },
       });
-      console.log(response.data);
       return response;
     } else {
       return mock.uploadMedia(projectId, file);
@@ -115,7 +107,6 @@ class Api {
       const response = await axios.post(`${host}/api/projects/${projectId}/image/comment`, {
         "name": imageId,
       });
-      console.log(response.data);
       return response;
     } else {
       return mock.createCommentToPhoto(projectId, imageId);
@@ -127,7 +118,6 @@ class Api {
       const response = await axios.post(`${host}/api/projects/${projectId}/video/comment`, {
         "splitPoint": splitPoint,
       })
-      console.log(response.data);
       return response;
     } else {
       return mock.createCommentToVideo(projectId, splitPoint);
@@ -139,7 +129,6 @@ class Api {
       const response = await axios.post(`${host}/api/projects/${projectId}/voice`, {
         "text": text,
       });
-      console.log(response.data);
       return response;
     } else {
       return mock.voiceComment(projectId, text)
@@ -149,7 +138,6 @@ class Api {
   async createFinalAudio(projectId) {
     if (this.isDeploy) {
       const response = await axios.post(`${host}/api/projects/${projectId}/audio`);
-      console.log(response.data);
       return response;
     } else {
       return mock.createFinalAudio(projectId);
@@ -159,7 +147,6 @@ class Api {
   async deleteAudioPart(projectId, partId) {
     if (this.isDeploy) {
       const response = await axios.delete(`${host}/api/projects/${projectId}/audio-part/${partId}`);
-      console.log(response.data)
       return response;
     } else {
       return mock.deleteAudioPart(projectId, partId);
@@ -171,7 +158,6 @@ class Api {
       const response = await axios.put(`${host}/api/projects/${projectId}/audio-part/${partId}`, {
         "text": text,
       });
-      console.log(response.data);
       return response;
     } else {
       return mock.changeTextComment(projectId, partId, text)
@@ -191,7 +177,6 @@ class Api {
         console.log(response.data)
         // create file link in browser's memory
         const href = URL.createObjectURL(response.data);
-        console.log("href", href)
 
         // create "a" HTML element with href to file & click
         const link = document.createElement('a');

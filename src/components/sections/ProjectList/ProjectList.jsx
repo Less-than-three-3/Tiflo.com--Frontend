@@ -60,7 +60,7 @@ export const ProjectList = () => {
             projectList.filter((project) => determineFileType(project.path) === "image" ||
               determineFileType(project.path) === "none").map((project) => (
               <div key={project.projectId}
-                   style={{backgroundImage: `url(${(api.isDeploy ? `${host}/media/${project.path}` : project.path) || "/src/assets/icons/image_inactive.svg"})`}}
+                   style={{backgroundImage: `url(${((api.isDeploy && project.path) ? `${host}/media/${project.path}` : project.path) || `/src/assets/icons/image_inactive.svg`})`}}
                    className="project-image"
                    onClick={() => clickExistingProject(project)}/>
             ))}

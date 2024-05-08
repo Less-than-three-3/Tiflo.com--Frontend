@@ -9,12 +9,14 @@ import {determineFileType} from "../../../utils/format.js";
 
 export const Topbar = () => {
   const {project, setProject} = useProject();
-  const {projectList, setProjectList} = useProjectList();
+  const {projectList, setProjectList, clearProjectList} = useProjectList();
   const {clearProject} = useProject();
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState(project.name);
   const [showDelete, setShowDelete] = useState(false);
   const {user, dropUser} = useUser();
+  const navigate = useNavigate();
+  const {pathname} = useLocation();
 
   useEffect(() => {
     setName(project.name)
@@ -37,16 +39,14 @@ export const Topbar = () => {
     }
   }
 
-  const navigate = useNavigate();
-
   const logout = async () => {
     dropUser();
+    clearProject();
+    clearProjectList();
 
     navigate("/auth/signIn");
     await api.logout();
   }
-
-  const {pathname} = useLocation();
 
   const deleteProject = async () => {
     const deleteProjectRes = await api.deleteProject(project.projectId);
@@ -59,11 +59,23 @@ export const Topbar = () => {
           const photoProjects = projectList.filter((project) => determineFileType(project.path) === "image");
           if (photoProjects.length > 0) {
             navigate(`/project/photo/${photoProjects[0].projectId}`);
+          } else {
+            const newProjectRes = await api.createProject();
+            if (newProjectRes.status === 200) {
+              setProject(newProjectRes.data);
+              navigate(`/project/photo/${newProjectRes.data.projectId}`);
+            }
           }
         } else if (pathname.includes("/project/video")) {
           const videoProjects = projectList.filter((project) => determineFileType(project.path) === "video");
           if (videoProjects.length > 0) {
             navigate(`/project/video/${videoProjects[0].projectId}`);
+          } else {
+            const newProjectRes = await api.createProject();
+            if (newProjectRes.status === 200) {
+              setProject(newProjectRes.data);
+              navigate(`/project/video/${newProjectRes.data.projectId}`);
+            }
           }
         }
       }
@@ -89,7 +101,7 @@ export const Topbar = () => {
                        onKeyDown={saveProjectName}/>
                 :
                 <div className="ml-2"
-                     // onDoubleClick={() => setIsEditing(true)}
+                  // onDoubleClick={() => setIsEditing(true)}
                 >
                   {project.name}
                 </div>

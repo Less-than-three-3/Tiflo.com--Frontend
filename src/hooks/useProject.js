@@ -3,7 +3,8 @@ import {
   newProjectAction,
   updateProjectAudioAction,
   setProjectAudioAction,
-  setProjectAction
+  setProjectAction,
+  clearProjectAction
 } from "../store/projectSlice.js";
 
 export function useProject() {
@@ -29,11 +30,16 @@ export function useProject() {
     dispatch(setProjectAudioAction(value))
   }
 
+  const clearProject = () => {
+    dispatch(clearProjectAction())
+  }
+
   return {
     project,
     newProject,
     setProject,
     updateProjectAudio,
     setProjectAudio,
+    clearProject,
   }
 }

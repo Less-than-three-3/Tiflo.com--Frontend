@@ -38,6 +38,15 @@ const projectSlice = createSlice({
           state.audioParts[index] = payload;
         }
       }
+    },
+
+    clearProjectAction(state) {
+      state = {
+        projectId: "",
+        name: "",
+        path: "",
+        audioParts: [],
+      }
     }
   }
 })
@@ -47,5 +56,6 @@ export const {
   setProjectAction,
   setProjectAudioAction,
   updateProjectAudioAction,
+  clearProjectAction,
 } = projectSlice.actions
 export default projectSlice.reducer

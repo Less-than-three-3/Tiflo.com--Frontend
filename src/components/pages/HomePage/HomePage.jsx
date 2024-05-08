@@ -1,11 +1,17 @@
 import {useNavigate} from "react-router-dom";
 import {useEffect} from "react";
+import {useUser} from "../../../hooks/useUser.js";
 
 export const HomePage = () => {
   const navigate = useNavigate();
+  const {user} = useUser();
 
   useEffect(() => {
-    navigate("/project/photo");
+    if (user.userId === "") {
+      navigate("/auth/signIn");
+    } else {
+      navigate("/project/photo");
+    }
   }, [])
 
   return (

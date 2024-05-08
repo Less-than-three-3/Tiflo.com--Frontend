@@ -14,7 +14,7 @@ export const Toolbar = ({states, handlers}) => {
   const navigate = useNavigate();
   const openPhotoProject = async () => {
     let projectId;
-    const photoProjects = projectList.filter((project) => determineFileType(project.path) === "image");
+    const photoProjects = projectList.filter((project) => determineFileType(project.path) === "image" || determineFileType(project.path) === "none");
     if (photoProjects.length !== 0) {
       projectId = photoProjects[0].projectId;
     } else {
@@ -28,7 +28,7 @@ export const Toolbar = ({states, handlers}) => {
 
   const openVideoProject = async () => {
     let projectId;
-    const videoProjects = projectList.filter((project) => determineFileType(project.path) === "video");
+    const videoProjects = projectList.filter((project) => determineFileType(project.path) === "video" || determineFileType(project.path) === "none");
     if (videoProjects.length !== 0) {
       projectId = videoProjects[0].projectId;
     } else {

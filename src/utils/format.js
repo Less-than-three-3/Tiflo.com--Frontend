@@ -5,11 +5,11 @@ export const determineFileType = (fileName) => {
   const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg'];
 
   if (videoExtensions.includes(extension)) {
-    return 'video';
+    return "video";
   } else if (imageExtensions.includes(extension)) {
-    return 'image';
+    return "image";
   } else {
-    return 'none';
+    return "none";
   }
 }
 

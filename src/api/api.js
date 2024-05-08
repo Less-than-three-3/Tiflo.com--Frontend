@@ -175,7 +175,6 @@ class Api {
 
   //  --- Get audio file
   async getAudio(fileName) {
-    console.log(fileName)
     if (this.isDeploy) {
       const response = await axios({
         url: `${host}/media/${fileName}`, //your url
@@ -184,7 +183,6 @@ class Api {
       })
 
       if (response.status) {
-        console.log(response.data)
         // create file link in browser's memory
         const href = URL.createObjectURL(response.data);
 

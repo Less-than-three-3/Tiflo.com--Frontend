@@ -26,9 +26,7 @@ export const VideoEditor = () => {
     if (getProjectResponse.status === 200) {
       setProject(getProjectResponse.data);
 
-      if (!getProjectResponse.data.audioParts) {
-        console.error("Cannot find audio parts\nproject.audioParts = ", getProjectResponse.data.audioParts);
-      } else {
+      if (getProjectResponse.data.audioParts) {
         setProjectAudio(getProjectResponse.data.audioParts);
       }
     }

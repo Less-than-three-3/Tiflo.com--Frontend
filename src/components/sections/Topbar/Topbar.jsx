@@ -51,7 +51,6 @@ export const Topbar = () => {
 
   const deleteProject = async () => {
     const deleteProjectRes = await api.deleteProject(project.projectId);
-    console.log(deleteProjectRes);
     if (deleteProjectRes.status === 200) {
       const getProjectsListRes = await api.getProjectList();
       if (getProjectsListRes.status === 200) {

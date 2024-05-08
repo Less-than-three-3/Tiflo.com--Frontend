@@ -12,6 +12,8 @@ export const TextEditor = () => {
   const [boxSizes, setBoxSizes] = useState([]);
   const location = useLocation();
   const pathname = location.pathname;
+  const [currentText, setCurrentText] = useState("");
+  const [currentPartId, setCurrentPartId] = useState("");
 
   useEffect(() => {
     const boxes = document.getElementsByClassName("non-editable");
@@ -23,15 +25,29 @@ export const TextEditor = () => {
     }
   }, [])
 
-  const changeText = (event) => {
-    const part = project.audioParts.find((part) => part.partId === event.currentTarget.id);
-    updateProjectAudio({
-      ...part,
-      text: event.currentTarget.value,
-    });
+  const focusText = (event) => {
+    if (event.currentTarget.id !== currentPartId) {
+      const part = project.audioParts.find((part) => part.partId === event.currentTarget.id);
+      setCurrentText(part.text);
+      setCurrentPartId(part.partId);
+    }
   }
 
-  const changeComment = async (event) => {
+  const isFocused = (partId) => {
+    return partId === currentPartId;
+  }
+
+  const changeText = (event) => {
+    setCurrentText(event.currentTarget.value);
+    // const part = project.audioParts.find((part) => part.partId === event.currentTarget.id);
+
+    // updateProjectAudio({
+    //   ...part,
+    //   text: event.currentTarget.value,
+    // });
+  }
+
+  const updateComment = async (event) => {
     if (event.ctrlKey && event.key === 'Enter') {
       const part = project.audioParts.find((part) => part.partId === event.currentTarget.id);
       const changeTextRes = await api.changeTextComment(project.projectId, event.currentTarget.id, part.text);
@@ -137,9 +153,10 @@ export const TextEditor = () => {
                         className="editable resize-none bg-inherit border-2 border-rat rounded-md
                         p-2 outline-none w-11/12 h-full box-content overflow-y-hidden"
                         style={{height: `${part.height}px`}}
-                        value={part.text}
+                        value={isFocused(part.partId) ? currentText : part.text}
+                        onClick={focusText}
                         onChange={changeText}
-                        onKeyDown={changeComment}
+                        onKeyDown={updateComment}
                         id={part.partId}
                       />
                       {pathname.includes("/project/video") &&

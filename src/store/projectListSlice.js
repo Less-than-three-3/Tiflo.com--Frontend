@@ -10,9 +10,10 @@ const projectListSlice = createSlice({
     },
 
     setProjectListAction(state, {payload}) {
-      payload.sort((a, b) => a.projectId < b.projectId);
       state.length = 0;
       if (payload) {
+        payload.sort((a, b) => a.projectId < b.projectId);
+        console.log("list", payload)
         state.push(...payload);
       }
     },

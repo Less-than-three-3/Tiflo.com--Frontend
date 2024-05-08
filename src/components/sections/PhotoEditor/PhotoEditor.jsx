@@ -58,7 +58,6 @@ export const PhotoEditor = () => {
       <div className="section grow text-sm">
         {project.path ?
           <>
-            <div className="font-bold pb-8">Фото: {project.path || (file && file.name)}</div>
             <div style={{backgroundImage: api.isDeploy ? `url(${host}/media/${project.path})` : `url(${project.path})`}}
                  className="background-image w-full h-4/6"/>
             <div className="mt-4 w-28">

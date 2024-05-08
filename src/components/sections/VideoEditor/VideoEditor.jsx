@@ -83,9 +83,7 @@ export const VideoEditor = () => {
       <div className="section grow text-sm">
         {project.path ?
           <>
-            <div className="font-bold pb-8">Видео: {project.path}</div>
-
-            <video className="m-auto mb-4 h-4/6"
+            <video className="m-auto mb-4 h-5/6"
                    ref={media.video}
                    muted
                    key={params.projectId}

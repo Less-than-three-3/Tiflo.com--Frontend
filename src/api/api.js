@@ -166,6 +166,7 @@ class Api {
 
   //  --- Get audio file
   async getAudio(fileName) {
+    console.log(fileName)
     if (this.isDeploy) {
       const response = await axios({
         url: `${host}/media/${fileName}`, //your url

@@ -3,18 +3,27 @@ import {AudioEditor} from "../../../sections/AudioEditor/AudioEditor.jsx";
 import {VideoEditor} from "../../../sections/VideoEditor/VideoEditor.jsx";
 import {useEffect, useState} from "react";
 import {useProject} from "../../../../hooks/useProject.js";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {api} from "../../../../api/api.js";
+import {useProjectList} from "../../../../hooks/useProjectList.js";
+import {determineFileType} from "../../../../utils/format.js";
 
 export const VideoCommentPage = () => {
   const {setProject} = useProject();
+  const {projectList} = useProjectList()
   const params = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
-      const getProjectRes = await api.getProjectById(params.projectId);
-      if (getProjectRes.status === 200) {
-        setProject(getProjectRes.data);
+      if (!params.projectId) {
+        const videoProject = projectList.filter((project) => determineFileType(project.path) === "video")[0];
+        navigate(`/project/video/${videoProject.projectId}`);
+      } else {
+        const getProjectRes = await api.getProjectById(params.projectId);
+        if (getProjectRes.status === 200) {
+          setProject(getProjectRes.data);
+        }
       }
     })()
   }, [params])

@@ -24,7 +24,9 @@ export const App = () => {
           </Route>
           <Route path="project" element={<ProjectPage/>}>
             <Route path="photo/:projectId" element={<PhotoCommentPage/>}/>
+            <Route path="photo/*" element={<PhotoCommentPage/>}/>
             <Route path="video/:projectId" element={<VideoCommentPage/>}/>
+            <Route path="video/*" element={<VideoCommentPage/>}/>
           </Route>
           <Route path="*" element={<NotFoundPage/>}/>
         </Routes>

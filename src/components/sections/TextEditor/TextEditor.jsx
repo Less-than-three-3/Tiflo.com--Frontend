@@ -61,7 +61,7 @@ export const TextEditor = () => {
   }
 
   const toVoice = async () => {
-    if (pathname.includes("/projects/photo")) {
+    if (pathname.includes("/project/photo/")) {
       const text = project.audioParts.find((part) => part.text !== "").text;
       const voiceTextRes = await api.voiceTheText(project.projectId, text);
 
@@ -71,7 +71,7 @@ export const TextEditor = () => {
       }
     }
 
-    if (pathname.includes("/projects/video/")) {
+    if (pathname.includes("/project/video/")) {
       const finalAudioRes = await api.createFinalAudio(project.projectId);
       if (finalAudioRes.status === 200) {
         const getProjectRes = await api.getProjectById(project.projectId);

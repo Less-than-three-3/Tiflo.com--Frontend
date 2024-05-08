@@ -119,6 +119,7 @@ export const TextEditor = () => {
         </div>
         <div className=" w-full overflow-y-scroll">
           {project.projectId && project.audioParts?.filter((part) => part.text !== "")
+            .sort((a, b) => a.partId > b.partId ? 1 : -1)
             .map((part, i) => ({
               ...part,
               height: boxSizes[i],

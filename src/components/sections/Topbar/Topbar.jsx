@@ -58,6 +58,7 @@ export const Topbar = () => {
 
         if (pathname.includes("/project/photo")) {
           const photoProjects = projectList.filter((project) => determineFileType(project.path) === "image");
+          console.log(photoProjects)
           if (photoProjects.length > 0) {
             navigate(`/project/photo/${photoProjects[0].projectId}`);
           }

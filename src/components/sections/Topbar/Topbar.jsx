@@ -66,7 +66,8 @@ export const Topbar = () => {
           const videoProjects = projectList.filter((project) => determineFileType(project.path) === "video");
           if (videoProjects.length > 0) {
             navigate(`/project/video/${videoProjects[0].projectId}`);
-          }        }
+          }
+        }
       }
     }
   }
@@ -89,7 +90,9 @@ export const Topbar = () => {
                        onChange={(event) => setName(event.target.value)}
                        onKeyDown={saveProjectName}/>
                 :
-                <div className="ml-2" onDoubleClick={() => setIsEditing(true)}>
+                <div className="ml-2"
+                     // onDoubleClick={() => setIsEditing(true)}
+                >
                   {project.name}
                 </div>
               }

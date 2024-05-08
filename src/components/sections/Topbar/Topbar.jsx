@@ -5,12 +5,11 @@ import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useUser} from "../../../hooks/useUser.js";
 import {api} from "../../../api/api.js";
 import {useProjectList} from "../../../hooks/useProjectList.js";
-import {projectList} from "../../../mocks/projectList.js";
 import {determineFileType} from "../../../utils/format.js";
 
 export const Topbar = () => {
   const {project, setProject} = useProject();
-  const {setProjectList} = useProjectList();
+  const {projectList, setProjectList} = useProjectList();
   const {clearProject} = useProject();
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState(project.name);
@@ -58,7 +57,6 @@ export const Topbar = () => {
 
         if (pathname.includes("/project/photo")) {
           const photoProjects = projectList.filter((project) => determineFileType(project.path) === "image");
-          console.log(photoProjects)
           if (photoProjects.length > 0) {
             navigate(`/project/photo/${photoProjects[0].projectId}`);
           }

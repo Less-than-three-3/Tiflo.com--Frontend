@@ -138,6 +138,13 @@ class Mock {
       data: `Create final audio for project ${projectId}`,
     }
   }
+
+  deleteAudioPart(projectId, partId) {
+    return {
+      status: 200,
+      data: `Delete audio part ${partId} for project ${projectId}`,
+    }
+  }
 }
 
 export const mock = new Mock();

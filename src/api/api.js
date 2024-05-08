@@ -118,7 +118,7 @@ class Api {
       console.log(response.data);
       return response;
     } else {
-    return mock.createCommentToPhoto(projectId, imageId);
+      return mock.createCommentToPhoto(projectId, imageId);
     }
   }
 
@@ -143,6 +143,26 @@ class Api {
       return response;
     } else {
       return mock.voiceComment(projectId, text)
+    }
+  }
+
+  async createFinalAudio(projectId) {
+    if (this.isDeploy) {
+      const response = await axios.post(`${host}/api/projects/${projectId}/audio`);
+      console.log(response.data);
+      return response;
+    } else {
+      return mock.createFinalAudio(projectId);
+    }
+  }
+
+  async deleteAudioPart(projectId, partId) {
+    if (this.isDeploy) {
+      const response = await axios.delete(`${host}/api/projects/${projectId}/audio-parts/${partId}`);
+      console.log(response.data)
+      return response;
+    } else {
+      return mock.deleteAudioPart(projectId, partId);
     }
   }
 
@@ -173,16 +193,6 @@ class Api {
         document.body.removeChild(link);
         URL.revokeObjectURL(href);
       }
-    }
-  }
-
-  async createFinalAudio(projectId) {
-    if (this.isDeploy) {
-      const response = await axios.post(`${host}/api/projects/${projectId}/audio`);
-      console.log(response.data);
-      return response;
-    } else {
-      return mock.createFinalAudio(projectId);
     }
   }
 }

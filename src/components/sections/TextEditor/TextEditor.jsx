@@ -43,20 +43,29 @@ export const TextEditor = () => {
     }
 
     if (pathname.includes("/projects/video/")) {
-     const finalAudioRes = await api.createFinalAudio(project.projectId);
-     if (finalAudioRes.status === 200) {
-       const getProjectRes = await api.getProjectById(project.projectId);
-       if (getProjectRes.status === 200) {
-         setProject(getProjectRes.data);
-       }
-     }
+      const finalAudioRes = await api.createFinalAudio(project.projectId);
+      if (finalAudioRes.status === 200) {
+        const getProjectRes = await api.getProjectById(project.projectId);
+        if (getProjectRes.status === 200) {
+          setProject(getProjectRes.data);
+        }
+      }
     }
   }
 
-  const showDeleteBtn = (isShown, id) => {
-    const img = document.getElementById(`delete_${id}`);
-    // console.log(`delete_${id}`, img)
+  const showDeleteBtn = (isShown, partId) => {
+    const img = document.getElementById(`delete_${partId}`);
     img.style.display = isShown ? "block" : "none";
+  }
+
+  const deletePart = async (partId) => {
+    const deleteRes = await api.deleteAudioPart(project.projectId, partId);
+    if (deleteRes.status === 200) {
+      const getProjectRes = await api.getProjectById(project.projectId);
+      if (getProjectRes.status === 200) {
+        setProject(getProjectRes.data);
+      }
+    }
   }
 
   const setStart = (time) => {
@@ -66,8 +75,6 @@ export const TextEditor = () => {
   const setEnd = (time) => {
 
   }
-
-  const [show, setShow] = useState(false);
 
   return (
     <>
@@ -90,13 +97,14 @@ export const TextEditor = () => {
             }))
             .map((part) => (
               <div className="relative"
-                key={part.partId}
+                   key={part.partId}
                    onMouseOver={() => showDeleteBtn(true, part.partId)}
                    onMouseOut={() => showDeleteBtn(false, part.partId)}>
 
-                <img src="/src/assets/icons/delete.svg" alt=""
-                     className="h-5 hidden absolute right-0 top-5"
+                <img src="/src/assets/icons/trash_can.svg" alt=""
+                     className="h-5 hidden absolute right-0 bottom-5"
                      id={`delete_${part.partId}`}
+                     onClick={() => deletePart(part.partId)}
                 />
 
                 <div className="flex flex-col items-center"

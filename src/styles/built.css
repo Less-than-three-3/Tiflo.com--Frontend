@@ -655,6 +655,14 @@ video {
   top: 1.25rem;
 }
 
+.bottom-0 {
+  bottom: 0px;
+}
+
+.bottom-5 {
+  bottom: 1.25rem;
+}
+
 .m-14 {
   margin: 3.5rem;
 }

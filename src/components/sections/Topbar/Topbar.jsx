@@ -34,7 +34,7 @@ export const Topbar = () => {
 
   const logout = async () => {
     dropUser();
-    navigate("/");
+    navigate("/auth/signIn");
     await api.logout();
   }
 

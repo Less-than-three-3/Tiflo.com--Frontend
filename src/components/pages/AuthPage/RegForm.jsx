@@ -51,12 +51,14 @@ export const RegForm = () => {
         </div>
       </div>
 
-      <Button value="Создать аккаунт" onClick={reg} mode="primary"/>
-      <div className="w-full flex justify-center">
-        Уже есть аккаунт?
-        <Link className="underline underline-offset-4 text-purple ml-1" to="/auth/signIn">
-          Вход в аккаунт
-        </Link>
+      <div>
+        <Button value="Создать аккаунт" onClick={reg} mode="primary"/>
+        <div className="w-full flex justify-center">
+          Уже есть аккаунт?
+          <Link className="underline underline-offset-4 text-purple ml-1" to="/auth/signIn">
+            Вход в аккаунт
+          </Link>
+        </div>
       </div>
     </>
   );

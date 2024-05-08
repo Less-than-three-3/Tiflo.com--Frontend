@@ -69,7 +69,7 @@ export const PhotoEditor = () => {
           <>
             <div className="border-4 border-dashed border-mouse rounded-3xl
                             flex justify-center items-center flex-col
-                            m-14 p-20"
+                            m-auto mt-10 p-20 w-96"
                  onClick={handleClick}>
               <img src="/src/assets/icons/upload.svg" alt=""/>
               <input

@@ -21,7 +21,7 @@ export const AuthForm = () => {
         isLoggedIn: true,
       })
 
-      navigate("/project/photo/new")
+      navigate("/project/photo/new");
     }
   }
 

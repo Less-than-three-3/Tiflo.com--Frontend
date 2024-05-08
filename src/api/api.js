@@ -158,7 +158,7 @@ class Api {
 
   async deleteAudioPart(projectId, partId) {
     if (this.isDeploy) {
-      const response = await axios.delete(`${host}/api/projects/${projectId}/audio-parts/${partId}`);
+      const response = await axios.delete(`${host}/api/projects/${projectId}/audio-part/${partId}`);
       console.log(response.data)
       return response;
     } else {
@@ -166,6 +166,17 @@ class Api {
     }
   }
 
+  async changeTextComment(projectId, partId, text) {
+    if (this.isDeploy) {
+      const response = await axios.put(`${host}/api/projects/${projectId}/audio-part/${partId}`, {
+        "text": text,
+      });
+      console.log(response.data);
+      return response;
+    } else {
+      return mock.changeTextComment(projectId, partId, text)
+    }
+  }
 
   //  --- Get audio file
   async getAudio(fileName) {

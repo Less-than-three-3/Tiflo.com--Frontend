@@ -31,6 +31,19 @@ export const TextEditor = () => {
     });
   }
 
+  const changeComment = async (event) => {
+    if (event.ctrlKey && event.key === 'Enter') {
+      const part = project.audioParts.find((part) => part.partId === event.currentTarget.id);
+      const changeTextRes = await api.changeTextComment(project.projectId, event.currentTarget.id, part.text);
+      if (changeTextRes.status === 200) {
+        const getProjectRes = await api.getProjectById(project.projectId);
+        if (getProjectRes.status === 200) {
+          setProject(getProjectRes.data);
+        }
+      }
+    }
+  }
+
   const toVoice = async () => {
     if (pathname.includes("/projects/photo")) {
       const text = project.audioParts.find((part) => part.text !== "").text;
@@ -54,8 +67,10 @@ export const TextEditor = () => {
   }
 
   const showDeleteBtn = (isShown, partId) => {
-    const img = document.getElementById(`delete_${partId}`);
-    img.style.display = isShown ? "block" : "none";
+    if (pathname.includes("/project/video") && isEditing) {
+      const img = document.getElementById(`delete_${partId}`);
+      img.style.display = isShown ? "block" : "none";
+    }
   }
 
   const deletePart = async (partId) => {
@@ -101,11 +116,13 @@ export const TextEditor = () => {
                    onMouseOver={() => showDeleteBtn(true, part.partId)}
                    onMouseOut={() => showDeleteBtn(false, part.partId)}>
 
-                <img src="/src/assets/icons/trash_can.svg" alt=""
-                     className="h-5 hidden absolute right-0 bottom-5"
-                     id={`delete_${part.partId}`}
-                     onClick={() => deletePart(part.partId)}
-                />
+                {pathname.includes("/project/video") && isEditing &&
+                  <img src="/src/assets/icons/trash_can.svg" alt=""
+                       className="h-5 hidden absolute right-2 bottom-10"
+                       id={`delete_${part.partId}`}
+                       onClick={() => deletePart(part.partId)}
+                  />
+                }
 
                 <div className="flex flex-col items-center"
                      onDoubleClick={() => setIsEditing(true)}>
@@ -122,6 +139,7 @@ export const TextEditor = () => {
                         style={{height: `${part.height}px`}}
                         value={part.text}
                         onChange={changeText}
+                        onKeyDown={changeComment}
                         id={part.partId}
                       />
                       {pathname.includes("/project/video") &&

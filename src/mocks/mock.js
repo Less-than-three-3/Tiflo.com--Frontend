@@ -145,6 +145,13 @@ class Mock {
       data: `Delete audio part ${partId} for project ${projectId}`,
     }
   }
+
+  changeTextComment(projectId, partId, text){
+    return {
+      status: 200,
+      data: `Change audio part ${partId} for project ${projectId}\nNew text: ${text}`,
+    }
+  }
 }
 
 export const mock = new Mock();

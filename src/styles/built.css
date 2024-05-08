@@ -663,6 +663,18 @@ video {
   bottom: 1.25rem;
 }
 
+.bottom-8 {
+  bottom: 2rem;
+}
+
+.right-2 {
+  right: 0.5rem;
+}
+
+.bottom-10 {
+  bottom: 2.5rem;
+}
+
 .m-14 {
   margin: 3.5rem;
 }
@@ -769,6 +781,10 @@ video {
 
 .h-full {
   height: 100%;
+}
+
+.h-8 {
+  height: 2rem;
 }
 
 .max-h-full {

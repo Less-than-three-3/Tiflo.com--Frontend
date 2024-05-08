@@ -43,13 +43,13 @@ export const Toolbar = ({states, handlers}) => {
   return (
     <>
       <div className="section pt-12 w-24 flex flex-col gap-12">
-        <Link to="/">
-          <img src={pathname === "/" ?
-            "/src/assets/icons/home_active.svg" :
-            "/src/assets/icons/home_inactive.svg"}
-               alt="home"
-               className="toolbar-icon"/>
-        </Link>
+        {/*<Link to="/">*/}
+        {/*  <img src={pathname === "/" ?*/}
+        {/*    "/src/assets/icons/home_active.svg" :*/}
+        {/*    "/src/assets/icons/home_inactive.svg"}*/}
+        {/*       alt="home"*/}
+        {/*       className="toolbar-icon"/>*/}
+        {/*</Link>*/}
 
         <img src={states.isProjectListOpened ?
           "/src/assets/icons/list_active.svg" :

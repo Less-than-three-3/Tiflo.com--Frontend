@@ -49,7 +49,6 @@ export const ProjectList = () => {
           {pathname.includes("/project/video") &&
             <div>Комментарии к видео</div>
           }
-          {/*<div className="text-inactive">Недавние</div>*/}
         </div>
 
         <div className="grid grid-cols-2 gap-3">

@@ -57,7 +57,10 @@ class Mock {
   }
 
   deleteProject(projectId) {
-    console.log(`Delete project, \nid:${projectId}`)
+    return {
+      status: 200,
+      data: `Delete project, \nid:${projectId}`,
+    }
   }
 
   updateProjectName(projectId, name) {
@@ -146,7 +149,7 @@ class Mock {
     }
   }
 
-  changeTextComment(projectId, partId, text){
+  changeTextComment(projectId, partId, text) {
     return {
       status: 200,
       data: `Change audio part ${partId} for project ${projectId}\nNew text: ${text}`,

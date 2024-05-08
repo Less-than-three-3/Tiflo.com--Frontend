@@ -148,7 +148,7 @@ export const TextEditor = () => {
                       }
                       <textarea
                         className="editable resize-none bg-inherit border-2 border-rat rounded-md
-                        p-2 outline-none w-11/12 h-full box-content overflow-y-hidden"
+                                    p-2 outline-none w-11/12 h-full box-content overflow-y-hidden"
                         style={{height: `${part.height}px`}}
                         value={isFocused(part.partId) ? currentText : part.text}
                         onClick={focusText}

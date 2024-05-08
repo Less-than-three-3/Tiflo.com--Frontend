@@ -75,6 +75,14 @@ class Api {
     }
   }
 
+  async deleteProject(projectId) {
+    if (this.isDeploy) {
+const response = await axios.delete(`${host}/api/projects/${projectId}`)
+    } else {
+      return mock.deleteProject(projectId);
+    }
+  }
+
   async updateProjectName(projectId, name) {
     if (this.isDeploy) {
       const response = await axios.patch(`${host}/api/projects/${projectId}`, {

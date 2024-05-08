@@ -187,7 +187,7 @@ export const TextEditor = () => {
 
         </div>
 
-        {project.audioParts?.some((part) => part.path !== "") &&
+        {project.audioParts?.some((part) => part.text !== "") &&
           <div className="mt-4 w-28">
             <Button mode="primary" value={"В голос"} onClick={toVoice}/>
           </div>

@@ -1,0 +1,7 @@
+.editable {
+  @apply border-2 border-rat rounded-md p-2;
+}
+
+.non-editable {
+
+}

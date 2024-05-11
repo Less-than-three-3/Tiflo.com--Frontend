@@ -5,6 +5,7 @@
 @import "./components/image.css";
 @import "./components/text.css";
 @import "../components/pages/AuthPage/AuthRegAnimation.css";
+@import "../components/sections/TextEditor/Comment/Comment.css";
 
 @tailwind base;
 @tailwind components;

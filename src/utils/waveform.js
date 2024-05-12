@@ -8,7 +8,7 @@ export const setAudioParts = (project) => {
   for (const id in project.audioParts) {
     audioParts.push({
       id: id,
-      draggable: true,
+      draggable: false,
       startPosition: project.audioParts[id].start / 10,
       duration: project.audioParts[id].duration / 10,
       url: import.meta.env.VITE_IS_DEPLOY === "true" ? `/media/${project.audioParts[id].path}` : project.audioParts[id].path,
@@ -32,7 +32,7 @@ export const createMultitrack = (audioParts) => {
       cursorWidth: 2,
       cursorColor: '#9421d7',
       trackBorderColor: '#466193',
-      dragBounds: true,
+      dragBounds: false,
     },
   )
 }

@@ -17,8 +17,6 @@ const projectSlice = createSlice({
       state.audioParts = [];
     },
 
-
-
     setProjectAction(state, {payload}) {
       state.projectId = payload.projectId;
       state.name = payload.name;

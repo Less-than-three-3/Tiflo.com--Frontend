@@ -109,7 +109,7 @@ export const Topbar = () => {
                    onClick={() => setShowEditMenu(true)}/>
 
               {showEditMenu &&
-                <EditMenu/>
+                <EditMenu onClose={() => console.log("close")}/>
               }
             </div>
 

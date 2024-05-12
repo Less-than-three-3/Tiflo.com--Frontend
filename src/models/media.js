@@ -11,7 +11,7 @@ class Media {
     const onChangeHandlers = this.onChangeHandlers;
 
     const handlePlayPause = () => {
-      const time = this.getTime() * 10;
+      const time = this.getAudioTime() * 10;
       const tracks = this.getVideoTracks();
       const isVideo = tracks.some((track) => (track.startPosition * 10 < time) && (time < (track.startPosition * 10 + track.duration * 10)));
 
@@ -77,8 +77,12 @@ class Media {
     return this.multitrack.maxDuration;
   }
 
-  getTime() {
+  getAudioTime() {
     return this.multitrack.getCurrentTime();
+  }
+
+  getVideoTime() {
+    return this.video.current.currentTime;
   }
 
   setTime(time) {

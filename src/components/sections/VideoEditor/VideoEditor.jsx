@@ -46,12 +46,12 @@ export const VideoEditor = () => {
   }
 
   const forward = () => {
-    const newTime = media.getTime() + 10;
+    const newTime = media.getAudioTime() + 10;
     media.setTime(newTime);
   }
 
   const back = () => {
-    const newTime = media.getTime() - 10;
+    const newTime = media.getAudioTime() - 10;
     media.setTime(newTime);
   }
 
@@ -60,7 +60,7 @@ export const VideoEditor = () => {
       media.video.current.addEventListener('loadedmetadata', () => {
         setTimeout(() => {
           media.onMultitrackChange(() => {
-            setTime(convertNumberToTimestamp(media.getTime()));
+            setTime(convertNumberToTimestamp(media.getAudioTime()));
           });
 
           setDuration(convertNumberToTimestamp(media.getDuration()));
@@ -70,7 +70,8 @@ export const VideoEditor = () => {
   }, [project])
 
   const generateComment = async () => {
-    const videoCommentRes = await api.createCommentToVideo(project.projectId, convertNumberToTimestampWithMS(media.getTime()));
+    console.log(convertNumberToTimestampWithMS(media.getVideoTime()))
+    const videoCommentRes = await api.createCommentToVideo(project.projectId, convertNumberToTimestampWithMS(media.getVideoTime()));
     if (videoCommentRes.status === 200) {
       setProjectAudio(videoCommentRes.data.audioParts);
     }

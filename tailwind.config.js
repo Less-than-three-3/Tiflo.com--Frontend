@@ -8,6 +8,7 @@ export default {
       colors: {
         "mouse": "#656565",
         "rat": "#787878",
+        "wolf": "#262a2e",
         "raccoon": "#1A1D1F",
         "seal": "#111315",
         "purple": "#7A79FF"

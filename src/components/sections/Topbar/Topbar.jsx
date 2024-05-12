@@ -6,6 +6,7 @@ import {useUser} from "../../../hooks/useUser.js";
 import {api} from "../../../api/api.js";
 import {useProjectList} from "../../../hooks/useProjectList.js";
 import {determineFileType} from "../../../utils/format.js";
+import {EditMenu} from "./EditMenu/EditMenu.jsx";
 
 export const Topbar = () => {
   const {project, setProject} = useProject();
@@ -13,7 +14,7 @@ export const Topbar = () => {
   const {clearProject} = useProject();
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState(project.name);
-  const [showDelete, setShowDelete] = useState(false);
+  const [showEditMenu, setShowEditMenu] = useState(false);
   const {user, dropUser} = useUser();
   const navigate = useNavigate();
   const {pathname} = useLocation();
@@ -89,9 +90,7 @@ export const Topbar = () => {
 
         {user.isLoggedIn ?
           <>
-            <div className="text-xl flex items-center"
-                 onMouseOver={() => setShowDelete(true)}
-                 onMouseOut={() => setShowDelete(false)}>
+            <div className="text-xl flex items-center">
               <div>Проект:</div>
 
               {isEditing ?
@@ -100,17 +99,17 @@ export const Topbar = () => {
                        onChange={(event) => setName(event.target.value)}
                        onKeyDown={saveProjectName}/>
                 :
-                <div className="ml-2"
-                  // onDoubleClick={() => setIsEditing(true)}
-                >
+                <div className="ml-2">
                   {project.name}
                 </div>
               }
 
-              {showDelete &&
-                <img src="/src/assets/icons/trash_can.svg" alt=""
-                     className="h-6 ml-2"
-                     onClick={deleteProject}/>
+              <img src="/src/assets/icons/dots.svg" alt=""
+                   className="hover:cursor-pointer h-6 ml-2"
+                   onClick={() => setShowEditMenu(true)}/>
+
+              {showEditMenu &&
+                <EditMenu/>
               }
             </div>
 

@@ -30,7 +30,7 @@ export const AudioEditor = () => {
       moveWfElements(wfElements, audioParts);
 
       media.waveform.current.addEventListener("click", () => {
-        media.setTime(media.getTime());
+        media.setTime(media.getAudioTime());
       })
     }
   }, [project, params]);

@@ -55,7 +55,7 @@ export let projectList = [
   {
     projectId: "00000000-0000-0000-0000-000000000007",
     name: "Jason Statham",
-    path: "/src/assets/statham.mp4",
+    path: "/src/assets/video/statham.mp4",
     userId: "00000000-0000-0000-0000-000000000000",
     audioParts: [
       {
@@ -64,7 +64,7 @@ export let projectList = [
         start: 0,
         duration: 30,
         text: "",
-        path: "/src/assets/statham-part-1.wav",
+        path: "/src/assets/audio/statham-part-1.wav",
       },
       {
         partId: "00000000-0000-0000-0000-000000000009",
@@ -73,7 +73,7 @@ export let projectList = [
         duration: 110,
         text: "группа мужчин, стоящих рядом с черной машиной. Они одеты в синюю форму, и автомобиль кажется BMW. " +
           "Мужчины расположены перед машиной, а сцена происходит на грунтовой дороге.",
-        path: "/src/assets/statham-description.wav",
+        path: "/src/assets/audio/statham-description.wav",
       },
       {
         partId: "00000000-0000-0000-0000-000000000010",
@@ -81,7 +81,7 @@ export let projectList = [
         start: 140,
         duration: 130,
         text: "",
-        path: "/src/assets/statham-part-2.wav",
+        path: "/src/assets/audio/statham-part-2.wav",
       },
       {
         partId: "00000000-0000-0000-0000-000000000011",
@@ -90,7 +90,7 @@ export let projectList = [
         duration: 110,
         text: "группа мужчин, стоящих рядом с черной машиной. Они одеты в синюю форму, и автомобиль кажется BMW. " +
           "Мужчины расположены перед машиной, а сцена происходит на грунтовой дороге.",
-        path: "/src/assets/statham-description.wav",
+        path: "/src/assets/audio/statham-description.wav",
       },
       {
         partId: "00000000-0000-0000-0000-000000000012",
@@ -98,7 +98,7 @@ export let projectList = [
         start: 300,
         duration: 130,
         text: "",
-        path: "/src/assets/statham-part-2.wav",
+        path: "/src/assets/audio/statham-part-2.wav",
       }
     ]
   },
@@ -114,7 +114,7 @@ export let projectList = [
         start: 0,
         duration: 0,
         text: "",
-        path: "/src/assets/shorts_out.mp3",
+        path: "/src/assets/audio/shorts_out.mp3",
       }
     ]
   },

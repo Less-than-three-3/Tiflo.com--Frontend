@@ -111,7 +111,7 @@ class Mock {
     }
   }
 
-  createCommentToVideo(projectId, splitPoint) {
+  createCommentToVideo(projectId, splitPoint, videoTime) {
     const id = projectList.findIndex((project) => project.projectId === projectId);
 
     projectList[id] = {
@@ -119,7 +119,7 @@ class Mock {
       audioParts: audioParts,
     };
 
-    console.log(`Create comment to video\nproject: ${projectId}\nfor point ${splitPoint}`);
+    console.log(`Create comment to video\nproject: ${projectId}\nfor point ${splitPoint}\non video ${videoTime}`);
 
     return {
       status: 200,

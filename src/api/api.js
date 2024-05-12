@@ -122,14 +122,15 @@ class Api {
     }
   }
 
-  async createCommentToVideo(projectId, splitPoint) {
+  async createCommentToVideo(projectId, splitPoint, videoTime) {
     if (this.isDeploy) {
       const response = await axios.post(`${host}/api/projects/${projectId}/video/comment`, {
         "splitPoint": splitPoint,
+        "videoTime": videoTime,
       })
       return response;
     } else {
-      return mock.createCommentToVideo(projectId, splitPoint);
+      return mock.createCommentToVideo(projectId, splitPoint, videoTime);
     }
   }
 

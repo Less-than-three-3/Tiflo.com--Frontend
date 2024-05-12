@@ -71,7 +71,10 @@ export const VideoEditor = () => {
 
   const generateComment = async () => {
     console.log(convertNumberToTimestampWithMS(media.getVideoTime()))
-    const videoCommentRes = await api.createCommentToVideo(project.projectId, convertNumberToTimestampWithMS(media.getVideoTime()));
+    const videoCommentRes = await api.createCommentToVideo(project.projectId,
+      convertNumberToTimestampWithMS(media.getAudioTime()),
+      convertNumberToTimestampWithMS(media.getVideoTime()));
+
     if (videoCommentRes.status === 200) {
       setProjectAudio(videoCommentRes.data.audioParts);
     }

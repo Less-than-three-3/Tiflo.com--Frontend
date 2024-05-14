@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react";
+import {Divider} from "../Divider/Divider.jsx";
 
 export const Timestamp = ({time, setTime, isEditing = false}) => {
   const [value, setValue] = useState(time);
@@ -33,18 +34,18 @@ export const Timestamp = ({time, setTime, isEditing = false}) => {
   return (
     <>
       <div className="flex w-full justify-between items-center">
-        <div className="w-full h-0.5 bg-rat"/>
+        <Divider/>
         {/*{isEditing ?*/}
         {/*  <input className="bg-inherit border-2 border-rat rounded-md p-1 outline-none m-2 w-full text-center text-xl"*/}
         {/*         type="text"*/}
         {/*         value={value}*/}
         {/*         onChange={onChangeHandler}/>*/}
         {/*  :*/}
-          <div className="m-2">
-            {value}
-          </div>
+        <div className="m-2">
+          {value}
+        </div>
         {/*}*/}
-        <div className="w-full h-0.5 bg-rat"/>
+        <Divider/>
       </div>
     </>
   );

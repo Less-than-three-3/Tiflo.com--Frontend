@@ -32,6 +32,7 @@ export const EditMenu = ({onClose, setIsEditing}) => {
 
         if (pathname.includes("/project/photo")) {
           const photoProjects = projectList.filter((project) => determineFileType(project.path) === "image");
+          console.log(photoProjects)
           if (photoProjects.length > 0) {
             navigate(`/project/photo/${photoProjects[0].projectId}`);
           } else {
@@ -62,6 +63,11 @@ export const EditMenu = ({onClose, setIsEditing}) => {
     onClose();
   }
 
+  const onDelete = () => {
+    deleteProject();
+    onClose();
+  }
+
   return (
     <>
       <div>
@@ -75,7 +81,7 @@ export const EditMenu = ({onClose, setIsEditing}) => {
           </div>
           <Divider/>
           <div className="hover:cursor-pointer text-red-500"
-               onClick={deleteProject}
+               onClick={onDelete}
           >
             Delete project
           </div>

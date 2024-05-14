@@ -1,7 +1,3 @@
 .editable {
-  @apply border-2 border-rat rounded-md p-2;
-}
-
-.non-editable {
-
+  @apply border-2 border-koala rounded-md p-2;
 }

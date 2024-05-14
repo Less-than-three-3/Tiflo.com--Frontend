@@ -87,7 +87,7 @@ export const Comment = ({part, isEditing, setIsEditing}) => {
                        isEditing={isEditing}/>
           }
           <div contentEditable={isEditing}
-               className={"bg-inherit outline-none  h-full box-content overflow-y-hidden " + (isEditing && "editable")}
+               className={"bg-inherit outline-none h-full box-content overflow-y-hidden " + (isEditing && "editable")}
                onClick={focusText}
                onChange={changeText}
                onKeyDown={updateComment}

@@ -31,8 +31,7 @@ export const EditMenu = ({onClose, setIsEditing}) => {
         setProjectList(getProjectsListRes.data);
 
         if (pathname.includes("/project/photo")) {
-          const photoProjects = projectList.filter((project) => determineFileType(project.path) === "image");
-          console.log(photoProjects)
+          const photoProjects = getProjectsListRes.data.filter((project) => determineFileType(project.path) === "image");
           if (photoProjects.length > 0) {
             navigate(`/project/photo/${photoProjects[0].projectId}`);
           } else {

@@ -16,9 +16,11 @@ export const PhotoCommentPage = () => {
   useEffect(() => {
     (async () => {
       if (!params.projectId) {
+        console.log("no id")
         const photoProject = projectList.filter((project) => determineFileType(project.path) === "image")[0];
         navigate(`/project/photo/${photoProject.projectId}`);
       } else {
+        console.log("id")
         const getProjectRes = await api.getProjectById(params.projectId);
         if (getProjectRes.status === 200) {
           setProject(getProjectRes.data);

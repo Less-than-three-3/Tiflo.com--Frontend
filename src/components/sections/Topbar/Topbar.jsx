@@ -16,6 +16,7 @@ export const Topbar = () => {
   const [showEditMenu, setShowEditMenu] = useState(false);
   const {user, dropUser} = useUser();
   const navigate = useNavigate();
+  const {pathname} = useLocation();
 
   useEffect(() => {
     setName(project.name)
@@ -49,31 +50,38 @@ export const Topbar = () => {
 
   return (
     <>
-      <div id="topbar" className="section flex items-center justify-between px-10 py-4 font-bold">
-        <div className="text-xl">Tiflo.tech</div>
+      <div id="topbar" className="section sticky top-0 flex items-center justify-between px-10 py-4 font-bold">
+        <div className="text-xl">
+          <Link to="/">
+            Tiflo.tech
+          </Link>
+        </div>
 
         {user.isLoggedIn ?
           <>
             <div className="text-xl flex items-center">
-              <div>Проект:</div>
+              {pathname !== "/" &&
+                <>
+                  <div>Проект:</div>
 
-              {isEditing ?
-                <input className="bg-inherit border-2 border-rat rounded-md p-2 outline-none ml-2" type="text"
-                       value={name}
-                       onChange={(event) => setName(event.target.value)}
-                       onKeyDown={saveProjectName}
-                />
-                :
-                <div className="ml-2">
-                  {project.name}
-                </div>
+                  {isEditing ?
+                    <input className="bg-inherit border-2 border-rat rounded-md p-2 outline-none ml-2" type="text"
+                           value={name}
+                           onChange={(event) => setName(event.target.value)}
+                           onKeyDown={saveProjectName}
+                    />
+                    :
+                    <div className="ml-2">
+                      {project.name}
+                    </div>
+                  }
+
+                  <img src="/src/assets/icons/dots.svg" alt=""
+                       className="hover:cursor-pointer h-6 ml-2"
+                       onClick={() => setShowEditMenu(true)}
+                  />
+                </>
               }
-
-              <img src="/src/assets/icons/dots.svg" alt=""
-                   className="hover:cursor-pointer h-6 ml-2"
-                   onClick={() => setShowEditMenu(true)}
-              />
-
               {showEditMenu &&
                 <EditMenu onClose={() => setShowEditMenu(false)}
                           setIsEditing={setIsEditing}

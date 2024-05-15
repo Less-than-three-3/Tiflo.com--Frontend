@@ -9,9 +9,7 @@ export const RegForm = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");
-
   const {setUser} = useUser();
-
   const navigate = useNavigate();
 
   const reg = async () => {
@@ -27,7 +25,7 @@ export const RegForm = () => {
           isLoggedIn: true,
         })
 
-        navigate("/project/photo/new")
+        navigate("/")
       }
     }
   }

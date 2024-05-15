@@ -12,8 +12,9 @@
 @tailwind utilities;
 
 html {
-  overflow-y: hidden;
+  @apply bg-seal;
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 body {
@@ -22,7 +23,6 @@ body {
 }
 
 #root {
-  @apply bg-seal;
   height: 100vh;
   color: white;
 }

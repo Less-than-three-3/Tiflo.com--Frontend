@@ -655,12 +655,20 @@ video {
   position: relative;
 }
 
+.sticky {
+  position: sticky;
+}
+
 .bottom-10 {
   bottom: 2.5rem;
 }
 
 .right-2 {
   right: 0.5rem;
+}
+
+.top-0 {
+  top: 0px;
 }
 
 .top-4 {
@@ -689,8 +697,16 @@ video {
   margin-bottom: 2.5rem;
 }
 
+.mb-20 {
+  margin-bottom: 5rem;
+}
+
 .mb-4 {
   margin-bottom: 1rem;
+}
+
+.mb-40 {
+  margin-bottom: 10rem;
 }
 
 .mb-8 {
@@ -719,6 +735,14 @@ video {
 
 .mt-4 {
   margin-top: 1rem;
+}
+
+.mt-6 {
+  margin-top: 1.5rem;
+}
+
+.mt-40 {
+  margin-top: 10rem;
 }
 
 .box-content {
@@ -781,6 +805,10 @@ video {
   height: 100%;
 }
 
+.h-20 {
+  height: 5rem;
+}
+
 .w-1\/2 {
   width: 50%;
 }
@@ -801,8 +829,16 @@ video {
   width: 7rem;
 }
 
+.w-5\/12 {
+  width: 41.666667%;
+}
+
 .w-60 {
   width: 15rem;
+}
+
+.w-8\/12 {
+  width: 66.666667%;
 }
 
 .w-9\/12 {
@@ -815,6 +851,10 @@ video {
 
 .w-full {
   width: 100%;
+}
+
+.w-11\/12 {
+  width: 91.666667%;
 }
 
 .grow {
@@ -879,6 +919,10 @@ video {
 
 .overflow-y-scroll {
   overflow-y: scroll;
+}
+
+.text-pretty {
+  text-wrap: pretty;
 }
 
 .rounded-2xl {
@@ -960,6 +1004,10 @@ video {
   padding: 0.25rem;
 }
 
+.p-10 {
+  padding: 2.5rem;
+}
+
 .p-16 {
   padding: 4rem;
 }
@@ -974,6 +1022,10 @@ video {
 
 .p-3 {
   padding: 0.75rem;
+}
+
+.p-6 {
+  padding: 1.5rem;
 }
 
 .px-10 {
@@ -1018,6 +1070,11 @@ video {
   line-height: 2rem;
 }
 
+.text-5xl {
+  font-size: 3rem;
+  line-height: 1;
+}
+
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -1028,8 +1085,21 @@ video {
   line-height: 1.75rem;
 }
 
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
 .font-bold {
   font-weight: 700;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.italic {
+  font-style: italic;
 }
 
 .text-purple {
@@ -1066,8 +1136,10 @@ video {
 }
 
 html {
-  overflow-y: hidden;
+  --tw-bg-opacity: 1;
+  background-color: rgb(17 19 21 / var(--tw-bg-opacity));
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 body {
@@ -1076,8 +1148,6 @@ body {
 }
 
 #root {
-  --tw-bg-opacity: 1;
-  background-color: rgb(17 19 21 / var(--tw-bg-opacity));
   height: 100vh;
   color: white;
 }

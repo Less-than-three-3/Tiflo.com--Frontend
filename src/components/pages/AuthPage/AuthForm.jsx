@@ -9,8 +9,8 @@ export const AuthForm = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const {setUser} = useUser();
-
   const navigate = useNavigate();
+
   const auth = async () => {
     const signInRes = await api.signIn(login, password)
 
@@ -21,7 +21,7 @@ export const AuthForm = () => {
         isLoggedIn: true,
       })
 
-      navigate("/project/photo/new");
+      navigate("/");
     }
   }
 

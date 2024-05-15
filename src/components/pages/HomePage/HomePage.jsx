@@ -1,22 +1,25 @@
-import {useNavigate} from "react-router-dom";
+import {WelcomeSection} from "./WelcomeSection/WelcomeSection.jsx";
 import {useEffect} from "react";
-import {useUser} from "../../../hooks/useUser.js";
+import {VideoDescSection} from "./VideoDescSection/VideoDescSection.jsx";
+import {PhotoDescSection} from "./PhotoDescSection/PhotoDescSection.jsx";
 
 export const HomePage = () => {
-  const navigate = useNavigate();
-  const {user} = useUser();
-
   useEffect(() => {
-    if (user.userId === "") {
-      navigate("/auth/signIn");
-    } else {
-      navigate("/project/photo");
+    const html = document.getElementsByTagName("html")[0];
+    html.style.overflowY="scroll";
+
+    return () => {
+      html.style.overflowY="hidden";
     }
   }, [])
 
   return (
     <>
-      <h1>Home</h1>
+      <div>
+        <WelcomeSection/>
+        <PhotoDescSection/>
+        <VideoDescSection/>
+      </div>
     </>
   );
 }

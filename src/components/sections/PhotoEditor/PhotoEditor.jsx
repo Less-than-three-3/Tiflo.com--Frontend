@@ -79,7 +79,7 @@ export const PhotoEditor = () => {
               />
               <div>
                 <div>Загрузите изображение</div>
-                <div>Или перетащите изображение сюда</div>
+                <div>Кликните сюда</div>
               </div>
             </div>
           </>

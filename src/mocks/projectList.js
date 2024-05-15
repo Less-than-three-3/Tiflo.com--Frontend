@@ -1,10 +1,9 @@
-import { v4 as uuidv4 } from 'uuid';
-
 export let projectList = [
   {
     projectId: "00000000-0000-0000-0000-000000000001",
     name: "Sheep project",
     path: "/src/assets/photo/sheep.png",
+    previewPath: "/src/assets/photo/sheep.png",
     userId: "00000000-0000-0000-0000-000000000000",
     audioParts: [
       {
@@ -21,6 +20,7 @@ export let projectList = [
     projectId: "00000000-0000-0000-0000-000000000003",
     name: "Bear project",
     path: "/src/assets/photo/bear.png",
+    previewPath: "/src/assets/photo/bear.png",
     userId: "00000000-0000-0000-0000-000000000000",
     audioParts: [
       {
@@ -37,6 +37,7 @@ export let projectList = [
     projectId: "00000000-0000-0000-0000-000000000005",
     name: "Interstellar film",
     path: "/src/assets/photo/interstellar.png",
+    previewPath: "/src/assets/photo/interstellar.png",
     userId: "00000000-0000-0000-0000-000000000000",
     audioParts: [
       {
@@ -56,6 +57,7 @@ export let projectList = [
     projectId: "00000000-0000-0000-0000-000000000007",
     name: "Jason Statham",
     path: "/src/assets/video/statham.mp4",
+    previewPath: "/src/assets/photo/statham_preview.png",
     userId: "00000000-0000-0000-0000-000000000000",
     audioParts: [
       {
@@ -105,7 +107,8 @@ export let projectList = [
   {
     projectId: "00000000-0000-0000-0000-000000000013",
     name: "Shorts",
-    path: "/src/assets/shorts.mp4",
+    path: "/src/assets/video/shorts.mp4",
+    previewPath: "/src/assets/photo/shorts_preview.png",
     userId: "00000000-0000-0000-0000-000000000000",
     audioParts: [
       {

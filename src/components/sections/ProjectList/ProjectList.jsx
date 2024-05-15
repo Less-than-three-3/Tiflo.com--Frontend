@@ -60,7 +60,7 @@ export const ProjectList = () => {
             projectList.filter((project) => determineFileType(project.path) === "image" ||
               determineFileType(project.path) === "none").map((project) => (
               <div key={project.projectId}
-                   style={{backgroundImage: `url(${((api.isDeploy && project.path) ? `${host}/media/${project.path}` : project.path) || `/src/assets/icons/image_inactive.svg`})`}}
+                   style={{backgroundImage: `url(${((api.isDeploy && project.previewPath) ? `${host}/media/${project.previewPath}` : project.previewPath) || `/src/assets/icons/image_inactive.svg`})`}}
                    className="project-image"
                    onClick={() => clickExistingProject(project)}/>
             ))}
@@ -69,7 +69,7 @@ export const ProjectList = () => {
             projectList.filter((project) => determineFileType(project.path) === "video" ||
               determineFileType(project.path) === "none").map((project) => (
               <div key={project.projectId}
-                   style={{backgroundImage: `url("/src/assets/icons/image_inactive.svg")`}}
+                   style={{backgroundImage: `url(${((api.isDeploy && project.previewPath) ? `${host}/media/${project.previewPath}` : project.previewPath) || `/src/assets/icons/image_inactive.svg`})`}}
                    className="project-image"
                    onClick={() => clickExistingProject(project)}/>
             ))}

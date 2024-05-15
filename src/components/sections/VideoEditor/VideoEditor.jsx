@@ -134,7 +134,7 @@ export const VideoEditor = () => {
               />
               <div>
                 <div>Загрузите видео</div>
-                <div>Или перетащите видео сюда</div>
+                <div>Кликните сюда</div>
               </div>
             </div>
           </>

@@ -737,12 +737,12 @@ video {
   margin-top: 1rem;
 }
 
-.mt-6 {
-  margin-top: 1.5rem;
-}
-
 .mt-40 {
   margin-top: 10rem;
+}
+
+.mt-6 {
+  margin-top: 1.5rem;
 }
 
 .box-content {
@@ -805,10 +805,6 @@ video {
   height: 100%;
 }
 
-.h-20 {
-  height: 5rem;
-}
-
 .w-1\/2 {
   width: 50%;
 }
@@ -851,10 +847,6 @@ video {
 
 .w-full {
   width: 100%;
-}
-
-.w-11\/12 {
-  width: 91.666667%;
 }
 
 .grow {
@@ -1083,11 +1075,6 @@ video {
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
-}
-
-.text-3xl {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
 }
 
 .font-bold {

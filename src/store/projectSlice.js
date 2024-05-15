@@ -4,8 +4,10 @@ const projectSlice = createSlice({
   name: 'project',
   initialState: {
     projectId: "",
+    created: "",
     name: "New Project",
     path: "",
+    previewPath: "",
     audioParts: [],
   },
 
@@ -19,8 +21,10 @@ const projectSlice = createSlice({
 
     setProjectAction(state, {payload}) {
       state.projectId = payload.projectId;
+      state.created = payload.created;
       state.name = payload.name;
       state.path = payload.path;
+      state.previewPath = payload.previewPath;
       state.audioParts = payload.audioParts;
     },
 
@@ -39,12 +43,12 @@ const projectSlice = createSlice({
     },
 
     clearProjectAction(state) {
-      state = {
-        projectId: "",
-        name: "",
-        path: "",
-        audioParts: [],
-      }
+      state.projectId = "";
+      state.created = "";
+      state.name = "";
+      state.path = "";
+      state.previewPath = "";
+      state.audioParts = [];
     }
   }
 })

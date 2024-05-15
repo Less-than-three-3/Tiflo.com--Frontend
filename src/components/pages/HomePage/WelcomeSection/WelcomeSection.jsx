@@ -31,7 +31,7 @@ export const WelcomeSection = () => {
           <Divider/>
 
           <div className="mt-6">
-            <Button value="Озвучить" mode="primary"/>
+            <div className="h-10 w-full font-bold px-4 rounded-md bg-purple flex items-center">Озвучить</div>
           </div>
         </div>
       </div>

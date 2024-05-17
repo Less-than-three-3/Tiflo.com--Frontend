@@ -6,6 +6,10 @@ const userSlice = createSlice({
     userId: "",
     login: "",
     isLoggedIn: false,
+    showOnboarding: {
+      photo: true,
+      video: true,
+    }
   },
 
   reducers: {
@@ -20,11 +24,27 @@ const userSlice = createSlice({
       state.login = payload.login;
       state.isLoggedIn = true;
     },
+
+    openOnboardingAction(state) {
+      state.showOnboarding.photo = true;
+      state.showOnboarding.video = true;
+    },
+
+    closePhotoOnboardingAction(state) {
+      state.showOnboarding.photo = false;
+    },
+
+    closeVideoOnboardingAction(state) {
+      state.showOnboarding.video = false;
+    }
   }
 })
 
 export const {
   dropUserAction,
   setUserAction,
+  openOnboardingAction,
+  closePhotoOnboardingAction,
+  closeVideoOnboardingAction,
 } = userSlice.actions
 export default userSlice.reducer

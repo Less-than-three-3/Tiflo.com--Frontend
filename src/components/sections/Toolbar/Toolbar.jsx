@@ -2,10 +2,30 @@ import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useProjectList} from "../../../hooks/useProjectList.js";
 import {determineFileType} from "../../../utils/format.js";
 import {api} from "../../../api/api.js";
+import {useEffect, useRef} from "react";
+import {onboarding} from "../../../models/onboarding.js";
 
 export const Toolbar = ({states, handlers}) => {
   const {pathname} = useLocation();
   const {projectList} = useProjectList();
+  const projectsRef = useRef(null);
+  const photoRef = useRef(null);
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    onboarding.pushPhoto({
+      component: projectsRef.current,
+      data: onboarding.data.toolbarProjects,
+    });
+    onboarding.pushPhoto({
+      component: photoRef.current,
+      data: onboarding.data.toolbarPhoto,
+    });
+    onboarding.pushPhoto({
+      component: videoRef.current,
+      data: onboarding.data.toolbarVideo,
+    });
+  }, []);
 
   const openProjectList = () => {
     handlers.setIsProjectListOpened((v) => !v)
@@ -43,35 +63,29 @@ export const Toolbar = ({states, handlers}) => {
   return (
     <>
       <div className="section pt-12 w-24 flex flex-col gap-12">
-        {/*<Link to="/">*/}
-        {/*  <img src={pathname === "/" ?*/}
-        {/*    "/src/assets/icons/home_active.svg" :*/}
-        {/*    "/src/assets/icons/home_inactive.svg"}*/}
-        {/*       alt="home"*/}
-        {/*       className="toolbar-icon"/>*/}
-        {/*</Link>*/}
-
         <img src={states.isProjectListOpened ?
           "/src/assets/icons/list_active.svg" :
           "/src/assets/icons/list_inactive.svg"}
              alt="list"
              className="toolbar-icon"
-             onClick={openProjectList}/>
+             onClick={openProjectList}
+             ref={projectsRef}/>
 
         <img src={pathname.includes("/project/photo") ?
           "/src/assets/icons/image_active.svg" :
           "/src/assets/icons/image_inactive.svg"}
              alt="image"
              className="toolbar-icon"
-             onClick={openPhotoProject}/>
-
+             onClick={openPhotoProject}
+             ref={photoRef}/>
 
         <img src={pathname.includes("/project/video") ?
           "/src/assets/icons/video_active.svg" :
           "/src/assets/icons/video_inactive.svg"}
              alt="video"
              className="toolbar-icon"
-             onClick={openVideoProject}/>
+             onClick={openVideoProject}
+             ref={videoRef}/>
       </div>
     </>
   );

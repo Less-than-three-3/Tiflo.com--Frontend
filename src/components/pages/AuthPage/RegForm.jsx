@@ -9,7 +9,7 @@ export const RegForm = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");
-  const {setUser} = useUser();
+  const {setUser, openOnboarding} = useUser();
   const navigate = useNavigate();
 
   const reg = async () => {
@@ -25,7 +25,8 @@ export const RegForm = () => {
           isLoggedIn: true,
         })
 
-        navigate("/")
+        navigate("/");
+        openOnboarding();
       }
     }
   }

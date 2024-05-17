@@ -1,5 +1,10 @@
 import {useDispatch, useSelector} from "react-redux";
-import {dropUserAction, setUserAction} from "../store/userSlice.js";
+import {
+  closePhotoOnboardingAction,
+  closeVideoOnboardingAction,
+  dropUserAction, openOnboardingAction,
+  setUserAction
+} from "../store/userSlice.js";
 
 export function useUser() {
   const user = useSelector((state) => {
@@ -16,9 +21,24 @@ export function useUser() {
     dispatch(setUserAction(value));
   }
 
+  const openOnboarding = () => {
+    dispatch(openOnboardingAction());
+  }
+
+  const closePhotoOnboarding = () => {
+    dispatch(closePhotoOnboardingAction());
+  }
+
+  const closeVideoOnboarding = () => {
+    dispatch(closeVideoOnboardingAction());
+  }
+
   return {
     user,
     dropUser,
     setUser,
+    openOnboarding,
+    closePhotoOnboarding,
+    closeVideoOnboarding,
   }
 }

@@ -1,15 +1,24 @@
-import {useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {Button} from "../../UI/Button/Button.jsx";
 import {useProject} from "../../../hooks/useProject.js";
 import {api} from "../../../api/api.js";
 import {useLocation} from "react-router-dom";
 import {Comment} from "./Comment/Comment.jsx";
+import {onboarding} from "../../../models/onboarding.js";
 
 export const TextEditor = () => {
   const [isEditing, setIsEditing] = useState(false);
   const {project} = useProject();
   const location = useLocation();
   const pathname = location.pathname;
+  const textEditorRef = useRef(null);
+
+  useEffect(() => {
+    onboarding.pushPhoto({
+      component: textEditorRef.current,
+      data: onboarding.data.textEditor,
+    });
+  }, []);
 
   const toVoice = async () => {
     if (pathname.includes("/project/photo/")) {
@@ -33,7 +42,10 @@ export const TextEditor = () => {
 
   return (
     <>
-      <div className="section text-sm h-full" style={{width: "30em"}}>
+      <div className="section text-sm h-full"
+           style={{width: "30em"}}
+           ref={textEditorRef}
+      >
         <div className="grid grid-cols-2 pb-6 w-9/12">
           <div className={`${!project.projectId ? "text-inactive" : isEditing && "text-inactive"} font-bold`}
                onClick={() => setIsEditing(false)}>

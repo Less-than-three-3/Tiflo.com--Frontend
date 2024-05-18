@@ -22,7 +22,10 @@ class Mock {
   }
 
   signUp(login, password) {
-    console.log(`Sign up user\nlogin: ${login}\npassword: ${password}`)
+    return {
+      status: 201,
+      data: `Sign up user\nlogin: ${login}\npassword: ${password}`,
+    }
   }
 
   getProjectList() {

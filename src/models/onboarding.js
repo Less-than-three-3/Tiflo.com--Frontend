@@ -15,7 +15,7 @@ class Onboarding {
       side: this.#side.bottom,
     },
     toolbarProjects: {
-      text: "Здесь находятся ваши проекты Здесь находятся ваши проекты Здесь находятся ваши проекты Здесь находятся ваши проекты",
+      text: "Здесь находятся ваши проекты",
       side: this.#side.right,
     },
     toolbarPhoto: {

@@ -14,12 +14,12 @@ export const PhotoEditor = () => {
   const params = useParams();
   const uploadRef = useRef(null);
 
-  useEffect(() => {
+  const pushUploadOnboarding = () => {
     onboarding.pushPhoto({
       component: uploadRef.current,
       data: onboarding.data.photoUpload,
     });
-  }, []);
+  }
 
   const handleClick = () => {
     hiddenFileInput.current.click();
@@ -71,7 +71,9 @@ export const PhotoEditor = () => {
                  onClick={handleClick}
                  ref={uploadRef}
             >
-              <img src="/src/assets/icons/upload.svg" alt=""/>
+              <img src="/src/assets/icons/upload.svg" alt=""
+                   onLoad={pushUploadOnboarding}
+              />
               <input
                 type="file"
                 onChange={uploadFile}

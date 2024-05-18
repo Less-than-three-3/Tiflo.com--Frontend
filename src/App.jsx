@@ -9,7 +9,7 @@ import {Topbar} from "./components/sections/Topbar/Topbar.jsx";
 import {NotFoundPage} from "./components/pages/NotFoundPage/NotFoundPage.jsx";
 import {AuthRegPage} from "./components/pages/AuthPage/AuthRegPage.jsx";
 import {AuthForm} from "./components/pages/AuthPage/AuthForm.jsx";
-import {PhotoOnboarding} from "./components/onboarding/PhotoOnboarding/PhotoOnboarding.jsx";
+import {Onboarding} from "./components/onboarding/Onboarding.jsx";
 
 export const App = () => {
   return (

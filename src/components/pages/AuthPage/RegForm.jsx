@@ -4,6 +4,7 @@ import {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import {useUser} from "../../../hooks/useUser.js";
 import {api} from "../../../api/api.js";
+import {onboarding} from "../../../models/onboarding.js";
 
 export const RegForm = () => {
   const [login, setLogin] = useState("");
@@ -14,8 +15,6 @@ export const RegForm = () => {
 
   const reg = async () => {
     const regResponse = await api.signUp(login, password);
-    console.log(regResponse)
-
     if (regResponse.status === 201) {
       const authResponse = await api.signIn(login, password);
 
@@ -26,6 +25,7 @@ export const RegForm = () => {
           isLoggedIn: true,
         })
 
+        onboarding.clearOnboarding();
         navigate("/");
         openOnboarding();
       }

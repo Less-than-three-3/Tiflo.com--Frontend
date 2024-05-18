@@ -5,6 +5,7 @@ export const Hint = ({text, side, position}) => {
   const hintRef = useRef(null);
 
   useEffect(() => {
+    if (position.x !== 0 && position.y !== 0) {
       switch (side) {
         case "left":
           setHintPosition({
@@ -31,7 +32,8 @@ export const Hint = ({text, side, position}) => {
           })
           break;
       }
-  }, [text, position])
+    }
+  }, [position])
 
   const setFlexDirection = () => {
     switch (side) {

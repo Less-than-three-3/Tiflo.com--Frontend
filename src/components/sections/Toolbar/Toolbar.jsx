@@ -1,4 +1,4 @@
-import {Link, useLocation, useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {useProjectList} from "../../../hooks/useProjectList.js";
 import {determineFileType} from "../../../utils/format.js";
 import {api} from "../../../api/api.js";
@@ -12,20 +12,26 @@ export const Toolbar = ({states, handlers}) => {
   const photoRef = useRef(null);
   const videoRef = useRef(null);
 
-  useEffect(() => {
+  const pushProjectOnboarding = () => {
     onboarding.pushPhoto({
       component: projectsRef.current,
       data: onboarding.data.toolbarProjects,
     });
+  }
+
+  const pushPhotoOnboarding = () => {
     onboarding.pushPhoto({
       component: photoRef.current,
       data: onboarding.data.toolbarPhoto,
     });
+  }
+
+  const pushVideoOnboarding = () => {
     onboarding.pushPhoto({
       component: videoRef.current,
       data: onboarding.data.toolbarVideo,
     });
-  }, []);
+  }
 
   const openProjectList = () => {
     handlers.setIsProjectListOpened((v) => !v)
@@ -69,7 +75,9 @@ export const Toolbar = ({states, handlers}) => {
              alt="list"
              className="toolbar-icon"
              onClick={openProjectList}
-             ref={projectsRef}/>
+             ref={projectsRef}
+             onLoad={pushProjectOnboarding}
+        />
 
         <img src={pathname.includes("/project/photo") ?
           "/src/assets/icons/image_active.svg" :
@@ -77,7 +85,9 @@ export const Toolbar = ({states, handlers}) => {
              alt="image"
              className="toolbar-icon"
              onClick={openPhotoProject}
-             ref={photoRef}/>
+             ref={photoRef}
+             onLoad={pushPhotoOnboarding}
+        />
 
         <img src={pathname.includes("/project/video") ?
           "/src/assets/icons/video_active.svg" :
@@ -85,7 +95,9 @@ export const Toolbar = ({states, handlers}) => {
              alt="video"
              className="toolbar-icon"
              onClick={openVideoProject}
-             ref={videoRef}/>
+             ref={videoRef}
+             onLoad={pushVideoOnboarding}
+        />
       </div>
     </>
   );

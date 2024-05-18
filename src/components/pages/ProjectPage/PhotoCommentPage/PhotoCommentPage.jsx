@@ -6,7 +6,7 @@ import {api} from "../../../../api/api.js";
 import {useEffect, useState} from "react";
 import {determineFileType} from "../../../../utils/format.js";
 import {useProjectList} from "../../../../hooks/useProjectList.js";
-import {PhotoOnboarding} from "../../../onboarding/PhotoOnboarding/PhotoOnboarding.jsx";
+import {Onboarding} from "../../../onboarding/Onboarding.jsx";
 import {useUser} from "../../../../hooks/useUser.js";
 
 export const PhotoCommentPage = () => {
@@ -16,7 +16,6 @@ export const PhotoCommentPage = () => {
   const navigate = useNavigate();
   const {user} = useUser();
 
-  console.log(user)
   useEffect(() => {
     (async () => {
       if (!params.projectId) {
@@ -38,7 +37,7 @@ export const PhotoCommentPage = () => {
         <TextEditor/>
 
         {user.showOnboarding.photo &&
-          <PhotoOnboarding/>
+          <Onboarding/>
         }
 
       </div>

@@ -12,26 +12,20 @@ export const Toolbar = ({states, handlers}) => {
   const photoRef = useRef(null);
   const videoRef = useRef(null);
 
-  const pushProjectOnboarding = () => {
+  useEffect(() => {
     onboarding.pushPhoto({
       component: projectsRef.current,
       data: onboarding.data.toolbarProjects,
     });
-  }
-
-  const pushPhotoOnboarding = () => {
     onboarding.pushPhoto({
       component: photoRef.current,
       data: onboarding.data.toolbarPhoto,
     });
-  }
-
-  const pushVideoOnboarding = () => {
     onboarding.pushPhoto({
       component: videoRef.current,
       data: onboarding.data.toolbarVideo,
     });
-  }
+  }, []);
 
   const openProjectList = () => {
     handlers.setIsProjectListOpened((v) => !v)
@@ -68,7 +62,7 @@ export const Toolbar = ({states, handlers}) => {
 
   return (
     <>
-      <div className="section pt-12 w-24 flex flex-col gap-12">
+      <div className="section pt-12 flex flex-col gap-12">
         <img src={states.isProjectListOpened ?
           "/src/assets/icons/list_active.svg" :
           "/src/assets/icons/list_inactive.svg"}
@@ -76,7 +70,6 @@ export const Toolbar = ({states, handlers}) => {
              className="toolbar-icon"
              onClick={openProjectList}
              ref={projectsRef}
-             onLoad={pushProjectOnboarding}
         />
 
         <img src={pathname.includes("/project/photo") ?
@@ -86,7 +79,6 @@ export const Toolbar = ({states, handlers}) => {
              className="toolbar-icon"
              onClick={openPhotoProject}
              ref={photoRef}
-             onLoad={pushPhotoOnboarding}
         />
 
         <img src={pathname.includes("/project/video") ?
@@ -96,7 +88,6 @@ export const Toolbar = ({states, handlers}) => {
              className="toolbar-icon"
              onClick={openVideoProject}
              ref={videoRef}
-             onLoad={pushVideoOnboarding}
         />
       </div>
     </>

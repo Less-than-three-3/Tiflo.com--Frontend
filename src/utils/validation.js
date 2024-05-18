@@ -1,8 +1,8 @@
-export const validationParams = {
-  minLen: null,
-  maxLen: null,
-  allowRu: false,
-}
+// validationParams = {
+//   minLen: null,
+//   maxLen: null,
+//   allowRu: false,
+// }
 
 export const validate = (str, params) => {
   if (str.length < params.minLen) {
@@ -14,6 +14,7 @@ export const validate = (str, params) => {
   }
 
   if (!params.allowRu) {
+    console.log("asdads")
     const regex = /^[a-zA-Z0-9]+$/;
     if (!regex.test(str)) {
       return false;

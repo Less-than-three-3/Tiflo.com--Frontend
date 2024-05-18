@@ -18,13 +18,21 @@ export const PhotoCommentPage = () => {
 
   useEffect(() => {
     (async () => {
-      if (!params.projectId) {
-        const photoProject = projectList.filter((project) => determineFileType(project.path) === "image")[0];
-        navigate(`/project/photo/${photoProject.projectId}`);
-      } else {
+      if (params.projectId) {
         const getProjectRes = await api.getProjectById(params.projectId);
         if (getProjectRes.status === 200) {
           setProject(getProjectRes.data);
+        }
+        return;
+      }
+
+      if (projectList.length !== 0) {
+        const photoProject = projectList.filter((project) => determineFileType(project.path) === "image")[0];
+        navigate(`/project/photo/${photoProject.projectId}`);
+      } else {
+        const createProjectRes = await api.createProject();
+        if (createProjectRes.status === 200) {
+          navigate(`/project/photo/${createProjectRes.data.projectId}`);
         }
       }
     })()

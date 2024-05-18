@@ -5,6 +5,7 @@ import {convertNumberToTimestamp, convertNumberToTimestampWithMS} from "../../..
 import {media} from "../../../models/media.js";
 import {host} from "../../../models/consts.js";
 import {useParams} from "react-router-dom";
+import {Loader} from "../../UI/Loader/Loader.jsx";
 
 export const VideoEditor = () => {
   const {project, setProject, setProjectAudio} = useProject();
@@ -12,16 +13,16 @@ export const VideoEditor = () => {
   const [time, setTime] = useState("00:00:00");
   const [duration, setDuration] = useState("00:00:00");
   const params = useParams();
+  const [loading, setLoading] = useState(false);
 
   const handleClick = () => {
     hiddenFileInput.current.click();
   };
 
   const uploadFile = async (event) => {
+    setLoading(true);
     const uploadedFIle = event.target.files[0];
-
     const mediaResponse = await api.uploadMedia(params.projectId, uploadedFIle);
-
     const getProjectResponse = await api.getProjectById(params.projectId);
     if (getProjectResponse.status === 200) {
       setProject(getProjectResponse.data);
@@ -30,6 +31,7 @@ export const VideoEditor = () => {
         setProjectAudio(getProjectResponse.data.audioParts);
       }
     }
+    setLoading(false);
   };
 
   const [play, setPlay] = useState(false);
@@ -90,6 +92,10 @@ export const VideoEditor = () => {
                    key={params.projectId}
                    src={api.isDeploy ? `${host}/media/${project.path}` : project.path}
             />
+
+            {loading &&
+              <Loader/>
+            }
 
             <div className="flex justify-between items-center">
               <div className="flex gap-1">

@@ -14,7 +14,7 @@ export const ProjectList = () => {
 
   useEffect(() => {
     (async () => {
-      const projectListRes = await api.getProjectList()
+      const projectListRes = await api.getProjectList();
       setProjectList(projectListRes.data);
     })()
   }, [project])
@@ -41,7 +41,7 @@ export const ProjectList = () => {
 
   return (
     <>
-      <div className="section w-60">
+      <div className="section" style={{width: "250px"}}>
         <div className="flex justify-between font-bold mb-8 text-sm">
           {pathname.includes("/project/photo") &&
             <div>Описание фото</div>

@@ -13,6 +13,7 @@ export const VideoCommentPage = () => {
   const {projectList} = useProjectList()
   const params = useParams();
   const navigate = useNavigate();
+  const [loadingAudio, setLoadingAudio] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -32,10 +33,10 @@ export const VideoCommentPage = () => {
     <>
       <div className="flex flex-col grow gap-5">
         <div className="flex grow gap-5 h-3/6">
-          <VideoEditor/>
+          <VideoEditor setLoadingAudio={setLoadingAudio}/>
           <TextEditor/>
         </div>
-        <AudioEditor/>
+        <AudioEditor loadingAudio={loadingAudio}/>
       </div>
     </>
   );

@@ -17,12 +17,12 @@ export const AudioEditor = ({loadingComment}) => {
   media.setWaveform(useRef(null));
 
   useEffect(() => {
-    if (media.waveform.current && media.waveform.current.querySelector("div")) {
+    if (media.waveform.current && media.waveform.current.querySelector("div") && !loadingComment) {
       const domNode = media.waveform.current.querySelector("div");
       domNode.remove();
     }
 
-    if (project && project.audioParts && project.audioParts.length > 0) {
+    if (project && project.audioParts && project.audioParts.length > 0 && !loadingComment) {
       const audioParts = setAudioParts(project);
       audioParts.sort((a, b) => a.startPosition - b.startPosition);
       media.setMultitrack(createMultitrack(audioParts));
@@ -34,7 +34,7 @@ export const AudioEditor = ({loadingComment}) => {
         media.setTime(media.getAudioTime());
       })
     }
-  }, [project, params]);
+  }, [project, params, loadingComment]);
 
   return (
     <>

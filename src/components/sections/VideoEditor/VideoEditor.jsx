@@ -93,10 +93,6 @@ export const VideoEditor = () => {
                    src={api.isDeploy ? `${host}/media/${project.path}` : project.path}
             />
 
-            {loading &&
-              <Loader/>
-            }
-
             <div className="flex justify-between items-center">
               <div className="flex gap-1">
                 <div className="text-purple">{time}</div>
@@ -131,13 +127,21 @@ export const VideoEditor = () => {
                             video flex justify-center items-center flex-col
                             m-auto mt-10 p-20 w-96"
                  onClick={handleClick}>
-              <img src="/src/assets/icons/upload.svg" alt=""/>
-              <input
-                type="file"
-                onChange={uploadFile}
-                ref={hiddenFileInput}
-                style={{display: 'none'}}
-              />
+
+              {loading ?
+                <Loader/>
+                :
+                <>
+                  <img src="/src/assets/icons/upload.svg" alt=""/>
+                  <input
+                    type="file"
+                    onChange={uploadFile}
+                    ref={hiddenFileInput}
+                    style={{display: 'none'}}
+                  />
+                </>
+              }
+
               <div>
                 <div>Загрузите видео</div>
                 <div>Кликните сюда</div>

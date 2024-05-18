@@ -10,25 +10,25 @@ class Onboarding {
   }
 
   data = {
-    photoUpload: {
-      order: 1,
-      text: "Кликните сюда чтобы загрузить фото",
-      side: this.#side.bottom,
-    },
     toolbarProjects: {
-      order:2,
+      order: 1,
       text: "Здесь находятся ваши проекты",
       side: this.#side.right,
     },
     toolbarPhoto: {
-      order: 3,
+      order: 2,
       text: "В этом разделе вы можете создать тифлокомментарий к фото",
       side: this.#side.right,
     },
     toolbarVideo: {
-      order: 4,
+      order: 3,
       text: "А тут - к видео",
       side: this.#side.right,
+    },
+    photoUpload: {
+      order: 4,
+      text: "Кликните сюда чтобы загрузить фото",
+      side: this.#side.bottom,
     },
     textEditor: {
       order: 5,

@@ -123,30 +123,28 @@ export const VideoEditor = () => {
           </>
           :
           <>
-            <div className="border-4 border-dashed border-mouse rounded-3xl
+            {loading ?
+              <Loader/>
+              :
+              <div className="border-4 border-dashed border-mouse rounded-3xl
                             video flex justify-center items-center flex-col
                             m-auto mt-10 p-20 w-96"
-                 onClick={handleClick}>
+                   onClick={handleClick}>
+                <img src="/src/assets/icons/upload.svg" alt=""/>
+                <input
+                  type="file"
+                  onChange={uploadFile}
+                  ref={hiddenFileInput}
+                  style={{display: 'none'}}
+                />
 
-              {loading ?
-                <Loader/>
-                :
-                <>
-                  <img src="/src/assets/icons/upload.svg" alt=""/>
-                  <input
-                    type="file"
-                    onChange={uploadFile}
-                    ref={hiddenFileInput}
-                    style={{display: 'none'}}
-                  />
-                </>
-              }
 
-              <div>
-                <div>Загрузите видео</div>
-                <div>Кликните сюда</div>
+                <div>
+                  <div>Загрузите видео</div>
+                  <div>Кликните сюда</div>
+                </div>
               </div>
-            </div>
+            }
           </>
         }
       </div>

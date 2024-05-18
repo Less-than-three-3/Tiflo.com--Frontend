@@ -3,7 +3,7 @@ import {Grid} from "react-loader-spinner";
 export const Loader = () => {
   return (
     <>
-      <div className="w-full flex justify-center">
+      <div className="w-full h-full flex justify-center items-center">
         <Grid
           visible={true}
           height="80"

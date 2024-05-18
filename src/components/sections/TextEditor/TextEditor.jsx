@@ -5,6 +5,7 @@ import {api} from "../../../api/api.js";
 import {useLocation} from "react-router-dom";
 import {Comment} from "./Comment/Comment.jsx";
 import {onboarding} from "../../../models/onboarding.js";
+import {Loader} from "../../UI/Loader/Loader.jsx";
 
 export const TextEditor = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -12,6 +13,7 @@ export const TextEditor = () => {
   const location = useLocation();
   const pathname = location.pathname;
   const textEditorRef = useRef(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     onboarding.pushPhoto({
@@ -21,6 +23,7 @@ export const TextEditor = () => {
   }, []);
 
   const toVoice = async () => {
+    setLoading(true);
     if (pathname.includes("/project/photo/")) {
       const text = project.audioParts.find((part) => part.text !== "").text;
       const voiceTextRes = await api.voiceTheText(project.projectId, text);
@@ -38,6 +41,7 @@ export const TextEditor = () => {
         await api.getAudio(fileName);
       }
     }
+    setLoading(false);
   }
 
   return (
@@ -57,17 +61,21 @@ export const TextEditor = () => {
           </div>
         </div>
 
-        <div className="w-full overflow-y-auto" style={{maxHeight: "70%"}}>
-          {project.projectId && project.audioParts?.filter((part) => part.text !== "")
-            .sort((a, b) => a.start > b.start ? 1 : -1)
-            .map((part) => (
-              <Comment part={part} isEditing={isEditing} setIsEditing={setIsEditing} key={part.partId} />
-            ))}
-        </div>
+        {loading ?
+          <Loader/>
+          :
+          <div className="w-full overflow-y-auto" style={{maxHeight: "70%"}}>
+            {project.projectId && project.audioParts?.filter((part) => part.text !== "")
+              .sort((a, b) => a.start > b.start ? 1 : -1)
+              .map((part) => (
+                <Comment part={part} isEditing={isEditing} setIsEditing={setIsEditing} key={part.partId}/>
+              ))}
+          </div>
+        }
 
         {project.audioParts?.some((part) => part.text !== "") &&
           <div className="mt-4 w-28">
-            <Button mode="primary" value={"В голос"} onClick={toVoice}/>
+            <Button mode="primary" value={"To voice"} onClick={toVoice}/>
           </div>
         }
       </div>

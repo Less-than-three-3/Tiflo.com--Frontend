@@ -46,12 +46,10 @@ export const AudioEditor = () => {
           <img src="/src/assets/icons/video_inactive.svg" alt="" className="w-10 mt-16"/>
           <img src="/src/assets/icons/text.svg" alt="" className="w-10 mt-24"/>
         </div>
-        <div>
-          <div className="w-full h-full" id="waveform" ref={media.waveform}/>
-          {loading &&
-            <Loader/>
-          }
-        </div>
+        <div className="w-full h-full" id="waveform" ref={media.waveform}/>
+        {loading &&
+          <Loader/>
+        }
       </div>
     </>
   );

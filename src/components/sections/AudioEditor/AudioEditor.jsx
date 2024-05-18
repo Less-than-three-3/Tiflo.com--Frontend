@@ -8,9 +8,8 @@ import {
 import {useProject} from "../../../hooks/useProject.js";
 import {media} from "../../../models/media.js";
 import {useParams} from "react-router-dom";
-import {Loader} from "../../UI/Loader/Loader.jsx";
 
-export const AudioEditor = ({loadingAudio}) => {
+export const AudioEditor = () => {
   const {project} = useProject();
   const params = useParams();
 
@@ -43,11 +42,7 @@ export const AudioEditor = ({loadingAudio}) => {
           <img src="/src/assets/icons/video_inactive.svg" alt="" className="w-10 mt-16"/>
           <img src="/src/assets/icons/text.svg" alt="" className="w-10 mt-24"/>
         </div>
-        {loadingAudio ?
-          <Loader/>
-          :
-          <div className="w-full h-full" id="waveform" ref={media.waveform}></div>
-        }
+        <div className="w-full h-full" id="waveform" ref={media.waveform}/>
       </div>
     </>
   );

@@ -7,7 +7,7 @@ import {Comment} from "./Comment/Comment.jsx";
 import {onboarding} from "../../../models/onboarding.js";
 import {Loader} from "../../UI/Loader/Loader.jsx";
 
-export const TextEditor = () => {
+export const TextEditor = ({loadingText}) => {
   const [isEditing, setIsEditing] = useState(false);
   const {project} = useProject();
   const location = useLocation();
@@ -61,7 +61,7 @@ export const TextEditor = () => {
           </div>
         </div>
 
-        {loading ?
+        {loading || loadingText ?
           <Loader/>
           :
           <div className="w-full overflow-y-auto" style={{maxHeight: "70%"}}>

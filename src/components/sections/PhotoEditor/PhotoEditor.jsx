@@ -8,7 +8,7 @@ import {host} from "../../../models/consts.js";
 import {onboarding} from "../../../models/onboarding.js";
 import {Loader} from "../../UI/Loader/Loader.jsx";
 
-export const PhotoEditor = () => {
+export const PhotoEditor = ({setLoadingText}) => {
   const {project, setProject} = useProject();
   const hiddenFileInput = useRef(null);
   const {setProjectList} = useProjectList();
@@ -47,6 +47,7 @@ export const PhotoEditor = () => {
   };
 
   const toText = async () => {
+    setLoadingText(true);
     const createTextRes = await api.createCommentToPhoto(project.projectId, project.path);
     if (createTextRes.status === 200) {
       const getProjectRes = await api.getProjectById(project.projectId);
@@ -54,6 +55,7 @@ export const PhotoEditor = () => {
         setProject(getProjectRes.data);
       }
     }
+    setLoadingText(false);
   }
 
   return (

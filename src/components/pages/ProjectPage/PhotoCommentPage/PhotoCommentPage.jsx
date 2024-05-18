@@ -15,6 +15,7 @@ export const PhotoCommentPage = () => {
   const params = useParams();
   const navigate = useNavigate();
   const {user} = useUser();
+  const [loadingText, setLoadingText] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -41,8 +42,8 @@ export const PhotoCommentPage = () => {
   return (
     <>
       <div className="flex gap-5 grow">
-        <PhotoEditor/>
-        <TextEditor/>
+        <PhotoEditor setLoadingText={setLoadingText} />
+        <TextEditor loadingText={loadingText}/>
 
         {user.showOnboarding.photo &&
           <Onboarding/>

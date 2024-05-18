@@ -15,10 +15,6 @@ export const VideoEditor = () => {
   const params = useParams();
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    setLoading(true);
-  }, [])
-
   const handleClick = () => {
     hiddenFileInput.current.click();
   };
@@ -95,7 +91,6 @@ export const VideoEditor = () => {
                    muted
                    key={params.projectId}
                    src={api.isDeploy ? `${host}/media/${project.path}` : project.path}
-                   onLoad={() => setLoading(false)}
             />
 
             <div className="flex justify-between items-center">

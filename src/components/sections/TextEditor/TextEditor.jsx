@@ -57,7 +57,7 @@ export const TextEditor = () => {
           </div>
         </div>
 
-        <div className="w-full overflow-y-scroll" style={{height: "70%"}}>
+        <div className="w-full overflow-y-auto" style={{maxHeight: "70%"}}>
           {project.projectId && project.audioParts?.filter((part) => part.text !== "")
             .sort((a, b) => a.start > b.start ? 1 : -1)
             .map((part) => (

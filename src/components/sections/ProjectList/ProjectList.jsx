@@ -41,7 +41,7 @@ export const ProjectList = () => {
 
   return (
     <>
-      <div className="section" style={{width: "250px"}}>
+      <div className="section w-60">
         <div className="flex justify-between font-bold mb-8 text-sm">
           {pathname.includes("/project/photo") &&
             <div>Описание фото</div>
@@ -51,7 +51,7 @@ export const ProjectList = () => {
           }
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-3 overflow-y-auto" style={{maxHeight: "90%"}}>
           <div style={{backgroundImage: "url(/src/assets/icons/new_project.svg)"}}
                className="project-image"
                onClick={clickNewProject}/>

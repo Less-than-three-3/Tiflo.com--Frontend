@@ -10,7 +10,7 @@ import {media} from "../../../models/media.js";
 import {useParams} from "react-router-dom";
 import {Loader} from "../../UI/Loader/Loader.jsx";
 
-export const AudioEditor = () => {
+export const AudioEditor = ({loadingComment}) => {
   const {project} = useProject();
   const params = useParams();
   const [loading, setLoading] = useState(false);
@@ -47,7 +47,7 @@ export const AudioEditor = () => {
           <img src="/src/assets/icons/text.svg" alt="" className="w-10 mt-24"/>
         </div>
         <div className="w-full h-full" id="waveform" ref={media.waveform}/>
-        {loading &&
+        {loading || loadingComment &&
           <Loader/>
         }
       </div>

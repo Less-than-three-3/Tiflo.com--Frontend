@@ -7,7 +7,7 @@ import {host} from "../../../models/consts.js";
 import {useParams} from "react-router-dom";
 import {Loader} from "../../UI/Loader/Loader.jsx";
 
-export const VideoEditor = () => {
+export const VideoEditor = ({setLoadingComment}) => {
   const {project, setProject, setProjectAudio} = useProject();
   const hiddenFileInput = useRef(null);
   const [time, setTime] = useState("00:00:00");
@@ -72,6 +72,7 @@ export const VideoEditor = () => {
   }, [project])
 
   const generateComment = async () => {
+    setLoadingComment(true);
     const videoCommentRes = await api.createCommentToVideo(project.projectId,
       convertNumberToTimestampWithMS(media.getAudioTime()),
       convertNumberToTimestampWithMS(media.getVideoTime()));
@@ -79,6 +80,7 @@ export const VideoEditor = () => {
     if (videoCommentRes.status === 200) {
       setProjectAudio(videoCommentRes.data.audioParts);
     }
+    setLoadingComment(false);
   }
 
   return (

@@ -13,12 +13,10 @@ import {Loader} from "../../UI/Loader/Loader.jsx";
 export const AudioEditor = ({loadingComment}) => {
   const {project} = useProject();
   const params = useParams();
-  const [loading, setLoading] = useState(false);
 
   media.setWaveform(useRef(null));
 
   useEffect(() => {
-    setLoading(true);
     if (media.waveform.current && media.waveform.current.querySelector("div")) {
       const domNode = media.waveform.current.querySelector("div");
       domNode.remove();
@@ -36,7 +34,6 @@ export const AudioEditor = ({loadingComment}) => {
         media.setTime(media.getAudioTime());
       })
     }
-    setLoading(false);
   }, [project, params]);
 
   return (
@@ -46,8 +43,8 @@ export const AudioEditor = ({loadingComment}) => {
           <img src="/src/assets/icons/video_inactive.svg" alt="" className="w-10 mt-16"/>
           <img src="/src/assets/icons/text.svg" alt="" className="w-10 mt-24"/>
         </div>
-        <div className="w-full h-full" id="waveform" ref={media.waveform}/>
-        {loading || loadingComment &&
+        <div className={`${loadingComment ? "hidden" : "block"} w-full h-full`} id="waveform" ref={media.waveform}/>
+        {loadingComment &&
           <Loader/>
         }
       </div>

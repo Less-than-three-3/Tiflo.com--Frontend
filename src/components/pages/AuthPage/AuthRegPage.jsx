@@ -19,16 +19,16 @@ export const AuthRegPage = () => {
 
   return (
     <>
-      <div className="w-full h-full flex justify-center mt-10">
-        <div className="w-1/2 h-5/6 rounded-2xl bg-center bg-no-repeat bg-cover flex flex-row"
+      <div className="flex justify-center mt-10">
+        <div className="w-1/2 rounded-2xl bg-center bg-no-repeat bg-cover flex flex-row"
              style={{backgroundImage: "url(/src/assets/photo/purple.jpg)"}}>
 
-          <div className="w-full h-full backdrop-blur-2xl flex justify-center items-end">
+          <div className=" backdrop-blur-2xl flex justify-center items-end">
             <div className="w-1/2 p-16 pictureContainer" ref={pictureContainerRef}>
               Создавайте проекты с авто-генерацией тифлокомментариев и удобными инструментами для их редактирования
             </div>
 
-            <div className="w-1/2 h-full bg-raccoon p-20 rounded-md flex flex-col justify-between inputContainer"
+            <div className="w-1/2 bg-raccoon p-20 rounded-md flex flex-col justify-between inputContainer"
                  ref={inputContainerRef}>
 
               <Outlet />

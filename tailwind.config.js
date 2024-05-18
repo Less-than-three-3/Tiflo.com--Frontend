@@ -12,7 +12,8 @@ export default {
         "wolf": "#262a2e",
         "raccoon": "#1A1D1F",
         "seal": "#111315",
-        "purple": "#7A79FF"
+        "purple": "#7A79FF",
+        "soul": "#16121e",
       },
     },
   },

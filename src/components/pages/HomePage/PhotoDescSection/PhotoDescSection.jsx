@@ -9,15 +9,15 @@ export const PhotoDescSection = () => {
           <img src="/src/assets/photo/photo_desc.png" alt=""/>
         </div>
 
-        <div className="section ml-2 w-5/12 flex flex-col items-center justify-center"
+        <div className=" ml-2 w-5/12 flex flex-col items-center justify-center"
              style={{height: "85vh"}}>
-          <div className="text-2xl text-center font-semibold mb-20">
+          <div className="text-2xl text-center font-medium mb-20">
             Это уникальное решение, разработанное специально для добавления тифлокомментариев к фото и видео. Наше
             приложение поможет вам создать невидимые мосты в мире зрительного искусства для тех, кто испытывает проблемы
             со зрением.
           </div>
 
-          <div className="text-2xl text-center font-semibold mb-20">
+          <div className="text-2xl text-center font-medium mb-20">
             Легкость в создании и редактировании комментариев с использованием передовых технологий искусственного
             интеллекта.
           </div>

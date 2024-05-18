@@ -50,7 +50,7 @@ export const Topbar = () => {
 
   return (
     <>
-      <div id="topbar" className="section sticky top-0 flex items-center justify-between px-10 py-4 font-bold">
+      <div id="topbar" className={`${pathname === "/" ? "section-soul" : "section"} sticky top-0 flex items-center justify-between px-10 py-4 font-bold`}>
         <div className="text-xl">
           <Link to="/">
             Tiflo.tech
@@ -102,10 +102,7 @@ export const Topbar = () => {
           <>
             <div className="flex gap-10">
               <Link to="/auth/signIn">
-                <Button value="Войти" mode="primary"/>
-              </Link>
-              <Link to="/auth/signUp">
-                <Button value="Регистрация" mode="secondary"/>
+                <Button value="Войти | Регистрация" mode="secondary"/>
               </Link>
             </div>
           </>

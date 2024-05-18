@@ -34,7 +34,7 @@ export const RegForm = () => {
 
   return (
     <>
-      <div>
+      <div style={{height: "25em"}}>
         <div className="text-2xl mb-8">Создание аккаунта</div>
         <div>
           <div>Логин*</div>
@@ -53,7 +53,7 @@ export const RegForm = () => {
 
       <div>
         <Button value="Создать аккаунт" onClick={reg} mode="primary"/>
-        <div className="w-full flex justify-center">
+        <div className="w-full mt-4 flex justify-center">
           Уже есть аккаунт?
           <Link className="underline underline-offset-4 text-purple ml-1" to="/auth/signIn">
             Вход в аккаунт

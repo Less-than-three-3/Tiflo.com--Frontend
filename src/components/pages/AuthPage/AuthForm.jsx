@@ -27,13 +27,13 @@ export const AuthForm = () => {
 
   return (
     <>
-      <div>
+      <div style={{height: "25em"}}>
         <div className="text-2xl mb-10">Вход в аккаунт</div>
         <div>
           <div>Логин*</div>
           <Input placeholder="Введите логин" value={login} handler={setLogin}/>
         </div>
-        <div className="">
+        <div>
           <div>Пароль*</div>
           <Input placeholder="Введите пароль" value={password} handler={setPassword} type="password"/>
         </div>
@@ -41,7 +41,7 @@ export const AuthForm = () => {
 
       <div>
         <Button value="Войти в аккаунт" onClick={auth} mode="primary"/>
-        <div className="w-full flex justify-center">
+        <div className="w-full mt-4 flex justify-center">
           Нет аккаунта?
           <Link className="underline underline-offset-4 text-purple ml-1" to="/auth/signUp">
             Регистрация

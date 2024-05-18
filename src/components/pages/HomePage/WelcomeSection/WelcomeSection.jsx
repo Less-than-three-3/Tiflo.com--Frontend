@@ -1,23 +1,22 @@
 import {Divider} from "../../../UI/Divider/Divider.jsx";
-import {Button} from "../../../UI/Button/Button.jsx";
 
 export const WelcomeSection = () => {
   return (
     <>
       <div className="flex">
-        <div className="section ml-2 w-5/12 flex flex-col items-center justify-center"
+        <div className=" ml-2 w-5/12 flex flex-col items-center justify-center"
              style={{height: "85vh"}}>
           <div className="text-5xl font-semibold text-center mb-40">
             Добро пожаловать в Tiflo
           </div>
-          <div className="text-2xl font-bold italic text-center">
+          <div className="text-2xl mb-20 font-bold text-center">
             Вместе мы сделаем искусство видимым для каждого, преображая мир видео и фотографии в аудио рассказ
           </div>
         </div>
 
         <div className="w-1/2 p-10 flex flex-col items-center justify-center">
           <img src="/src/assets/photo/interstellar.png" alt=""
-               className="w-8/12 mb-20"/>
+               className="w-10/12 mb-20"/>
 
           <Divider/>
 
@@ -29,10 +28,6 @@ export const WelcomeSection = () => {
           </div>
 
           <Divider/>
-
-          <div className="mt-6">
-            <div className="h-10 w-full font-bold px-4 rounded-md bg-purple flex items-center">Озвучить</div>
-          </div>
         </div>
       </div>
     </>

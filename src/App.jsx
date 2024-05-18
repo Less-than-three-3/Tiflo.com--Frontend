@@ -9,12 +9,31 @@ import {Topbar} from "./components/sections/Topbar/Topbar.jsx";
 import {NotFoundPage} from "./components/pages/NotFoundPage/NotFoundPage.jsx";
 import {AuthRegPage} from "./components/pages/AuthPage/AuthRegPage.jsx";
 import {AuthForm} from "./components/pages/AuthPage/AuthForm.jsx";
-import {Onboarding} from "./components/onboarding/Onboarding.jsx";
+import {useEffect} from "react";
 
 export const App = () => {
+  const {pathname} = useLocation();
+
+  useEffect(() => {
+    const html = document.getElementsByTagName("html")[0];
+
+    if (pathname === "/") {
+      html.style.overflowY = "scroll";
+      html.style.backgroundImage = "url(/src/assets/photo/purple_blur_3.jpg)";
+      html.style.backgroundRepeat = "no-repeat";
+      html.style.backgroundSize = "cover";
+      html.style.backgroundPositionX = "right";
+    } else {
+      html.style.overflowY="hidden";
+      html.style.backgroundImage = "none";
+      html.style.backgroundColor = "#111315";
+    }
+  }, [pathname])
+
   return (
     <>
-      <div className="flex flex-col gap-5 h-full">
+      <div className="flex flex-col gap-5"
+      >
         <Topbar/>
 
         <Routes>

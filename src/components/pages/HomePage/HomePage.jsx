@@ -4,14 +4,7 @@ import {VideoDescSection} from "./VideoDescSection/VideoDescSection.jsx";
 import {PhotoDescSection} from "./PhotoDescSection/PhotoDescSection.jsx";
 
 export const HomePage = () => {
-  useEffect(() => {
-    const html = document.getElementsByTagName("html")[0];
-    html.style.overflowY="scroll";
 
-    return () => {
-      html.style.overflowY="hidden";
-    }
-  }, [])
 
   return (
     <>

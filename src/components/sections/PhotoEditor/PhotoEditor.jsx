@@ -1,4 +1,4 @@
-import {useEffect, useRef} from "react";
+import {useEffect, useRef, useState} from "react";
 import {Button} from "../../UI/Button/Button.jsx";
 import {useProject} from "../../../hooks/useProject.js";
 import {api} from "../../../api/api.js";
@@ -6,6 +6,7 @@ import {useProjectList} from "../../../hooks/useProjectList.js";
 import {useParams} from "react-router-dom";
 import {host} from "../../../models/consts.js";
 import {onboarding} from "../../../models/onboarding.js";
+import {Loader} from "../../UI/Loader/Loader.jsx";
 
 export const PhotoEditor = () => {
   const {project, setProject} = useProject();
@@ -13,6 +14,7 @@ export const PhotoEditor = () => {
   const {setProjectList} = useProjectList();
   const params = useParams();
   const uploadRef = useRef(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     onboarding.pushPhoto({
@@ -26,6 +28,7 @@ export const PhotoEditor = () => {
   };
 
   const uploadFile = async (event) => {
+    setLoading(true);
     const uploadedFIle = event.target.files[0];
 
     const uploadMediaRes = await api.uploadMedia(project.projectId, uploadedFIle);
@@ -40,6 +43,7 @@ export const PhotoEditor = () => {
         setProjectList(projectListRes.data);
       }
     }
+    setLoading(false);
   };
 
   const toText = async () => {
@@ -65,24 +69,28 @@ export const PhotoEditor = () => {
           </>
           :
           <>
-            <div className="relative border-4 border-dashed border-mouse rounded-3xl
+            {loading ?
+              <Loader/>
+              :
+              <div className="relative border-4 border-dashed border-mouse rounded-3xl
                             flex justify-center items-center flex-col
                             m-auto mt-10 p-20 w-96"
-                 onClick={handleClick}
-                 ref={uploadRef}
-            >
-              <img src="/src/assets/icons/upload.svg" alt=""/>
-              <input
-                type="file"
-                onChange={uploadFile}
-                ref={hiddenFileInput}
-                style={{display: 'none'}}
-              />
-              <div>
-                <div>Загрузите изображение</div>
-                <div>Кликните сюда</div>
+                   onClick={handleClick}
+                   ref={uploadRef}
+              >
+                <img src="/src/assets/icons/upload.svg" alt=""/>
+                <input
+                  type="file"
+                  onChange={uploadFile}
+                  ref={hiddenFileInput}
+                  style={{display: 'none'}}
+                />
+                <div>
+                  <div>Загрузите изображение</div>
+                  <div>Кликните сюда</div>
+                </div>
               </div>
-            </div>
+            }
           </>
         }
       </div>

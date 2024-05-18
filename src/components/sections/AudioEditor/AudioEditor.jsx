@@ -1,4 +1,4 @@
-import {useEffect, useRef} from "react";
+import {useEffect, useRef, useState} from "react";
 import {
   createMultitrack,
   getWfElements,
@@ -10,14 +10,15 @@ import {media} from "../../../models/media.js";
 import {useParams} from "react-router-dom";
 import {Loader} from "../../UI/Loader/Loader.jsx";
 
-export const AudioEditor = ({loadingAudio}) => {
+export const AudioEditor = () => {
   const {project} = useProject();
   const params = useParams();
-
+  const [loading, setLoading] = useState(false);
 
   media.setWaveform(useRef(null));
 
   useEffect(() => {
+    setLoading(true);
     if (media.waveform.current && media.waveform.current.querySelector("div")) {
       const domNode = media.waveform.current.querySelector("div");
       domNode.remove();
@@ -35,6 +36,7 @@ export const AudioEditor = ({loadingAudio}) => {
         media.setTime(media.getAudioTime());
       })
     }
+    setLoading(false);
   }, [project, params]);
 
   return (
@@ -44,10 +46,12 @@ export const AudioEditor = ({loadingAudio}) => {
           <img src="/src/assets/icons/video_inactive.svg" alt="" className="w-10 mt-16"/>
           <img src="/src/assets/icons/text.svg" alt="" className="w-10 mt-24"/>
         </div>
-        <div className="w-full h-full" id="waveform" ref={media.waveform}/>
-        {loadingAudio &&
-          <Loader/>
-        }
+        <div>
+          <div className="w-full h-full" id="waveform" ref={media.waveform}/>
+          {loading &&
+            <Loader/>
+          }
+        </div>
       </div>
     </>
   );

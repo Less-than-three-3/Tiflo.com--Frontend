@@ -48,7 +48,6 @@ class Onboarding {
   }
 
   pushPhoto(photo) {
-    console.log(photo)
     this.photo.push(photo);
     this.photo.sort((a, b) => a.data.order - b.data.order);
   }

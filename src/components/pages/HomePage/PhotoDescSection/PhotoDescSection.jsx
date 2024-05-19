@@ -1,7 +1,10 @@
 import {Button} from "../../../UI/Button/Button.jsx";
 import {Link} from "react-router-dom";
+import {useUser} from "../../../../hooks/useUser.js";
 
 export const PhotoDescSection = () => {
+  const {user} = useUser();
+
   return (
     <>
       <div className="flex mt-40">
@@ -22,9 +25,11 @@ export const PhotoDescSection = () => {
             интеллекта.
           </div>
 
-          <Link to="/project/photo">
-            <Button value="Перейти к работе с фото" mode="primary"/>
-          </Link>
+          {user.isLoggedIn &&
+            <Link to="/project/photo">
+              <Button value="Перейти к работе с фото" mode="primary"/>
+            </Link>
+          }
         </div>
       </div>
     </>

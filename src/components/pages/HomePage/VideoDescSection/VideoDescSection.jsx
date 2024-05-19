@@ -1,8 +1,11 @@
 import {Divider} from "../../../UI/Divider/Divider.jsx";
 import {Button} from "../../../UI/Button/Button.jsx";
 import {Link} from "react-router-dom";
+import {useUser} from "../../../../hooks/useUser.js";
 
 export const VideoDescSection = () => {
+  const {user} = useUser();
+
   return (
     <>
       <div className="flex mt-40 mb-10">
@@ -19,9 +22,11 @@ export const VideoDescSection = () => {
             лучшему!
           </div>
 
-          <Link to="/project/video">
-            <Button value="Перейти к работе с видео" mode="primary"/>
-          </Link>
+          {user.isLoggedIn &&
+            <Link to="/project/video">
+              <Button value="Перейти к работе с видео" mode="primary"/>
+            </Link>
+          }
         </div>
 
         <div className="w-1/2 p-10 flex flex-col items-center justify-center">

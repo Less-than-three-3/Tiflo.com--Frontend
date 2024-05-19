@@ -21,14 +21,14 @@ export const AuthRegPage = () => {
     <>
       <div className="flex justify-center mt-10">
         <div className="w-1/2 rounded-2xl bg-center bg-no-repeat bg-cover flex flex-row"
-             style={{backgroundImage: "url(/src/assets/photo/purple.jpg)"}}>
+             style={{backgroundImage: "url(/src/assets/photo/purple_blur_2.jpg)"}}>
 
-          <div className=" backdrop-blur-2xl flex justify-center items-end">
+          <div className="flex justify-center items-end">
             <div className="w-1/2 p-16 pictureContainer" ref={pictureContainerRef}>
               Создавайте проекты с авто-генерацией тифлокомментариев и удобными инструментами для их редактирования
             </div>
 
-            <div className="w-1/2 bg-raccoon p-20 rounded-md flex flex-col justify-between inputContainer"
+            <div className="w-1/2 bg-raccoon p-20 rounded-2xl flex flex-col justify-between inputContainer"
                  ref={inputContainerRef}>
 
               <Outlet />

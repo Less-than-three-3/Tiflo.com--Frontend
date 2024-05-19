@@ -68,7 +68,7 @@ export const Hint = ({text, side, position}) => {
            ref={hintRef}
       >
 
-        <div className="bg-koala p-4 rounded-xl max-w-64">
+        <div className="bg-koala p-4 rounded-xl max-w-64 text-pretty">
           {text}
         </div>
 

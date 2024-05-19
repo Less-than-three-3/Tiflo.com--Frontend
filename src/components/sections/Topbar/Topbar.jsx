@@ -62,7 +62,7 @@ export const Topbar = () => {
             <div className="text-xl flex items-center">
               {pathname !== "/" &&
                 <>
-                  <div>Проект:</div>
+                  <div>Project:</div>
 
                   {isEditing ?
                     <input className="bg-inherit border-2 border-rat rounded-md p-2 outline-none ml-2" type="text"
@@ -96,9 +96,7 @@ export const Topbar = () => {
               <Button value="Выйти" mode="secondary" onClick={logout}/>
             </div>
           </>
-
           :
-
           <>
             <div className="flex gap-10">
               <Link to="/auth/signIn">

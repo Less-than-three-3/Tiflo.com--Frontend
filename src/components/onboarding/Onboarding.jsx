@@ -13,52 +13,50 @@ export const Onboarding = () => {
 
   const item = useRef(null);
   useEffect(() => {
-
     if (item.current && item.current.component) {
       item.current.component.style.zIndex = "0";
     }
 
     setTimeout(() => {
+      item.current = onboarding.getPhoto(count);
+      if (item.current) {
+        if (item.current.component) {
+          item.current.component.style.zIndex = "1";
+        }
 
-    item.current = onboarding.showPhoto(count);
-    if (item.current) {
-      if (item.current.component) {
-        item.current.component.style.zIndex = "1";
+        setText(item.current.data.text);
+        setSide(item.current.data.side);
+
+        switch (item.current.data.side) {
+          case "left":
+            setPosition({
+              x: item.current.component.offsetLeft,
+              y: item.current.component.offsetTop + item.current.component.offsetHeight / 2,
+            });
+            break;
+          case "right":
+            setPosition({
+              x: item.current.component.offsetLeft + item.current.component.offsetWidth,
+              y: item.current.component.offsetTop + item.current.component.offsetHeight / 2,
+            });
+            break;
+          case "top":
+            setPosition({
+              x: item.current.component.offsetLeft + item.current.component.offsetWidth / 2,
+              y: item.current.component.offsetTop,
+            });
+            break;
+          case "bottom":
+            setPosition({
+              x: item.current.component.offsetLeft + item.current.component.offsetWidth / 2,
+              y: item.current.component.offsetTop + item.current.component.offsetHeight,
+            });
+            break;
+        }
+
+      } else {
+        closePhotoOnboarding();
       }
-
-      setText(item.current.data.text);
-      setSide(item.current.data.side);
-
-      switch (item.current.data.side) {
-        case "left":
-          setPosition({
-            x: item.current.component.offsetLeft,
-            y: item.current.component.offsetTop + item.current.component.offsetHeight / 2,
-          });
-          break;
-        case "right":
-          setPosition({
-            x: item.current.component.offsetLeft + item.current.component.offsetWidth,
-            y: item.current.component.offsetTop + item.current.component.offsetHeight / 2,
-          });
-          break;
-        case "top":
-          setPosition({
-            x: item.current.component.offsetLeft + item.current.component.offsetWidth / 2,
-            y: item.current.component.offsetTop,
-          });
-          break;
-        case "bottom":
-          setPosition({
-            x: item.current.component.offsetLeft + item.current.component.offsetWidth / 2,
-            y: item.current.component.offsetTop + item.current.component.offsetHeight,
-          });
-          break;
-      }
-
-    } else {
-      closePhotoOnboarding();
-    }
     }, 100)
 
 

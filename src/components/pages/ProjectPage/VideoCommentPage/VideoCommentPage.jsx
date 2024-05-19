@@ -10,20 +10,32 @@ import {determineFileType} from "../../../../utils/format.js";
 
 export const VideoCommentPage = () => {
   const {setProject} = useProject();
-  const {projectList} = useProjectList()
+  const {setProjectList} = useProjectList()
   const params = useParams();
   const navigate = useNavigate();
   const [loadingComment, setLoadingComment] = useState(false);
 
   useEffect(() => {
     (async () => {
-      if (!params.projectId) {
-        const videoProject = projectList.filter((project) => determineFileType(project.path) === "video")[0];
-        navigate(`/project/video/${videoProject.projectId}`);
-      } else {
+      if (params.projectId) {
         const getProjectRes = await api.getProjectById(params.projectId);
         if (getProjectRes.status === 200) {
           setProject(getProjectRes.data);
+        }
+        return;
+      }
+
+      const getProjectListRes = await api.getProjectList();
+      if (getProjectListRes.status === 200) {
+        setProjectList(getProjectListRes.data);
+        if (getProjectListRes.data.length !== 0) {
+          const videoProject = getProjectListRes.data.filter((project) => determineFileType(project.path) === "video")[0];
+          navigate(`/project/video/${videoProject.projectId}`);
+        } else {
+          const createProjectRes = await api.createProject();
+          if (createProjectRes.status === 200) {
+            navigate(`/project/video/${createProjectRes.data.projectId}`);
+          }
         }
       }
     })()

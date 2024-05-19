@@ -11,7 +11,7 @@ import {useUser} from "../../../../hooks/useUser.js";
 
 export const PhotoCommentPage = () => {
   const {setProject} = useProject();
-  const {projectList} = useProjectList();
+  const {setProjectList} = useProjectList();
   const params = useParams();
   const navigate = useNavigate();
   const {user} = useUser();
@@ -27,13 +27,17 @@ export const PhotoCommentPage = () => {
         return;
       }
 
-      if (projectList.length !== 0) {
-        const photoProject = projectList.filter((project) => determineFileType(project.path) === "image")[0];
-        navigate(`/project/photo/${photoProject.projectId}`);
-      } else {
-        const createProjectRes = await api.createProject();
-        if (createProjectRes.status === 200) {
-          navigate(`/project/photo/${createProjectRes.data.projectId}`);
+      const getProjectListRes = await api.getProjectList();
+      if (getProjectListRes.status === 200) {
+        setProjectList(getProjectListRes.data);
+        if (getProjectListRes.data.length !== 0) {
+          const photoProject = getProjectListRes.data.filter((project) => determineFileType(project.path) === "image")[0];
+          navigate(`/project/photo/${photoProject.projectId}`);
+        } else {
+          const createProjectRes = await api.createProject();
+          if (createProjectRes.status === 200) {
+            navigate(`/project/photo/${createProjectRes.data.projectId}`);
+          }
         }
       }
     })()

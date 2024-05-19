@@ -19,6 +19,8 @@
 .project-image {
   height: 4rem;
   width: 100%;
+  --tw-border-opacity: 1;
+  border-color: rgb(255 255 255 / var(--tw-border-opacity));
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -851,10 +853,6 @@ video {
   height: 100%;
 }
 
-.max-h-full {
-  max-height: 100%;
-}
-
 .min-h-16 {
   min-height: 4rem;
 }
@@ -887,6 +885,10 @@ video {
   width: 41.666667%;
 }
 
+.w-60 {
+  width: 15rem;
+}
+
 .w-9\/12 {
   width: 75%;
 }
@@ -897,10 +899,6 @@ video {
 
 .w-full {
   width: 100%;
-}
-
-.w-60 {
-  width: 15rem;
 }
 
 .max-w-64 {
@@ -982,10 +980,6 @@ video {
 
 .overflow-y-hidden {
   overflow-y: hidden;
-}
-
-.overflow-y-scroll {
-  overflow-y: scroll;
 }
 
 .text-pretty {

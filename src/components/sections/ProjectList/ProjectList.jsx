@@ -57,21 +57,21 @@ export const ProjectList = () => {
                onClick={clickNewProject}/>
 
           {pathname.includes("/project/photo") &&
-            projectList.filter((project) => determineFileType(project.path) === "image" ||
-              determineFileType(project.path) === "none").map((project) => (
-              <div key={project.projectId}
-                   style={{backgroundImage: `url(${((api.isDeploy && project.previewPath) ? `${host}/media/${project.previewPath}` : project.previewPath) || `/src/assets/icons/image_inactive.svg`})`}}
-                   className="project-image"
-                   onClick={() => clickExistingProject(project)}/>
+            projectList.filter((projectItem) => determineFileType(projectItem.path) === "image" ||
+              determineFileType(projectItem.path) === "none").map((projectItem) => (
+              <div key={projectItem.projectId}
+                   style={{backgroundImage: `url(${((api.isDeploy && projectItem.previewPath) ? `${host}/media/${projectItem.previewPath}` : projectItem.previewPath) || `/src/assets/icons/image_inactive.svg`})`}}
+                   className={`${project.projectId === projectItem.projectId && "border-2"} project-image`}
+                   onClick={() => clickExistingProject(projectItem)}/>
             ))}
 
           {pathname.includes("/project/video") &&
-            projectList.filter((project) => determineFileType(project.path) === "video" ||
-              determineFileType(project.path) === "none").map((project) => (
-              <div key={project.projectId}
-                   style={{backgroundImage: `url(${((api.isDeploy && project.previewPath) ? `${host}/media/${project.previewPath}` : project.previewPath) || `/src/assets/icons/image_inactive.svg`})`}}
-                   className="project-image"
-                   onClick={() => clickExistingProject(project)}/>
+            projectList.filter((projectItem) => determineFileType(projectItem.path) === "video" ||
+              determineFileType(projectItem.path) === "none").map((projectItem) => (
+              <div key={projectItem.projectId}
+                   style={{backgroundImage: `url(${((api.isDeploy && projectItem.previewPath) ? `${host}/media/${projectItem.previewPath}` : projectItem.previewPath) || `/src/assets/icons/image_inactive.svg`})`}}
+                   className={`${project.projectId === projectItem.projectId && "border-2"} project-image`}
+                   onClick={() => clickExistingProject(projectItem)}/>
             ))}
         </div>
       </div>

@@ -37,7 +37,7 @@ export const TextEditor = ({loadingText}) => {
     if (pathname.includes("/project/video/")) {
       const finalAudioRes = await api.createFinalAudio(project.projectId);
       if (finalAudioRes.status === 200) {
-        const fileName = finalAudioRes.data.path + ".wav";
+        const fileName = finalAudioRes.data.path;
         await api.getAudio(fileName);
       }
     }

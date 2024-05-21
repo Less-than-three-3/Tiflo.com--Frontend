@@ -75,7 +75,7 @@ export const TextEditor = ({loadingText}) => {
 
         {project.audioParts?.some((part) => part.text !== "") &&
           <div className="mt-4 w-28">
-            <Button mode="primary" value={"To voice"} onClick={toVoice}/>
+            <Button mode="primary" value="Озвучить" onClick={toVoice}/>
           </div>
         }
       </div>

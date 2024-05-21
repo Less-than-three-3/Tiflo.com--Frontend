@@ -33,31 +33,11 @@ export const Toolbar = ({states, handlers}) => {
 
   const navigate = useNavigate();
   const openPhotoProject = async () => {
-    let projectId;
-    const photoProjects = projectList.filter((project) => determineFileType(project.path) === "image" || determineFileType(project.path) === "none");
-    if (photoProjects.length !== 0) {
-      projectId = photoProjects[0].projectId;
-    } else {
-      const createProjectRes = await api.createProject();
-      if (createProjectRes.status === 200) {
-        projectId = createProjectRes.data.projectId;
-      }
-    }
-    navigate(`/project/photo/${projectId}`);
+    navigate(`/project/photo`);
   }
 
   const openVideoProject = async () => {
-    let projectId;
-    const videoProjects = projectList.filter((project) => determineFileType(project.path) === "video" || determineFileType(project.path) === "none");
-    if (videoProjects.length !== 0) {
-      projectId = videoProjects[0].projectId;
-    } else {
-      const createProjectRes = await api.createProject();
-      if (createProjectRes.status === 200) {
-        projectId = createProjectRes.data.projectId;
-      }
-    }
-    navigate(`/project/video/${projectId}`);
+    navigate(`/project/video`);
   }
 
   return (

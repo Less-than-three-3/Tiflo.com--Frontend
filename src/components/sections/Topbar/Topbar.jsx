@@ -56,7 +56,7 @@ export const Topbar = () => {
            flex items-center justify-between px-10 py-4 font-bold`}>
         <div className="text-xl">
           <Link to="/">
-            Tiflo.tech
+            Tiflo
           </Link>
         </div>
 

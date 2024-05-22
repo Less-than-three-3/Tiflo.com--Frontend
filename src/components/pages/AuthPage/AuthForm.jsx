@@ -7,11 +7,13 @@ import {api} from "../../../api/api.js";
 import {validatePassword} from "../../../utils/validation.js";
 
 export const AuthForm = () => {
+  const {setUser} = useUser();
+
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
-  const {setUser} = useUser();
-  const navigate = useNavigate();
   const [validationErr, setValidationErr] = useState("");
+
+  const navigate = useNavigate();
 
   const auth = async () => {
     if (!validatePassword(password)) {

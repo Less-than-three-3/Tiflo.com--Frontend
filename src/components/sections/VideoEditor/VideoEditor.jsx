@@ -6,17 +6,29 @@ import {media} from "../../../models/media.js";
 import {host} from "../../../models/consts.js";
 import {useParams} from "react-router-dom";
 import {Loader} from "../../UI/Loader/Loader.jsx";
+import {onboarding} from "../../../models/onboarding.js";
 
 export const VideoEditor = ({setLoadingComment}) => {
   const {project, setProject, setProjectAudio} = useProject();
-  const hiddenFileInput = useRef(null);
+
   const [time, setTime] = useState("00:00:00");
   const [duration, setDuration] = useState("00:00:00");
-  const params = useParams();
   const [loading, setLoading] = useState(false);
 
+  const params = useParams();
+  const hiddenFileInputRef = useRef(null);
+  const addCommentRef = useRef(null);
+
+    const pushAddCommentToOB = () => {
+      console.log(addCommentRef)
+      onboarding.pushVideo({
+        component: addCommentRef.current,
+        data: onboarding.data.addVideoComment,
+      });
+    }
+
   const handleClick = () => {
-    hiddenFileInput.current.click();
+    hiddenFileInputRef.current.click();
   };
 
   const uploadFile = async (event) => {
@@ -120,7 +132,11 @@ export const VideoEditor = ({setLoadingComment}) => {
                      onClick={forward}/>
               </div>
 
-              <img src="/src/assets/icons/add_text.svg" alt="" onClick={generateComment}/>
+              <img src="/src/assets/icons/add_text.svg" alt=""
+                   onClick={generateComment}
+                   ref={addCommentRef}
+                   onLoad={pushAddCommentToOB}
+              />
             </div>
           </>
           :
@@ -136,7 +152,7 @@ export const VideoEditor = ({setLoadingComment}) => {
                 <input
                   type="file"
                   onChange={uploadFile}
-                  ref={hiddenFileInput}
+                  ref={hiddenFileInputRef}
                   style={{display: 'none'}}
                 />
 

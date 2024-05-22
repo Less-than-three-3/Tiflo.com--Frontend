@@ -8,13 +8,14 @@ import {useProjectList} from "../../../hooks/useProjectList.js";
 import {EditMenu} from "./EditMenu/EditMenu.jsx";
 
 export const Topbar = () => {
-  const {project, setProject} = useProject();
+  const {user, dropUser} = useUser();
+  const {project, setProject, clearProject} = useProject();
   const {clearProjectList} = useProjectList();
-  const {clearProject} = useProject();
+
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState(project.name);
   const [showEditMenu, setShowEditMenu] = useState(false);
-  const {user, dropUser} = useUser();
+
   const navigate = useNavigate();
   const {pathname} = useLocation();
 
@@ -50,7 +51,9 @@ export const Topbar = () => {
 
   return (
     <>
-      <div id="topbar" className={`${pathname === "/" ? "section-soul" : "section"} sticky top-0 flex items-center justify-between px-10 py-4 font-bold`}>
+      <div id="topbar"
+           className={`${pathname === "/" ? "section-soul" : "section"} sticky top-0 
+           flex items-center justify-between px-10 py-4 font-bold`}>
         <div className="text-xl">
           <Link to="/">
             Tiflo.tech
@@ -62,10 +65,11 @@ export const Topbar = () => {
             <div className="text-xl flex items-center">
               {pathname !== "/" &&
                 <>
-                  <div>Project:</div>
+                  <div>Проект:</div>
 
                   {isEditing ?
-                    <input className="bg-inherit border-2 border-rat rounded-md p-2 outline-none ml-2" type="text"
+                    <input className="bg-inherit border-2 border-rat rounded-md p-2 outline-none ml-2"
+                           type="text"
                            value={name}
                            onChange={(event) => setName(event.target.value)}
                            onKeyDown={saveProjectName}
@@ -76,7 +80,8 @@ export const Topbar = () => {
                     </div>
                   }
 
-                  <img src="/src/assets/icons/dots.svg" alt=""
+                  <img src="/src/assets/icons/dots.svg"
+                       alt=""
                        className="hover:cursor-pointer h-6 ml-2"
                        onClick={() => setShowEditMenu(true)}
                   />
@@ -90,7 +95,8 @@ export const Topbar = () => {
             </div>
 
             <div className="flex gap-6 items-center">
-              <img src="/src/assets/icons/user.svg" alt="user"
+              <img src="/src/assets/icons/user.svg"
+                   alt="user"
                    className="w-10"/>
               <div>{user.login}</div>
               <Button value="Выйти" mode="secondary" onClick={logout}/>
@@ -100,7 +106,8 @@ export const Topbar = () => {
           <>
             <div className="flex gap-10">
               <Link to="/auth/signIn">
-                <Button value="Войти | Регистрация" mode="secondary"/>
+                <Button value="Войти | Регистрация"
+                        mode="secondary"/>
               </Link>
             </div>
           </>

@@ -1,13 +1,9 @@
 import {useLocation, useNavigate} from "react-router-dom";
-import {useProjectList} from "../../../hooks/useProjectList.js";
-import {determineFileType} from "../../../utils/format.js";
-import {api} from "../../../api/api.js";
 import {useEffect, useRef} from "react";
 import {onboarding} from "../../../models/onboarding.js";
 
 export const Toolbar = ({states, handlers}) => {
   const {pathname} = useLocation();
-  const {projectList} = useProjectList();
   const projectsRef = useRef(null);
   const photoRef = useRef(null);
   const videoRef = useRef(null);

@@ -7,13 +7,18 @@ import {useNavigate, useParams} from "react-router-dom";
 import {api} from "../../../../api/api.js";
 import {useProjectList} from "../../../../hooks/useProjectList.js";
 import {determineFileType} from "../../../../utils/format.js";
+import {Onboarding} from "../../../onboarding/Onboarding.jsx";
+import {useUser} from "../../../../hooks/useUser.js";
 
 export const VideoCommentPage = () => {
+  const {user} = useUser();
   const {setProject} = useProject();
-  const {setProjectList} = useProjectList()
+  const {setProjectList} = useProjectList();
+
+  const [loadingComment, setLoadingComment] = useState(false);
+
   const params = useParams();
   const navigate = useNavigate();
-  const [loadingComment, setLoadingComment] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -49,6 +54,11 @@ export const VideoCommentPage = () => {
           <TextEditor loadingtext={loadingComment}/>
         </div>
         <AudioEditor loadingComment={loadingComment}/>
+
+        {user.showOnboarding.video &&
+          <Onboarding/>
+        }
+
       </div>
     </>
   );

@@ -8,17 +8,22 @@ import {onboarding} from "../../../models/onboarding.js";
 import {Loader} from "../../UI/Loader/Loader.jsx";
 
 export const TextEditor = ({loadingText}) => {
-  const [isEditing, setIsEditing] = useState(false);
   const {project} = useProject();
-  const location = useLocation();
-  const pathname = location.pathname;
-  const textEditorRef = useRef(null);
+
+  const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const {pathname} = useLocation();
+  const textEditorRef = useRef(null);
 
   useEffect(() => {
     onboarding.pushPhoto({
       component: textEditorRef.current,
-      data: onboarding.data.textEditor,
+      data: onboarding.data.textEditorForPhoto,
+    });
+    onboarding.pushVideo({
+      component: textEditorRef.current,
+      data: onboarding.data.textEditorForVideo,
     });
   }, []);
 

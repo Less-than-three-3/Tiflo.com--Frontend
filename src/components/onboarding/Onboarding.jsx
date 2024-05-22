@@ -3,13 +3,18 @@ import {onboarding} from "../../models/onboarding.js";
 import {useEffect, useRef, useState} from "react";
 import {Hint} from "./Hint.jsx";
 import {useUser} from "../../hooks/useUser.js";
+import {useLocation, useNavigate} from "react-router-dom";
 
 export const Onboarding = () => {
+  const {user, closePhotoOnboarding, closeVideoOnboarding} = useUser();
+
   const [count, setCount] = useState(0);
   const [text, setText] = useState("");
   const [side, setSide] = useState("");
   const [position, setPosition] = useState({x: 0, y: 0});
-  const {closePhotoOnboarding} = useUser();
+
+  const {pathname} = useLocation();
+  const navigate = useNavigate();
 
   const item = useRef(null);
   useEffect(() => {
@@ -18,7 +23,12 @@ export const Onboarding = () => {
     }
 
     setTimeout(() => {
-      item.current = onboarding.getPhoto(count);
+      if (pathname.includes("/project/photo")) {
+        item.current = onboarding.getPhoto(count);
+      } else if (pathname.includes("/project/video")) {
+        item.current = onboarding.getVideo(count);
+      }
+
       if (item.current) {
         if (item.current.component) {
           item.current.component.style.zIndex = "1";
@@ -27,6 +37,7 @@ export const Onboarding = () => {
         setText(item.current.data.text);
         setSide(item.current.data.side);
 
+        console.log(item.current)
         switch (item.current.data.side) {
           case "left":
             setPosition({
@@ -55,11 +66,19 @@ export const Onboarding = () => {
         }
 
       } else {
-        closePhotoOnboarding();
+        if (pathname.includes("/project/photo")) {
+          closePhotoOnboarding();
+          if (user.showOnboarding.video) {
+            navigate("/project/video");
+          }
+        } else if (pathname.includes("/project/video")) {
+          closeVideoOnboarding();
+          if (user.showOnboarding.photo) {
+            navigate("/project/photo");
+          }
+        }
       }
-    }, 100)
-
-
+    }, 1000)
   }, [count])
 
   return (
@@ -71,9 +90,11 @@ export const Onboarding = () => {
       }
 
       <div className="absolute bottom-10 right-10 z-10">
-        <Button value={count < onboarding.photo.length - 1 ? "Далее" : "Понятно"}
-                onClick={() => setCount((v) => v + 1)}
-                mode="primary"/>
+        <Button
+          value={count < (pathname.includes("/project/photo") ? (onboarding.photo.length - 1) : (onboarding.video.length - 1))
+            ? "Далее" : "Понятно"}
+          onClick={() => setCount((v) => v + 1)}
+          mode="primary"/>
       </div>
     </>
   );

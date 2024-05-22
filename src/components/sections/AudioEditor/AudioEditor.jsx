@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useRef} from "react";
 import {
   createMultitrack,
   getWfElements,
@@ -9,10 +9,20 @@ import {useProject} from "../../../hooks/useProject.js";
 import {media} from "../../../models/media.js";
 import {useParams} from "react-router-dom";
 import {Loader} from "../../UI/Loader/Loader.jsx";
+import {onboarding} from "../../../models/onboarding.js";
 
 export const AudioEditor = ({loadingComment}) => {
   const {project} = useProject();
+
   const params = useParams();
+  const audioEditorRef = useRef(null);
+
+  useEffect(() => {
+    onboarding.pushVideo({
+      component: audioEditorRef.current,
+      data: onboarding.data.audioEditor,
+    });
+  }, [])
 
   media.setWaveform(useRef(null));
 
@@ -38,7 +48,9 @@ export const AudioEditor = ({loadingComment}) => {
 
   return (
     <>
-      <div className="section grow w-full flex">
+      <div className="section grow w-full flex"
+           ref={audioEditorRef}
+      >
         <div className="w-16">
           <img src="/src/assets/icons/video_inactive.svg" alt="" className="w-10 mt-16"/>
           <img src="/src/assets/icons/text.svg" alt="" className="w-10 mt-24"/>

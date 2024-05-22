@@ -34,12 +34,30 @@ class Onboarding {
       text: "Кликните сюда чтобы загрузить фото",
       side: this.#side.bottom,
     },
-    textEditor: {
+    textEditorForPhoto: {
       order: 5,
-      key: "TEXT_EDITOR",
+      key: "TEXT_EDITOR_FOR_PHOTO",
       text: "Здесь будет отображаться текстовое описание избражения",
       side: this.#side.left,
-    }
+    },
+    textEditorForVideo: {
+      order: 6,
+      key: "TEXT_EDITOR_FOR_VIDEO",
+      text: "Для видео можно создать несколько комментариев",
+      side: this.#side.left,
+    },
+    addVideoComment: {
+      order: 7,
+      key: "ADD_VIDEO_COMMENT",
+      text: "Вы можете создать текстовый комментарий к видеокадру",
+      side: this.#side.top,
+    },
+    audioEditor: {
+      order: 8,
+      key: "AUDIO_EDITOR",
+      text: "Прослушайте сгенерированные аудиодорожки",
+      side: this.#side.top,
+    },
   }
 
   constructor() {
@@ -63,6 +81,7 @@ class Onboarding {
     if (!this.video.find((item) => item.data.key === video.data.key)) {
       this.video.push(video);
       this.video.sort((a, b) => a.data.order - b.data.order);
+      console.log(this.video)
     }
   }
 

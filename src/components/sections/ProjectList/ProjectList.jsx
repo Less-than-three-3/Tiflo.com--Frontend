@@ -9,8 +9,9 @@ import {host} from "../../../models/consts.js";
 export const ProjectList = () => {
   const {project, setProject} = useProject();
   const {projectList, setProjectList} = useProjectList();
-  const navigate = useNavigate();
+
   const {pathname} = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {

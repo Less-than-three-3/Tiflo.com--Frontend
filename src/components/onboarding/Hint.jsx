@@ -12,6 +12,8 @@ export const Hint = ({text, side, position}) => {
             x: position.x - hintRef.current.offsetWidth,
             y: position.y - hintRef.current.offsetHeight / 2,
           })
+          console.log(position.x - hintRef.current.offsetHeight)
+          console.log(position.y - hintRef.current.offsetHeight / 2)
           break;
         case "right":
           setHintPosition({

@@ -2,10 +2,11 @@ import {Outlet, useLocation} from "react-router-dom";
 import {useEffect, useRef} from "react";
 
 export const AuthRegPage = () => {
+  const location = useLocation();
+
   const pictureContainerRef = useRef(null);
   const inputContainerRef = useRef(null);
 
-  const location = useLocation();
   useEffect(() => {
     if (location.pathname === "/auth/signIn") {
       pictureContainerRef.current.classList.remove('active');

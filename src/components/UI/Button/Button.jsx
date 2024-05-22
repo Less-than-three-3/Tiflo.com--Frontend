@@ -1,5 +1,6 @@
 export const Button = ({value, onClick, mode}) => {
   const segments = value.split("|");
+
   return (
     <>
       <button className={(mode === "primary" ? "btn-blue" :

@@ -10,11 +10,13 @@ import {Loader} from "../../UI/Loader/Loader.jsx";
 
 export const PhotoEditor = ({setLoadingText}) => {
   const {project, setProject} = useProject();
-  const hiddenFileInput = useRef(null);
   const {setProjectList} = useProjectList();
-  const params = useParams();
-  const uploadRef = useRef(null);
+
   const [loading, setLoading] = useState(false);
+
+  const params = useParams();
+  const hiddenFileInput = useRef(null);
+  const uploadRef = useRef(null);
 
   useEffect(() => {
     onboarding.pushPhoto({

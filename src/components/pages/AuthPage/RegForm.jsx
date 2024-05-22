@@ -8,12 +8,14 @@ import {onboarding} from "../../../models/onboarding.js";
 import {validate, validatePassword} from "../../../utils/validation.js";
 
 export const RegForm = () => {
+  const {setUser, openOnboarding} = useUser();
+
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");
-  const {setUser, openOnboarding} = useUser();
-  const navigate = useNavigate();
   const [validationErr, setValidationErr] = useState("");
+
+  const navigate = useNavigate();
 
   const reg = async () => {
     if (!validate(login, {

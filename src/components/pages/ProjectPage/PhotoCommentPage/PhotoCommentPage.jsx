@@ -10,12 +10,14 @@ import {Onboarding} from "../../../onboarding/Onboarding.jsx";
 import {useUser} from "../../../../hooks/useUser.js";
 
 export const PhotoCommentPage = () => {
+  const {user} = useUser();
   const {setProject} = useProject();
   const {setProjectList} = useProjectList();
+
+  const [loadingText, setLoadingText] = useState(false);
+
   const params = useParams();
   const navigate = useNavigate();
-  const {user} = useUser();
-  const [loadingText, setLoadingText] = useState(false);
 
   useEffect(() => {
     (async () => {

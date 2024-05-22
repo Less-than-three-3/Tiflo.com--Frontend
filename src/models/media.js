@@ -3,6 +3,7 @@ class Media {
   waveform;
   video;
 
+  splitPoint = 0;
   isPlaying = false;
   onChangeHandlers = [];
 
@@ -101,6 +102,14 @@ class Media {
     }
 
     this.video.current.currentTime = videoTime;
+  }
+
+  getSplitPoint() {
+    return this.splitPoint;
+  }
+
+  setSplitPoint(time) {
+    this.splitPoint = this.getAudioTime();
   }
 
   onMultitrackChange(callback) {

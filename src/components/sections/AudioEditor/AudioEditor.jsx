@@ -36,6 +36,7 @@ export const AudioEditor = ({loadingComment}) => {
       const audioParts = setAudioParts(project);
       audioParts.sort((a, b) => a.startPosition - b.startPosition);
       media.setMultitrack(createMultitrack(audioParts));
+      media.setTime(media.getSplitPoint());
 
       const wfElements = getWfElements(audioParts);
       moveWfElements(wfElements, audioParts);

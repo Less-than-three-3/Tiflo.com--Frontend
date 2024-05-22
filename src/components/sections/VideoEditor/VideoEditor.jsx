@@ -19,18 +19,20 @@ export const VideoEditor = ({setLoadingComment}) => {
   const hiddenFileInputRef = useRef(null);
   const addCommentRef = useRef(null);
 
-    const pushAddCommentToOB = () => {
-      onboarding.pushVideo({
-        component: addCommentRef.current,
-        data: onboarding.data.addVideoComment,
-      });
-    }
+  const pushAddCommentToOB = () => {
+    onboarding.pushVideo({
+      component: addCommentRef.current,
+      data: onboarding.data.addVideoComment,
+    });
+  }
 
   const handleClick = () => {
     hiddenFileInputRef.current.click();
   };
 
   const uploadFile = async (event) => {
+    media.setTime(0);
+
     setLoading(true);
     const uploadedFIle = event.target.files[0];
     const mediaResponse = await api.uploadMedia(params.projectId, uploadedFIle);
@@ -84,6 +86,7 @@ export const VideoEditor = ({setLoadingComment}) => {
 
   const generateComment = async () => {
     setLoadingComment(true);
+    media.setSplitPoint(media.getAudioTime());
     const videoCommentRes = await api.createCommentToVideo(project.projectId,
       convertNumberToTimestampWithMS(media.getAudioTime()),
       convertNumberToTimestampWithMS(media.getVideoTime()));
@@ -96,14 +99,14 @@ export const VideoEditor = ({setLoadingComment}) => {
 
   return (
     <>
-      <div className="section grow text-sm">
+      <div className="section grow text-sm flex flex-col justify-between">
         {project.path ?
           <>
             <video className="m-auto mb-4 h-5/6"
                    ref={media.video}
-                   muted
                    key={params.projectId}
                    src={api.isDeploy ? `${host}/media/${project.path}` : project.path}
+                   muted
             />
 
             <div className="flex justify-between items-center">
@@ -160,10 +163,10 @@ export const VideoEditor = ({setLoadingComment}) => {
               </div>
             }
             <div className="w-full flex justify-end">
-            <img src="/src/assets/icons/add_text_inactive.svg" alt=""
-                 ref={addCommentRef}
-                 onLoad={pushAddCommentToOB}
-            />
+              <img src="/src/assets/icons/add_text_inactive.svg" alt=""
+                   ref={addCommentRef}
+                   onLoad={pushAddCommentToOB}
+              />
             </div>
           </>
         }

@@ -31,11 +31,18 @@ export const PhotoCommentPage = () => {
 
       const getProjectListRes = await api.getProjectList();
       if (getProjectListRes.status === 200) {
-        setProjectList(getProjectListRes.data);
         if (getProjectListRes.data && getProjectListRes.data.length !== 0) {
-          const photoProject = getProjectListRes.data.filter((project) => (determineFileType(project.path) === "image")
+          setProjectList(getProjectListRes.data);
+          const currentProject = getProjectListRes.data.filter((project) => (determineFileType(project.path) === "photo")
             || (determineFileType(project.path) === "none"))[0];
-          navigate(`/project/photo/${photoProject.projectId}`);
+          if (currentProject) {
+            navigate(`/project/photo/${currentProject.projectId}`);
+          } else {
+            const createProjectRes = await api.createProject();
+            if (createProjectRes.status === 200) {
+              navigate(`/project/photo/${createProjectRes.data.projectId}`);
+            }
+          }
         } else {
           const createProjectRes = await api.createProject();
           if (createProjectRes.status === 200) {

@@ -32,11 +32,18 @@ export const VideoCommentPage = () => {
 
       const getProjectListRes = await api.getProjectList();
       if (getProjectListRes.status === 200) {
-        setProjectList(getProjectListRes.data);
         if (getProjectListRes.data && getProjectListRes.data.length !== 0) {
-          const videoProject = getProjectListRes.data.filter((project) => (determineFileType(project.path) === "video")
+          setProjectList(getProjectListRes.data);
+          const currentProject = getProjectListRes.data.filter((project) => (determineFileType(project.path) === "video")
             || (determineFileType(project.path) === "none"))[0];
-          navigate(`/project/video/${videoProject.projectId}`);
+          if (currentProject) {
+            navigate(`/project/video/${currentProject.projectId}`);
+          } else {
+            const createProjectRes = await api.createProject();
+            if (createProjectRes.status === 200) {
+              navigate(`/project/video/${createProjectRes.data.projectId}`);
+            }
+          }
         } else {
           const createProjectRes = await api.createProject();
           if (createProjectRes.status === 200) {

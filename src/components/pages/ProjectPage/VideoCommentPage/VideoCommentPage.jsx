@@ -34,7 +34,8 @@ export const VideoCommentPage = () => {
       if (getProjectListRes.status === 200) {
         setProjectList(getProjectListRes.data);
         if (getProjectListRes.data && getProjectListRes.data.length !== 0) {
-          const videoProject = getProjectListRes.data.filter((project) => determineFileType(project.path) === "video")[0];
+          const videoProject = getProjectListRes.data.filter((project) => (determineFileType(project.path) === "video")
+            || (determineFileType(project.path) === "none"))[0];
           navigate(`/project/video/${videoProject.projectId}`);
         } else {
           const createProjectRes = await api.createProject();

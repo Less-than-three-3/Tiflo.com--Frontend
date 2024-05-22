@@ -20,6 +20,7 @@ export const Onboarding = () => {
   useEffect(() => {
     if (item.current && item.current.component) {
       item.current.component.style.zIndex = "0";
+      item.current.component.style.pointerEvents = "auto";
     }
 
     if (pathname.includes("/project/photo")) {
@@ -31,6 +32,7 @@ export const Onboarding = () => {
     if (item.current) {
       if (item.current.component) {
         item.current.component.style.zIndex = "1";
+        item.current.component.style.pointerEvents = "none";
       }
 
       setText(item.current.data.text);

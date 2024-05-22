@@ -36,6 +36,7 @@ export const Comment = ({part, isEditing, setIsEditing}) => {
           setProject(getProjectRes.data);
         }
       }
+      setIsEditing(false);
     }
   }
 

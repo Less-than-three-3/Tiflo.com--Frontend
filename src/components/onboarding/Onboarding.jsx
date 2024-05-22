@@ -22,63 +22,61 @@ export const Onboarding = () => {
       item.current.component.style.zIndex = "0";
     }
 
-    setTimeout(() => {
+    if (pathname.includes("/project/photo")) {
+      item.current = onboarding.getPhoto(count);
+    } else if (pathname.includes("/project/video")) {
+      item.current = onboarding.getVideo(count);
+    }
+
+    if (item.current) {
+      if (item.current.component) {
+        item.current.component.style.zIndex = "1";
+      }
+
+      setText(item.current.data.text);
+      setSide(item.current.data.side);
+
+      console.log(item.current)
+      switch (item.current.data.side) {
+        case "left":
+          setPosition({
+            x: item.current.component.offsetLeft,
+            y: item.current.component.offsetTop + item.current.component.offsetHeight / 2,
+          });
+          break;
+        case "right":
+          setPosition({
+            x: item.current.component.offsetLeft + item.current.component.offsetWidth,
+            y: item.current.component.offsetTop + item.current.component.offsetHeight / 2,
+          });
+          break;
+        case "top":
+          setPosition({
+            x: item.current.component.offsetLeft + item.current.component.offsetWidth / 2,
+            y: item.current.component.offsetTop,
+          });
+          break;
+        case "bottom":
+          setPosition({
+            x: item.current.component.offsetLeft + item.current.component.offsetWidth / 2,
+            y: item.current.component.offsetTop + item.current.component.offsetHeight,
+          });
+          break;
+      }
+
+    } else {
       if (pathname.includes("/project/photo")) {
-        item.current = onboarding.getPhoto(count);
+        closePhotoOnboarding();
+        if (user.showOnboarding.video) {
+          navigate("/project/video");
+        }
       } else if (pathname.includes("/project/video")) {
-        item.current = onboarding.getVideo(count);
-      }
-
-      if (item.current) {
-        if (item.current.component) {
-          item.current.component.style.zIndex = "1";
-        }
-
-        setText(item.current.data.text);
-        setSide(item.current.data.side);
-
-        console.log(item.current)
-        switch (item.current.data.side) {
-          case "left":
-            setPosition({
-              x: item.current.component.offsetLeft,
-              y: item.current.component.offsetTop + item.current.component.offsetHeight / 2,
-            });
-            break;
-          case "right":
-            setPosition({
-              x: item.current.component.offsetLeft + item.current.component.offsetWidth,
-              y: item.current.component.offsetTop + item.current.component.offsetHeight / 2,
-            });
-            break;
-          case "top":
-            setPosition({
-              x: item.current.component.offsetLeft + item.current.component.offsetWidth / 2,
-              y: item.current.component.offsetTop,
-            });
-            break;
-          case "bottom":
-            setPosition({
-              x: item.current.component.offsetLeft + item.current.component.offsetWidth / 2,
-              y: item.current.component.offsetTop + item.current.component.offsetHeight,
-            });
-            break;
-        }
-
-      } else {
-        if (pathname.includes("/project/photo")) {
-          closePhotoOnboarding();
-          if (user.showOnboarding.video) {
-            navigate("/project/video");
-          }
-        } else if (pathname.includes("/project/video")) {
-          closeVideoOnboarding();
-          if (user.showOnboarding.photo) {
-            navigate("/project/photo");
-          }
+        closeVideoOnboarding();
+        if (user.showOnboarding.photo) {
+          navigate("/project/photo");
         }
       }
-    }, 1000)
+    }
   }, [count])
 
   return (

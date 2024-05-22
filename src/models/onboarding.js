@@ -81,7 +81,6 @@ class Onboarding {
     if (!this.video.find((item) => item.data.key === video.data.key)) {
       this.video.push(video);
       this.video.sort((a, b) => a.data.order - b.data.order);
-      console.log(this.video)
     }
   }
 

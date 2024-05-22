@@ -20,7 +20,6 @@ export const VideoEditor = ({setLoadingComment}) => {
   const addCommentRef = useRef(null);
 
     const pushAddCommentToOB = () => {
-      console.log(addCommentRef)
       onboarding.pushVideo({
         component: addCommentRef.current,
         data: onboarding.data.addVideoComment,
@@ -98,7 +97,7 @@ export const VideoEditor = ({setLoadingComment}) => {
   return (
     <>
       <div className="section grow text-sm">
-        {project.path ?
+        {!project.path ?
           <>
             <video className="m-auto mb-4 h-5/6"
                    ref={media.video}
@@ -134,8 +133,6 @@ export const VideoEditor = ({setLoadingComment}) => {
 
               <img src="/src/assets/icons/add_text.svg" alt=""
                    onClick={generateComment}
-                   ref={addCommentRef}
-                   onLoad={pushAddCommentToOB}
               />
             </div>
           </>
@@ -156,13 +153,18 @@ export const VideoEditor = ({setLoadingComment}) => {
                   style={{display: 'none'}}
                 />
 
-
                 <div>
                   <div>Загрузите видео</div>
                   <div>Кликните сюда</div>
                 </div>
               </div>
             }
+            <div className="w-full flex justify-end">
+            <img src="/src/assets/icons/add_text_inactive.svg" alt=""
+                 ref={addCommentRef}
+                 onLoad={pushAddCommentToOB}
+            />
+            </div>
           </>
         }
       </div>

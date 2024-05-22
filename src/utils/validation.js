@@ -14,7 +14,6 @@ export const validate = (str, params) => {
   }
 
   if (!params.allowRu) {
-    console.log("asdads")
     const regex = /^[a-zA-Z0-9]+$/;
     if (!regex.test(str)) {
       return false;

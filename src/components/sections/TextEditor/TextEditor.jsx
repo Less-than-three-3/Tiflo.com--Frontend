@@ -17,14 +17,18 @@ export const TextEditor = ({loadingText}) => {
   const textEditorRef = useRef(null);
 
   useEffect(() => {
-    onboarding.pushPhoto({
-      component: textEditorRef.current,
-      data: onboarding.data.textEditorForPhoto,
-    });
-    onboarding.pushVideo({
-      component: textEditorRef.current,
-      data: onboarding.data.textEditorForVideo,
-    });
+    if (pathname.includes("/project/photo")) {
+      onboarding.pushPhoto({
+        component: textEditorRef.current,
+        data: onboarding.data.textEditorForPhoto,
+      });
+    }
+    if (pathname.includes("/project/video")) {
+      onboarding.pushVideo({
+        component: textEditorRef.current,
+        data: onboarding.data.textEditorForVideo,
+      });
+    }
   }, []);
 
   const toVoice = async () => {

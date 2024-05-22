@@ -97,7 +97,7 @@ export const VideoEditor = ({setLoadingComment}) => {
   return (
     <>
       <div className="section grow text-sm">
-        {!project.path ?
+        {project.path ?
           <>
             <video className="m-auto mb-4 h-5/6"
                    ref={media.video}

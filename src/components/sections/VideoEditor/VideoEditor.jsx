@@ -31,7 +31,7 @@ export const VideoEditor = ({setLoadingComment}) => {
   };
 
   const uploadFile = async (event) => {
-    media.setTime(0);
+    media.setSplitPoint(0);
 
     setLoading(true);
     const uploadedFIle = event.target.files[0];

@@ -37,6 +37,7 @@ export const AudioEditor = ({loadingComment}) => {
       audioParts.sort((a, b) => a.startPosition - b.startPosition);
       media.setMultitrack(createMultitrack(audioParts));
       setTimeout(() => {
+        console.log(media.getSplitPoint())
         media.setTime(media.getSplitPoint());
       })
 

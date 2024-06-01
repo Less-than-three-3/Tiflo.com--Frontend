@@ -901,8 +901,20 @@ video {
   width: 100%;
 }
 
+.w-11\/12 {
+  width: 91.666667%;
+}
+
 .max-w-64 {
   max-width: 16rem;
+}
+
+.max-w-full {
+  max-width: 100%;
+}
+
+.max-w-16 {
+  max-width: 4rem;
 }
 
 .grow {
@@ -940,10 +952,6 @@ video {
 
 .items-center {
   align-items: center;
-}
-
-.justify-start {
-  justify-content: flex-start;
 }
 
 .justify-end {

@@ -59,7 +59,7 @@ export const AudioEditor = ({loadingComment}) => {
           <img src="/src/assets/icons/video_inactive.svg" alt="" className="w-10 mt-16"/>
           <img src="/src/assets/icons/text.svg" alt="" className="w-10 mt-24"/>
         </div>
-        <div className={`${loadingComment ? "hidden" : "block"} w-full h-full`} id="waveform"
+        <div className={`${loadingComment ? "hidden" : "block"} w-11/12 h-full`} id="waveform"
              ref={media.waveform}/>
 
         {loadingComment &&

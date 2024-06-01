@@ -102,7 +102,11 @@ export const VideoEditor = ({setLoadingComment}) => {
       <div className="section grow text-sm flex flex-col justify-between">
         {project.path ?
           <>
-            <video className="m-auto mb-4 h-5/6"
+            <video className="m-auto mb-4"
+                   style={{
+                     height: "80%",
+                     maxWidth: "500px",
+                   }}
                    ref={media.video}
                    key={params.projectId}
                    src={api.isDeploy ? `${host}/media/${project.path}` : project.path}

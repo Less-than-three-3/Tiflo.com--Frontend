@@ -29,6 +29,7 @@ export const Comment = ({part, isEditing, setIsEditing}) => {
 
   const updateComment = async (event) => {
     if (event.ctrlKey && event.key === 'Enter') {
+      console.log(currentText);
       const changeTextRes = await api.changeTextComment(project.projectId, event.currentTarget.id, currentText);
       if (changeTextRes.status === 200) {
         const getProjectRes = await api.getProjectById(project.projectId);

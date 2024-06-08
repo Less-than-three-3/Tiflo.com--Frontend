@@ -164,6 +164,7 @@ class Api {
   }
 
   async changeTextComment(projectId, partId, text) {
+    console.log(text)
     if (this.isDeploy) {
       const response = await axios.put(`${host}/api/projects/${projectId}/audio-part/${partId}`, {
         "text": text,

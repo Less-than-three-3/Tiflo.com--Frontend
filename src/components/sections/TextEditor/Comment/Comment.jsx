@@ -25,14 +25,15 @@ export const Comment = ({part, isEditing, setIsEditing}) => {
   }
 
   const changeText = (event) => {
+    console.log("change")
     setCurrentText(event.currentTarget.value);
   }
 
   const updateComment = async (event) => {
-    console.log("update", event.currentTarget.value)
+    console.log("text", event.currentTarget.textContent)
     if (event.ctrlKey && event.key === 'Enter') {
       console.log(event.currentTarget.value);
-      const changeTextRes = await api.changeTextComment(project.projectId, event.currentTarget.id, event.currentTarget.value);
+      const changeTextRes = await api.changeTextComment(project.projectId, event.currentTarget.id, event.currentTarget.textContent);
       if (changeTextRes.status === 200) {
         const getProjectRes = await api.getProjectById(project.projectId);
         if (getProjectRes.status === 200) {

@@ -1,1 +1,1 @@
-export const host = "http://tiflo.tech"
+export const host = "https://tiflo.tech"

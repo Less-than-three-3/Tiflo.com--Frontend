@@ -10,6 +10,7 @@ import {NotFoundPage} from "./components/pages/NotFoundPage/NotFoundPage.jsx";
 import {AuthRegPage} from "./components/pages/AuthPage/AuthRegPage.jsx";
 import {AuthForm} from "./components/pages/AuthPage/AuthForm.jsx";
 import {useEffect} from "react";
+import { assetPath } from "./models/consts.js";
 
 export const App = () => {
   const {pathname} = useLocation();
@@ -19,7 +20,7 @@ export const App = () => {
 
     if (pathname === "/") {
       html.style.overflowY = "scroll";
-      html.style.backgroundImage = "url(/src/assets/photo/purple_blur_3.jpg)";
+      html.style.backgroundImage = `url(${assetPath}/photo/purple_blur_3.jpg)`;
       html.style.backgroundRepeat = "no-repeat";
       html.style.backgroundSize = "cover";
       html.style.backgroundPositionX = "right";

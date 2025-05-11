@@ -1,6 +1,7 @@
 import {Button} from "../../../UI/Button/Button.jsx";
 import {Link} from "react-router-dom";
 import {useUser} from "../../../../hooks/useUser.js";
+import { assetPath } from "../../../../models/consts.js";
 
 export const PhotoDescSection = () => {
   const {user} = useUser();
@@ -9,7 +10,7 @@ export const PhotoDescSection = () => {
     <>
       <div className="flex mt-40">
         <div className="w-1/2 p-10 flex flex-col items-center justify-center">
-          <img src="/src/assets/photo/photo_desc.png" alt=""/>
+          <img src={`${assetPath}/photo/photo_desc.png`} alt=""/>
         </div>
 
         <div className=" ml-2 w-5/12 flex flex-col items-center justify-center"

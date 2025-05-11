@@ -2,6 +2,7 @@ import {Divider} from "../../../UI/Divider/Divider.jsx";
 import {Button} from "../../../UI/Button/Button.jsx";
 import {Link} from "react-router-dom";
 import {useUser} from "../../../../hooks/useUser.js";
+import { assetPath } from "../../../../models/consts.js";
 
 export const VideoDescSection = () => {
   const {user} = useUser();
@@ -30,7 +31,7 @@ export const VideoDescSection = () => {
         </div>
 
         <div className="w-1/2 p-10 flex flex-col items-center justify-center">
-          <img src="/src/assets/photo/video_desc.png" alt=""/>
+          <img src={`${assetPath}/photo/video_desc.png`} alt=""/>
         </div>
       </div>
     </>

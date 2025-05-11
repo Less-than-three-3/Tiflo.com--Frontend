@@ -3,7 +3,7 @@ import {useProject} from "../../../hooks/useProject.js";
 import {api} from "../../../api/api.js";
 import {convertNumberToTimestamp, convertNumberToTimestampWithMS} from "../../../utils/format.js";
 import {media} from "../../../models/media.js";
-import {host} from "../../../models/consts.js";
+import {host, iconPath} from "../../../models/consts.js";
 import {useParams} from "react-router-dom";
 import {Loader} from "../../UI/Loader/Loader.jsx";
 import {onboarding} from "../../../models/onboarding.js";
@@ -121,24 +121,24 @@ export const VideoEditor = ({setLoadingComment}) => {
               </div>
 
               <div className="flex items-center gap-3">
-                <img src="/src/assets/icons/past.svg" alt=""
+                <img src={`${iconPath}/past.svg`} alt=""
                      className="h-5"
                      onClick={back}/>
                 {play ?
-                  <img src="/src/assets/icons/pause.svg" alt=""
+                  <img src={`${iconPath}/pause.svg`} alt=""
                        className="h-6"
                        onClick={clickPause}/>
                   :
-                  <img src="/src/assets/icons/play.svg" alt=""
+                  <img src={`${iconPath}/play.svg`} alt=""
                        className="h-6"
                        onClick={clickPlay}/>
                 }
-                <img src="/src/assets/icons/forward.svg" alt=""
+                <img src={`${iconPath}/forward.svg`} alt=""
                      className="h-5"
                      onClick={forward}/>
               </div>
 
-              <img src="/src/assets/icons/add_text.svg" alt=""
+              <img src={`${iconPath}/add_text.svg`} alt=""
                    onClick={generateComment}
               />
             </div>
@@ -152,7 +152,7 @@ export const VideoEditor = ({setLoadingComment}) => {
                             video flex justify-center items-center flex-col
                             m-auto mt-10 p-20 w-96"
                    onClick={handleClick}>
-                <img src="/src/assets/icons/upload.svg" alt=""/>
+                <img src={`${iconPath}/upload.svg`} alt=""/>
                 <input
                   type="file"
                   onChange={uploadFile}
@@ -167,7 +167,7 @@ export const VideoEditor = ({setLoadingComment}) => {
               </div>
             }
             <div className="w-full flex justify-end">
-              <img src="/src/assets/icons/add_text_inactive.svg" alt=""
+              <img src={`${iconPath}/add_text_inactive.svg`} alt=""
                    ref={addCommentRef}
                    onLoad={pushAddCommentToOB}
               />

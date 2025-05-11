@@ -4,7 +4,7 @@ import {useProject} from "../../../hooks/useProject.js";
 import {api} from "../../../api/api.js";
 import {useProjectList} from "../../../hooks/useProjectList.js";
 import {useParams} from "react-router-dom";
-import {host} from "../../../models/consts.js";
+import {host, iconPath} from "../../../models/consts.js";
 import {onboarding} from "../../../models/onboarding.js";
 import {Loader} from "../../UI/Loader/Loader.jsx";
 
@@ -82,7 +82,7 @@ export const PhotoEditor = ({setLoadingText}) => {
                    onClick={handleClick}
                    ref={uploadRef}
               >
-                <img src="/src/assets/icons/upload.svg" alt=""/>
+                <img src={`${iconPath}/upload.svg`} alt=""/>
                 <input
                   type="file"
                   onChange={uploadFile}

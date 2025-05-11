@@ -1,6 +1,7 @@
 import {useLocation, useNavigate} from "react-router-dom";
 import {useEffect, useRef} from "react";
 import {onboarding} from "../../../models/onboarding.js";
+import { iconPath } from "../../../models/consts.js";
 
 export const Toolbar = ({states, handlers}) => {
   const {pathname} = useLocation();
@@ -40,8 +41,8 @@ export const Toolbar = ({states, handlers}) => {
     <>
       <div className="section pt-12 flex flex-col gap-12">
         <img src={states.isProjectListOpened ?
-          "/src/assets/icons/list_active.svg" :
-          "/src/assets/icons/list_inactive.svg"}
+          `${iconPath}/list_active.svg` :
+          `${iconPath}/list_inactive.svg`}
              alt="list"
              className="toolbar-icon"
              onClick={openProjectList}
@@ -49,8 +50,8 @@ export const Toolbar = ({states, handlers}) => {
         />
 
         <img src={pathname.includes("/project/photo") ?
-          "/src/assets/icons/image_active.svg" :
-          "/src/assets/icons/image_inactive.svg"}
+          `${iconPath}/image_active.svg` :
+          `${iconPath}/image_inactive.svg`}
              alt="image"
              className="toolbar-icon"
              onClick={openPhotoProject}
@@ -58,8 +59,8 @@ export const Toolbar = ({states, handlers}) => {
         />
 
         <img src={pathname.includes("/project/video") ?
-          "/src/assets/icons/video_active.svg" :
-          "/src/assets/icons/video_inactive.svg"}
+          `${iconPath}/video_active.svg` :
+          `${iconPath}/video_inactive.svg`}
              alt="video"
              className="toolbar-icon"
              onClick={openVideoProject}

@@ -6,6 +6,7 @@ import {useUser} from "../../../hooks/useUser.js";
 import {api} from "../../../api/api.js";
 import {useProjectList} from "../../../hooks/useProjectList.js";
 import {EditMenu} from "./EditMenu/EditMenu.jsx";
+import { iconPath } from "../../../models/consts.js";
 
 export const Topbar = () => {
   const {user, dropUser} = useUser();
@@ -80,7 +81,7 @@ export const Topbar = () => {
                     </div>
                   }
 
-                  <img src="/src/assets/icons/dots.svg"
+                  <img src={`${iconPath}/dots.svg`}
                        alt=""
                        className="hover:cursor-pointer h-6 ml-2"
                        onClick={() => setShowEditMenu(true)}
@@ -95,7 +96,7 @@ export const Topbar = () => {
             </div>
 
             <div className="flex gap-6 items-center">
-              <img src="/src/assets/icons/user.svg"
+              <img src={`${iconPath}/user.svg`}
                    alt="user"
                    className="w-10"/>
               <div>{user.login}</div>

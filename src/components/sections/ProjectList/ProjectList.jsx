@@ -4,7 +4,7 @@ import {useProjectList} from "../../../hooks/useProjectList.js";
 import {api} from "../../../api/api.js";
 import {useLocation, useNavigate} from "react-router-dom";
 import {determineFileType} from "../../../utils/format.js";
-import {host} from "../../../models/consts.js";
+import {host, iconPath} from "../../../models/consts.js";
 
 export const ProjectList = () => {
   const {project, setProject} = useProject();
@@ -53,7 +53,7 @@ export const ProjectList = () => {
         </div>
 
         <div className="grid grid-cols-2 gap-3 overflow-y-auto" style={{maxHeight: "90%"}}>
-          <div style={{backgroundImage: "url(/src/assets/icons/new_project.svg)"}}
+          <div style={{backgroundImage: `url(${iconPath}/new_project.svg)`}}
                className="project-image"
                onClick={clickNewProject}/>
 
@@ -61,7 +61,7 @@ export const ProjectList = () => {
             projectList.filter((projectItem) => determineFileType(projectItem.path) === "image" ||
               determineFileType(projectItem.path) === "none").map((projectItem) => (
               <div key={projectItem.projectId}
-                   style={{backgroundImage: `url(${((api.isDeploy && projectItem.previewPath) ? `${host}/media/${projectItem.previewPath}` : projectItem.previewPath) || `/src/assets/icons/image_inactive.svg`})`}}
+                   style={{backgroundImage: `url(${((api.isDeploy && projectItem.previewPath) ? `${host}/media/${projectItem.previewPath}` : projectItem.previewPath) || `${iconPath}/image_inactive.svg`})`}}
                    className={`${project.projectId === projectItem.projectId && "border-2"} project-image`}
                    onClick={() => clickExistingProject(projectItem)}/>
             ))}
@@ -70,7 +70,7 @@ export const ProjectList = () => {
             projectList.filter((projectItem) => determineFileType(projectItem.path) === "video" ||
               determineFileType(projectItem.path) === "none").map((projectItem) => (
               <div key={projectItem.projectId}
-                   style={{backgroundImage: `url(${((api.isDeploy && projectItem.previewPath) ? `${host}/media/${projectItem.previewPath}` : projectItem.previewPath) || `/src/assets/icons/image_inactive.svg`})`}}
+                   style={{backgroundImage: `url(${((api.isDeploy && projectItem.previewPath) ? `${host}/media/${projectItem.previewPath}` : projectItem.previewPath) || `${iconPath}/image_inactive.svg`})`}}
                    className={`${project.projectId === projectItem.projectId && "border-2"} project-image`}
                    onClick={() => clickExistingProject(projectItem)}/>
             ))}

@@ -1,3 +1,4 @@
+import { assetPath } from "../../../../models/consts.js";
 import {Divider} from "../../../UI/Divider/Divider.jsx";
 
 export const WelcomeSection = () => {
@@ -15,7 +16,7 @@ export const WelcomeSection = () => {
         </div>
 
         <div className="w-1/2 p-10 flex flex-col items-center justify-center">
-          <img src="/src/assets/photo/interstellar.png" alt=""
+          <img src={`${assetPath}/photo/interstellar.png`} alt=""
                className="w-10/12 mb-20"/>
 
           <Divider/>

@@ -1,5 +1,6 @@
 import {Outlet, useLocation} from "react-router-dom";
 import {useEffect, useRef} from "react";
+import { assetPath } from "../../../models/consts";
 
 export const AuthRegPage = () => {
   const location = useLocation();
@@ -22,7 +23,7 @@ export const AuthRegPage = () => {
     <>
       <div className="flex justify-center mt-10">
         <div className="w-1/2 rounded-2xl bg-center bg-no-repeat bg-cover flex flex-row"
-             style={{backgroundImage: "url(/src/assets/photo/purple_blur_2.jpg)"}}>
+             style={{backgroundImage: `url(${assetPath}/photo/purple_blur_2.jpg)`}}>
 
           <div className="flex justify-center items-end">
             <div className="w-1/2 p-16 pictureContainer" ref={pictureContainerRef}>

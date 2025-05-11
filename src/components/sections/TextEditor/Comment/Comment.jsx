@@ -4,6 +4,7 @@ import {useLocation} from "react-router-dom";
 import {useState} from "react";
 import {useProject} from "../../../../hooks/useProject.js";
 import {api} from "../../../../api/api.js";
+import { iconPath } from "../../../../models/consts.js";
 
 export const Comment = ({part, isEditing, setIsEditing}) => {
   const {project, setProject} = useProject();
@@ -76,7 +77,7 @@ export const Comment = ({part, isEditing, setIsEditing}) => {
          onMouseOut={() => showDeleteBtn(false, part.partId)}>
 
       {pathname.includes("/project/video") && isEditing &&
-        <img src="/src/assets/icons/trash_can.svg" alt=""
+        <img src={`${iconPath}/trash_can.svg`} alt=""
              className="h-5 hidden absolute right-2 bottom-10"
              id={`delete_${part.partId}`}
              onClick={() => deletePart(part.partId)}

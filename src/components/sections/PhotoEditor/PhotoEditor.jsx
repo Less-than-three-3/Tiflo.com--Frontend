@@ -56,6 +56,14 @@ export const PhotoEditor = ({setLoadingText}) => {
       if (getProjectRes.status === 200) {
         setProject(getProjectRes.data);
       }
+    } else if (createTextRes.status >= 500) {
+      console.log("Image to text service is unavailable!");
+      const getProjectRes = await api.getProjectById(project.projectId);
+      if (getProjectRes.status === 200) {
+        console.log("Сервис описания изображений не доступен!")
+        getProjectRes.data.audioParts[0].text = "<Сервис описания изображений не доступен, но вы можете сами написать комментарий>"
+        setProject(getProjectRes.data);
+      }
     }
     setLoadingText(false);
   }

@@ -113,9 +113,17 @@ class Api {
 
   async createCommentToPhoto(projectId, imageId) {
     if (this.isDeploy) {
-      const response = await axios.post(`${host}/api/projects/${projectId}/image/comment`, {
-        "name": imageId,
-      });
+      let response;
+      try {
+        response = await axios.post(`${host}/api/projects/${projectId}/image/comment`, {
+          "name": imageId,
+        });
+      } catch (err) {
+        response = {
+          status: err.status,
+          data: err.response.data,
+        }
+      }
       return response;
     } else {
       return mock.createCommentToPhoto(projectId, imageId);
@@ -136,9 +144,17 @@ class Api {
 
   async voiceTheText(projectId, text) {
     if (this.isDeploy) {
-      const response = await axios.post(`${host}/api/projects/${projectId}/voice`, {
-        "text": text,
-      });
+      let response;
+      try {
+        response = await axios.post(`${host}/api/projects/${projectId}/voice`, {
+          "text": text,
+        });
+      } catch (err) {
+        response = {
+          status: err.status,
+          data: err.response.data,
+        }
+      }
       return response;
     } else {
       return mock.voiceComment(projectId, text)
@@ -198,6 +214,22 @@ class Api {
         // clean up "a" element & remove ObjectURL
         document.body.removeChild(link);
         URL.revokeObjectURL(href);
+      }
+    }
+  }
+
+  async setAudio(projectId, partId, formData) {
+    if (this.isDeploy) {
+      const response = axios.post(`${host}/api/projects/${projectId}/audio-part/${partId}/upload`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      return response;
+    } else {
+      return {
+        status: 200,
+        data: undefined, 
       }
     }
   }

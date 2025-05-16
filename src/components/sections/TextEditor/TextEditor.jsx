@@ -7,21 +7,25 @@ import {Comment} from "./Comment/Comment.jsx";
 import {onboarding} from "../../../models/onboarding.js";
 import {Loader} from "../../UI/Loader/Loader.jsx";
 import { useVoice } from "../../../hooks/useVoice.js";
+import { iconPath } from "../../../models/consts.js";
 
 export const TextEditor = ({loadingText}) => {
   const {project} = useProject();
   const voice = useVoice();
+  const [recording, setRecording] = useState(false);
 
   const startVoice = (partId) => {
     if (voice) {
       console.log("start recording");
       voice.start();
+      setRecording(true);
     }
   };
 
   const stopVoice = async (partId) => {
     console.log("stop recording");
     const blob = await voice.stop();
+    setRecording(false);
     
     if (blob) {
       const formData = new FormData();
@@ -30,7 +34,11 @@ export const TextEditor = ({loadingText}) => {
       console.log("voiceData", formData);
       
       try {
-        await api.setAudio(project.projectId, partId, formData);
+        const response = await api.setAudio(project.projectId, partId, formData);
+        if (response.status === 200) {
+          console.log(response.data);
+          await api.getAudio(response.data.filepath);
+        }
         voice.clear();
       } catch (error) {
         console.error("Upload error:", error);
@@ -45,7 +53,7 @@ export const TextEditor = ({loadingText}) => {
 
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [showAudioPopup, setShowAudioPopup] = useState(true);
+  const [showAudioPopup, setShowAudioPopup] = useState(false);
 
   const {pathname} = useLocation();
   const textEditorRef = useRef(null);
@@ -88,26 +96,6 @@ export const TextEditor = ({loadingText}) => {
     }
     setLoading(false);
   }
-
-  // const startVoice = () => {
-  //   console.log("start recording")
-  //   voice.start();
-  // }
-
-  // const stopVoice = () => {
-  //   console.log("stop recording")
-
-  //   voice.stop();
-  //   setTimeout(() => {
-  //     const voiceData = voice.getVoiceData();
-  //     console.log("voiceData", voiceData);
-  //   }, 100);
-  // }
-
-  // const closeModal = () => {
-  //   setShowAudioPopup(false);
-  //   voice.clear();
-  // }
 
   return (
     <>
@@ -157,8 +145,15 @@ export const TextEditor = ({loadingText}) => {
                 .sort((a, b) => a.start > b.start ? 1 : -1)
                 .map((part) => (
                   <div key={part.partId} className="flex justify-between w-full mt-4">
-                    <div className="text-sm">{part.text}</div>
+                    <div className="text-sm w-1/2">{part.text}</div>
+
                     <div className="flex gap-2">
+                      <img src={recording ?
+                        `${iconPath}/mic_active.svg` :
+                        `${iconPath}/mic_inactive.svg`}
+                           alt="mic"
+                        style={{width: "30px"}}
+                      />
                       <Button value="Старт" mode="primary" onClick={() => startVoice(part.partId)}/>
                       <Button value="Стоп" mode="secondary" onClick={() => stopVoice(part.partId)}/>
                     </div>

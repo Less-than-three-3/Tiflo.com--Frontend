@@ -8,9 +8,14 @@ import {host, iconPath} from "../../../models/consts.js";
 import {onboarding} from "../../../models/onboarding.js";
 import {Loader} from "../../UI/Loader/Loader.jsx";
 
+const allowedExtensions = ['jpg', 'jpeg', 'png'];
+const maxSize = 10 * 1024 * 1024; 
+
 export const PhotoEditor = ({setLoadingText}) => {
   const {project, setProject} = useProject();
   const {setProjectList} = useProjectList();
+  const [invalidExt, setInvalidExt] = useState(false);
+  const [isLargeFile, setIsLargeFile] = useState(false);
 
   const [loading, setLoading] = useState(false);
 
@@ -31,9 +36,30 @@ export const PhotoEditor = ({setLoadingText}) => {
 
   const uploadFile = async (event) => {
     setLoading(true);
-    const uploadedFIle = event.target.files[0];
+    const uploadedFile = event.target.files[0];
 
-    const uploadMediaRes = await api.uploadMedia(project.projectId, uploadedFIle);
+    const fileName = uploadedFile.name;
+    const fileExtension = fileName
+      .split('.')
+      .pop()
+      .toLowerCase();
+
+    if (!allowedExtensions.includes(fileExtension)) {
+      setInvalidExt(true);
+      setLoading(false);
+      return;
+    }
+
+    if (uploadedFile.size > maxSize) {
+      setIsLargeFile(true);
+      setLoading(false);
+      return;
+    }
+
+    setInvalidExt(false);
+    setIsLargeFile(false);
+
+    const uploadMediaRes = await api.uploadMedia(project.projectId, uploadedFile);
     if (uploadMediaRes.status === 200) {
       const getProjectRes = await api.getProjectById(params.projectId);
       if (getProjectRes.status === 200) {
@@ -59,6 +85,8 @@ export const PhotoEditor = ({setLoadingText}) => {
     } else if (createTextRes.status >= 500) {
       console.log("Image to text service is unavailable!");
       const getProjectRes = await api.getProjectById(project.projectId);
+      console.log("get project response", getProjectRes)
+      setLoadingText(false);
       if (getProjectRes.status === 200) {
         console.log("Сервис описания изображений не доступен!")
         getProjectRes.data.audioParts[0].text = "<Сервис описания изображений не доступен, но вы можете сами написать комментарий>"
@@ -100,6 +128,20 @@ export const PhotoEditor = ({setLoadingText}) => {
                 <div>
                   <div>Загрузите изображение</div>
                   <div>Кликните сюда</div>
+                  
+                  {invalidExt &&
+                    <>
+                      <div className="mt-4">НЕДОПУСТИМЫЙ ФОРМАТ ФАЙЛА!</div>
+                      <div>Допускаются форматы .jpg, .jpeg, .png</div> 
+                    </>
+                  }
+
+                  {isLargeFile &&
+                    <>
+                      <div className="mt-4">НЕДОПУСТИМЫЙ РАЗМЕР ФАЙЛА!</div>
+                      <div>Загрузите файл размером до 10 МБ</div> 
+                    </>
+                  }
                 </div>
               </div>
             }

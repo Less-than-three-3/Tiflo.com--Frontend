@@ -8,12 +8,17 @@ import {useParams} from "react-router-dom";
 import {Loader} from "../../UI/Loader/Loader.jsx";
 import {onboarding} from "../../../models/onboarding.js";
 
+const allowedExtensions = ['mp4'];
+const maxSize = 10 * 1024 * 1024; 
+
 export const VideoEditor = ({setLoadingComment}) => {
   const {project, setProject, setProjectAudio} = useProject();
 
   const [time, setTime] = useState("00:00:00");
   const [duration, setDuration] = useState("00:00:00");
   const [loading, setLoading] = useState(false);
+  const [invalidExt, setInvalidExt] = useState(false);
+  const [isLargeFile, setIsLargeFile] = useState(false);
 
   const params = useParams();
   const hiddenFileInputRef = useRef(null);
@@ -34,8 +39,30 @@ export const VideoEditor = ({setLoadingComment}) => {
     media.setSplitPoint(0);
 
     setLoading(true);
-    const uploadedFIle = event.target.files[0];
-    const mediaResponse = await api.uploadMedia(params.projectId, uploadedFIle);
+    const uploadedFile = event.target.files[0];
+
+    const fileName = uploadedFile.name;
+    const fileExtension = fileName
+      .split('.')
+      .pop()
+      .toLowerCase();
+
+    if (!allowedExtensions.includes(fileExtension)) {
+      setInvalidExt(true);
+      setLoading(false);
+      return;
+    }
+
+    if (uploadedFile.size > maxSize) {
+      setIsLargeFile(true);
+      setLoading(false);
+      return;
+    }
+
+    setInvalidExt(false);
+    setIsLargeFile(false);
+
+    const mediaResponse = await api.uploadMedia(params.projectId, uploadedFile);
     const getProjectResponse = await api.getProjectById(params.projectId);
     if (getProjectResponse.status === 200) {
       setProject(getProjectResponse.data);
@@ -150,7 +177,7 @@ export const VideoEditor = ({setLoadingComment}) => {
               :
               <div className="border-4 border-dashed border-mouse rounded-3xl
                             video flex justify-center items-center flex-col
-                            m-auto mt-10 p-20 w-96"
+                            m-auto mt-10 p-10 w-96"
                    onClick={handleClick}>
                 <img src={`${iconPath}/upload.svg`} alt=""/>
                 <input
@@ -163,6 +190,20 @@ export const VideoEditor = ({setLoadingComment}) => {
                 <div>
                   <div>Загрузите видео</div>
                   <div>Кликните сюда</div>
+
+                  {invalidExt &&
+                    <>
+                      <div className="mt-4">НЕДОПУСТИМЫЙ ФОРМАТ ФАЙЛА!</div>
+                      <div>Допускается формат .mp4</div> 
+                    </>
+                  }
+
+                  {isLargeFile &&
+                    <>
+                      <div className="mt-4">НЕДОПУСТИМЫЙ РАЗМЕР ФАЙЛА!</div>
+                      <div>Загрузите файл размером до 10 МБ</div> 
+                    </>
+                  }
                 </div>
               </div>
             }

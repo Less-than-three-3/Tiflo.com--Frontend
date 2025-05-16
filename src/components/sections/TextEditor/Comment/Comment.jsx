@@ -13,7 +13,6 @@ export const Comment = ({part, isEditing, setIsEditing}) => {
   const [currentPartId, setCurrentPartId] = useState("");
 
   const focusText = (event) => {
-    console.log("click")
     if (event.currentTarget.id !== currentPartId) {
       const part = project.audioParts.find((part) => part.partId === event.currentTarget.id);
       setCurrentText(part.text);
@@ -26,12 +25,10 @@ export const Comment = ({part, isEditing, setIsEditing}) => {
   }
 
   const changeText = (event) => {
-    console.log("change")
     setCurrentText(event.currentTarget.value);
   }
 
   const updateComment = async (event) => {
-    console.log("text", event.currentTarget.textContent)
     if (event.ctrlKey && event.key === 'Enter') {
       console.log(event.currentTarget.value);
       const changeTextRes = await api.changeTextComment(project.projectId, event.currentTarget.id, event.currentTarget.textContent);
